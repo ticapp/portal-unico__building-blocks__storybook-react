@@ -1,0 +1,47 @@
+$icon-xs: 16px;
+$icon-sm: 24px;
+$icon-md: 32px;
+$icon-lg: 48px;
+$icon-xl: 64px;
+
+.icon {
+  width: $icon-md;
+  height: $icon-md;
+  vertical-align: middle;
+
+  &.icon-padded {
+    padding: 8px;
+  }
+
+  &.icon-xs {
+    width: $icon-xs;
+    height: $icon-xs;
+    &.icon-padded {
+      padding: 4px;
+    }
+  }
+
+  &.icon-sm {
+    width: $icon-sm;
+    height: $icon-sm;
+    &.icon-padded {
+      padding: 6px;
+    }
+  }
+
+  &.icon-lg {
+    width: $icon-lg;
+    height: $icon-lg;
+    &.icon-padded {
+      padding: 12px;
+    }
+  }
+
+  &.icon-xl {
+    width: $icon-xl;
+    height: $icon-xl;
+    &.icon-padded {
+      padding: 16px;
+    }
+  }
+}

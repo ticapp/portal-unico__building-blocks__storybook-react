@@ -1,0 +1,17 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.ama {
+  &-scroll-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: #0902a2;
+    width: 4rem;
+    height: 4rem;
+    z-index: 99999;
+
+    svg {
+      fill: #fff;
+    }
+  }
+}

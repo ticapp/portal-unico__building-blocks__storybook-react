@@ -1,0 +1,71 @@
+@import '~bootstrap/scss/bootstrap.scss';
+.ama {
+  &-alert {
+    border: 1px solid #ccc;
+    padding: 1rem 1rem 1rem 2rem;
+    position: relative;
+
+    .btn-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 1rem;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    &.ama-alert-primary {
+      &:before {
+        background-color: blue;
+      }
+    }
+
+    &.ama-alert-secondary {
+      &:before {
+        background-color: lightblue;
+      }
+    }
+
+    &.ama-alert-success {
+      &:before {
+        background-color: green;
+      }
+    }
+
+    &.ama-alert-danger {
+      &:before {
+        background-color: red;
+      }
+    }
+
+    &.ama-alert-warning {
+      &:before {
+        background-color: yellow;
+      }
+    }
+
+    &.ama-alert-info {
+      &:before {
+        background-color: cyan;
+      }
+    }
+
+    &.ama-alert-dark {
+      &:before {
+        background-color: darkslategray;
+      }
+    }
+
+    &.ama-alert-light {
+      &:before {
+        background-color: lightgrey;
+      }
+    }
+  }
+}

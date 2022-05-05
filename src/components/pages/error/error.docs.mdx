@@ -1,0 +1,20 @@
+import { PageError } from './page-error';
+
+<h2>Description</h2>
+
+<p>Main content of the error page</p>
+
+<h2>Component usage</h2>
+
+```js
+<PageError
+  title={'Sample Error'}
+  message={'Lorem ipsum dolor sit amet.'}
+  link={{
+    url: '#',
+    isExternal: false,
+    label: 'Back',
+    target: '_self',
+  }}
+></PageError>
+```

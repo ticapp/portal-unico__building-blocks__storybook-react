@@ -1,0 +1,29 @@
+@import '~bootstrap/scss/bootstrap.scss';
+.ama {
+  &-skipNavigation {
+    a {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      white-space: nowrap;
+      border: 0;
+      background: rgb(211, 206, 206);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+
+      &:focus {
+        position: static;
+        width: 100%;
+        height: 56px;
+        overflow: visible;
+        white-space: normal;
+        outline: 0;
+        padding: 64px;
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+import { AuthService } from './AuthService';
+import { AuthContext } from './AuthContext';
+
+<h2>Description</h2>
+
+<p>
+  Provider for authentication. It uses Authorization Code Flow with Proof Key
+  for Code Exchange (PKCE)
+</p>
+
+<p>
+  This library is only for React usage. It may require the development of a
+  webservice if the token endpoint is protected and requires usage of a
+  client_secret
+</p>
+
+<h2>Usage</h2>
+
+<p>Without protected token endpoint</p>
+
+```js
+const authService = new AuthService({
+  clientId: 'ticapp-open',
+  provider:
+    'https://dev-apigw-2-pdun.northeurope.cloudapp.azure.com:8443/realms/fa',
+  scopes: ['openid'],
+  redirectUri: window.location.href,
+});
+
+<AuthProvider authService={authService}>
+  <App />
+</AuthProvider>;
+```
+
+<p>With protected token endpoint</p>
+
+```js
+const authService = new AuthService({
+  clientId: 'ticapp-open',
+  provider:
+    'https://dev-apigw-2-pdun.northeurope.cloudapp.azure.com:8443/realms/fa',
+  tokenEndpoint: 'http://myprotected-token-service',
+  scopes: ['openid'],
+  redirectUri: window.location.href,
+});
+
+<AuthProvider authService={authService}>
+  <App />
+</AuthProvider>;
+```

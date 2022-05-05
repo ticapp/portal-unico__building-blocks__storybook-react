@@ -1,0 +1,113 @@
+import classNames from 'classnames';
+import React, {
+  FC, SVGProps,
+  useEffect,
+  useState
+} from 'react';
+import { allIcons, IconName, isBundledIcon, loadIcon } from './assets';
+import { EmptyIcon } from './empty-icon';
+import './icon.scss';
+
+export type { IconName } from './assets';
+
+export const iconsList = allIcons;
+
+let iconsCache: Record<IconName, FC<SVGProps<SVGSVGElement>>> = {};
+
+/**
+ * Preloads icons
+ * @param icons - The icon list to preload
+ * @returns true If all icons are loaded
+ */
+export function preloadIcons(icons: IconName[]) {
+  return Promise.all(icons.map((icon) => loadIcon(icon))).then(
+    (preloadedIcons) => {
+      preloadedIcons.forEach(({ component }, i) => {
+        iconsCache[icons[i]] = (() => component) as unknown as FC<
+          SVGProps<SVGSVGElement>
+        >;
+      });
+      return true;
+    }
+  );
+}
+
+/**
+ * Remove icons from cache
+ * @param icon? - The icon name to remove. If no icon name is passed, all the cache is cleared
+ * @returns An object with all removed icons
+ */
+export const clearIconCache = (iconName?: IconName) => {
+  let deletedItems;
+  if (iconName) {
+    deletedItems = { [iconName]: iconsCache[iconName] };
+    delete iconsCache[iconName];
+  } else {
+    deletedItems = { ...iconsCache };
+    iconsCache = {};
+  }
+  return deletedItems;
+};
+
+export interface IconProps extends SVGProps<SVGSVGElement> {
+  /** Additional classes to use in icon component */
+  className?: string;
+  /** Predefined icon dimensions. Possible values: 'xl' | 'lg' | '' | 'sm' | 'xs'  */
+  size?: 'xl' | 'lg' | '' | 'sm' | 'xs';
+  /** Icon name to be used */
+  icon: string;
+  /** To use padding in icon container */
+  padding?: boolean;
+  /** Callback when image is loaded */
+  onIconLoad?: () => void;
+  /** Alt name for icon */
+  alt?: string;
+}
+
+export const Icon: FC<IconProps> = ({
+  size = '',
+  icon = '',
+  alt = '',
+  className,
+  padding = false,
+  onIconLoad,
+}) => {
+  const [IconComponent, setCurrentIcon] = useState<FC<SVGProps<SVGSVGElement>>>(
+    iconsCache[icon]
+  );
+  
+  const classes = classNames('icon', className, {
+    [`icon-${size}`]: size,
+    'icon-padded': padding,
+  });
+
+  useEffect(() => {
+    if (isBundledIcon(icon) && !iconsCache[icon]) {
+      loadIcon(icon).then(({ component }) => {
+        iconsCache[icon] = (() => component) as unknown as FC<
+          SVGProps<SVGSVGElement>
+        >;
+        setCurrentIcon(iconsCache[icon]);
+        onIconLoad?.();
+      });
+    } else {
+      onIconLoad?.();
+    }
+  }, [icon, onIconLoad]);
+
+  if (!isBundledIcon(icon)) {
+    // Assume that it is a base64 image and let the browser do his work
+    return <img src={icon} alt={alt} className={classes} />;
+  }
+
+  const iconAttributes = {
+    alt,
+    title: alt,
+  };
+
+  if (!IconComponent) {
+    return <EmptyIcon className={classes} role="img" {...iconAttributes} />;
+  }
+
+  return <IconComponent className={classes} role="img" {...iconAttributes} />;
+};

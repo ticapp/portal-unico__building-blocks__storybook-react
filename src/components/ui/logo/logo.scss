@@ -1,0 +1,11 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+.ama {
+  &-logo {
+    img,
+    svg {
+      width: 270px;
+      height: 64px;
+    }
+  }
+}

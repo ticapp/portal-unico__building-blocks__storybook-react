@@ -1,0 +1,16 @@
+@import '~bootstrap/scss/bootstrap.scss';
+.ama {
+  &-page-error {
+    .btn {
+      &-primary {
+        a {
+          color: #fff;
+        }
+        svg {
+          fill: #fff;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<h2> Description </h2>
+<p>A component that renders a **List** with diferent options.</p>
+
+<h2>Component usage </h2>
+<p>Simple list without links </p>
+
+```jsx
+<List
+  listData={[
+    {
+      value: 'Contactos ePortugal (external Link)',
+      hasExternalLink: false,
+      link: '',
+      title: '',
+    },
+    {
+      value: 'Componente Logo (inside link)',
+      hasExternalLink: false,
+      link: '',
+      title: '',
+    },
+  ]}
+></List>
+```
+
+<p>List with/without links and custom bullets. See more info on properties. </p>
+
+```jsx
+<List
+  listData={[
+    {
+      value: 'Contactos ePortugal (external Link)',
+      hasExternalLink: false,
+      link: '',
+      title: '',
+    },
+    {
+      value: 'Componente Logo (inside link)',
+      hasExternalLink: false,
+      link: '',
+      title: '',
+    },
+  ]}
+  listStyleType='square'
+  listStyleImageUrl='https://picsum.photos/14/14'
+  listStylePosition='inside'
+  classList='own_class'
+></List>
+```

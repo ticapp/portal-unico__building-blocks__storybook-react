@@ -1,0 +1,28 @@
+import { UserArea } from './user-area';
+
+<h2>Description</h2>
+
+<p>
+  Renders the UserArea button. It can redirect to an external path in a new tab
+  or in the same tab
+</p>
+
+<h2>Component usage</h2>
+
+<p>Relative path</p>
+
+```js
+<UserArea url={'/user-area'} />
+```
+
+<p>External url in a new tab</p>
+
+```js
+<UserArea isExternal={true} url={'http://www.google.com'} newTab={true} />
+```
+
+<p>External url in the current tab</p>
+
+```js
+<UserArea isExternal={true} url={'http://www.google.com'} newTab={false} />
+```
