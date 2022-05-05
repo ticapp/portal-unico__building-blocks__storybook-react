@@ -1,0 +1,44 @@
+stages:
+  - build
+  - publish
+
+cache:
+  paths:
+    - node_modules/
+  key: "$CI_BUILD_REF_NAME"
+
+variables:
+  NEXUS_PATH: '$NEXUS_GENERAL_REPOSITORY_URL/npm-private/'
+
+build-storybook:
+  stage: build
+  image: node:14.16.1-alpine3.13
+  artifacts:
+    paths:
+      - storybook-static/**
+  script:
+    - VERSION = node -p "require('./package.json').version"
+    - npm install
+    - npm run build-storybook
+  when: manual
+
+publish-storybook-image-nexus-registry:
+  image: docker:20.10.13
+  stage: publish  
+  script:
+    - VERSION = node -p "require('./package.json').version"
+    - docker login -u $NEXUS_REGISTRY_USER -p $NEXUS_REGISTRY_PASSWORD $NEXUS_REGISTRY_URL    
+    - docker build -f Dockerfile -t $NEXUS_REGISTRY_URL/portal-unico/storybook-react:$VERSION .
+    - docker push $NEXUS_REGISTRY_URL/portal-unico/storybook-react:$VERSION
+  when: manual
+
+publish-design-system-library:
+  stage: publish
+  image: docker:20.10.13
+  script:
+    - npm install
+    - npm run build
+    - echo "registry=${NEXUS_PATH}" >> .npmrc
+    - echo "_auth=${NEXUS_REGISTRY_CREDENTIALS_BASE_64}" >> .npmrc
+    - npm publish
+  when: manual
