@@ -1,3 +1,1 @@
-// export * from './use-window-size';
-
-export default true;
+export * from './use-window-size';
