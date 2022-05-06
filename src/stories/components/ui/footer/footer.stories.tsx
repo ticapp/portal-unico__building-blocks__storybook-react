@@ -1,23 +1,37 @@
-<h2>Description </h2>
-<p>A component that renders a footer.</p>
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { BrowserRouter } from 'react-router-dom';
+import { Footer } from '../../../../components/ui/footer';
+import { Icon } from '../../../../components';
+import { Image } from 'react-bootstrap';
 
-<h2>Component usage</h2>
-<p>Consult properties of component for more info</p>
+const rp = require('../../../../assets/rp.png');
 
-```jsx
-<Footer
-  headerTitle_01='Contactos e sites Públicos'
-  contentInfo_01={[
+export default {
+  title: 'Components/Footer',
+  component: Footer,
+} as ComponentMeta<typeof Footer>;
+
+const Template: ComponentStory<typeof Footer> = (args) => (
+  <BrowserRouter>
+    <Footer {...args} />
+  </BrowserRouter>
+);
+
+export const BasicFooter = Template.bind({});
+BasicFooter.args = {
+  headerTitle_01: 'Contactos e sites Públicos',
+  contentInfo_01: [
     { label: 'Centro de Contacto Cidadão (dias úteis: 9h - 18h)', value: '300 003 990 ou 210 489 010' },
     { label: 'Centro de Contacto Empresas (dias úteis: 9h - 18h)', value: '300 003 980 ou 210 489 010' },
-  ]}
-  headerTitle_02='Links úteis'
-  headerTitle_03='Redes sociais'
-  classFooterCopyright='text-center fw-bold'
-  classFooterCol_01='p-5'
-  classFooterCol_02='p-5'
-  classFooterCol_03='p-5'
-  listDataCol_01={[
+  ],
+  headerTitle_02: 'Links úteis',
+  headerTitle_03: 'Redes sociais',
+  classFooterCopyright: 'text-center fw-bold',
+  classFooterCol_01: 'p-5',
+  classFooterCol_02: 'p-5',
+  classFooterCol_03: 'p-5',
+  listDataCol_01: [
     {
       value: 'Contactos ePortugal',
       hasExternalLink: true,
@@ -36,8 +50,8 @@
       link: '/react/ui/logo',
       title: 'internal link',
     },
-  ]}
-  listDataCol_02={[
+  ],
+  listDataCol_02: [
     {
       value: 'APP.GOV.PT',
       hasExternalLink: true,
@@ -62,8 +76,8 @@
       link: '/react/ui/logo',
       title: 'internal link',
     },
-  ]}
-  listDataCol_03={[
+  ],
+  listDataCol_03: [
     {
       value: <Icon icon='ama-facebook' alt='AMA Facebook' aria-hidden='true' />,
       hasExternalLink: true,
@@ -82,14 +96,13 @@
       link: 'https://www.linkedin.com/',
       title: 'linkedin',
     },
-  ]}
-  listDataRowImagesLink={[
+  ],
+  listDataRowImagesLink: [
     { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
     { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
     { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
     { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
     { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
     { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
-  ]}
-></Footer>
-```
+  ],
+};
