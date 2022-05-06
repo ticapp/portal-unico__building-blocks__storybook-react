@@ -1,2 +1,1 @@
-// export * from './auth-code-pkce';
-export default true;
+export * from './auth-code-pkce';

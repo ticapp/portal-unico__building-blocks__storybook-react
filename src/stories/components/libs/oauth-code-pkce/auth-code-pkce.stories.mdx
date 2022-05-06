@@ -1,5 +1,6 @@
-import { AuthService } from './AuthService';
-import { AuthContext } from './AuthContext';
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='Libs/OAuth Code PKCE/OAuth Code PKCE Docs' />
 
 <h2>Description</h2>
 
@@ -18,7 +19,7 @@ import { AuthContext } from './AuthContext';
 
 <p>Without protected token endpoint</p>
 
-```js
+```tsx
 const authService = new AuthService({
   clientId: 'ticapp-open',
   provider:
@@ -34,7 +35,7 @@ const authService = new AuthService({
 
 <p>With protected token endpoint</p>
 
-```js
+```tsx
 const authService = new AuthService({
   clientId: 'ticapp-open',
   provider:

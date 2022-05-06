@@ -187,6 +187,7 @@ export class AuthService<TIDToken = JWTIDToken> {
     return await new Promise((resolve) => {
       this.removeItem('pkce');
       this.removeItem('auth');
+      this.removeItem('preAuthUri');
 
       if (!endSession) {
         window.location.reload();
