@@ -69,7 +69,7 @@ export const Icon: FC<IconProps> = ({
   icon = '',
   alt = '',
   className,
-  padding = false,
+  padding,
   onIconLoad,
 }) => {
   const [IconComponent, setCurrentIcon] = useState<FC<SVGProps<SVGSVGElement>>>(

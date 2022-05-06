@@ -1,56 +1,75 @@
+import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta, Story } from '@storybook/react';
-import { Icon, allIcons } from '../../../../components';
-import { Row, Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
+import { allIcons, Icon, IconProps } from '../../../../components';
 
 export default {
   title: 'Components/Icon',
-  component: Icon,
-  argTypes: {
-    icon: {
-      options: allIcons,
-      control: 'select',
-    },
-  },
 } as ComponentMeta<typeof Icon>;
 
-const Template: ComponentStory<typeof Icon> = (args) => <Icon {...args} />;
+export const Size: Story<IconProps> = ({ icon }: IconProps) => {
+  icon = icon || 'ama-user';
+  const dimensions = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
-export const Size = Template.bind({});
-Size.args = {
-  icon: 'ama-user',
-  size: 'md',
-};
-
-export const ExternalImage = () => {
   return (
     <>
-      <Icon
-        icon="https://www.abola.pt/img/clubes/35px/61926C84-B275-4CED-A560-731A6EBBEE20.png"
-        size="sm"
-      />
-      <Icon
-        icon="https://www.abola.pt/img/clubes/35px/591FB72A-DBDB-4DBB-825E-49BBAF368552.png"
-        size="sm"
-      />
-      <Icon
-        icon="https://www.abola.pt/img/clubes/35px/4B476B46-CE9F-46AF-BED0-BD6DD7B66F1C.png"
-        size="sm"
-      />
+      <div style={{ backgroundColor: '#ebebeb' }}>
+        {dimensions.map((size) => (
+          <Icon className="p-1" key={size} size={size} icon={icon} />
+        ))}
+      </div>
     </>
   );
 };
+Size.storyName = 'Size';
+Size.argTypes = {
+  icon: {
+    control: {
+      type: 'select',
+      options: allIcons,
+    },
+  },
+};
 
-export const IconList: Story = () => {
+export const ExternalImage: Story<IconProps> = ({ icon, size }: IconProps) => {
+  icon = icon || 'https://picsum.photos/50';
+  size = size || 'md';
+  return (
+    <>
+      <Icon icon={icon} size={size} />
+    </>
+  );
+};
+ExternalImage.storyName = 'External Image';
+ExternalImage.argTypes = {
+  icon: { control: 'text' },
+  size: {
+    control: {
+      type: 'inline-radio',
+      options: ['xl', 'lg', 'md', 'sm', 'xs'],
+    },
+  },
+};
+
+export const IconList: Story<IconProps> = ({ size }: IconProps) => {
+  size = size || 'md';
   return (
     <Row>
       {allIcons.map((icon) => (
         <Col md={3} key={icon}>
-          <Icon icon={icon} />
-          <span>{icon}</span>
+          <Icon icon={icon} size={size} />
+          <span className="ps-3">{icon}</span>
         </Col>
       ))}
     </Row>
   );
 };
 IconList.storyName = 'List';
+IconList.argTypes = {
+  size: {
+    control: {
+      type: 'inline-radio',
+      options: ['xl', 'lg', 'md', 'sm', 'xs'],
+    },
+  },
+};
