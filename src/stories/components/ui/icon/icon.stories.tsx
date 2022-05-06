@@ -24,6 +24,7 @@ export const Size: Story<IconProps> = ({ icon }: IconProps) => {
 Size.storyName = 'Size';
 Size.argTypes = {
   icon: {
+    description: 'Icon name or external image url',
     control: {
       type: 'select',
       options: allIcons,
@@ -42,8 +43,12 @@ export const ExternalImage: Story<IconProps> = ({ icon, size }: IconProps) => {
 };
 ExternalImage.storyName = 'External Image';
 ExternalImage.argTypes = {
-  icon: { control: 'text' },
+  icon: {
+    description: 'Icon name or external image url',
+    control: 'text',
+  },
   size: {
+    description: 'Icon size to be used',
     control: {
       type: 'inline-radio',
       options: ['xl', 'lg', 'md', 'sm', 'xs'],
@@ -67,6 +72,7 @@ export const IconList: Story<IconProps> = ({ size }: IconProps) => {
 IconList.storyName = 'List';
 IconList.argTypes = {
   size: {
+    description: 'Icon size to be used',
     control: {
       type: 'inline-radio',
       options: ['xl', 'lg', 'md', 'sm', 'xs'],

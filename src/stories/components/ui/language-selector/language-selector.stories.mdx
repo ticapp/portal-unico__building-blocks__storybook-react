@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs';
+import { LanguageSelector } from '../../../../components';
+import { Col, Row } from 'react-bootstrap';
+
+<Meta title="Components/Language Selector/Language Selector Docs" />
+
+<h2>Description</h2>
+
+<p>
+  Renders the language selector component. When it change, it will trigger the{' '}
+  <b>onLanguageChange</b> callback
+</p>
+
+<h2>Component usage</h2>
+
+<p>Using default args</p>
+
+<Row>
+  <Col xs={2}>
+    <LanguageSelector />
+  </Col>
+</Row>
+
+<p>Using specific language list</p>
+
+<Row>
+  <Col xs={2}>
+    <LanguageSelector
+      languages={{ pt: 'PT', en: 'EN', es: 'ES' }}
+      active={'pt'}
+    />
+  </Col>
+</Row>

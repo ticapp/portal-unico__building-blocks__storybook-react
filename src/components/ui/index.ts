@@ -4,7 +4,7 @@ export * from './accessibility-declaration';
 // export * from './header';
 // export * from './horizontal-menu';
 export * from './icon';
-// export * from './language-selector';
+export * from './language-selector';
 export * from './link';
 // export * from './list';
 export * from './loader';
