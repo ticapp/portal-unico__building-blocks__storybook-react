@@ -8,7 +8,7 @@ export * from './language-selector';
 export * from './link';
 export * from './list';
 export * from './loader';
-// export * from './logo';
+export * from './logo';
 // export * from './scroll-top';
 export * from './skip-navigation';
 // export * from './user-area';

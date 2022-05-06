@@ -1,6 +1,4 @@
 import { Meta } from '@storybook/addon-docs';
-import { LanguageSelector } from '../../../../components';
-import { Col, Row } from 'react-bootstrap';
 
 <Meta title="Components/Language Selector/Language Selector Docs" />
 
@@ -15,19 +13,12 @@ import { Col, Row } from 'react-bootstrap';
 
 <p>Using default args</p>
 
-<Row>
-  <Col xs={2}>
-    <LanguageSelector />
-  </Col>
-</Row>
+```jsx
+<LanguageSelector />
+```
 
 <p>Using specific language list</p>
 
-<Row>
-  <Col xs={2}>
-    <LanguageSelector
-      languages={{ pt: 'PT', en: 'EN', es: 'ES' }}
-      active={'pt'}
-    />
-  </Col>
-</Row>
+```jsx
+<LanguageSelector languages={{ pt: 'PT', en: 'EN', es: 'ES' }} active={'pt'} />
+```
