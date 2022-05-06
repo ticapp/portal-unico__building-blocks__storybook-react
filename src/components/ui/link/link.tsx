@@ -24,16 +24,7 @@ export interface LinkProps {
   scroll?: boolean;
 }
 
-export function Link({
-  children,
-  link,
-  target = '_self',
-  isExternal = false,
-  title = '',
-  className = '',
-  replace = false,
-  scroll = true,
-}: LinkProps) {
+export function Link({ children, link, target = '_self', isExternal = false, title = '', className = '', replace = false, scroll = true }: LinkProps) {
   const isNextJS = !window;
 
   const renderNextJSAnchor = (props) => {
