@@ -1,0 +1,29 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Header/Header Docs" />
+
+<h2>Description</h2>
+
+<p>Renders the header component in its multiple variants</p>
+
+<h2>Component usage</h2>
+
+<p>
+  With no languages available, the language selector will be rendered with the
+  default language.
+</p>
+
+```jsx
+<Header isHomepage={false} homepageLink={'/'} />
+```
+
+<p>With language list provided.</p>
+
+```jsx
+<Header
+  isHomepage={false}
+  homepageLink={'/'}
+  languages={{ pt: 'PT', en: 'EN', es: 'ES' }}
+  activeLanguage={'pt'}
+/>
+```
