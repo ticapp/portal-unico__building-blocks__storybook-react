@@ -1,4 +1,4 @@
-// export * from './accessibility-declaration';
+export * from './accessibility-declaration';
 // export * from './alert';
 // export * from './footer';
 // export * from './header';
@@ -13,4 +13,4 @@
 // export * from './skip-navigation';
 // export * from './user-area';
 
-export default true;
+// export default true;
