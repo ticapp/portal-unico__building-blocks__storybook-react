@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "storybook": "start-storybook -p 6006",
+    "start": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run build:styles",
     "build:styles": "gulp build",
@@ -27,7 +27,6 @@
     "@storybook/manager-webpack5": "^6.4.22",
     "@storybook/node-logger": "^6.4.22",
     "@storybook/preset-create-react-app": "^4.1.0",
-    "@storybook/preset-scss": "^1.0.3",
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "0.0.11",
     "@types/node": "^16.11.33",

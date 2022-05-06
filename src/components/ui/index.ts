@@ -3,7 +3,7 @@ export * from './accessibility-declaration';
 // export * from './footer';
 // export * from './header';
 // export * from './horizontal-menu';
-// export * from './icon';
+export * from './icon';
 // export * from './language-selector';
 export * from './link';
 export * from './list';
