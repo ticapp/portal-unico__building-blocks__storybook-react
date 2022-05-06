@@ -1,3 +1,2 @@
-// export { HorizontalMenu } from './horizontal-menu';
-// export type { HorizontalMenuProps } from './horizontal-menu';
-export default true;
+export { HorizontalMenu } from './horizontal-menu';
+export type { HorizontalMenuProps, HorizontalMenuLink } from './horizontal-menu';

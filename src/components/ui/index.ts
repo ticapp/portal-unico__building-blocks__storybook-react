@@ -2,7 +2,7 @@ export * from './accessibility-declaration';
 export * from './alert';
 export * from './footer';
 export * from './header';
-// export * from './horizontal-menu';
+export * from './horizontal-menu';
 export * from './icon';
 export * from './language-selector';
 export * from './link';
