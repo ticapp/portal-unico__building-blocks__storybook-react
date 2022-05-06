@@ -2,15 +2,15 @@ import React from 'react';
 import './loader.scss';
 import classNames from 'classnames';
 
-export type LoaderProps = {
+export interface LoaderProps {
   /** Add classes to the Footer component */
   classLoader?: string;
 
   /** Select type of spinner, if not define default will be shown */
-  type?: 'spinner-two-half' | 'spinner-half' | 'dots';
-};
+  type?: 'spinner-two-half' | 'spinner-half' | 'dots' | 'default';
+}
 
-export function Loader({ classLoader, type }: LoaderProps) {
+export const Loader = ({ classLoader, type }: LoaderProps) => {
   const cssLoader = classNames('ama-loader', classLoader);
   return (
     <div className={cssLoader}>
@@ -50,6 +50,8 @@ export function Loader({ classLoader, type }: LoaderProps) {
                 <span></span>
               </div>
             );
+
+          case 'default':
           default:
             return (
               <div className='ouro ouro3'>
@@ -65,4 +67,4 @@ export function Loader({ classLoader, type }: LoaderProps) {
       })()}
     </div>
   );
-}
+};

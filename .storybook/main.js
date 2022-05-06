@@ -5,10 +5,10 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/preset-create-react-app',
-    '@storybook/preset-scss',
+    // '@storybook/preset-scss',
   ],
   framework: '@storybook/react',
   core: {
     builder: '@storybook/builder-webpack5',
-  }
+  },
 };
