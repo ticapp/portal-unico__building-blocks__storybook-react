@@ -53,7 +53,7 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
   /** Additional classes to use in icon component */
   className?: string;
   /** Predefined icon dimensions. Possible values: 'xl' | 'lg' | '' | 'sm' | 'xs'  */
-  size?: 'xl' | 'lg' | '' | 'sm' | 'xs';
+  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
   /** Icon name to be used */
   icon: string;
   /** To use padding in icon container */
@@ -65,7 +65,7 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
 }
 
 export const Icon: FC<IconProps> = ({
-  size = '',
+  size = 'md',
   icon = '',
   alt = '',
   className,
@@ -91,6 +91,7 @@ export const Icon: FC<IconProps> = ({
         onIconLoad?.();
       });
     } else {
+      setCurrentIcon(iconsCache[icon]);
       onIconLoad?.();
     }
   }, [icon, onIconLoad]);

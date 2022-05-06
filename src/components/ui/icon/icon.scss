@@ -29,6 +29,14 @@ $icon-xl: 64px;
     }
   }
 
+  &.icon-md {
+    width: $icon-md;
+    height: $icon-md;
+    &.icon-padded {
+      padding: 8px;
+    }
+  }
+
   &.icon-lg {
     width: $icon-lg;
     height: $icon-lg;
