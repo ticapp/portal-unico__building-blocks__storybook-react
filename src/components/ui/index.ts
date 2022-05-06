@@ -5,7 +5,7 @@ export * from './accessibility-declaration';
 // export * from './horizontal-menu';
 // export * from './icon';
 // export * from './language-selector';
-// export * from './link';
+export * from './link';
 // export * from './list';
 export * from './loader';
 // export * from './logo';
