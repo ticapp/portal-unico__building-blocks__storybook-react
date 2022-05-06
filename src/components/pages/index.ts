@@ -1,3 +1,2 @@
 // export * from './error';
-// export * from './404';
-export default true;
+export * from './404';
