@@ -1,3 +1,2 @@
-// export { Alert } from './alert';
-// export type { AlertProps } from './alert';
-export default true;
+export { Alert } from './alert';
+export type { AlertProps } from './alert';
