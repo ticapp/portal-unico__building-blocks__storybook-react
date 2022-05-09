@@ -60,24 +60,24 @@ publish-storybook-image-nexus-registry:
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "master"'
 
-# publish-storybook-image-docker-hub:
-#   image: docker:20.10.13
-#   stage: publish
-#   script:
-#     - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD $DOCKER_HUB_URL
-#     - docker build -f Dockerfile -t ticapp/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver) .
-#     - docker push ticapp/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver)
-#   rules:
-#     - if: '$CI_COMMIT_BRANCH == "master"'
+publish-storybook-image-docker-hub:
+  image: docker:20.10.13
+  stage: publish
+  script:
+    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD $DOCKER_HUB_URL
+    - docker build -f Dockerfile -t ticapp/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver) .
+    - docker push ticapp/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver)
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
-# publish-design-system-library:
-#   stage: publish
-#   image: docker:20.10.13
-#   script:
-#     - npm install
-#     - npm run build
-#     - echo "@ama:registry=${NEXUS_PATH}" >> .npmrc
-#     - echo "_auth=${NEXUS_REGISTRY_CREDENTIALS_BASE_64}" >> .npmrc
-#     - npm publish
-#   rules:
-#     - if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
+publish-design-system-library:
+  stage: publish
+  image: docker:20.10.13
+  script:
+    - npm install
+    - npm run build
+    - echo "@ama:registry=${NEXUS_PATH}" >> .npmrc
+    - echo "_auth=${NEXUS_REGISTRY_CREDENTIALS_BASE_64}" >> .npmrc
+    - npm publish
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
