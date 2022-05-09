@@ -7,7 +7,7 @@ export default {
   component: ScrollTop,
 } as ComponentMeta<typeof ScrollTop>;
 
-const Template: ComponentStory<typeof ScrollTop> = (args) => (
+const Template: ComponentStory<typeof ScrollTop> = () => (
   <div style={{ position: 'relative' }}>
     <ScrollTop />
     <p>Scroll down and press the icon...</p>
