@@ -1,4 +1,5 @@
 stages:
+  - code-quality
   - build
   - publish
 
@@ -11,7 +12,7 @@ variables:
   NEXUS_PATH: '$NEXUS_GENERAL_REPOSITORY_URL/npm-private/'
 
 sonarqube-check:
-  stage: build
+  stage: code-quality
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
@@ -20,8 +21,7 @@ sonarqube-check:
     GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
   script:
     - sonar-scanner -Dsonar.qualitygate.wait=true
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "develop"'
+  when: manual
 
 build-storybook:
   stage: build
