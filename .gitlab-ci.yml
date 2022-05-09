@@ -30,7 +30,8 @@ build-storybook:
     paths:
       - storybook-static/**
   script:
-    - VERSION=node -p "require('./package.json').version"
+    - VERSION=$(cat package.json | grep -e "version" | grep -o -P "\d+\.\d+\.\d+")
+    - echo $VERSION
     - npm install
     - npm run build-storybook
   when: manual
@@ -39,7 +40,7 @@ publish-storybook-image-nexus-registry:
   image: docker:20.10.13
   stage: publish  
   script:
-    - VERSION = node -p "require('./package.json').version"
+    - VERSION=$(cat package.json | grep -e "version" | grep -o -P "\d+\.\d+\.\d+")
     - docker login -u $NEXUS_REGISTRY_USER -p $NEXUS_REGISTRY_PASSWORD $NEXUS_REGISTRY_URL    
     - docker build -f Dockerfile -t $NEXUS_REGISTRY_URL/portal-unico/storybook-react:$VERSION .
     - docker push $NEXUS_REGISTRY_URL/portal-unico/storybook-react:$VERSION
