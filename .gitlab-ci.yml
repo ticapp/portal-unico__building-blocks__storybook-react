@@ -43,6 +43,7 @@ build-storybook:
   artifacts:
     paths:
       - $METADATA_PATH
+      - $STORYBOOK_OUTPUT_PATH
   script:
     - npm install
     - npm run build-storybook
