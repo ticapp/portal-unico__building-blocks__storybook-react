@@ -1,5 +1,5 @@
 stages:
-  - code-quality
+  - sonar
   - build
   - publish
 
@@ -12,7 +12,7 @@ variables:
   NEXUS_PATH: '$NEXUS_GENERAL_REPOSITORY_URL/npm-private/'
 
 sonarqube-check:
-  stage: code-quality
+  stage: sonar
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
