@@ -63,6 +63,7 @@ publish-storybook-image-docker-hub:
   image: docker:20.10.13
   stage: publish
   script:
+    - ls 
     - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD $DOCKER_HUB_URL
     - docker build -f Dockerfile -t ticapp/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver) .
     - docker push ticapp/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver)
