@@ -30,7 +30,7 @@ build-storybook:
     paths:
       - storybook-static/**
   script:
-    - VERSION = node -p "require('./package.json').version"
+    - VERSION=node -p "require('./package.json').version"
     - npm install
     - npm run build-storybook
   when: manual
