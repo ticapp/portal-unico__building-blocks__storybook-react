@@ -183,31 +183,28 @@ export class AuthService<TIDToken = JWTIDToken> {
     window.location.replace(url);
   }
 
-  public async logout(endSession: boolean = false): Promise<void> {
-    return await new Promise((resolve) => {
-      this.removeItem('pkce');
-      this.removeItem('auth');
-      this.removeItem('preAuthUri');
+  public logout(endSession: boolean = false): void {
+    this.removeItem('pkce');
+    this.removeItem('auth');
+    this.removeItem('preAuthUri');
 
-      if (!endSession) {
-        window.location.reload();
-      } else {
-        const { clientId, logoutEndpoint, redirectUri } = this.props;
+    if (!endSession) {
+      window.location.reload();
+    } else {
+      const { clientId, logoutEndpoint, redirectUri } = this.props;
 
-        const query = {
-          client_id: clientId,
-          post_logout_redirect_uri: redirectUri,
-        };
+      const query = {
+        client_id: clientId,
+        post_logout_redirect_uri: redirectUri,
+      };
 
-        const endpoint = logoutEndpoint
-          ? logoutEndpoint
-          : this.Endpoints?.end_session_endpoint || '';
+      const endpoint = logoutEndpoint
+        ? logoutEndpoint
+        : this.Endpoints?.end_session_endpoint || '';
 
-        const url = `${endpoint}?${toUrlEncoded(query)}`;
-        window.location.replace(url);
-      }
-      resolve();
-    });
+      const url = `${endpoint}?${toUrlEncoded(query)}`;
+      window.location.replace(url);
+    }
   }
 
   get User(): TIDToken | null {
@@ -376,7 +373,7 @@ export class AuthService<TIDToken = JWTIDToken> {
             removeCodeFromLocation();
           }
         })
-        .catch((e) => {
+        .catch((_e) => {
           this.removeItem('auth');
           removeCodeFromLocation();
         });
@@ -391,7 +388,7 @@ export class AuthService<TIDToken = JWTIDToken> {
     }
 
     const { refresh_token: refreshToken, expires_at: expiresAt } = authTokens;
-    
+
     if (!expiresAt || !refreshToken) {
       return;
     }

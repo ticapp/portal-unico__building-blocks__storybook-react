@@ -19,9 +19,7 @@ export function ScrollTop({ className }: ScrollTopProps) {
   );
 
   const onClickHandler = () => {
-    if (window && window.scrollTo) {
-      window && window.scrollTo(0, 0);
-    }
+    window && window.scrollTo(0, 0);
   };
 
   return (

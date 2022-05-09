@@ -28,11 +28,11 @@ export function Link({ children, link, target = '_self', isExternal = false, tit
   const isNextJS = !window;
 
   const renderNextJSAnchor = (props) => {
-    return <NextJSAnchor {...props}>{children as any}</NextJSAnchor>;
+    return <NextJSAnchor {...props}>{children}</NextJSAnchor>;
   };
 
   const renderReactDomAnchor = (props: ReactDomAnchorType) => {
-    return <ReactDomAnchor {...props}>{children as any}</ReactDomAnchor>;
+    return <ReactDomAnchor {...props}>{children}</ReactDomAnchor>;
   };
 
   if (isNextJS) {
@@ -50,7 +50,7 @@ export function Link({ children, link, target = '_self', isExternal = false, tit
   }
 
   if (!isExternal) {
-    const reactDomLinkProps = {
+    const internalReactDomLinkProps = {
       to: link,
       children,
       target,
@@ -60,10 +60,10 @@ export function Link({ children, link, target = '_self', isExternal = false, tit
       scroll,
     };
 
-    return renderReactDomAnchor(reactDomLinkProps as ReactDomAnchorType);
+    return renderReactDomAnchor(internalReactDomLinkProps as ReactDomAnchorType);
   }
 
-  const reactDomLinkProps = {
+  const externalReactDomLinkProps = {
     to: '',
     component: () => {
       return (
@@ -79,5 +79,5 @@ export function Link({ children, link, target = '_self', isExternal = false, tit
     scroll,
   };
 
-  return renderReactDomAnchor(reactDomLinkProps as ReactDomAnchorType);
+  return renderReactDomAnchor(externalReactDomLinkProps as ReactDomAnchorType);
 }

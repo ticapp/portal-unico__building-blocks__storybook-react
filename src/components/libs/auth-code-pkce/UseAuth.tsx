@@ -4,7 +4,7 @@ import { AuthTokens, JWTIDToken } from './AuthService';
 
 export interface UseAuthProps {
   login: () => Promise<void>;
-  logout: (endSession?: boolean) => Promise<void>;
+  logout: (endSession?: boolean) => void;
 
   getUser: () => JWTIDToken | null;
   getTokens: () => AuthTokens;
