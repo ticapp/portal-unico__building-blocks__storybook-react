@@ -7,55 +7,67 @@ stages:
 cache:
   paths:
     - node_modules/
-  key: "$CI_BUILD_REF_NAME"
+  key: '$CI_BUILD_REF_NAME'
 
 variables:
   NEXUS_PATH: '$NEXUS_GENERAL_REPOSITORY_URL/npm-private/'
-  OUTPUT_PATH_TEMP: '${CI_PROJECT_DIR}/tmp'
+  METADATA_PATH: '${CI_PROJECT_DIR}/tmp'
+  STORYBOOK_OUTPUT_PATH: '${CI_PROJECT_DIR}/storybook-static'
 
-# CREATE VERSION FILE TO USE IN FUTURE STAGES
 build-metadata:
   stage: build-info
   image: docker:20.10.13
   artifacts:
     paths:
-      - $OUTPUT_PATH_TEMP
+      - $METADATA_PATH
   script:
-    - mkdir $OUTPUT_PATH_TEMP
-    - cat package.json | grep -e '\"version\"' | grep -oe '[0-9]\.[0-9]\.[0-9]' > $OUTPUT_PATH_TEMP/version.ver
+    - mkdir $METADATA_PATH
+    - cat package.json | grep -e '\"version\"' | grep -oe '[0-9]\.[0-9]\.[0-9]' > $METADATA_PATH/version.ver
 
 sonarqube-check:
   stage: code-quality
   image:
     name: sonarsource/sonar-scanner-cli:latest
-    entrypoint: [""]
+    entrypoint: ['']
   variables:
-    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
-    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+    SONAR_USER_HOME: '${CI_PROJECT_DIR}/.sonar' # Defines the location of the analysis task cache
+    GIT_DEPTH: '0' # Tells git to fetch all the branches of the project, required by the analysis task
   script:
     - sonar-scanner -Dsonar.qualitygate.wait=true
-  when: manual
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
 
 build-storybook:
   stage: build
   image: node:14.16.1-alpine3.13
   artifacts:
     paths:
-      - storybook-static/**
+      - $METADATA_PATH
   script:
-    - echo $(cat $OUTPUT_PATH_TEMP/version.ver)
     - npm install
     - npm run build-storybook
-  when: manual
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "master"'
 
 publish-storybook-image-nexus-registry:
   image: docker:20.10.13
-  stage: publish  
+  stage: publish
   script:
-    - docker login -u $NEXUS_REGISTRY_USER -p $NEXUS_REGISTRY_PASSWORD $NEXUS_REGISTRY_URL    
-    - docker build -f Dockerfile -t $NEXUS_REGISTRY_URL/portal-unico/storybook-react:$(cat $OUTPUT_PATH_TEMP/version.ver) .
-    - docker push $NEXUS_REGISTRY_URL/portal-unico/storybook-react:$(cat $OUTPUT_PATH_TEMP/version.ver)
-  when: manual
+    - docker login -u $NEXUS_REGISTRY_USER -p $NEXUS_REGISTRY_PASSWORD $NEXUS_REGISTRY_URL
+    - docker build -f Dockerfile -t $NEXUS_REGISTRY_URL/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver) .
+    - docker push $NEXUS_REGISTRY_URL/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver)
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "master"'
+
+publish-storybook-image-docker-hub:
+  image: docker:20.10.13
+  stage: publish
+  script:
+    - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD $DOCKER_HUB_URL
+    - docker build -f Dockerfile -t ticapp/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver) .
+    - docker push ticapp/portal-unico/storybook-react:$(cat $METADATA_PATH/version.ver)
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
 
 publish-design-system-library:
   stage: publish
@@ -66,4 +78,5 @@ publish-design-system-library:
     - echo "@ama:registry=${NEXUS_PATH}" >> .npmrc
     - echo "_auth=${NEXUS_REGISTRY_CREDENTIALS_BASE_64}" >> .npmrc
     - npm publish
-  when: manual
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master" && $CI_COMMIT_TAG =~ /^\d+\.\d+\.\d+$/'
