@@ -19,10 +19,10 @@ export const Page404 = ({ classPage404, pageInfo }: Page404Props) => {
     <div className={cssPage404}>
       <Container>
         <Row>
-          <Col xs={12} md={6} xl={6}>
+          <Col xs={12} md={6} xl={6} className='px-128 py-128'>
             <h1>{pageInfo.title}</h1>
             {pageInfo.description && <p>{pageInfo.description}</p>}
-            <Button variant='primary'>
+            <Button variant='brand-yellow-main'>
               <Link link={pageInfo.button.link} isExternal={pageInfo.button.isExternal} target={pageInfo.button.target}>
                 <Icon icon='ama-arrow-right-circle' />
                 {pageInfo.button.label}
