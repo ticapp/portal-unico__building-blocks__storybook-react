@@ -1,31 +1,52 @@
+@import '../../../scss/index.scss';
+
 .ama {
   &-footer {
     h2 {
-      font-size: 16px;
-      margin-bottom: 30px;
+      font-size: 1.5em !important;
+      line-height: 29px !important;
+      font-weight: 700 !important;
+      padding-top: 28px;
     }
-    p {
-      margin-bottom: 8px;
-      font-weight: 600;
+
+    .mb-34 {
+      margin-bottom: 34px;
     }
-    li {
-      font-weight: 600;
-    }
-    &-section-info {
-      background-color: #efb82e;
-      & > * {
-        border: 2px solid #ffffff;
-      }
-      &-detail {
-        margin-top: 30px;
-        & > :last-child {
-          font-weight: bold;
-          font-size: 18px;
+
+    &-section-info-detail {
+      p {
+        font-size: 0.875em !important;
+        line-height: 17px !important;
+        font-weight: 500 !important;
+        &.strong {
+          font-size: 1.375em !important;
+          line-height: 26px !important;
+          font-weight: 700 !important;
         }
       }
+      margin-bottom: 39px;
+      &:last-of-type {
+        margin-bottom: 44px;
+      }
     }
-    &-copyright {
-      font-size: 14px;
-    }
+    // li {
+    //   font-weight: 600;
+    // }
+    // &-section-info {
+    //   background-color: #efb82e;
+    //   & > * {
+    //     border: 2px solid #ffffff;
+    //   }
+    //   &-detail {
+    //     margin-top: 30px;
+    //     & > :last-child {
+    //       font-weight: bold;
+    //       font-size: 18px;
+    //     }
+    //   }
+    // }
+    // &-copyright {
+    //   font-size: 14px;
+    // }
   }
 }

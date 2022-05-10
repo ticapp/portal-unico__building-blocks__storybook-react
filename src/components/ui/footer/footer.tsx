@@ -6,7 +6,7 @@ import { List } from '../list';
 import { UrlObject } from 'url';
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
   /** Add classes to the Footer component */
-  classFooter?: string;
+  className?: string;
 
   /** Add classes in Footer component info section */
   classFooterSectionInfo?: string;
@@ -52,7 +52,7 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
 }
 
 export const Footer = ({
-  classFooter,
+  className,
   classFooterSectionInfo,
   classFooterCopyright,
   classFooterCol_01,
@@ -68,7 +68,7 @@ export const Footer = ({
   listDataCol_03,
   listDataRowImagesLink,
 }: FooterProps) => {
-  const cssFooter = classNames('ama-footer', classFooter);
+  const cssFooter = classNames('ama-footer', className);
   const cssFooterSectionInfo = classNames('ama-footer-section-info', classFooterSectionInfo);
   const cssFooterCopyright = classNames('ama-footer-copyright', classFooterCopyright);
   const cssFooterCol_01 = classNames('ama-footer-section-info-col-01', classFooterCol_01);
@@ -80,7 +80,7 @@ export const Footer = ({
       return (
         <div className='ama-footer-section-info-detail'>
           <p>{content.label}</p>
-          <p>{content.value}</p>
+          <p className='strong'>{content.value}</p>
         </div>
       );
     });
@@ -88,10 +88,10 @@ export const Footer = ({
 
   return (
     <footer className={cssFooter}>
-      <Container>
+      <Container fluid>
         <Row className={cssFooterSectionInfo}>
           <Col xs={12} md={6} xl={6} className={cssFooterCol_01}>
-            <h2>{headerTitle_01}</h2>
+            <h2 className='mb-34'>{headerTitle_01}</h2>
             <Row>
               <Col xs={12} md={8} xl={8}>
                 {renderContentInfo_01()}

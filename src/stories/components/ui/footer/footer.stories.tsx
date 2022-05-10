@@ -28,9 +28,9 @@ BasicFooter.args = {
   headerTitle_02: 'Links úteis',
   headerTitle_03: 'Redes sociais',
   classFooterCopyright: 'text-center fw-bold',
-  classFooterCol_01: 'p-5',
-  classFooterCol_02: 'p-5',
-  classFooterCol_03: 'p-5',
+  classFooterCol_01: 'bg-brand-yellow-terciary',
+  classFooterCol_02: 'bg-brand-yellow-secondary border border-white border-1',
+  classFooterCol_03: 'bg-brand-yellow-main border border-white border-1',
   listDataCol_01: [
     {
       value: 'Contactos ePortugal',

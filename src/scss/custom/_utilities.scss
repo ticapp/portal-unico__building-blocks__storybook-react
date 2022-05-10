@@ -1,0 +1,23 @@
+//Merge with utilities
+
+$utilities: map-merge(
+  $utilities,
+  (
+    'font-size': (
+      rfs: true,
+      property: font-size,
+      class: fs,
+      values: $font-sizes,
+    ),
+    'line-height': (
+      property: line-height,
+      class: lh,
+      values: $line-heights,
+    ),
+    'background-color': (
+      property: background-color,
+      class: bg,
+      values: map-merge($utilities-bg-colors, $colors),
+    ),
+  )
+);
