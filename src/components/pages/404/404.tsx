@@ -21,7 +21,7 @@ export const Page404 = ({ classPage404, pageInfo }: Page404Props) => {
         <Row>
           <Col xs={12} md={6} xl={6} className='px-128 py-128'>
             <h1>{pageInfo.title}</h1>
-            {pageInfo.description && <p>{pageInfo.description}</p>}
+            {pageInfo.description && <p className='fs-64 lh-72'>{pageInfo.description}</p>}
             <Button variant='brand-yellow-main'>
               <Link link={pageInfo.button.link} isExternal={pageInfo.button.isExternal} target={pageInfo.button.target}>
                 <Icon icon='ama-arrow-right-circle' />
