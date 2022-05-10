@@ -1,0 +1,72 @@
+@import '../../../node_modules/bootstrap/scss/functions';
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/mixins';
+
+$neutral-black: #212121;
+$neutral-dark: #242d37;
+$neutral-dark-grey: #707070;
+$neutral-light-grey: #c9c9c9;
+$neutral-light: #f0f0f0;
+$neutral-white: #ffffff;
+
+$brand-green-main: #00672f;
+$brand-green-secondary: #248241;
+$brand-green-terciary: #428048;
+$brand-green-fourth: #06571c;
+
+$brand-yellow-main: #fbcf5f;
+$brand-yellow-secondary: #f5c037;
+$brand-yellow-terciary: #efb82e;
+$brand-yellow-fourth: #fff0cb;
+
+$semantic-success: #3ec663;
+$semantic-info: #7bb1e5;
+$semantic-alerts: #aa120a;
+
+$details-links-visited: #661299;
+
+//We can use this as we used 'primary' on btn for example 'btn-neutral-black'
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    'neutral-black': $neutral-black,
+    'neutral-dark': $neutral-dark,
+    'neutral-dark-grey': $neutral-dark-grey,
+    'neutral-light-grey': $neutral-light-grey,
+    'neutral-light': $neutral-light,
+    'neutral-white': $neutral-white,
+    'brand-green-main': $brand-green-main,
+    'brand-green-secondary': $brand-green-secondary,
+    'brand-green-terciary': $brand-green-terciary,
+    'brand-green-fourth': $brand-green-fourth,
+    'brand-yellow-main': $brand-yellow-main,
+    'brand-yellow-secondary': $brand-yellow-secondary,
+    'brand-yellow-terciary': $brand-yellow-terciary,
+    'brand-yellow-fourth': $brand-yellow-fourth,
+    'semantic-success': $semantic-success,
+    'semantic-info': $semantic-info,
+    'semantic-alerts': $semantic-alerts,
+    'details-links-visited': $details-links-visited,
+  )
+);
+
+$colors: (
+  'neutral-black': $neutral-black,
+  'neutral-dark': $neutral-dark,
+  'neutral-dark-grey': $neutral-dark-grey,
+  'neutral-light-grey': $neutral-light-grey,
+  'neutral-light': $neutral-light,
+  'neutral-white': $neutral-white,
+  'brand-green-main': $brand-green-main,
+  'brand-green-secondary': $brand-green-secondary,
+  'brand-green-terciary': $brand-green-terciary,
+  'brand-green-fourth': $brand-green-fourth,
+  'brand-yellow-main': $brand-yellow-main,
+  'brand-yellow-secondary': $brand-yellow-secondary,
+  'brand-yellow-terciary': $brand-yellow-terciary,
+  'brand-yellow-fourth': $brand-yellow-fourth,
+  'semantic-success': $semantic-success,
+  'semantic-info': $semantic-info,
+  'semantic-alerts': $semantic-alerts,
+  'details-links-visited': $details-links-visited,
+);
