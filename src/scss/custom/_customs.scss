@@ -84,3 +84,21 @@ h5 {
     font-weight: 800 !important;
   }
 }
+
+//Override of margin-bottom original
+p {
+  margin-bottom: 8px;
+}
+
+ul {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+// Accessibility says min height/width 44px for clickable areas
+a {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+}

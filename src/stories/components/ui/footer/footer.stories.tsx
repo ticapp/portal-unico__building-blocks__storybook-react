@@ -5,8 +5,6 @@ import { Footer } from '../../../../components/ui/footer';
 import { Icon } from '../../../../components';
 import { Image } from 'react-bootstrap';
 
-const rp = require('../../../../assets/rp.png');
-
 export default {
   title: 'Components/Footer',
   component: Footer,
@@ -33,19 +31,34 @@ BasicFooter.args = {
   classFooterCol_03: 'bg-brand-yellow-main border border-white border-1',
   listDataCol_01: [
     {
-      value: 'Contactos ePortugal',
+      value: (
+        <>
+          <Icon icon='ama-arrow-right' />
+          Contactos ePortugal
+        </>
+      ),
       hasExternalLink: true,
       link: 'https://eportugal.gov.pt/contactos',
       title: 'external link',
     },
     {
-      value: 'Sites e Apps públicos',
+      value: (
+        <>
+          <Icon icon='ama-arrow-right' />
+          Sites e Apps públicos,
+        </>
+      ),
       hasExternalLink: false,
       link: '/react/ui/logo',
       title: 'internal link',
     },
     {
-      value: 'Linhas úteis',
+      value: (
+        <>
+          <Icon icon='ama-arrow-right' />
+          Linhas úteis
+        </>
+      ),
       hasExternalLink: false,
       link: '/react/ui/logo',
       title: 'internal link',
@@ -53,25 +66,45 @@ BasicFooter.args = {
   ],
   listDataCol_02: [
     {
-      value: 'APP.GOV.PT',
+      value: (
+        <>
+          <Icon icon='ama-arrow-right' />
+          APP.GOV.PT
+        </>
+      ),
       hasExternalLink: true,
       link: 'https://eportugal.gov.pt',
       title: 'external link',
     },
     {
-      value: 'Acessibilidade',
+      value: (
+        <>
+          <Icon icon='ama-arrow-right' />
+          Acessibilidade
+        </>
+      ),
       hasExternalLink: false,
       link: '/react/ui/logo',
       title: 'internal link',
     },
     {
-      value: 'Mapa do site',
+      value: (
+        <>
+          <Icon icon='ama-arrow-right' />
+          Linhas úteis
+        </>
+      ),
       hasExternalLink: false,
       link: '/react/ui/logo',
       title: 'internal link',
     },
     {
-      value: 'Termos e condições',
+      value: (
+        <>
+          <Icon icon='ama-arrow-right' />
+          Termos e condições
+        </>
+      ),
       hasExternalLink: false,
       link: '/react/ui/logo',
       title: 'internal link',
@@ -98,11 +131,41 @@ BasicFooter.args = {
     },
   ],
   listDataRowImagesLink: [
-    { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
-    { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
-    { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
-    { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
-    { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
-    { value: <Image src={rp} />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'República Portuguesa' },
+    {
+      value: <Image src={require('../../../../assets/img/rp.png')} alt='Portal do Governo' />,
+      hasExternalLink: true,
+      link: 'https://www.portugal.gov.pt/',
+      title: 'Portal do Governo',
+    },
+    {
+      value: <Image src={require('../../../../assets/img/ama.png')} alt='Agência para a Modernização Administrativa' />,
+      hasExternalLink: true,
+      link: 'https://www.portugal.gov.pt/',
+      title: 'Agência para a Modernização Administrativa',
+    },
+    { value: <Image src={require('../../../../assets/img/simplex.png')} alt='Simplex' />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'Simplex' },
+    { value: <Image src={require('../../../../assets/img/eugo.png')} alt='Rede EUGO' />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'Rede EUGO' },
+    {
+      value: <Image src={require('../../../../assets/img/net.png')} alt='Sistema de Informação do Mercado Interno (IMI)' />,
+      hasExternalLink: true,
+      link: 'https://www.portugal.gov.pt/',
+      title: 'Sistema de Informação do Mercado Interno (IMI)',
+    },
+    {
+      value: <Image src={require('../../../../assets/img/compete2020.png')} alt='Compete2020' />,
+      hasExternalLink: true,
+      link: 'https://www.portugal.gov.pt/',
+      title: 'Compete2020',
+    },
+    { value: <Image src={require('../../../../assets/img/pt2020.png')} alt='Portugal2020' />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'Portugal2020' },
+    {
+      value: <Image src={require('../../../../assets/img/ue.png')} alt='Fundos Europeus Estruturais e de Investimento' />,
+      hasExternalLink: true,
+      link: 'https://www.portugal.gov.pt/',
+      title: 'Fundos Europeus Estruturais e de Investimento',
+    },
+    { value: <Image src={require('../../../../assets/img/eu.png')} alt='A sua Europa' />, hasExternalLink: true, link: 'https://www.portugal.gov.pt/', title: 'A sua Europa' },
   ],
+  listDataCol_01_Type: 'none',
+  listDataCol_02_Type: 'none',
 };

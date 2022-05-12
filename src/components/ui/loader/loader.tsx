@@ -4,14 +4,14 @@ import classNames from 'classnames';
 
 export interface LoaderProps {
   /** Add classes to the Footer component */
-  classLoader?: string;
+  className?: string;
 
   /** Select type of spinner, if not define default will be shown */
   type?: 'spinner-two-half' | 'spinner-half' | 'dots' | 'default';
 }
 
-export const Loader = ({ classLoader, type }: LoaderProps) => {
-  const cssLoader = classNames('ama-loader', classLoader);
+export const Loader = ({ className, type }: LoaderProps) => {
+  const cssLoader = classNames('ama-loader', className);
   return (
     <div className={cssLoader}>
       {(() => {
