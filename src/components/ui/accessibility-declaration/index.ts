@@ -1,1 +1,0 @@
-export { AccessibilityDeclaration } from './accessibility-declaration';
