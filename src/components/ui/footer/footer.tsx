@@ -4,9 +4,11 @@ import classNames from 'classnames';
 import './footer.scss';
 import { List } from '../list';
 import { UrlObject } from 'url';
+import { v4 as uuidv4 } from 'uuid';
+
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
   /** Add classes to the Footer component */
-  classFooter?: string;
+  className?: string;
 
   /** Add classes in Footer component info section */
   classFooterSectionInfo?: string;
@@ -49,10 +51,44 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
 
   /** Data for footer image list - see List docs */
   listDataRowImagesLink?: Array<{ value: React.ReactNode; hasExternalLink?: boolean; link: string | UrlObject; title?: string; ariaLabel?: string }>;
+
+  /** Type of bullets of listDataCol_01 */
+  listDataCol_01_Type?:
+    | 'disc'
+    | 'circle'
+    | 'square'
+    | 'decimal'
+    | 'decimal-leading-zero'
+    | 'lower-roman'
+    | 'upper-roman'
+    | 'lower-greek'
+    | 'lower-latin'
+    | 'upper-latin'
+    | 'armenian'
+    | 'georgian'
+    | 'lower-alpha'
+    | 'none';
+
+  /** Type of bullets of listDataCol_02 */
+  listDataCol_02_Type?:
+    | 'disc'
+    | 'circle'
+    | 'square'
+    | 'decimal'
+    | 'decimal-leading-zero'
+    | 'lower-roman'
+    | 'upper-roman'
+    | 'lower-greek'
+    | 'lower-latin'
+    | 'upper-latin'
+    | 'armenian'
+    | 'georgian'
+    | 'lower-alpha'
+    | 'none';
 }
 
 export const Footer = ({
-  classFooter,
+  className,
   classFooterSectionInfo,
   classFooterCopyright,
   classFooterCol_01,
@@ -67,20 +103,23 @@ export const Footer = ({
   listDataCol_02,
   listDataCol_03,
   listDataRowImagesLink,
+  listDataCol_01_Type,
+  listDataCol_02_Type,
 }: FooterProps) => {
-  const cssFooter = classNames('ama-footer', classFooter);
+  const cssFooter = classNames('ama-footer', className);
   const cssFooterSectionInfo = classNames('ama-footer-section-info', classFooterSectionInfo);
   const cssFooterCopyright = classNames('ama-footer-copyright', classFooterCopyright);
-  const cssFooterCol_01 = classNames('ama-footer-section-info-col-01', classFooterCol_01);
-  const cssFooterCol_02 = classNames('ama-footer-section-info-col-02', classFooterCol_02);
-  const cssFooterCol_03 = classNames('ama-footer-section-info-col-03', classFooterCol_03);
+  const cssFooterCol_01 = classNames('ama-footer-section-info-col-01', classFooterCol_01, 'pb-34');
+  const cssFooterCol_02 = classNames('ama-footer-section-info-col-02', classFooterCol_02, 'pb-34', 'pl-30');
+  const cssFooterCol_03 = classNames('ama-footer-section-info-col-03', classFooterCol_03, 'pb-34', 'pl-30');
+  const cssLogos = classNames('ama-footer-logos');
 
   const renderContentInfo_01 = () => {
     return contentInfo_01?.map((content) => {
       return (
-        <div className='ama-footer-section-info-detail'>
+        <div className='ama-footer-section-info-detail' key={uuidv4()}>
           <p>{content.label}</p>
-          <p>{content.value}</p>
+          <p className='strong'>{content.value}</p>
         </div>
       );
     });
@@ -88,38 +127,40 @@ export const Footer = ({
 
   return (
     <footer className={cssFooter}>
-      <Container>
+      <Container fluid>
         <Row className={cssFooterSectionInfo}>
           <Col xs={12} md={6} xl={6} className={cssFooterCol_01}>
-            <h2>{headerTitle_01}</h2>
             <Row>
+              <h2 className='mb-34'>{headerTitle_01}</h2>
               <Col xs={12} md={8} xl={8}>
                 {renderContentInfo_01()}
               </Col>
               <Col xs={12} md={4} xl={4}>
-                <List listData={listDataCol_01}></List>
+                <List listData={listDataCol_01} listStyleType={listDataCol_01_Type}></List>
               </Col>
             </Row>
           </Col>
           <Col xs={12} md={3} xl={3} className={cssFooterCol_02}>
-            <h2>{headerTitle_02}</h2>
             <Row>
+              <h2 className='mb-34'>{headerTitle_02}</h2>
               <Col>
-                <List listData={listDataCol_02}></List>
+                <List listData={listDataCol_02} listStyleType={listDataCol_02_Type}></List>
               </Col>
             </Row>
           </Col>
           <Col xs={12} md={3} xl={3} className={cssFooterCol_03}>
-            <h2>{headerTitle_03}</h2>
             <Row>
-              <Col>
-                <List listData={listDataCol_03} listStyleType='none' classList='px-0 d-inline-flex'></List>
+              <h2 className='mb-36'>{headerTitle_03}</h2>
+              <Col xs={9} md={6} xl={6}>
+                <List listData={listDataCol_03} listStyleType='none' className='px-0 d-flex justify-content-between'></List>
               </Col>
             </Row>
           </Col>
         </Row>
         <Row>
-          <List listData={listDataRowImagesLink} listStyleType='none' classList='px-0 d-inline-flex'></List>
+          <Col className={cssLogos}>
+            <List listData={listDataRowImagesLink} listStyleType='none' className='px-0 d-grid d-md-flex flex-md-wrap justify-content-between mb-0'></List>
+          </Col>
         </Row>
         <Row>
           <Col className={cssFooterCopyright}>{copyrightContent}</Col>

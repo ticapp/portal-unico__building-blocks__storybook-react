@@ -1,31 +1,95 @@
+@import '../../../scss/index.scss';
+
 .ama {
   &-footer {
     h2 {
-      font-size: 16px;
-      margin-bottom: 30px;
+      font-size: 1.5em !important;
+      line-height: 29px !important;
+      font-weight: 700 !important;
+      padding-top: 28px;
     }
-    p {
-      margin-bottom: 8px;
-      font-weight: 600;
+
+    .pl-30 {
+      padding-left: 30px;
     }
-    li {
-      font-weight: 600;
+
+    .pb-34 {
+      padding-bottom: 34px;
     }
+
+    .mb-34 {
+      margin-bottom: 34px;
+    }
+
+    .mb-36 {
+      margin-bottom: 36px;
+    }
+
     &-section-info {
-      background-color: #efb82e;
-      & > * {
-        border: 2px solid #ffffff;
+      a,
+      svg {
+        text-decoration: none;
+        color: unset;
+        &:hover,
+        &:focus {
+          color: $brand-green-main;
+          fill: $brand-green-main;
+        }
+        &:focus-visible {
+          outline: 2px solid $brand-green-fourth;
+        }
       }
       &-detail {
-        margin-top: 30px;
-        & > :last-child {
-          font-weight: bold;
-          font-size: 18px;
+        p {
+          font-size: 0.875em !important;
+          line-height: 17px !important;
+          font-weight: 500 !important;
+          &.strong {
+            font-size: 1.375em !important;
+            line-height: 26px !important;
+            font-weight: 700 !important;
+          }
+        }
+        margin-bottom: 39px;
+        &:last-of-type {
+          margin-bottom: 0px;
         }
       }
     }
+    &-section-info-col-01,
+    &-section-info-col-02 {
+      .ama-list {
+        a {
+          font-size: 0.875em !important;
+          line-height: 17px !important;
+          font-weight: 500 !important;
+          svg {
+            padding-right: 10px;
+          }
+        }
+      }
+    }
+    &-section-info-col-02,
+    &-section-info-col-03 {
+      padding-left: 30px;
+    }
+
     &-copyright {
-      font-size: 14px;
+      font-size: 0.875em !important;
+      line-height: 17px !important;
+      font-weight: 500 !important;
+      margin-bottom: 30px;
+    }
+
+    &-logos {
+      padding: 20px 0px;
+      ul {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      img {
+        height: 35px;
+        width: auto;
+      }
     }
   }
 }

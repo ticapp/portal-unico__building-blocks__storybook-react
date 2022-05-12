@@ -1,9 +1,8 @@
 import React, { HTMLAttributes } from 'react';
-import './list.scss';
 import { Link } from '../link';
 import classNames from 'classnames';
 import { UrlObject } from 'url';
-
+import { v4 as uuidv4 } from 'uuid';
 export interface ListProps extends HTMLAttributes<HTMLElement> {
   /** Data to fill List options */
   listData?: Array<{ value: React.ReactNode; hasExternalLink?: boolean; link: string | UrlObject; title?: string; ariaLabel?: string }>;
@@ -32,7 +31,7 @@ export interface ListProps extends HTMLAttributes<HTMLElement> {
   listStylePosition?: 'inside' | 'outside';
 
   /** Css class */
-  classList?: string;
+  className?: string;
 }
 
 export function List({
@@ -47,25 +46,21 @@ export function List({
   listStyleType = 'disc',
   listStyleImageUrl,
   listStylePosition = 'outside',
-  classList,
+  className,
 }: ListProps) {
-  const cssList = classNames('ama-list', classList);
-  const listOptions = () => {
-    return listData?.map((option) => {
-      return (
-        <li key={'list' + option.value} style={{ listStyle: listStyleType + ' ' + (listStyleImageUrl ? 'url(' + listStyleImageUrl + ')' : '') + ' ' + listStylePosition }}>
-          {option.hasExternalLink ? (
-            <Link link={option.link} isExternal={true} target='_blank' title={option.title}>
-              {option.value}
-            </Link>
-          ) : (
-            <Link link={option.link} title={option.title}>
-              {option.value}
-            </Link>
-          )}
-        </li>
-      );
-    });
-  };
-  return <ul className={cssList}>{listOptions()}</ul>;
+  const cssList = classNames('ama-list', className);
+  const listOptions = listData?.map((option) => (
+    <li key={uuidv4()} style={{ listStyle: listStyleType + ' ' + (listStyleImageUrl ? 'url(' + listStyleImageUrl + ')' : '') + ' ' + listStylePosition }}>
+      {option.hasExternalLink ? (
+        <Link link={option.link} isExternal={true} target='_blank' title={option.title}>
+          {option.value}
+        </Link>
+      ) : (
+        <Link link={option.link} title={option.title}>
+          {option.value}
+        </Link>
+      )}
+    </li>
+  ));
+  return <ul className={cssList}>{listOptions}</ul>;
 }
