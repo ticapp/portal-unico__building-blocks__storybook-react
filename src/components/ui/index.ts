@@ -1,4 +1,4 @@
-export * from './accessibility-declaration';
+export * from './rich-text';
 export * from './alert';
 export * from './footer';
 export * from './header';
