@@ -3,7 +3,6 @@ import './buttons.scss';
 import classNames from 'classnames';
 import { Button as BsButton, ButtonProps as BsButtonProps } from 'react-bootstrap';
 import { Icon } from '../../../components/ui';
-import './buttons.scss';
 export interface ButtonProps extends BsButtonProps {
   /** Add classes to the Buttons component */
   className?: string;
