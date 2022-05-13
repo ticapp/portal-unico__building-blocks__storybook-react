@@ -9,11 +9,11 @@
 @import './custom/spacing';
 @import './custom/fonts';
 @import './custom/mixins';
+@import './custom/variables';
 @import './custom/customs';
 
 //Final
 @import './custom/utilities';
-
 //...
 //  Import bootstrap to set changes
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

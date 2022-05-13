@@ -1,0 +1,25 @@
+//Override buttons variables
+$btn-border-radius: 0px;
+$btn-border-radius-sm: $btn-border-radius;
+$btn-border-radius-lg: $btn-border-radius;
+$btn-disabled-opacity: 0.4;
+$btn-focus-box-shadow: none;
+$btn-active-box-shadow: none;
+$btn-box-shadow: none;
+$input-btn-focus-box-shadow: none;
+$enable-shadows: false;
+
+$btn-padding-y: 16px;
+$btn-padding-x: 16px;
+$btn-padding-y-sm: 10px;
+$btn-padding-x-sm: 10px;
+$btn-padding-y-lg: $btn-padding-y;
+$btn-padding-x-lg: $btn-padding-x;
+
+$btn-font-size: 1em;
+$btn-font-size-sm: $btn-font-size;
+$btn-font-size-lg: $btn-font-size;
+
+$btn-line-height: 28px;
+$btn-font-weight: $font-weight-bold;
+$btn-font-family: 'Lato-Bold', sans-serif;

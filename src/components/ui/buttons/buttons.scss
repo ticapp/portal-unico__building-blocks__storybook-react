@@ -1,0 +1,76 @@
+@import '../../../scss/index.scss';
+
+$threshold: 55%;
+@function contrast-color($color, $dark, $light) {
+  @return if(lightness($color) < $threshold, $light, $dark);
+}
+
+@function check-light($color, $color-contrast-light) {
+  @return if($color == $color-contrast-light, $color, $neutral-white);
+}
+
+@function findColor($color, $term) {
+  $name-color: str-insert(str-slice($color, 1, -5), $term, 100);
+  $value: map-get($theme-colors, $name-color);
+  @return $value;
+}
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant(
+      $background: $value,
+      $border: $value,
+      $color: contrast-color($value, $value, $neutral-white),
+      $hover-background: check-light($value, $color-contrast-light),
+      $hover-border: $value,
+      $hover-color: contrast-color(check-light($value, $color-contrast-light), $value, $neutral-white),
+      $active-background: check-light($value, transparent),
+      $active-border: $value,
+      $active-color: contrast-color($value, $neutral-white, $value)
+    );
+    &:hover {
+      svg {
+        fill: contrast-color($value, $neutral-white, $value);
+      }
+    }
+    .btn-check:focus + &,
+    &:focus {
+      background: contrast-color($value, transparent, $value);
+      color: contrast-color($value, $value, $neutral-white);
+      border-color: findColor($color, 'fourth');
+      border-width: 2px;
+      svg {
+        fill: contrast-color($value, $value, $neutral-white);
+      }
+    }
+
+    svg {
+      fill: contrast-color($value, $value, $neutral-white);
+    }
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .btn-outline-#{$color} {
+    @include button-outline-variant($color: $value, $color-hover: contrast-color(check-light($value, $color-contrast-light), $neutral-white, $value));
+    &:hover {
+      svg {
+        fill: contrast-color($value, $value, $neutral-white);
+      }
+    }
+    .btn-check:focus + &,
+    &:focus {
+      background: contrast-color($value, transparent, $value);
+      color: contrast-color($value, $value, $neutral-white);
+      border-color: findColor($color, 'fourth');
+      border-width: 2px;
+      svg {
+        fill: contrast-color($value, $value, $neutral-white);
+      }
+    }
+
+    svg {
+      fill: contrast-color($value, $neutral-white, $value);
+    }
+  }
+}
