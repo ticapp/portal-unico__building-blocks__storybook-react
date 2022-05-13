@@ -2,8 +2,6 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { UrlObject } from 'url';
 import { Link } from '../link';
-import { DefaultLogo } from './DefaultLogo';
-import './logo.scss';
 
 declare type Url = string | UrlObject;
 
@@ -12,32 +10,51 @@ export interface LogoProps {
   src?: string;
   /** Image alt text */
   alt?: string;
+  /** Image width in pixels */
+  width?: number;
+  /** Image height in pixels */
+  height?: number;
+
   /** If true, the logo image is not rendered inside a link for the homepage */
   isHomepage?: boolean;
+  /** Link title */
+  title?: string;
   /** Homepage link */
   homepageLink?: Url;
 }
 
+const logo = require('../../../assets/img/logo.png');
+
 const Logo: FC<LogoProps> = ({
   src,
   alt = 'Página inicial',
+  width,
+  height,
+  title = 'Voltar a página de entrada',
   homepageLink = '/',
   isHomepage = false,
 }: LogoProps) => {
-  const classes = classNames('ama-logo');
-
-  const currentImage = !src ? (
-    <DefaultLogo alt={alt} />
-  ) : (
-    <img src={src} alt={alt}></img>
+  const classes = classNames(
+    'ama-logo',
+    'd-flex',
+    isHomepage ? '' : 'h1',
+    'mb-0'
   );
-
-  //  Necessario os dois porque a distinção está
   return (
-    <div className={classes}>
-      {isHomepage && currentImage}
-      {!isHomepage && <Link link={homepageLink}>{currentImage}</Link>}
-    </div>
+    <>
+      {isHomepage && (
+        <h1 className={classes}>
+          <img src={src || logo} alt={alt} width={width} height={height} />
+        </h1>
+      )}
+      {!isHomepage && (
+        <div className={classes}>
+          <Link link={homepageLink} title={title}>
+            <img src={src || logo} alt={alt} width={width} height={height} />
+          </Link>
+        </div>
+      )}
+    </>
   );
 };
 

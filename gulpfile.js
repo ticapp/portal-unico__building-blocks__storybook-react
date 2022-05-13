@@ -9,7 +9,8 @@ const gulp = require('gulp'),
   rename = require('gulp-rename'),
   gap = require('gulp-append-prepend'),
   touch = require('gulp-touch-cmd'),
-  pkg = require('./package.json');
+  pkg = require('./package.json'),
+  del = require('del');
 
 gulp.task('scss-min', () => {
   return gulp
@@ -56,6 +57,10 @@ gulp.task('assets', () => {
 // Fonts
 gulp.task('fonts', () => {
   return gulp.src(['src/fonts/**']).pipe(gulp.dest('dist/fonts')).pipe(touch());
+});
+
+gulp.task('clean', function () {
+  return del('dist/**', { force: true });
 });
 
 gulp.task('build', gulp.series('scss-min', 'assets', 'fonts'));

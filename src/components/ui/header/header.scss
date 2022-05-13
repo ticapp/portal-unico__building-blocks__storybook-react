@@ -1,5 +1,30 @@
+@import '../../../scss/index.scss';
+
 .ama {
   &-header {
-    border: 1px solid #ccc;
+    border-bottom: 1px solid $neutral-light-grey;
+
+    padding-top: 25px;
+    padding-bottom: 20px;
+
+    @media screen and (min-width: 768px) {
+      padding-top: 20px;
+      padding-bottom: 14px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .combo {
+      width: 100px;
+      &.language-selector {
+        .combo-input {
+          border: 1px solid transparent;
+
+          &:focus {
+            border: 1px solid transparent;
+          }
+        }
+      }
+    }
   }
 }

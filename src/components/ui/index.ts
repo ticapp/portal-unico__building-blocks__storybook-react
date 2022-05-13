@@ -13,3 +13,4 @@ export * from './scroll-top';
 export * from './skip-navigation';
 export * from './user-area';
 export * from './buttons';
+export * from './select';
