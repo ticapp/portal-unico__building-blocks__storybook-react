@@ -27,7 +27,7 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon icon='ama-arrow-right' />
+            <Icon ariaHidden='true' icon='ama-arrow-right' />
             Contactos ePortugal
           </>
         ),
@@ -38,7 +38,7 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon icon='ama-arrow-right' />
+            <Icon ariaHidden='true' icon='ama-arrow-right' />
             Sites e Apps públicos,
           </>
         ),
@@ -49,7 +49,7 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon icon='ama-arrow-right' />
+            <Icon ariaHidden='true' icon='ama-arrow-right' />
             Linhas úteis
           </>
         ),
@@ -62,7 +62,7 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon icon='ama-arrow-right' />
+            <Icon ariaHidden='true' icon='ama-arrow-right' />
             APP.GOV.PT
           </>
         ),
@@ -73,7 +73,7 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon icon='ama-arrow-right' />
+            <Icon ariaHidden='true' icon='ama-arrow-right' />
             Acessibilidade
           </>
         ),
@@ -84,7 +84,7 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon icon='ama-arrow-right' />
+            <Icon ariaHidden='true' icon='ama-arrow-right' />
             Linhas úteis
           </>
         ),
@@ -95,7 +95,7 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon icon='ama-arrow-right' />
+            <Icon ariaHidden='true' icon='ama-arrow-right' />
             Termos e condições
           </>
         ),
@@ -106,19 +106,19 @@ export const BasicFooter: Story<FooterProps> = () => {
     ],
     listDataCol_03: [
       {
-        value: <Icon icon='ama-facebook' alt='AMA Facebook' aria-hidden='true' />,
+        value: <Icon ariaHidden='true' icon='ama-facebook' alt='AMA Facebook' />,
         hasExternalLink: true,
         link: 'https://facebook.com',
         title: 'facebook',
       },
       {
-        value: <Icon icon='ama-twitter' alt='AMA Twitter' aria-hidden='true' />,
+        value: <Icon ariaHidden='true' icon='ama-twitter' alt='AMA Twitter' />,
         hasExternalLink: true,
         link: 'https://twitter.com',
         title: 'Twitter',
       },
       {
-        value: <Icon icon='ama-linkedin' alt='AMA Linkedin' aria-hidden='true' />,
+        value: <Icon ariaHidden='true' icon='ama-linkedin' alt='AMA Linkedin' />,
         hasExternalLink: true,
         link: 'https://www.linkedin.com/',
         title: 'linkedin',
