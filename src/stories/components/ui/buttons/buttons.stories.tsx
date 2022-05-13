@@ -465,7 +465,7 @@ export const ButtonLink: Story<ButtonProps> = () => {
     className: 'shadow-none',
     children: 'Default',
     variant: 'link',
-    href: 'http://www.google.pt',
+    href: 'https://www.google.pt',
   } as ButtonProps;
 
   const argsDisabled = {
