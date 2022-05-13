@@ -290,7 +290,7 @@ const Select = ({
     }
   };
 
-  const onComboClick = (e) => {
+  const onComboClick = () => {
     if (!disabled) {
       updateMenuState(!isOpen, false);
     }
@@ -332,6 +332,8 @@ const Select = ({
 
     const action = getActionFromKey(event, isOpen);
 
+    const { key } = event;
+
     switch (action) {
       case SelectActions.Last:
       case SelectActions.First:
@@ -357,7 +359,7 @@ const Select = ({
 
       case SelectActions.Type:
         if (searchable) {
-          const { key } = event;
+          
           return onComboType(key);
         }
 
@@ -377,8 +379,7 @@ const Select = ({
         if (multiSelection) {
           return selectOption(activeIndex);
         }
-
-        const { key } = event;
+        
         updateMenuState(true);
         return onComboType(key);
     }
