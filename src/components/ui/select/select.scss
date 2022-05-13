@@ -1,0 +1,70 @@
+@import '../../../scss/index.scss';
+
+.combo {
+  position: relative;
+  cursor: default;
+
+  &.disabled {
+    pointer-events: none;
+    color: $neutral-dark-grey;
+    .combo-input {
+      border: 1px solid $neutral-light-grey;
+
+      svg {
+        fill: $neutral-dark-grey;
+      }
+    }
+  }
+
+  .combo-input {
+    border: 1px solid $neutral-black;
+
+    &:focus {
+      border: 2px solid $neutral-dark;
+    }
+
+    .tags {
+      .tag {
+        border-radius: 6px;
+        color: $neutral-white;
+        word-break: break-word;        
+      }
+    }
+  }
+
+  &.open {
+    .combo-input {
+      &:focus {
+        border: 1px solid $neutral-black;
+      }
+    }
+  }
+
+  .combo-menu {
+    @include shadow;
+    @include scrollbars;
+    overflow-y: scroll;
+
+    position: absolute;
+    left: 0;
+    top: 100%;
+
+    max-height: 272px;
+
+    z-index: $zindex-dropdown;
+
+    .combo-option {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      margin-bottom: 10px;
+
+      &:last-of-type {
+        margin-bottom: 0px;
+      }
+      &.hover {
+        background-color: rgb(0 0 0 / 10%);
+      }
+    }
+  }
+}

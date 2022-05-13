@@ -22,6 +22,10 @@ const iconList: Record<string, boolean> = {
   'ama-chart-line': true,
   'ama-check-circle': true,
   'ama-check': true,
+  'ama-checkbox': true,
+  'ama-checkbox-checked': true,
+  'ama-chevron-up': true,
+  'ama-chevron-down': true,
   'ama-chevron-left': true,
   'ama-chevron-right': true,
   'ama-clip': true,
@@ -193,6 +197,18 @@ export const loadIcon = (name: IconName) => {
     }
     case 'ama-check': {
       return import('./AmaCheck');
+    }
+    case 'ama-checkbox': {
+      return import('./AmaCheckbox');
+    }
+    case 'ama-checkbox-checked': {
+      return import('./AmaCheckboxChecked');
+    }
+    case 'ama-chevron-up': {
+      return import('./AmaChevronUp');
+    }
+    case 'ama-chevron-down': {
+      return import('./AmaChevronDown');
     }
     case 'ama-chevron-left': {
       return import('./AmaChevronLeft');
