@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react';
 import './buttons.scss';
 import classNames from 'classnames';
-import { Button, ButtonProps } from 'react-bootstrap';
+import { Button as BsButton, ButtonProps as BsButtonProps } from 'react-bootstrap';
 import { Icon } from '../../../components/ui';
-
 export interface ButtonsProps extends ButtonProps {
+import './buttons.scss';
+export interface ButtonProps extends BsButtonProps {
   /** Add classes to the Buttons component */
   className?: string;
 
@@ -18,13 +19,13 @@ export interface ButtonsProps extends ButtonProps {
   iconDirection?: 'right' | 'left' | 'none';
 }
 
-export const Buttons = ({ className, children, iconName = '', iconDirection = 'none', ...props }: ButtonsProps) => {
+export const Button = ({ className, children, iconName = '', iconDirection = 'none', ...props }: ButtonProps) => {
   const cssButtons = classNames('ama-buttons', className, 'd-flex align-items-center', iconDirection === 'right' ? 'justify-content-between' : '');
   return (
-    <Button className={cssButtons} {...props}>
+    <BsButton className={cssButtons} {...props}>
       {iconDirection === 'left' ? <Icon icon={iconName} className='me-8' ariaHidden='true' /> : ''}
       {children}
       {iconDirection === 'right' ? <Icon icon={iconName} className='ms-8' ariaHidden='true' /> : ''}
-    </Button>
+    </BsButton>
   );
 };

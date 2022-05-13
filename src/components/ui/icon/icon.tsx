@@ -55,7 +55,7 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
   /** Alt name for icon */
   alt?: string;
   /** Aria-hidden for icon decorative */
-  ariaHidden?: 'true' | 'false';
+  ariaHidden?: boolean | 'true' | 'false';
 }
 
 export const Icon: FC<IconProps> = ({ size = 'md', icon = '', alt = '', className, padding, onIconLoad, ariaHidden = 'false' }) => {
