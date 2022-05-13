@@ -22,9 +22,9 @@ export const Buttons = ({ className, children, iconName = '', iconDirection = 'n
   const cssButtons = classNames('ama-buttons', className, 'd-flex align-items-center', iconDirection === 'right' ? 'justify-content-between' : '');
   return (
     <Button className={cssButtons} {...props}>
-      {iconDirection === 'left' ? <Icon icon={iconName} className='me-8' /> : ''}
+      {iconDirection === 'left' ? <Icon icon={iconName} className='me-8' ariaHidden='true' /> : ''}
       {children}
-      {iconDirection === 'right' ? <Icon icon={iconName} className='ms-8' /> : ''}
+      {iconDirection === 'right' ? <Icon icon={iconName} className='ms-8' ariaHidden='true' /> : ''}
     </Button>
   );
 };

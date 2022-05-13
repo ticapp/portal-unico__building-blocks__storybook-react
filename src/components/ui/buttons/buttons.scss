@@ -74,3 +74,10 @@ $threshold: 55%;
     }
   }
 }
+
+.btn-link {
+  &:active,
+  &:visited {
+    color: $details-links-visited !important;
+  }
+}

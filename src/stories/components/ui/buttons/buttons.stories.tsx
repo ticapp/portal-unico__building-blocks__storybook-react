@@ -465,12 +465,14 @@ export const ButtonLink: Story<ButtonsProps> = () => {
     className: 'shadow-none',
     children: 'Default',
     variant: 'link',
+    href: 'http://www.google.pt',
   } as ButtonsProps;
 
   const argsDisabled = {
     className: 'shadow-none',
     children: 'Default',
     variant: 'link',
+    disabled: true,
   } as ButtonsProps;
 
   return (
