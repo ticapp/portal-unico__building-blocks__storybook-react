@@ -212,7 +212,7 @@ export class AuthService<TIDToken = JWTIDToken> {
       return null;
     }
 
-    return jwtDecode(this.Tokens.id_token) as TIDToken;
+    return jwtDecode(this.Tokens.id_token);
   }
 
   get Tokens(): AuthTokens {
