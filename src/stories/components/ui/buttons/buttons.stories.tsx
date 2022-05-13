@@ -85,8 +85,8 @@ export const BasicButtons: Story<ButtonsProps> = () => {
 
   return (
     <>
+      <h4>Size LG of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size LG of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...args} />
@@ -96,8 +96,8 @@ export const BasicButtons: Story<ButtonsProps> = () => {
           <Buttons {...argsDisabled} />
         </Col>
       </Row>
+      <h4>Size SM of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size SM of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsSM} />
@@ -107,15 +107,15 @@ export const BasicButtons: Story<ButtonsProps> = () => {
           <Buttons {...argsSMDisabled} />
         </Col>
       </Row>
+      <h4>Full width column</h4>
       <Row className='mb-16'>
-        <h4>Full width column</h4>
         <Col xs={4}>
           <Buttons {...argsFull} />
         </Col>
       </Row>
       <hr />
+      <h4>Size LG of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size LG of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsOutline} />
@@ -125,8 +125,8 @@ export const BasicButtons: Story<ButtonsProps> = () => {
           <Buttons {...argsOutlineDisabled} />
         </Col>
       </Row>
+      <h4>Size SM of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size SM of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsOutlineSM} />
@@ -136,8 +136,8 @@ export const BasicButtons: Story<ButtonsProps> = () => {
           <Buttons {...argsOutlineSMDisabled} />
         </Col>
       </Row>
+      <h4>Full width column</h4>
       <Row className='mb-16'>
-        <h4>Full width column</h4>
         <Col xs={4}>
           <Buttons {...argsOutlineFull} />
         </Col>
@@ -242,8 +242,8 @@ export const ButtonRightIcon: Story<ButtonsProps> = () => {
   } as ButtonsProps;
   return (
     <>
+      <h4>Size LG of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size LG of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...args} />
@@ -253,8 +253,8 @@ export const ButtonRightIcon: Story<ButtonsProps> = () => {
           <Buttons {...argsDisabled} />
         </Col>
       </Row>
+      <h4>Size SM of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size SM of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsSM} />
@@ -264,15 +264,15 @@ export const ButtonRightIcon: Story<ButtonsProps> = () => {
           <Buttons {...argsSMDisabled} />
         </Col>
       </Row>
+      <h4>Full width column</h4>
       <Row className='mb-16'>
-        <h4>Full width column</h4>
         <Col xs={4}>
           <Buttons {...argsFull} />
         </Col>
       </Row>
       <hr />
+      <h4>Size LG of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size LG of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsOutline} />
@@ -282,8 +282,8 @@ export const ButtonRightIcon: Story<ButtonsProps> = () => {
           <Buttons {...argsOutlineDisabled} />
         </Col>
       </Row>
+      <h4>Size SM of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size SM of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsOutlineSM} />
@@ -293,8 +293,8 @@ export const ButtonRightIcon: Story<ButtonsProps> = () => {
           <Buttons {...argsOutlineSMDisabled} />
         </Col>
       </Row>
+      <h4>Full width column</h4>
       <Row className='mb-16'>
-        <h4>Full width column</h4>
         <Col xs={4}>
           <Buttons {...argsOutlineFull} />
         </Col>
@@ -398,8 +398,8 @@ export const ButtonLeftIcon: Story<ButtonsProps> = () => {
   } as ButtonsProps;
   return (
     <>
+      <h4>Size LG of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size LG of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...args} />
@@ -409,8 +409,8 @@ export const ButtonLeftIcon: Story<ButtonsProps> = () => {
           <Buttons {...argsDisabled} />
         </Col>
       </Row>
+      <h4>Size SM of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size SM of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsSM} />
@@ -420,15 +420,15 @@ export const ButtonLeftIcon: Story<ButtonsProps> = () => {
           <Buttons {...argsSMDisabled} />
         </Col>
       </Row>
+      <h4>Full width column</h4>
       <Row className='mb-16'>
-        <h4>Full width column</h4>
         <Col xs={4}>
           <Buttons {...argsFull} />
         </Col>
       </Row>
       <hr />
+      <h4>Size LG of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size LG of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsOutline} />
@@ -438,8 +438,8 @@ export const ButtonLeftIcon: Story<ButtonsProps> = () => {
           <Buttons {...argsOutlineDisabled} />
         </Col>
       </Row>
+      <h4>Size SM of buttons</h4>
       <Row className='mb-16'>
-        <h4>Size SM of buttons</h4>
         <Col xs={4}>
           <div className='strong'>Normal</div>
           <Buttons {...argsOutlineSM} />
@@ -449,8 +449,8 @@ export const ButtonLeftIcon: Story<ButtonsProps> = () => {
           <Buttons {...argsOutlineSMDisabled} />
         </Col>
       </Row>
+      <h4>Full width column</h4>
       <Row className='mb-16'>
-        <h4>Full width column</h4>
         <Col xs={4}>
           <Buttons {...argsOutlineFull} />
         </Col>
@@ -459,3 +459,34 @@ export const ButtonLeftIcon: Story<ButtonsProps> = () => {
   );
 };
 ButtonLeftIcon.storyName = 'Button Left icon';
+
+export const ButtonLink: Story<ButtonsProps> = () => {
+  const args = {
+    className: 'shadow-none',
+    children: 'Default',
+    variant: 'link',
+  } as ButtonsProps;
+
+  const argsDisabled = {
+    className: 'shadow-none',
+    children: 'Default',
+    variant: 'link',
+  } as ButtonsProps;
+
+  return (
+    <>
+      <Row className='mb-16'>
+        <Col xs={4}>
+          <div className='strong'>Normal</div>
+          <Buttons {...args} />
+        </Col>
+        <Col xs={4}>
+          <div className='strong'>Disabled</div>
+          <Buttons {...argsDisabled} />
+        </Col>
+      </Row>
+    </>
+  );
+};
+
+ButtonLink.storyName = 'Button Link';
