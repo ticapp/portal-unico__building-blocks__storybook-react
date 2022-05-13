@@ -60,12 +60,12 @@ $threshold: 55%;
     }
     .btn-check:focus + &,
     &:focus {
-      background: contrast-color($value, transparent, $value);
-      color: contrast-color($value, $value, $neutral-white);
+      background: contrast-color($value, $value, transparent);
+      color: contrast-color($value, $neutral-white, $value);
       border-color: findColor($color, 'fourth');
       border-width: 2px;
       svg {
-        fill: contrast-color($value, $value, $neutral-white);
+        fill: contrast-color($value, $neutral-white, $value);
       }
     }
 
