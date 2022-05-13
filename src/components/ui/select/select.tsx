@@ -81,24 +81,38 @@ const Select = ({
     Type: 10,
   };
 
+  // Get action when menu open
+  function getActionWithMenuOpen(key: string, altKey: boolean) {
+    if (key === 'ArrowUp' && altKey) {
+      return SelectActions.CloseSelect;
+    } else if (key === 'ArrowDown' && !altKey) {
+      return SelectActions.Next;
+    } else if (key === 'ArrowUp') {
+      return SelectActions.Previous;
+    } else if (key === 'PageUp') {
+      return SelectActions.PageUp;
+    } else if (key === 'PageDown') {
+      return SelectActions.PageDown;
+    } else if (key === 'Escape') {
+      return SelectActions.Close;
+    } else if (key === 'Enter') {
+      return SelectActions.CloseSelect;
+    } else if (key === ' ') {
+      return SelectActions.Select;
+    }
+  }
   // map a key press to an action
   function getActionFromKey(event, menuOpen) {
     const { key, altKey, ctrlKey, metaKey } = event;
-    const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']; // all keys that will do the default open action
 
-    // handle opening when closed
-    if (!menuOpen && openKeys.includes(key)) {
-      return SelectActions.Open;
-    }
-
-    // home and end move the selected option when open or closed
+    // home move the selected option when open or closed
     if (key === 'Home') {
       return SelectActions.First;
     }
+    // end move the selected option when open or closed
     if (key === 'End') {
       return SelectActions.Last;
     }
-
     // handle typing characters when open or closed
     if (
       key === 'Backspace' ||
@@ -108,25 +122,15 @@ const Select = ({
       return SelectActions.Type;
     }
 
+    // handle opening when closed
+    const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']; // all keys that will do the default open action
+    if (!menuOpen && openKeys.includes(key)) {
+      return SelectActions.Open;
+    }
+
     // handle keys when open
     if (menuOpen) {
-      if (key === 'ArrowUp' && altKey) {
-        return SelectActions.CloseSelect;
-      } else if (key === 'ArrowDown' && !altKey) {
-        return SelectActions.Next;
-      } else if (key === 'ArrowUp') {
-        return SelectActions.Previous;
-      } else if (key === 'PageUp') {
-        return SelectActions.PageUp;
-      } else if (key === 'PageDown') {
-        return SelectActions.PageDown;
-      } else if (key === 'Escape') {
-        return SelectActions.Close;
-      } else if (key === 'Enter') {
-        return SelectActions.CloseSelect;
-      } else if (key === ' ') {
-        return SelectActions.Select;
-      }
+      return getActionWithMenuOpen(key, altKey);
     }
   }
 
