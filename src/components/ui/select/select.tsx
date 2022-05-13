@@ -213,7 +213,7 @@ const Select = ({
           }
         });
 
-        onChange?.(options.filter((o, i) => newVal.includes(i)));
+        onChange?.(options.filter((_o, i) => newVal.includes(i)));
 
         return newVal;
       });
@@ -438,7 +438,7 @@ const Select = ({
               return opt.label == activeOption.label;
             });
           })
-          .map((o, i) => i)
+          .map((_o, i) => i)
       );
     } else if (!multiSelection && !!active && !Array.isArray(active)) {
       setActiveIndex(options.findIndex((o) => o.label === active.label));
@@ -484,7 +484,7 @@ const Select = ({
             (activeIndexes.length <= 0
               ? placeholder
               : options
-                  .filter((o, i) => activeIndexes.includes(i))
+                  .filter((_o, i) => activeIndexes.includes(i))
                   .map((o, i) => {
                     return (
                       <div
