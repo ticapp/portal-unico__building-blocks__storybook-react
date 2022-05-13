@@ -1,3 +1,5 @@
+@import '../../../scss/index.scss';
+
 $icon-xs: 16px;
 $icon-sm: 24px;
 $icon-md: 32px;
@@ -8,6 +10,10 @@ $icon-xl: 64px;
   width: $icon-md;
   height: $icon-md;
   vertical-align: middle;
+  
+  svg {
+    fill: $neutral-black;
+  }
 
   &.icon-padded {
     padding: 8px;

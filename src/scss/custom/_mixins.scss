@@ -2,3 +2,25 @@
 @mixin shadow {
   box-shadow: 0px 2px 4px 0px #00000014;
 }
+
+// Only works for webkit based browsers
+// Firefox only support custom background and foreground
+@mixin scrollbars{
+  $size: 4px;
+  $foreground-color: #707070;
+  $background-color: #FFF;
+  
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  // Standard version (Firefox only for now)
+  scrollbar-color: $foreground-color $background-color;
+}
