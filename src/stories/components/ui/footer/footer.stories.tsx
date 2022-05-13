@@ -106,19 +106,19 @@ export const BasicFooter: Story<FooterProps> = () => {
     ],
     listDataCol_03: [
       {
-        value: <Icon ariaHidden='true' icon='ama-facebook' alt='AMA Facebook' aria-hidden='true' />,
+        value: <Icon ariaHidden='true' icon='ama-facebook' alt='AMA Facebook' />,
         hasExternalLink: true,
         link: 'https://facebook.com',
         title: 'facebook',
       },
       {
-        value: <Icon ariaHidden='true' icon='ama-twitter' alt='AMA Twitter' aria-hidden='true' />,
+        value: <Icon ariaHidden='true' icon='ama-twitter' alt='AMA Twitter' />,
         hasExternalLink: true,
         link: 'https://twitter.com',
         title: 'Twitter',
       },
       {
-        value: <Icon ariaHidden='true' icon='ama-linkedin' alt='AMA Linkedin' aria-hidden='true' />,
+        value: <Icon ariaHidden='true' icon='ama-linkedin' alt='AMA Linkedin' />,
         hasExternalLink: true,
         link: 'https://www.linkedin.com/',
         title: 'linkedin',
