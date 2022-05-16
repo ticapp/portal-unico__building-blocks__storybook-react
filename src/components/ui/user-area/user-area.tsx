@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import React, { FC, HTMLAttributes } from 'react';
-import { useWindowSize } from '../../hooks';
 import { Icon } from '../icon';
-import { Link } from '../link';
+import { Select, SelectOption } from '../select';
 import './user-area.scss';
 
 export interface UserAreaProps extends HTMLAttributes<HTMLElement> {
@@ -12,40 +11,47 @@ export interface UserAreaProps extends HTMLAttributes<HTMLElement> {
   icon?: string;
   /** Defines if the user is authenticated. Affects the class name of the component */
   isAuthenticated?: boolean;
-  /** Path for the user area */
-  url?: string;
-  /** If true, clicking on the link will open a new tab with the url specified in the url */
-  isExternal?: boolean;
-  /** Defines if external link will open in a new tab or in the same tab */
-  newTab?: boolean;
+  /** Authenticated user options */
+  authenticatedOptions: SelectOption[];
+  /** Anonymous user options */
+  anonymousOptions: SelectOption[];
 }
 
 const UserArea: FC<UserAreaProps> = ({
   label = 'Area reservada',
   icon = 'ama-user',
-  url = '/',
   isAuthenticated,
-  isExternal = false,
-  newTab = false,
+  authenticatedOptions,
+  anonymousOptions,
 }: UserAreaProps) => {
-  const windowSize = useWindowSize();
-
-  const classes = classNames('ama-user-area', {
-    authenticated: !!isAuthenticated,
-  });
+  const classes = classNames(
+    'ama-user-area',
+    {
+      authenticated: !!isAuthenticated,
+    },
+    'd-inline-flex align-items-center justify-content-center position-relative'
+  );
 
   return (
     <div className={classes}>
-      <Link
-        link={url}
-        isExternal={isExternal}
-        target={newTab ? '_blank' : '_self'}
-      >
-        <span>
-          <Icon icon={icon} alt={label} aria-hidden="true" />
+      <span>
+        <Icon icon={icon} alt={label} ariaHidden={true} />
+        <span className="ms-10 bg-neutral-white">{label}</span>
+        <span aria-hidden="true" className="spacing d-inline-block h-100">
+          &nbsp;
         </span>
-        {windowSize.width >= 768 && <span>{label}</span>}
-      </Link>
+      </span>
+      <div className="drop-down-container w-100 h-100 z-dropdown position-absolute top-0 bottom-0 right-0">
+        <label id="user-area-options-label" className="d-none">
+          User Area Options
+        </label>
+        <Select
+          labelledby="user-area-options-label"
+          size={'sm'}
+          className="user-area-options"
+          options={isAuthenticated ? authenticatedOptions : anonymousOptions}
+        />
+      </div>
     </div>
   );
 };

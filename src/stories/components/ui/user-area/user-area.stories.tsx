@@ -1,35 +1,69 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
-import { UserArea, UserAreaProps } from '../../../../components';
+import { SelectOption, UserArea, UserAreaProps } from '../../../../components';
 import { BrowserRouter } from 'react-router-dom';
 
 export default {
   title: 'Components/User Area',
 } as ComponentMeta<typeof UserArea>;
 
-export const Relative: Story<UserAreaProps> = () => {
-  return (
-    <BrowserRouter>
-      <UserArea url={'/user-area'} />
-    </BrowserRouter>
-  );
-};
-Relative.storyName = 'Relative Path';
+export const Authenticated: Story<UserAreaProps> = () => {
+  const authenticatedOptions = [
+    {
+      label: 'Area reservada',
+      value: 'user-area',
+    },
+    {
+      label: 'Terminar sessão',
+      value: 'logout',
+    },
+  ] as SelectOption[];
+  const anonymousOptions = [
+    {
+      label: 'Login',
+      value: 'login',
+    },
+  ] as SelectOption[];
 
-export const ExternalNewTab: Story<UserAreaProps> = () => {
   return (
     <BrowserRouter>
-      <UserArea isExternal={true} url={'https://example.com'} newTab={true} />
+      <UserArea
+        isAuthenticated={true}
+        label={'User Name'}
+        anonymousOptions={anonymousOptions}
+        authenticatedOptions={authenticatedOptions}
+      />
     </BrowserRouter>
   );
 };
-ExternalNewTab.storyName = 'External Path New Tab';
+Authenticated.storyName = 'Authenticated User';
 
-export const ExternalSameTab: Story<UserAreaProps> = () => {
+export const Anonymous: Story<UserAreaProps> = () => {
+  const authenticatedOptions = [
+    {
+      label: 'Area reservada',
+      value: 'user-area',
+    },
+    {
+      label: 'Terminar sessão',
+      value: 'logout',
+    },
+  ] as SelectOption[];
+  const anonymousOptions = [
+    {
+      label: 'Login',
+      value: 'login',
+    },
+  ] as SelectOption[];
+
   return (
     <BrowserRouter>
-      <UserArea isExternal={true} url={'https://example.com'} newTab={false} />
+      <UserArea
+        isAuthenticated={false}
+        anonymousOptions={anonymousOptions}
+        authenticatedOptions={authenticatedOptions}
+      />
     </BrowserRouter>
   );
 };
-ExternalSameTab.storyName = 'External Path New Tab';
+Anonymous.storyName = 'Anonymous User';
