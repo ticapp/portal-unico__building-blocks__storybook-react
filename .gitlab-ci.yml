@@ -55,8 +55,8 @@ publish-storybook-image-nexus-registry:
   stage: publish
   script:
     - docker login -u $NEXUS_REGISTRY_USER -p $NEXUS_REGISTRY_PASSWORD $NEXUS_REGISTRY_URL
-    - docker build -f Dockerfile -t $NEXUS_REGISTRY_URL/portal-unico-storybook-react:$(cat $METADATA_PATH/version.ver) .
-    - docker push $NEXUS_REGISTRY_URL/portal-unico-storybook-react:$(cat $METADATA_PATH/version.ver)
+    - docker build -f Dockerfile -t $NEXUS_REGISTRY_URL/portal-unico/portal-unico-storybook-react:$(cat $METADATA_PATH/version.ver) .
+    - docker push $NEXUS_REGISTRY_URL/portal-unico/portal-unico-storybook-react:$(cat $METADATA_PATH/version.ver)
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "master"'
 
