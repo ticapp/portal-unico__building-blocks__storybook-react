@@ -3,11 +3,26 @@
 $utilities: map-merge(
   $utilities,
   (
+    'font-family': (
+      property: font-family,
+      class: font,
+      values: (
+        monospace: var(--#{$variable-prefix}font-monospace),
+        lato: $font-family-lato,
+        lato-bold: $font-family-lato-bold,
+        lato-extra-bold: $font-family-lato-extra-bold,
+      ),
+    ),
     'font-size': (
       rfs: true,
       property: font-size,
       class: fs,
       values: $font-sizes,
+    ),
+    'font-weight': (
+      property: font-weight,
+      class: fw,
+      values: $font-weights,
     ),
     'line-height': (
       property: line-height,

@@ -1,0 +1,10 @@
+@import '../../../scss/index.scss';
+
+.ama-card {
+  &-light {
+    color: $neutral-black;
+  }
+  &-brand-green-main {
+    color: $neutral-white;
+  }
+}
