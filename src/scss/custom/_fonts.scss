@@ -90,3 +90,16 @@ $line-heights: (
   52: 52px,
   72: 72px,
 );
+
+//Font-weight
+$font-weights: (
+  light: $font-weight-light,
+  lighter: $font-weight-lighter,
+  normal: $font-weight-normal,
+  bold: $font-weight-bold,
+  bolder: $font-weight-bolder,
+  400: 400,
+  600: 600,
+  700: 700,
+  800: 800,
+);

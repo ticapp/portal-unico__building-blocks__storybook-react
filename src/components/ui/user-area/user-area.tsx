@@ -37,7 +37,7 @@ const UserArea: FC<UserAreaProps> = ({
 
   return (
     <div className={classes}>
-      <div>
+      <div className='d-inline-flex align-items-center'>
         <Icon icon={icon} alt={label} ariaHidden={true} />
         <span className="ms-10 bg-neutral-white">{label}</span>
         <span aria-hidden="true" className="spacing d-inline-block h-100">

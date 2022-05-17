@@ -1,6 +1,5 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
 import { SelectOption, UserArea, UserAreaProps } from '../../../../components';
 
 export default {
@@ -30,19 +29,13 @@ export const Authenticated: Story<UserAreaProps> = () => {
   };
 
   return (
-    <Container>
-      <Row className="d-flex justify-content-center">
-        <Col xs={6}>
-          <UserArea
-            isAuthenticated={true}
-            label={'User Name'}
-            anonymousOptions={anonymousOptions}
-            authenticatedOptions={authenticatedOptions}
-            onMenuAction={handleSelectOption}
-          />
-        </Col>
-      </Row>
-    </Container>
+    <UserArea
+      isAuthenticated={true}
+      label={'User Name'}
+      anonymousOptions={anonymousOptions}
+      authenticatedOptions={authenticatedOptions}
+      onMenuAction={handleSelectOption}
+    />
   );
 };
 Authenticated.storyName = 'Authenticated User';
