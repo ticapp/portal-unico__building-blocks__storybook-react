@@ -84,13 +84,7 @@ export const Card = ({
               {description && <p className='text-medium-normal'>{description}</p>}
             </Col>
           )}
-          <Col
-            xs={12}
-            md={12}
-            xl={12}
-            className='ama-card-
-          content'
-          >
+          <Col xs={12} md={12} xl={12} className='ama-card-content'>
             {contentIcon && content && (
               <div className='d-flex align-items-center'>
                 <Icon icon={contentIcon} ariaHidden='true' />
