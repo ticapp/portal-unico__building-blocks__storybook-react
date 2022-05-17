@@ -2,9 +2,16 @@
 
 .ama-card {
   &-light {
-    color: $neutral-black;
+    @include bg-cards($neutral-black, $neutral-light, $neutral-black, $brand-green-main, $neutral-black, '2px solid ' + $brand-yellow-fourth);
+    .ama-card-content {
+      color: $neutral-dark-grey;
+      svg > * {
+        fill: $neutral-dark-grey;
+      }
+    }
   }
+
   &-brand-green-main {
-    color: $neutral-white;
+    @include bg-cards($neutral-white, $brand-green-main, $neutral-white, $neutral-white, $neutral-white, '2px solid ' + $brand-yellow-fourth);
   }
 }

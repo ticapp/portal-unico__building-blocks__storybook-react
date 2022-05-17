@@ -8,19 +8,35 @@ export default {
   component: Card,
 } as ComponentMeta<typeof Card>;
 
-export const Cards: Story<CardProps> = () => {
-  const args = {
-    className: '',
-    children: '',
-    preTitle: 'CONDUZIR',
-    mainTitle: 'Consultar pontos da carta de condução',
-    description: 'Número atual de pontos da sua carta de condução',
-  } as CardProps;
-
+export const Cards: Story<{ cardTheme: 'ama-card-light' | 'ama-card-brand-green-main ' | string }> = (args) => {
   return (
     <BrowserRouter>
       <Card {...args}></Card>
     </BrowserRouter>
   );
 };
+
+Cards.args = {
+  className: '',
+  children: '',
+  preTitle: 'CONDUZIR',
+  mainTitle: 'Consultar pontos da carta de condução',
+  description: 'Número atual de pontos da sua carta de condução',
+  contentIcon: 'ama-badge',
+  content: '15 pontos',
+  link: 'https://www.ama.pt',
+  isExternal: false,
+  title: 'link para o site AMA',
+  linkLabel: 'Default',
+  // linkIcon: 'ama-arrow-down-right',
+  stretchedLink: false,
+} as CardProps;
+
+Cards.argTypes = {
+  cardTheme: {
+    options: ['ama-card-light', 'ama-card-brand-green-main'],
+    control: { type: 'select' },
+  },
+};
+
 Cards.storyName = 'Cards';
