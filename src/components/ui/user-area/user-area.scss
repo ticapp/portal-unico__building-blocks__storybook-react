@@ -1,25 +1,37 @@
+@import '../../../scss/index.scss';
+
 .ama {
   &-user-area {
-    a {
-      color: black;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    
+    .spacing {
+      width: 34px;
+    }
 
-      &:link {
-        color: black;
+    .drop-down-container {
+      .combo {
+        &.user-area-options {
+          height: 100%;
+          .tags {
+            visibility: hidden;
+          }
+
+          .combo-input {
+            padding: 0 !important;
+            border: 1px solid transparent;
+            height: 100%;
+
+            &:focus {
+              border: 1px solid transparent;
+            }
+          }
+        }
       }
-      &:visited {
-        color: black;
-      }
-      &:hover {
-        color: black;
-      }
-      &:active {
-        color: black;
-      }
+    }
+
+    svg {
+      fill: black;
     }
   }
 }
