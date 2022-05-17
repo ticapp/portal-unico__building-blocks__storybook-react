@@ -15,6 +15,8 @@ export interface UserAreaProps extends HTMLAttributes<HTMLElement> {
   authenticatedOptions: SelectOption[];
   /** Anonymous user options */
   anonymousOptions: SelectOption[];
+  /** To be called whenever an option is selected */
+  onMenuAction?: (val: SelectOption | SelectOption[]) => void;
 }
 
 const UserArea: FC<UserAreaProps> = ({
@@ -23,6 +25,7 @@ const UserArea: FC<UserAreaProps> = ({
   isAuthenticated,
   authenticatedOptions,
   anonymousOptions,
+  onMenuAction,
 }: UserAreaProps) => {
   const classes = classNames(
     'ama-user-area',
@@ -50,6 +53,7 @@ const UserArea: FC<UserAreaProps> = ({
           size={'sm'}
           className="user-area-options"
           options={isAuthenticated ? authenticatedOptions : anonymousOptions}
+          onChange={onMenuAction}
         />
       </div>
     </div>

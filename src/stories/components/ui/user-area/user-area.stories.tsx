@@ -1,7 +1,7 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
+import { Row, Col, Container } from 'react-bootstrap';
 import { SelectOption, UserArea, UserAreaProps } from '../../../../components';
-import { BrowserRouter } from 'react-router-dom';
 
 export default {
   title: 'Components/User Area',
@@ -25,15 +25,24 @@ export const Authenticated: Story<UserAreaProps> = () => {
     },
   ] as SelectOption[];
 
+  const handleSelectOption = (val: SelectOption | SelectOption[]) => {
+    console.log(val);
+  };
+
   return (
-    <BrowserRouter>
-      <UserArea
-        isAuthenticated={true}
-        label={'User Name'}
-        anonymousOptions={anonymousOptions}
-        authenticatedOptions={authenticatedOptions}
-      />
-    </BrowserRouter>
+    <Container>
+      <Row className="d-flex justify-content-center">
+        <Col xs={6}>
+          <UserArea
+            isAuthenticated={true}
+            label={'User Name'}
+            anonymousOptions={anonymousOptions}
+            authenticatedOptions={authenticatedOptions}
+            onMenuAction={handleSelectOption}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 Authenticated.storyName = 'Authenticated User';
@@ -56,14 +65,17 @@ export const Anonymous: Story<UserAreaProps> = () => {
     },
   ] as SelectOption[];
 
+  const handleSelectOption = (val: SelectOption | SelectOption[]) => {
+    console.log(val);
+  };
+
   return (
-    <BrowserRouter>
-      <UserArea
-        isAuthenticated={false}
-        anonymousOptions={anonymousOptions}
-        authenticatedOptions={authenticatedOptions}
-      />
-    </BrowserRouter>
+    <UserArea
+      isAuthenticated={false}
+      anonymousOptions={anonymousOptions}
+      authenticatedOptions={authenticatedOptions}
+      onMenuAction={handleSelectOption}
+    />
   );
 };
 Anonymous.storyName = 'Anonymous User';
