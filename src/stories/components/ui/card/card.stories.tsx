@@ -8,7 +8,7 @@ export default {
   component: Card,
 } as ComponentMeta<typeof Card>;
 
-export const Cards: Story<{ cardTheme: 'ama-card-light' | 'ama-card-brand-green-main ' | string }> = (args) => {
+export const Cards: Story<{ cardTheme: 'ama-card-light' | 'ama-card-brand-green-main ' | string; stretchedLink: boolean; isLinkLabel: boolean }> = (args) => {
   return (
     <BrowserRouter>
       <Card {...args}></Card>
@@ -28,14 +28,20 @@ Cards.args = {
   isExternal: false,
   title: 'link para o site AMA',
   linkLabel: 'Default',
-  // linkIcon: 'ama-arrow-down-right',
-  stretchedLink: false,
+  linkIcon: 'ama-arrow-down-right',
+  isLinkLabel: true,
 } as CardProps;
 
 Cards.argTypes = {
   cardTheme: {
     options: ['ama-card-light', 'ama-card-brand-green-main'],
     control: { type: 'select' },
+  },
+  stretchedLink: {
+    control: { type: 'boolean' },
+  },
+  isLinkLabel: {
+    control: { type: 'boolean' },
   },
 };
 

@@ -47,6 +47,9 @@ export interface CardProps extends BsCardProps {
 
   /** All card as clickable area */
   stretchedLink?: boolean;
+
+  /**Type of link */
+  isLinkLabel?: boolean;
 }
 
 export const Card = ({
@@ -64,6 +67,7 @@ export const Card = ({
   linkIcon = '',
   cardTheme = 'ama-card-brand-green-main',
   stretchedLink = false,
+  isLinkLabel = true,
   ...props
 }: CardProps) => {
   const cssCard = classNames('ama-card', className, cardTheme);
@@ -72,12 +76,12 @@ export const Card = ({
       <Container fluid>
         <Row>
           <Col xs={12} md={12} xl={12}>
-            {preTitle && <div className='fs-14 lh-24 fw-normal'>{preTitle}</div>}
+            {preTitle && <div className='text-medium-normal'>{preTitle}</div>}
           </Col>
           {mainTitle && description && (
             <Col xs={12} md={12} xl={12}>
-              {mainTitle && <h3 className='fs-20 lh-32 fw-800 font-lato-bold'>{mainTitle}</h3>}
-              {description && <p className='fs-14 lh-24 fw-normal'>{description}</p>}
+              {mainTitle && <h3 className='h5-bold'>{mainTitle}</h3>}
+              {description && <p className='text-medium-normal'>{description}</p>}
             </Col>
           )}
           <Col
@@ -90,21 +94,21 @@ export const Card = ({
             {contentIcon && content && (
               <div className='d-flex align-items-center'>
                 <Icon icon={contentIcon} ariaHidden='true' />
-                <span className='fs-28 lh-40 fw-800 font-lato-bold'>{content}</span>
+                <span className='h4-bold'>{content}</span>
               </div>
             )}
             {children}
           </Col>
-          {linkLabel && (
+          {isLinkLabel && (
             <Col xs={6} md={6} xl={6}>
-              <Link link={link} title={title} isExternal={isExternal} className={'fs-16 lh-28 fw-700 font-lato-bold' + stretchedLink ? '' : 'stretched-link'}>
+              <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato-bold'}>
                 {linkLabel}
               </Link>
             </Col>
           )}
-          {linkIcon && (
+          {!isLinkLabel && (
             <Col xs={{ span: 6, offset: 6 }} md={{ span: 6, offset: 6 }} xl={{ span: 6, offset: 6 }} className='text-end'>
-              <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? '' : 'stretched-link'}>
+              <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? 'stretched-link' : ''}>
                 <Icon icon={linkIcon} ariaHidden='true' />
               </Link>
             </Col>
