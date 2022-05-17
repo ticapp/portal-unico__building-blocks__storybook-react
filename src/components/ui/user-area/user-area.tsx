@@ -37,13 +37,13 @@ const UserArea: FC<UserAreaProps> = ({
 
   return (
     <div className={classes}>
-      <span>
+      <div>
         <Icon icon={icon} alt={label} ariaHidden={true} />
         <span className="ms-10 bg-neutral-white">{label}</span>
         <span aria-hidden="true" className="spacing d-inline-block h-100">
           &nbsp;
         </span>
-      </span>
+      </div>
       <div className="drop-down-container w-100 h-100 z-dropdown position-absolute top-0 bottom-0 right-0">
         <label id="user-area-options-label" className="d-none">
           User Area Options

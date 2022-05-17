@@ -35,6 +35,8 @@ export interface SelectProps {
   disabled?: boolean;
   /** Icon size */
   size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | undefined;
+  /** Keep select options open */
+  allwaysOpen?: boolean;
 }
 
 let searchTimeout;
@@ -52,6 +54,7 @@ const Select = ({
   disabled = false,
   active,
   size,
+  allwaysOpen,
 }: SelectProps) => {
   const guid = v4();
   const singleSelectId = id || `ama-select-id-${guid}`;
@@ -233,6 +236,11 @@ const Select = ({
   };
 
   const updateMenuState = (open, callFocus = true) => {
+    if (allwaysOpen) {
+      setIsOpen(true);
+      return;
+    }
+
     if (isOpen === open) {
       return;
     }
@@ -446,6 +454,10 @@ const Select = ({
     } else if (!multiSelection && !!active && !Array.isArray(active)) {
       setActiveIndex(options.findIndex((o) => o.label === active.label));
     }
+
+    if (allwaysOpen) {
+      updateMenuState(true, true);
+    }
   }, []);
 
   const getActiveDescendantValue = (): string => {
@@ -530,7 +542,9 @@ const Select = ({
               role="option"
               key={i}
               id={`${singleSelectId}-option-${i}`}
-              className={'combo-option d-flex align-items-center py-8 px-16'}
+              className={
+                'combo-option w-100 d-flex align-items-center py-8 px-16'
+              }
               onClick={() => onOptionClick(i)}
               onMouseDown={onOptionMouseDown}
               onMouseOver={onOptionMouseOver}

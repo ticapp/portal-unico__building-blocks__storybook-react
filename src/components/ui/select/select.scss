@@ -27,7 +27,7 @@
       .tag {
         border-radius: 6px;
         color: $neutral-white;
-        word-break: break-word;        
+        word-break: break-word;
       }
     }
   }
@@ -43,7 +43,8 @@
   .combo-menu {
     @include shadow;
     @include scrollbars;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     position: absolute;
     left: 0;
