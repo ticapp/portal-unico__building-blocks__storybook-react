@@ -34,7 +34,7 @@ export interface SelectProps {
   /** Disables the select */
   disabled?: boolean;
   /** Icon size */
-  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | undefined;
+  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
   /** Keep select options open */
   allwaysOpen?: boolean;
 }
