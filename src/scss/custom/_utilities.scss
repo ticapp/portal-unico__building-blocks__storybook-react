@@ -160,5 +160,11 @@ $utilities: map-merge(
           )
         ),
     ),
+    'zindex': (
+      responsive: true,
+      property: z-index,
+      class: z,
+      values: $zindexes,
+    ),
   )
 );

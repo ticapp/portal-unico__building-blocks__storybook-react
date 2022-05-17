@@ -33,6 +33,10 @@ export interface SelectProps {
   onChange?: (val: SelectOption | SelectOption[]) => void;
   /** Disables the select */
   disabled?: boolean;
+  /** Icon size */
+  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+  /** Keep select options open */
+  allwaysOpen?: boolean;
 }
 
 let searchTimeout;
@@ -49,6 +53,8 @@ const Select = ({
   onChange,
   disabled = false,
   active,
+  size,
+  allwaysOpen,
 }: SelectProps) => {
   const guid = v4();
   const singleSelectId = id || `ama-select-id-${guid}`;
@@ -230,6 +236,11 @@ const Select = ({
   };
 
   const updateMenuState = (open, callFocus = true) => {
+    if (allwaysOpen) {
+      setIsOpen(true);
+      return;
+    }
+
     if (isOpen === open) {
       return;
     }
@@ -240,7 +251,7 @@ const Select = ({
     // update aria-expanded and styles
     setIsComboExpanded(open);
 
-    if (!open && !isElementInView(comboRef.current)) {
+    if (!open && comboRef.current && !isElementInView(comboRef.current)) {
       comboRef.current?.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
@@ -359,7 +370,6 @@ const Select = ({
 
       case SelectActions.Type:
         if (searchable) {
-          
           return onComboType(key);
         }
 
@@ -379,7 +389,7 @@ const Select = ({
         if (multiSelection) {
           return selectOption(activeIndex);
         }
-        
+
         updateMenuState(true);
         return onComboType(key);
     }
@@ -444,6 +454,10 @@ const Select = ({
     } else if (!multiSelection && !!active && !Array.isArray(active)) {
       setActiveIndex(options.findIndex((o) => o.label === active.label));
     }
+
+    if (allwaysOpen) {
+      updateMenuState(true, true);
+    }
   }, []);
 
   const getActiveDescendantValue = (): string => {
@@ -497,7 +511,12 @@ const Select = ({
                     );
                   }))}
         </div>
-        <Icon icon={isOpen ? 'ama-chevron-up' : 'ama-chevron-down'} />
+
+        <Icon
+          icon={isOpen ? 'ama-chevron-up' : 'ama-chevron-down'}
+          size={size}
+          ariaHidden={true}
+        />
       </div>
 
       <div
@@ -523,7 +542,9 @@ const Select = ({
               role="option"
               key={i}
               id={`${singleSelectId}-option-${i}`}
-              className={'combo-option d-flex align-items-center py-8 px-16'}
+              className={
+                'combo-option w-100 d-flex align-items-center py-8 px-16'
+              }
               onClick={() => onOptionClick(i)}
               onMouseDown={onOptionMouseDown}
               onMouseOver={onOptionMouseOver}
