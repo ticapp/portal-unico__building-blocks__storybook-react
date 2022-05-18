@@ -26,9 +26,10 @@
 }
 
 //Card background
-@mixin bg-cards($color, $background, $fill, $link-color, $link-hover, $link-focus-border) {
+@mixin bg-cards($color, $background, $fill, $link-color, $link-hover, $link-focus-border, $border-radius) {
   color: $color;
   background-color: $background;
+  border-radius: $border-radius;
   svg > * {
     fill: $fill;
   }
