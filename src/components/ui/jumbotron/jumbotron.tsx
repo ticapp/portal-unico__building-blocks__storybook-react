@@ -38,7 +38,7 @@ export const Jumbotron = ({ className, jumboTitle, description, ...props }: Jumb
   return (
     <div className={cssJumbotron} {...props}>
       <h1 className='h4-bold'>{renderTitle()}</h1>
-      <p className='p-0'>{description}</p>
+      {description && <p className='p-0'>{description}</p>}
     </div>
   );
 };
