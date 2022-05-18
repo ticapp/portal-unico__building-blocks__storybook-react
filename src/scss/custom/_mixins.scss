@@ -25,6 +25,26 @@
   scrollbar-color: $foreground-color $background-color;
 }
 
+//Card background
+@mixin bg-cards($color, $background, $fill, $link-color, $link-hover, $link-focus-border, $border-radius) {
+  color: $color;
+  background-color: $background;
+  border-radius: $border-radius;
+  svg > * {
+    fill: $fill;
+  }
+  a {
+    color: $link-color;
+    &:hover {
+      color: $link-hover;
+      text-decoration: none;
+    }
+    &:focus {
+      border: $link-focus-border;
+    }
+  }
+}
+
 // Typings / TextStyles
 @mixin h1-normal {
   font-family: $font-family-lato;

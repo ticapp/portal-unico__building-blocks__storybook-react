@@ -1,0 +1,31 @@
+@import '../../../scss/index.scss';
+
+.ama-card {
+  &-light {
+    @include bg-cards($neutral-black, $neutral-light, $neutral-black, $brand-green-main, $neutral-black, '2px solid ' + $brand-yellow-fourth, 0);
+    .ama-card-content {
+      &.card-info {
+        color: $neutral-dark-grey;
+        svg > * {
+          fill: $neutral-dark-grey;
+        }
+      }
+      &.card-success {
+        color: $brand-green-main;
+        svg > * {
+          fill: $brand-green-main;
+        }
+      }
+      &.card-alert {
+        color: $semantic-alerts;
+        svg > * {
+          fill: $semantic-alerts;
+        }
+      }
+    }
+  }
+
+  &-brand-green-main {
+    @include bg-cards($neutral-white, $brand-green-main, $neutral-white, $neutral-white, $neutral-white, '2px solid ' + $brand-yellow-fourth, 0);
+  }
+}

@@ -67,7 +67,7 @@ export function Link({ children, link, target = '_self', isExternal = false, tit
     to: '',
     component: () => {
       return (
-        <a href={link.toString()} target={target} title={title}>
+        <a href={link.toString()} target={target} title={title} className={className}>
           {children}
         </a>
       );
