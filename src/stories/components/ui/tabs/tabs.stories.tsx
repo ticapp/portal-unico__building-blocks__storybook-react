@@ -9,7 +9,7 @@ export default {
 
 export const BasicTabs: Story<TabsProps & TabProps> = () => {
   const args = {
-    defaultKeyTab: 'tab-first',
+    defaultActiveKey: 'tab-first',
     id: 'basic-tabs',
     tabsName: [
       {

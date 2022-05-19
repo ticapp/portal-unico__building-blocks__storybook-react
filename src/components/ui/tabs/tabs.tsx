@@ -6,12 +6,6 @@ import './tabs.scss';
 export interface TabsProps extends BsTabsProps {
   /** Add classes to the Tabs component */
   className?: string;
-
-  /**Tabs default key, which tab is open when loaded */
-  defaultKeyTab: string;
-
-  /**Id for tabs group */
-  id: string;
 }
 
 export interface TabProps extends BsTabProps {
@@ -19,7 +13,7 @@ export interface TabProps extends BsTabProps {
   tabsName: Array<{ label: string; children: ReactNode; keyTab: string; disabled: boolean }>;
 }
 
-export const Tabs = ({ className, children, defaultKeyTab, id, tabsName, ...props }: TabsProps & TabProps) => {
+export const Tabs = ({ className, tabsName, ...props }: TabsProps & TabProps) => {
   const cssTabs = classNames('ama-tabs', className);
 
   const renderTab = (tab) => {
@@ -33,7 +27,7 @@ export const Tabs = ({ className, children, defaultKeyTab, id, tabsName, ...prop
   };
 
   return (
-    <BsTabs className={cssTabs} defaultActiveKey={defaultKeyTab} id={id} {...props}>
+    <BsTabs className={cssTabs} {...props}>
       {renderTab(tabsName)}
     </BsTabs>
   );
