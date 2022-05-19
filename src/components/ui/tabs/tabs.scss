@@ -1,0 +1,45 @@
+@import '../../../scss/index.scss';
+
+.ama-tabs {
+  &.nav {
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    display: -moz-box;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  &.nav-tabs {
+    border-bottom: none;
+  }
+
+  .nav-link {
+    color: $neutral-dark;
+    border-bottom: 1px solid $neutral-light-grey;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    margin: 0 8px;
+    &:hover,
+    &:focus {
+      border-color: transparent;
+      border-bottom: 1px solid $neutral-light-grey;
+    }
+
+    &.disabled {
+      color: $neutral-light-grey;
+      border-bottom: 1px solid $neutral-light-grey;
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    @include text-big-bold;
+    color: $brand-green-main;
+    background-color: transparent;
+    border-bottom: 1px solid $brand-green-main;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+  }
+}
