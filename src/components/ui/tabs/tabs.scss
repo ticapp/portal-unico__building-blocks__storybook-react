@@ -22,8 +22,10 @@
     margin: 0 8px;
     &:hover,
     &:focus {
+      @include text-big-bold;
+      color: $neutral-black;
       border-color: transparent;
-      border-bottom: 1px solid $neutral-light-grey;
+      border-bottom: 1px solid $neutral-black;
     }
 
     &.disabled {
