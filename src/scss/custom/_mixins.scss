@@ -47,7 +47,7 @@
 
 // Typings / TextStyles
 @mixin h1-normal {
-  font-family: $font-family-lato;
+  font-family: $font-family-lato-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 600);
   font-size: map-get($font-sizes, 64);
@@ -55,7 +55,7 @@
 }
 
 @mixin h1-bold {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato-extra-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 64);
@@ -63,7 +63,7 @@
 }
 
 @mixin h2-normal {
-  font-family: $font-family-lato;
+  font-family: $font-family-lato-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 600);
   font-size: map-get($font-sizes, 40);
@@ -71,7 +71,7 @@
 }
 
 @mixin h2-bold {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato-extra-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 40);
@@ -79,7 +79,7 @@
 }
 
 @mixin h3-normal {
-  font-family: $font-family-lato;
+  font-family: $font-family-lato-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 600);
   font-size: map-get($font-sizes, 32);
@@ -87,7 +87,7 @@
 }
 
 @mixin h3-bold {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato-extra-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 32);
@@ -95,7 +95,7 @@
 }
 
 @mixin h4-normal {
-  font-family: $font-family-lato;
+  font-family: $font-family-lato-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 600);
   font-size: map-get($font-sizes, 28);
@@ -103,7 +103,7 @@
 }
 
 @mixin h4-bold {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato-extra-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 28);
@@ -111,7 +111,7 @@
 }
 
 @mixin h5-normal {
-  font-family: $font-family-lato;
+  font-family: $font-family-lato-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 400);
   font-size: map-get($font-sizes, 20);
@@ -119,7 +119,7 @@
 }
 
 @mixin h5-bold {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato-extra-bold;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 20);
