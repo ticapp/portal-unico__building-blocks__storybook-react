@@ -33,6 +33,15 @@ $font-family-lato: 'Lato', sans-serif;
 $font-family-lato-bold: 'Lato-Bold', sans-serif;
 $font-family-lato-extra-bold: 'Lato-Extra-Bold', sans-serif;
 
+//Tabs
+$nav-tabs-border-color: $neutral-light-grey;
+$nav-tabs-border-width: 1px;
+$nav-tabs-border-radius: 0;
+$nav-tabs-link-hover-border-color: $neutral-black;
+$nav-tabs-link-active-color: $neutral-black;
+$nav-tabs-link-active-bg: transparent;
+$nav-tabs-link-active-border-color: $neutral-light-grey;
+
 //Accordion
 $accordion-padding-y: 1rem;
 $accordion-padding-x: 2rem;
