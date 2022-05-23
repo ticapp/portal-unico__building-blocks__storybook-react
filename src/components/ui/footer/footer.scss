@@ -1,4 +1,4 @@
-@import '../../../scss/index.scss';
+@use '../../../scss/index' as index;
 
 .ama {
   &-footer {
@@ -32,11 +32,11 @@
         color: unset;
         &:hover,
         &:focus {
-          color: $brand-green-main;
-          fill: $brand-green-main;
+          color: index.$brand-green-main;
+          fill: index.$brand-green-main;
         }
         &:focus-visible {
-          outline: 2px solid $brand-green-fourth;
+          outline: 2px solid index.$brand-green-fourth;
         }
       }
       &-detail {

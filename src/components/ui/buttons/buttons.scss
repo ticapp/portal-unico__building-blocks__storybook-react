@@ -1,4 +1,4 @@
-@import '../../../scss/index.scss';
+@use '../../../scss/index' as index;
 
 $threshold: 55%;
 @function contrast-color($color, $dark, $light) {
@@ -6,71 +6,71 @@ $threshold: 55%;
 }
 
 @function check-light($color, $color-contrast-light) {
-  @return if($color == $color-contrast-light, $color, $neutral-white);
+  @return if($color == $color-contrast-light, $color, index.$neutral-white);
 }
 
 @function findColor($color, $term) {
   $name-color: str-insert(str-slice($color, 1, -5), $term, 100);
-  $value: map-get($theme-colors, $name-color);
+  $value: map-get(index.$theme-colors, $name-color);
   @return $value;
 }
 
-@each $color, $value in $theme-colors {
+@each $color, $value in index.$theme-colors {
   .btn-#{$color} {
-    @include button-variant(
+    @include index.button-variant(
       $background: $value,
       $border: $value,
-      $color: contrast-color($value, $value, $neutral-white),
-      $hover-background: check-light($value, $color-contrast-light),
+      $color: contrast-color($value, $value, index.$neutral-white),
+      $hover-background: check-light($value, index.$color-contrast-light),
       $hover-border: $value,
-      $hover-color: contrast-color(check-light($value, $color-contrast-light), $value, $neutral-white),
+      $hover-color: contrast-color(check-light($value, index.$color-contrast-light), $value, index.$neutral-white),
       $active-background: check-light($value, transparent),
       $active-border: $value,
-      $active-color: contrast-color($value, $neutral-white, $value)
+      $active-color: contrast-color($value, index.$neutral-white, $value)
     );
     &:hover {
       svg {
-        fill: contrast-color($value, $neutral-white, $value);
+        fill: contrast-color($value, index.$neutral-white, $value);
       }
     }
     .btn-check:focus + &,
     &:focus {
       background: contrast-color($value, transparent, $value);
-      color: contrast-color($value, $value, $neutral-white);
+      color: contrast-color($value, $value, index.$neutral-white);
       border-color: findColor($color, 'fourth');
       border-width: 2px;
       svg {
-        fill: contrast-color($value, $value, $neutral-white);
+        fill: contrast-color($value, $value, index.$neutral-white);
       }
     }
 
     svg {
-      fill: contrast-color($value, $value, $neutral-white);
+      fill: contrast-color($value, $value, index.$neutral-white);
     }
   }
 }
 
-@each $color, $value in $theme-colors {
+@each $color, $value in index.$theme-colors {
   .btn-outline-#{$color} {
-    @include button-outline-variant($color: $value, $color-hover: contrast-color(check-light($value, $color-contrast-light), $neutral-white, $value));
+    @include index.button-outline-variant($color: $value, $color-hover: contrast-color(check-light($value, index.$color-contrast-light), index.$neutral-white, $value));
     &:hover {
       svg {
-        fill: contrast-color($value, $value, $neutral-white);
+        fill: contrast-color($value, $value, index.$neutral-white);
       }
     }
     .btn-check:focus + &,
     &:focus {
       background: contrast-color($value, $value, transparent);
-      color: contrast-color($value, $neutral-white, $value);
+      color: contrast-color($value, index.$neutral-white, $value);
       border-color: findColor($color, 'fourth');
       border-width: 2px;
       svg {
-        fill: contrast-color($value, $neutral-white, $value);
+        fill: contrast-color($value, index.$neutral-white, $value);
       }
     }
 
     svg {
-      fill: contrast-color($value, $neutral-white, $value);
+      fill: contrast-color($value, index.$neutral-white, $value);
     }
   }
 }
@@ -78,6 +78,6 @@ $threshold: 55%;
 .btn-link {
   &:active,
   &:visited {
-    color: $details-links-visited !important;
+    color: index.$details-links-visited !important;
   }
 }

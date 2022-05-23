@@ -1,4 +1,4 @@
-@import '../../../scss/index.scss';
+@use '../../../scss/index' as index;
 
 .ama-tabs {
   &.nav {
@@ -14,32 +14,32 @@
   }
 
   .nav-link {
-    color: $neutral-dark;
-    border-bottom: 1px solid $neutral-light-grey;
+    color: index.$neutral-dark;
+    border-bottom: 1px solid index.$neutral-light-grey;
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
     margin: 0 8px;
     &:hover,
     &:focus {
-      @include text-big-bold;
-      color: $neutral-black;
+      @include index.text-big-bold;
+      color: index.$neutral-black;
       border-color: transparent;
-      border-bottom: 1px solid $neutral-black;
+      border-bottom: 1px solid index.$neutral-black;
     }
 
     &.disabled {
-      color: $neutral-light-grey;
-      border-bottom: 1px solid $neutral-light-grey;
+      color: index.$neutral-light-grey;
+      border-bottom: 1px solid index.$neutral-light-grey;
     }
   }
 
   .nav-link.active,
   .nav-item.show .nav-link {
-    @include text-big-bold;
-    color: $brand-green-main;
+    @include index.text-big-bold;
+    color: index.$brand-green-main;
     background-color: transparent;
-    border-bottom: 1px solid $brand-green-main;
+    border-bottom: 1px solid index.$brand-green-main;
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
