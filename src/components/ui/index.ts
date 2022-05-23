@@ -15,4 +15,5 @@ export * from './buttons';
 export * from './select';
 export * from './card';
 export * from './jumbotron';
+export * from './tabs';
 export * from './accordion';
