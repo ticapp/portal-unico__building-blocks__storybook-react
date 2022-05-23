@@ -1,8 +1,8 @@
-@import '../../../scss/index.scss';
+@use '../../../scss/index' as index;
 
 .ama {
   &-header {
-    border-bottom: 1px solid $neutral-light-grey;
+    border-bottom: 1px solid index.$neutral-light-grey;
 
     padding-top: 25px;
     padding-bottom: 20px;

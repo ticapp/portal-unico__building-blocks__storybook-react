@@ -1,18 +1,19 @@
-@import '../../../scss/index.scss';
+@use '../../../scss/index' as index;
 
 .ama-accordion {
   .accordion-button {
+    @include index.text-big-normal;
     &:focus {
       border: 0;
     }
     &:focus-visible {
-      outline: 2px solid $neutral-light-grey;
+      outline: 2px solid index.$neutral-light-grey;
     }
   }
   .accordion-body {
     padding-top: 0;
     hr {
-      color: $neutral-light-grey;
+      color: index.$neutral-light-grey;
       margin: 0 0 1rem 0;
     }
   }

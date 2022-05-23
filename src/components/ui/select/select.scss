@@ -1,4 +1,4 @@
-@import '../../../scss/index.scss';
+@use '../../../scss/index' as index;
 
 .combo {
   position: relative;
@@ -6,27 +6,27 @@
 
   &.disabled {
     pointer-events: none;
-    color: $neutral-dark-grey;
+    color: index.$neutral-dark-grey;
     .combo-input {
-      border: 1px solid $neutral-light-grey;
+      border: 1px solid index.$neutral-light-grey;
 
       svg {
-        fill: $neutral-dark-grey;
+        fill: index.$neutral-dark-grey;
       }
     }
   }
-  
+
   .combo-input {
-    border: 1px solid $neutral-black;
+    border: 1px solid index.$neutral-black;
 
     &:focus {
-      border: 1px solid $neutral-dark;
+      border: 1px solid index.$neutral-dark;
     }
 
     .tags {
       .tag {
         border-radius: 6px;
-        color: $neutral-white;
+        color: index.$neutral-white;
         word-break: break-word;
       }
     }
@@ -35,14 +35,14 @@
   &.open {
     .combo-input {
       &:focus {
-        border: 1px solid $neutral-black;
+        border: 1px solid index.$neutral-black;
       }
     }
   }
 
   .combo-menu {
-    @include shadow;
-    @include scrollbars;
+    @include index.shadow;
+    @include index.scrollbars;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -52,7 +52,7 @@
 
     max-height: 272px;
 
-    z-index: $zindex-dropdown;
+    z-index: index.$zindex-dropdown;
 
     .combo-option {
       display: flex;
@@ -65,7 +65,7 @@
       }
 
       &.hover {
-        background-color: $neutral-light;
+        background-color: index.$neutral-light;
       }
     }
   }
