@@ -14,3 +14,4 @@ export * from './user-area';
 export * from './buttons';
 export * from './select';
 export * from './card';
+export * from './accordion';
