@@ -3,6 +3,7 @@ import './table.scss';
 import classNames from 'classnames';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
+import { useSortTableData } from '../../hooks';
 
 export interface TableProps extends BsTableProps {
   /** Add classes to the Table component */
@@ -12,15 +13,27 @@ export interface TableProps extends BsTableProps {
   tableHeaders: Array<string>;
 
   /** Array of data table */
-  tableData: Array<{ [key: string]: string }>;
+  tableData: Array<{ [key: string]: string | number | boolean }>;
 }
 
 export const Table = ({ className, tableHeaders, tableData, ...props }: TableProps) => {
+  const { items, requestSort, sortConfig } = useSortTableData(tableData, null);
   const cssTable = classNames('ama-table', className);
-
-  const renderThead = (item) => {
-    return item?.map((content) => {
-      return <th key={uuidv4()}>{content}</th>;
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
+  const renderThead = (item, keys) => {
+    return item?.map((data, i) => {
+      return (
+        <th key={uuidv4()}>
+          <button type='button' onClick={() => requestSort(keys[i])} className={getClassNamesFor(keys[i])}>
+            {data}
+          </button>
+        </th>
+      );
     });
   };
 
@@ -34,12 +47,16 @@ export const Table = ({ className, tableHeaders, tableData, ...props }: TablePro
     return Object.keys(content).map((k) => <td key={uuidv4()}>{content[k]}</td>);
   };
 
+  const dataKeys = (content) => {
+    return Object.keys(Object.assign({}, ...content));
+  };
+
   return (
     <BsTable {...props} className={cssTable} striped>
       <thead>
-        <tr>{renderThead(tableHeaders)}</tr>
+        <tr>{renderThead(tableHeaders, dataKeys(tableData))}</tr>
       </thead>
-      <tbody>{renderTr(tableData)}</tbody>
+      <tbody>{renderTr(items)}</tbody>
     </BsTable>
   );
 };

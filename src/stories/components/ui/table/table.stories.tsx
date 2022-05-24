@@ -15,7 +15,7 @@ BasicTable.args = {
   tableHeaders: ['Infração', 'N.º processo', 'Data', 'Veículo', 'Local da infração', 'Estado', 'Coima', 'Sanção acessória'],
   tableData: [
     {
-      col_01: '1',
+      col_01: '1000',
       col_02: '2',
       col_03: '3',
       col_04: '4',
