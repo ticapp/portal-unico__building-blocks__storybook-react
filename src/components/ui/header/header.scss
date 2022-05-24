@@ -106,32 +106,27 @@
 
             .combo-menu {
               .combo-option {
+                .combo-option-content {
+                  @include index.h5-bold;
+                  font-size: map-get(index.$font-sizes, 14);
+                  line-height: map-get(index.$line-heights, 24);
 
-                .combo-option-content{
                   .marker {
                     visibility: hidden;
                   }
-
                 }
 
                 &.checked {
-                  background-color: index.$neutral-light-grey;
-                  .combo-option-content{
+                  background-color: index.$neutral-white;
+                  .combo-option-content {
                     .marker {
                       visibility: visible;
                     }
-  
                   }
                 }
 
                 &.selected {
                   background-color: index.$neutral-light-grey;
-                }
-
-                .combo-option-content {
-                  @include index.h5-bold;
-                  font-size: map-get(index.$font-sizes, 14);
-                  line-height: map-get(index.$line-heights, 24);
                 }
               }
             }

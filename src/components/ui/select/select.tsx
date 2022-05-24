@@ -195,8 +195,8 @@ const Select = ({
 
   // ensure a given child element is within the parent's visible scroll area
   // if the child is not visible, scroll the parent
-  function maintainScrollVisibility(activeElement, scrollParent) {
-    const { offsetHeight, offsetTop } = activeElement;
+  function maintainScrollVisibility(elem, scrollParent) {
+    const { offsetHeight, offsetTop } = elem;
     const { offsetHeight: parentOffsetHeight, scrollTop } = scrollParent;
 
     const isAbove = offsetTop < scrollTop;

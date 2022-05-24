@@ -145,29 +145,23 @@ const Header = ({
     'w-100 pt-0 pb-0 pt-md-24 pb-md-16'
   );
 
+  const buildUserAreaOption = (o: UserAreaOption) => {
+    return (
+      <li key={uuidv4()} role="menuitem">
+        <NavLink className="nav-link" href={o.link}>
+          <span className="nav-link-label">{o.label}</span>
+        </NavLink>
+      </li>
+    );
+  };
+
   const authenticatedOptions = options
     .filter((o) => o.authenticatedOption)
-    .map((o) => {
-      return (
-        <li key={uuidv4()} role="menuitem">
-          <NavLink className="nav-link" href={o.link}>
-            <span className="nav-link-label">{o.label}</span>
-          </NavLink>
-        </li>
-      );
-    });
+    .map(buildUserAreaOption);
 
   const unauthenticatedOptions = options
     .filter((o) => !o.authenticatedOption)
-    .map((o) => {
-      return (
-        <li key={uuidv4()} role="menuitem">
-          <NavLink className="nav-link" href={o.link}>
-            <span className="nav-link-label">{o.label}</span>
-          </NavLink>
-        </li>
-      );
-    });
+    .map(buildUserAreaOption);
 
   return (
     <header className={classes}>

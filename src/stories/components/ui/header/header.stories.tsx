@@ -76,8 +76,8 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
     <BrowserRouter>
       <Header
         isHomepage={true}
-        isAuthenticated={true}
-        username={'John Doe'}
+        isAuthenticated={props.isAuthenticated}
+        username={'Area reservada'}
         homepageLink={'/'}
         languages={languages}
         activeLanguage={languages[0]}
