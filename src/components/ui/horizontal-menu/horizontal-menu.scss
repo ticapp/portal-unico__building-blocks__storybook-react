@@ -1,3 +1,5 @@
+@use '../../../scss/index.scss' as index;
+
 .ama {
   &-horizontal-menu {
     ul {
@@ -7,23 +9,51 @@
           margin: 0;
         }
 
-        a {
-          color: black;
+        .navbar-brand {
+          &:hover,
+          &.active {
+            svg {
+              fill: index.$brand-green-main;
+            }
+          }
+        }
+
+        .nav-link {
           text-decoration: none;
 
-          &:link {
-            color: black;
-          }
+          &:active,
           &:visited {
-            color: black;
+            color: index.$neutral-black !important;
           }
-          &:hover {
-            color: black;
-            text-decoration: underline;
+
+          .label {
+            @include index.h5-bold;
+            position: relative;
+
+            &:hover {
+              &:after {
+                content: '';
+                width: 100%;
+                border-bottom: 2px solid index.$brand-green-main;
+                position: absolute;
+                left: 0;
+                top: 30px;
+              }
+            }
           }
-          &:active {
-            color: black;
-            text-decoration: underline;
+
+          &.active {
+            .label {
+              color: index.$brand-green-main;
+              &:after {
+                content: '';
+                width: 100%;
+                border-bottom: 2px solid index.$brand-green-main;
+                position: absolute;
+                left: 0;
+                top: 30px;
+              }
+            }
           }
         }
       }

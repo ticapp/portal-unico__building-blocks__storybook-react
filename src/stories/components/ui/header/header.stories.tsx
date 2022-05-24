@@ -1,23 +1,71 @@
-import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Header, HeaderProps, SelectOption } from '../../../../components';
+import {
+  Header,
+  HeaderProps,
+  HorizontalMenuLink,
+  SelectOption,
+  UserAreaOption,
+} from '../../../../components';
 
 export default {
   title: 'Components/Header',
   component: Header,
 } as ComponentMeta<typeof Header>;
 
-export const NoRedirect: Story<HeaderProps> = () => {
-  return (
-    <BrowserRouter>
-      <Header isHomepage={true} homepageLink={'/'} />
-    </BrowserRouter>
-  );
-};
-NoRedirect.storyName = 'Header with default languages';
+export const HeaderExample: Story<HeaderProps> = (props) => {
+  const links: HorizontalMenuLink[] = [
+    {
+      id: '1',
+      label: 'Serviços',
+      link: '/services',
+    },
+    {
+      id: '2',
+      label: 'Entidades',
+      link: '/entities',
+    },
+    {
+      id: '3',
+      label: 'Atendimento',
+      link: '/attendance',
+    },
+    {
+      id: '4',
+      label: 'Notícias',
+      link: '/news',
+    },
+  ];
 
-export const Redirect: Story<HeaderProps> = () => {
+  const options = [
+    {
+      authenticatedOption: false,
+      link: '/login',
+      icon: 'ama-login',
+      label: 'Entrar no portal',
+    },
+    {
+      authenticatedOption: false,
+      link: '/register',
+      icon: 'ama-add-user',
+      label: 'Criar registo',
+    },
+
+    {
+      authenticatedOption: true,
+      link: '/user-area',
+      icon: 'ama-user',
+      label: 'Area Reservada',
+    },
+    {
+      authenticatedOption: true,
+      link: 'logout',
+      icon: 'ama-logout',
+      label: 'Terminar sessão',
+    },
+  ] as UserAreaOption[];
+
   const languages: SelectOption[] = [
     { label: 'PT', value: 'pt' },
     { label: 'EN', value: 'en' },
@@ -27,12 +75,16 @@ export const Redirect: Story<HeaderProps> = () => {
   return (
     <BrowserRouter>
       <Header
-        isHomepage={false}
+        isHomepage={true}
+        isAuthenticated={true}
+        username={'John Doe'}
         homepageLink={'/'}
         languages={languages}
         activeLanguage={languages[0]}
+        options={options}
+        links={links}
       />
     </BrowserRouter>
   );
 };
-Redirect.storyName = 'Header with list of languages';
+HeaderExample.storyName = 'Header example';

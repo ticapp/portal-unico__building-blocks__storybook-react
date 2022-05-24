@@ -1,59 +1,93 @@
 import classNames from 'classnames';
 import React, { FC, HTMLAttributes } from 'react';
 import { Icon } from '../icon';
+import { Link } from '../link';
 import { Select, SelectOption } from '../select';
 import './user-area.scss';
 
+export interface UserAreaOption {
+  /** Specifies if the option is visible if user is authenticated */
+  authenticatedOption: boolean;
+  /** Link to be redirected when activated */
+  link: string;
+  /** Icon to be rendered along label */
+  icon?: string;
+  /** Readable text of the option */
+  label: string;
+}
+
 export interface UserAreaProps extends HTMLAttributes<HTMLElement> {
-  /** Label to use bellow the icon*/
-  label?: string;
+  /** Username to set */
+  username?: string;
   /** The icon name or src image to use */
   icon?: string;
   /** Defines if the user is authenticated. Affects the class name of the component */
   isAuthenticated?: boolean;
-  /** Authenticated user options */
-  authenticatedOptions: SelectOption[];
-  /** Anonymous user options */
-  anonymousOptions: SelectOption[];
-  /** To be called whenever an option is selected */
-  onMenuAction?: (val: SelectOption | SelectOption[]) => void;
+  /** Options configuration to display in the user area dropdown menu */
+  options: UserAreaOption[];
 }
 
 const UserArea: FC<UserAreaProps> = ({
-  label = 'Area reservada',
+  username = 'Area reservada',
   icon = 'ama-user',
   isAuthenticated,
-  authenticatedOptions,
-  anonymousOptions,
-  onMenuAction,
+  options,
 }: UserAreaProps) => {
   const classes = classNames(
     'ama-user-area',
     {
       authenticated: !!isAuthenticated,
     },
-    'd-inline-flex align-items-center justify-content-center position-relative'
+    'd-flex align-items-center justify-content-center position-relative'
   );
+
+  const buildOption = (o: UserAreaOption) => {
+    return {
+      label: o.label,
+      value: o.label,
+      labelElement: (
+        <>
+          {o.link && (
+            <Link
+              link={o.link}
+              isExternal={true}
+              target={'_self'}
+              tabIndex={-1}
+            >
+              {o.icon && <Icon className="option-icon" icon={o.icon} />}
+              <span className="option-label">{o.label}</span>
+            </Link>
+          )}
+        </>
+      ),
+    } as SelectOption;
+  };
+
+  const authenticatedOptions = options
+    .filter((o) => o.authenticatedOption)
+    .map(buildOption);
+  const anonymousOptions = options
+    .filter((o) => !o.authenticatedOption)
+    .map(buildOption);
 
   return (
     <div className={classes}>
-      <div className='d-inline-flex align-items-center'>
-        <Icon icon={icon} alt={label} ariaHidden={true} />
-        <span className="ms-10 bg-neutral-white">{label}</span>
-        <span aria-hidden="true" className="spacing d-inline-block h-100">
+      <div className="w-100 d-flex align-items-center justify-content-between">
+        <Icon size={'md'} icon={icon} alt={username} ariaHidden={true} />
+        <span className="h5-bold">{username}</span>
+        <span aria-hidden="true" className="spacing h-100">
           &nbsp;
         </span>
       </div>
-      <div className="drop-down-container w-100 h-100 z-dropdown position-absolute top-0 bottom-0 right-0">
+      <div className="drop-down-container w-100 h-100 position-absolute top-0 bottom-0 right-0">
         <label id="user-area-options-label" className="d-none">
           User Area Options
         </label>
         <Select
           labelledby="user-area-options-label"
           size={'sm'}
-          className="user-area-options"
+          className="user-area-options h5-bold"
           options={isAuthenticated ? authenticatedOptions : anonymousOptions}
-          onChange={onMenuAction}
         />
       </div>
     </div>

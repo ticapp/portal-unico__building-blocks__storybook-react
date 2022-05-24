@@ -5,6 +5,7 @@ export * from './header';
 export * from './horizontal-menu';
 export * from './icon';
 export * from './link';
+export * from './navlink';
 export * from './list';
 export * from './loader';
 export * from './logo';
