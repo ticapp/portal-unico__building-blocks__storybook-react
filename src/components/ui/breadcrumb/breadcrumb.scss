@@ -1,0 +1,40 @@
+@use '../../../scss/index'as index;
+
+
+.ama-breadcrumb {
+
+    .item {
+        color: index.$brand-green-main;
+        text-decoration: underline;
+        text-underline-offset: 8px;
+        min-height: 44px;
+
+        background-color: transparent;
+        border: none;
+
+        @include index.text-big-normal;
+
+        &.selected {
+            @include index.text-big-bold;
+            text-decoration: none;
+        }
+
+    }
+
+    .icon-container {
+        width: 16px;
+        min-height: 44px;
+
+        .icon-style {
+            width: 16px;
+            height: 16px;
+            color: index.$brand-green-main;
+
+            fill: index.$brand-green-main;
+
+        }
+    }
+
+
+
+}
