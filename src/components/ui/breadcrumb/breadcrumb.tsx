@@ -48,7 +48,10 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCr
                         </Link>
                         {!isAtualLink &&
                             (
-                                <span key={uuidv4()} className={iconContainerClassNames}>
+                                <span
+                                    key={uuidv4()}
+                                    className={iconContainerClassNames}
+                                >
                                     <Icon className='icon-style' icon='ama-chevron-right' />
                                 </span>
                             )
@@ -83,17 +86,25 @@ const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCru
             <p className='title mb-8'>Você está aqui:</p>
 
             <button className={cssBreadCrumbTableHistoryButton} onClick={setIsOpenHandler}>
-                <Icon className='icon-style ' icon="ama-chevron-left" /> {selectedCrumb?.name}
+                <Icon className='icon-style' icon="ama-chevron-left" /> {selectedCrumb?.name}
             </button>
 
             {isOpen && (
-                <div ref={historyCrumbRef} className={cssHistoryContainer}>
+                <div
+                    ref={historyCrumbRef}
+                    className={cssHistoryContainer}
+                >
                     <ul>
                         {breadcrumbs.map((page) => {
 
+                            const isSelected = page.url === crumbSelectedUrl ? 'selected' : '';
+
+                            const linkClassNames = classNames('items', isSelected);
+
+
                             return (
                                 <li key={uuidv4()}>
-                                    <Link className='items' link={page.url}>
+                                    <Link className={linkClassNames} link={page.url}>
                                         {page.name}
                                     </Link>
                                 </li>

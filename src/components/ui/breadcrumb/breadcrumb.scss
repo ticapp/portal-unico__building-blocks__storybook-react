@@ -64,8 +64,11 @@
     .items {
         @include index.text-medium-normal;
         text-decoration: none;
-        color: index.$neutral-dark;
+        color: index.$neutral-black;
 
+        &.selected{
+            color: index.$neutral-dark-grey
+        }
 
     }
 
