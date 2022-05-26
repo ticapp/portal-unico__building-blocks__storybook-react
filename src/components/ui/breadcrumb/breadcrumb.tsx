@@ -15,12 +15,11 @@ interface CrumbItems {
 }
 
 export interface BreadCrumbProps {
-    /** Add classes to the BreadCrumb component */
+    /** Add classes to the breadCrumb component */
     className?: string;
-
-    /** Set an array pages in breadcrumb */
+    /** Set an array pages in breadcrumb with name and url */
     breadcrumbs: Array<CrumbItems>;
-    /** Get selected crumb */
+    /** Get selected crumb url*/
     crumbSelectedUrl: string;
 }
 
@@ -75,6 +74,8 @@ const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCru
         setIsOpen(!isOpen);
     }
 
+    const selectedCrumb = breadcrumbs.find(crumb => crumb.url === crumbSelectedUrl);
+
     useOutsideElementClick(historyCrumbRef, () => setIsOpenHandler());
 
     return (
@@ -82,7 +83,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCru
             <p className='title mb-8'>Você está aqui:</p>
 
             <button className={cssBreadCrumbTableHistoryButton} onClick={setIsOpenHandler}>
-                <Icon className='icon-style ' icon="ama-chevron-left" /> Histórico de infrações
+                <Icon className='icon-style ' icon="ama-chevron-left" /> {selectedCrumb?.name}
             </button>
 
             {isOpen && (
@@ -101,8 +102,6 @@ const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCru
                     </ul>
                 </div>
             )}
-
-
         </div>
     )
 }

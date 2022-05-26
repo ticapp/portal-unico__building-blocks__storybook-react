@@ -43,11 +43,14 @@
 
     li{ 
         list-style: none;
-        margin-bottom: 16px;
-
-        &:last-child{
-            margin-bottom: 0;
+        
+        @for $i from 0 through 5 {
+            &:nth-child(#{$i}) {
+                margin-left: calc($i * map-get(index.$spacers, 8));
+            }
         }
+        
+        
     }
 
     .history-container {
@@ -55,8 +58,6 @@
         min-height: 168px;
 
         background-color: index.$neutral-white;
-
-
 
     }
 
