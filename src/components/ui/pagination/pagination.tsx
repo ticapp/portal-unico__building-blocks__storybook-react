@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import './pagination.scss';
 import classNames from 'classnames';
 import { Pagination as BsPagination, PaginationProps as BsPaginationProps } from 'react-bootstrap';
@@ -20,7 +20,7 @@ export const Pagination = ({ className, linesPage = 2, data, ...props }: Paginat
   const cssPagination = classNames('ama-pagination', className);
   const pageData = usePaginationData(linesPage, data);
   const { setValue } = useContext(Context) as any;
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (setValue) {
       setValue(pageData);
     }
@@ -33,6 +33,10 @@ export const Pagination = ({ className, linesPage = 2, data, ...props }: Paginat
           <p>Lines: {pageData.contentPerPage}</p>
           <p>Current page: {pageData.currentPage}</p>
           <p>Total pages: {pageData.totalPageCount}</p>
+          <p>Total items: {data.length}</p>
+          <p>
+            Item of-to: {pageData.startIndex} - {pageData.endIndex}
+          </p>
         </div>
         <BsPagination.Prev onClick={pageData.gotToPreviousPage} disabled={pageData.currentPage === 1} />
         <BsPagination.Next onClick={pageData.goToNextPage} disabled={pageData.currentPage === pageData.totalPageCount} />
