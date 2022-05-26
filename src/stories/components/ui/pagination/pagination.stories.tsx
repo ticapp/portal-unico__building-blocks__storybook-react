@@ -11,6 +11,7 @@ export const TablePagination: Story<PaginationProps> = (args) => {
   return <Pagination {...args}></Pagination>;
 };
 
+//Todo:Falta passar dados dummy
 TablePagination.args = {} as PaginationProps;
 
 TablePagination.argTypes = {};

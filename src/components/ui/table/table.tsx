@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './table.scss';
 import classNames from 'classnames';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useSortTableData } from '../../hooks';
+import { Pagination } from '../pagination';
 
 export interface TableProps extends BsTableProps {
   /** Add classes to the Table component */
@@ -16,8 +17,18 @@ export interface TableProps extends BsTableProps {
   tableData: Array<{ [key: string]: string | number | boolean }>;
 }
 
+export const Context = React.createContext({ value: null, setValue: null as any });
+
 export const Table = ({ className, tableHeaders, tableData, ...props }: TableProps) => {
-  const { items, requestSort, sortConfig } = useSortTableData(tableData, null);
+  const [elementsPerPage, setElementsPerPage] = useState();
+  const { value } = React.useContext(Context) as any;
+  useEffect(() => {
+    if (value) {
+      setElementsPerPage(value.currentData);
+    }
+  }, [value]);
+
+  const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, null);
   const cssTable = classNames('ama-table', className);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -52,11 +63,14 @@ export const Table = ({ className, tableHeaders, tableData, ...props }: TablePro
   };
 
   return (
-    <BsTable {...props} className={cssTable} striped>
-      <thead>
-        <tr>{renderThead(tableHeaders, dataKeys(tableData))}</tr>
-      </thead>
-      <tbody>{renderTr(items)}</tbody>
-    </BsTable>
+    <>
+      <BsTable {...props} className={cssTable} striped>
+        <thead>
+          <tr>{renderThead(tableHeaders, dataKeys(tableData))}</tr>
+        </thead>
+        <tbody>{renderTr(items)}</tbody>
+      </BsTable>
+      <Pagination data={tableData}></Pagination>
+    </>
   );
 };

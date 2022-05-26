@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
 import { Table, TableProps } from '../../../../components/ui';
+import { Context } from '../../../../components/ui/table/table';
 
 export default {
   title: 'Components/Table',
@@ -8,14 +9,20 @@ export default {
 } as ComponentMeta<typeof Table>;
 
 export const BasicTable: Story<TableProps> = (args) => {
-  return <Table {...args}></Table>;
+  const [value, setValue] = React.useState(null);
+
+  return (
+    <Context.Provider value={{ value, setValue }}>
+      <Table {...args}></Table>
+    </Context.Provider>
+  );
 };
 
 BasicTable.args = {
   tableHeaders: ['Infração', 'N.º processo', 'Data', 'Veículo', 'Local da infração', 'Estado', 'Coima', 'Sanção acessória'],
   tableData: [
     {
-      col_01: '1000',
+      col_01: '1',
       col_02: '2',
       col_03: '3',
       col_04: '4',
@@ -37,6 +44,46 @@ BasicTable.args = {
     {
       col_01: '100',
       col_02: '200',
+      col_03: '300',
+      col_04: '400',
+      col_05: '500',
+      col_06: '600',
+      col_07: '700',
+      col_08: '800',
+    },
+    {
+      col_01: '1000',
+      col_02: '201',
+      col_03: '3000',
+      col_04: '4000',
+      col_05: '5000',
+      col_06: '6000',
+      col_07: '7000',
+      col_08: '8000',
+    },
+    {
+      col_01: '10000',
+      col_02: '202',
+      col_03: '300',
+      col_04: '400',
+      col_05: '500',
+      col_06: '600',
+      col_07: '700',
+      col_08: '800',
+    },
+    {
+      col_01: '1000000',
+      col_02: '203',
+      col_03: '300',
+      col_04: '400',
+      col_05: '500',
+      col_06: '600',
+      col_07: '700',
+      col_08: '800',
+    },
+    {
+      col_01: '10000000',
+      col_02: '204',
       col_03: '300',
       col_04: '400',
       col_05: '500',
