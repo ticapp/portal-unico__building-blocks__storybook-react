@@ -24,42 +24,50 @@ export interface BreadCrumbProps {
 }
 
 const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCrumbProps) => {
-    const cssBreadCrumbDesktop = classNames('ama-breadcrumb-desktop', className, 'd-flex align-items-center justify-content-start');
+    const cssBreadCrumbDesktop = classNames('ama-breadcrumb-desktop', className, 'm-0');
 
     return (
-        <div className={cssBreadCrumbDesktop}>
-            {breadcrumbs.map((page, index) => {
+        <nav className={cssBreadCrumbDesktop} aria-label="Breadcrumb">
+            <ol className="d-flex align-items-center justify-content-start">
+                {breadcrumbs.map((page, index) => {
 
-                const isSelected = page.url === crumbSelectedUrl ? 'selected' : '';
+                    const isSelected = page.url === crumbSelectedUrl ? 'selected' : '';
 
-                const linkClassNames = classNames('items', isSelected, 'py-8', 'px-0');
-                const iconContainerClassNames = classNames('icon-container', 'd-flex align-items-center justify-content-center mx-8');
+                    const linkClassNames = classNames('items', isSelected, 'py-8', 'px-0');
+                    const iconContainerClassNames = classNames('icon-container', 'd-flex align-items-center justify-content-center mx-8');
 
-                const isAtualLink = index === breadcrumbs.length - 1;
+                    const isAtualLink = index === breadcrumbs.length - 1;
 
-                return (
-                    <>
-                        <Link
-                            link={page.url}
-                            key={uuidv4()}
-                            className={linkClassNames}
-                        >
-                            {page.name}
-                        </Link>
-                        {!isAtualLink &&
-                            (
-                                <span
+                    return (
+                        <>
+                            <li className="d-flex align-items-center justify-content-center">
+
+                                <Link
+                                    link={page.url}
                                     key={uuidv4()}
-                                    className={iconContainerClassNames}
+                                    aria-label={isSelected && 'page'}
+                                    className={linkClassNames}
                                 >
-                                    <Icon className='icon-style' icon='ama-chevron-right' />
-                                </span>
-                            )
-                        }
-                    </>
-                )
-            })}
-        </div>
+                                    {page.name}
+                                </Link>
+                                {!isAtualLink &&
+                                    (
+                                        <span
+                                            key={uuidv4()}
+                                            className={iconContainerClassNames}
+                                        >
+                                            <Icon className='icon-style' icon='ama-chevron-right' />
+                                        </span>
+                                    )
+                                }
+                            </li>
+
+                        </>
+                    )
+                })}
+            </ol>
+
+        </nav>
     )
 }
 
@@ -85,33 +93,43 @@ const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCru
         <div className={cssBreadCrumbMobile}>
             <p className='title mb-8'>Você está aqui:</p>
 
-            <button className={cssBreadCrumbTableHistoryButton} onClick={setIsOpenHandler}>
+            <button
+                aria-expanded={isOpen}
+                className={cssBreadCrumbTableHistoryButton}
+                onClick={setIsOpenHandler}
+                aria-haspopup="true"
+                aria-label='Open Breadcrumb'
+            >
                 <Icon className='icon-style' icon="ama-chevron-left" /> {selectedCrumb?.name}
             </button>
 
             {isOpen && (
-                <div
+                <nav
                     ref={historyCrumbRef}
                     className={cssHistoryContainer}
+                    aria-label="Breadcrumb"
                 >
-                    <ul>
+                    <ol>
                         {breadcrumbs.map((page) => {
 
                             const isSelected = page.url === crumbSelectedUrl ? 'selected' : '';
 
                             const linkClassNames = classNames('items', isSelected);
 
-
                             return (
-                                <li key={uuidv4()}>
-                                    <Link className={linkClassNames} link={page.url}>
+                                <li key={uuidv4()} >
+                                    <Link
+                                        className={linkClassNames}
+                                        aria-current={isSelected && 'page'}
+                                        link={page.url}
+                                    >
                                         {page.name}
                                     </Link>
                                 </li>
                             )
                         })}
-                    </ul>
-                </div>
+                    </ol>
+                </nav>
             )}
         </div>
     )
@@ -119,9 +137,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCru
 
 export const BreadCrumb = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCrumbProps) => {
 
-
     const { width } = useWindowSize();
-
 
     if (width >= 1366) {
         return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} crumbSelectedUrl={crumbSelectedUrl} />

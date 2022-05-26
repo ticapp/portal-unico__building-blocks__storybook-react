@@ -2,6 +2,7 @@
 
 
 .ama-breadcrumb-desktop {
+    
 
     .items {
         text-decoration: underline;
@@ -49,8 +50,6 @@
                 margin-left: calc($i * map-get(index.$spacers, 8));
             }
         }
-        
-        
     }
 
     .history-container {
@@ -58,7 +57,6 @@
         min-height: 168px;
 
         background-color: index.$neutral-white;
-
     }
 
     .items {
@@ -69,7 +67,6 @@
         &.selected{
             color: index.$neutral-dark-grey
         }
-
     }
 
     .title {
@@ -83,9 +80,6 @@
         border: transparent;
         @include index.text-medium-bold;
         color: index.$brand-green-main;
-
-
-
     }
 
     .icon-style {
