@@ -85,9 +85,13 @@ const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCru
         setIsOpen(!isOpen);
     }
 
+    const closeBreadCrumbHistory = () => {
+        setIsOpen(false);
+    }
+
     const selectedCrumb = breadcrumbs.find(crumb => crumb.url === crumbSelectedUrl);
 
-    useOutsideElementClick(historyCrumbRef, () => setIsOpenHandler());
+    useOutsideElementClick(historyCrumbRef, () => closeBreadCrumbHistory());
 
     return (
         <div className={cssBreadCrumbMobile}>
