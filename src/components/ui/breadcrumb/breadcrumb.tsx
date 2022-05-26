@@ -28,7 +28,7 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCr
 
     return (
         <nav className={cssBreadCrumbDesktop} aria-label="Breadcrumb">
-            <ol className="d-flex align-items-center justify-content-start p-0">
+            <ol className="d-flex align-items-center justify-content-start p-0 m-0">
                 {breadcrumbs.map((page, index) => {
 
                     const isSelected = page.url === crumbSelectedUrl ? 'selected' : '';
