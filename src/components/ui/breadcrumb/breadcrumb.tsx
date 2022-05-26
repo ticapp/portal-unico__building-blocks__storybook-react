@@ -7,8 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link } from '../link';
 import { useOutsideElementClick, useWindowSize } from '../../hooks';
 
-
-
 interface CrumbItems {
     url: string,
     name: string
@@ -39,30 +37,27 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCr
                     const isAtualLink = index === breadcrumbs.length - 1;
 
                     return (
-                        <>
-                            <li className="d-flex align-items-center justify-content-center">
+                        <li key={uuidv4()} className="d-flex align-items-center justify-content-center">
 
-                                <Link
-                                    link={page.url}
-                                    key={uuidv4()}
-                                    aria-label={isSelected && 'page'}
-                                    className={linkClassNames}
-                                >
-                                    {page.name}
-                                </Link>
-                                {!isAtualLink &&
-                                    (
-                                        <span
-                                            key={uuidv4()}
-                                            className={iconContainerClassNames}
-                                        >
-                                            <Icon className='icon-style' icon='ama-chevron-right' />
-                                        </span>
-                                    )
-                                }
-                            </li>
+                            <Link
+                                link={page.url}
 
-                        </>
+                                aria-label={isSelected && 'page'}
+                                className={linkClassNames}
+                            >
+                                {page.name}
+                            </Link>
+                            {!isAtualLink &&
+                                (
+                                    <span
+                                        key={uuidv4()}
+                                        className={iconContainerClassNames}
+                                    >
+                                        <Icon key={uuidv4()} className='icon-style' icon='ama-chevron-right' />
+                                    </span>
+                                )
+                            }
+                        </li>
                     )
                 })}
             </ol>
