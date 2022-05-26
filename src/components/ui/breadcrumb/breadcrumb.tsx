@@ -24,11 +24,11 @@ export interface BreadCrumbProps {
 }
 
 const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCrumbProps) => {
-    const cssBreadCrumbDesktop = classNames('ama-breadcrumb-desktop', className, 'm-0');
+    const cssBreadCrumbDesktop = classNames('ama-breadcrumb-desktop', className);
 
     return (
         <nav className={cssBreadCrumbDesktop} aria-label="Breadcrumb">
-            <ol className="d-flex align-items-center justify-content-start">
+            <ol className="d-flex align-items-center justify-content-start p-0">
                 {breadcrumbs.map((page, index) => {
 
                     const isSelected = page.url === crumbSelectedUrl ? 'selected' : '';
