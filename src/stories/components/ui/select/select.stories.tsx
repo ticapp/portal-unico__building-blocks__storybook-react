@@ -32,17 +32,14 @@ SingleSelect.args = {
 SingleSelect.argTypes = {
   disabled: {
     description: 'Change the availability of the select element',
-    defaultValue: false,
     control: 'boolean',
   },
   multiSelection: {
     description: 'Allow or disallow multiple selection of options',
-    defaultValue: false,
     control: 'boolean',
   },
   searchable: {
     description: 'Allow or disallow typing to search for option',
-    defaultValue: false,
     control: 'boolean',
   },
   options: {
@@ -59,7 +56,6 @@ SingleSelect.argTypes = {
   },
   allwaysOpen: {
     description: 'Keep select dropdown always open',
-    defaultValue: false,
     control: 'boolean',
   },
   className: {
@@ -92,17 +88,14 @@ MultiSelect.args = {
 MultiSelect.argTypes = {
   disabled: {
     description: 'Change the availability of the select element',
-    defaultValue: false,
     control: 'boolean',
   },
   multiSelection: {
     description: 'Allow or disallow multiple selection of options',
-    defaultValue: false,
     control: 'boolean',
   },
   searchable: {
     description: 'Allow or disallow typing to search for option',
-    defaultValue: false,
     control: 'boolean',
   },
   options: {
@@ -119,7 +112,6 @@ MultiSelect.argTypes = {
   },
   allwaysOpen: {
     description: 'Keep select dropdown always open',
-    defaultValue: false,
     control: 'boolean',
   },
   className: {
