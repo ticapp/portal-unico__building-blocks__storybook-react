@@ -99,7 +99,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs }: BreadCrumbProps) => {
                 aria-haspopup="true"
                 aria-label='Open Breadcrumb'
             >
-                <Icon className='icon-style' icon="ama-chevron-left" /> {selectedCrumb?.name}
+                <Icon className='icon-style me-8' icon="ama-chevron-left" /> {selectedCrumb?.name}
             </button>
 
             {isOpen && (
