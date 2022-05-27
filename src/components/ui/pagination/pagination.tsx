@@ -10,9 +10,6 @@ export interface PaginationProps extends BsPaginationProps {
   /** Add classes to the Card component */
   className?: string;
 
-  /** Lines per page */
-  linesPage?: number;
-
   /** Lines Options */
   linesOptions?: SelectOption[];
 
@@ -20,9 +17,9 @@ export interface PaginationProps extends BsPaginationProps {
   data?: Array<{ [key: string]: string | number | boolean }>;
 }
 
-export const Pagination = ({ className, linesOptions = [], linesPage = 3, data, ...props }: PaginationProps) => {
+export const Pagination = ({ className, linesOptions = [], data, ...props }: PaginationProps) => {
   const cssPagination = classNames('ama-pagination', className);
-  let pageData = usePaginationData(linesPage, data);
+  let pageData = usePaginationData(linesOptions[0].value, data);
   const { setValue } = useContext(Context) as any;
 
   useLayoutEffect(() => {

@@ -49,7 +49,7 @@ export const usePaginationData = (linesPage, data) => {
       const startIndex = 1 * val['value'] - val['value'];
       const endIndex = startIndex + val['value'];
       const currentData = data.slice(startIndex, endIndex);
-      setStartIndex(startIndex);
+      setStartIndex(startIndex + 1);
       setEndIndex(currentData.length === val['value'] ? endIndex : endIndex - (val['value'] - currentData.length));
       setTotalPageCount(Math.ceil(data.length / val['value']));
       return currentData;
