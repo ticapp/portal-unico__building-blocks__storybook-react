@@ -1,7 +1,13 @@
 import classNames from 'classnames';
-import React, { MouseEvent, useEffect, useRef, useState } from 'react';
+import React, {
+  MouseEvent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { v4 } from 'uuid';
-import { useOutsideElementClick } from '../../hooks';
+import { useActiveElement, useOutsideElementClick } from '../../hooks';
 import { Icon } from '../icon';
 import './select.scss';
 
@@ -10,6 +16,10 @@ export interface SelectOption {
   value: any;
   /** Label of the select option */
   label: string;
+  /** If specified, will render in label element */
+  labelElement?: ReactNode;
+  /** Disable select option */
+  disabled?: boolean;
 }
 
 export interface SelectProps {
@@ -33,7 +43,7 @@ export interface SelectProps {
   onChange?: (val: SelectOption | SelectOption[]) => void;
   /** Disables the select */
   disabled?: boolean;
-  /** Icon size */
+  /** Chevron icon size */
   size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
   /** Keep select options open */
   allwaysOpen?: boolean;
@@ -43,9 +53,9 @@ let searchTimeout;
 let searchString = '';
 
 const Select = ({
-  className,
-  id,
-  labelledby,
+  className = '',
+  id = '',
+  labelledby = '',
   placeholder = '',
   searchable = false,
   multiSelection = false,
@@ -66,31 +76,33 @@ const Select = ({
   const comboWrapperRef = useRef(null);
 
   const [isInitialized, setIsInitialized] = useState(false);
-  const [ignoreBlur, setIgnoreBlur] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
   const [isComboExpanded, setIsComboExpanded] = useState(false);
-  const [activeIndexes, setActiveIndexes] = useState([] as number[]);
+
+  const [checkedIndex, setCheckedIndex] = useState(-1);
+  const [checkedIndexes, setCheckedIndexes] = useState([] as number[]);
+
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   // Save a list of named combobox actions, for future readability
   const SelectActions = {
     Close: 0,
-    CloseSelect: 1,
-    First: 2,
-    Last: 3,
-    Next: 4,
-    Open: 5,
-    PageDown: 6,
-    PageUp: 7,
-    Previous: 8,
-    Select: 9,
-    Type: 10,
+    First: 1,
+    Last: 2,
+    Next: 3,
+    Open: 4,
+    PageDown: 5,
+    PageUp: 6,
+    Previous: 7,
+    Select: 8,
+    Type: 9,
+    SelectClose: 10,
   };
 
   // Get action when menu open
   function getActionWithMenuOpen(key: string, altKey: boolean) {
     if (key === 'ArrowUp' && altKey) {
-      return SelectActions.CloseSelect;
+      return SelectActions.Select;
     } else if (key === 'ArrowDown' && !altKey) {
       return SelectActions.Next;
     } else if (key === 'ArrowUp') {
@@ -101,8 +113,10 @@ const Select = ({
       return SelectActions.PageDown;
     } else if (key === 'Escape') {
       return SelectActions.Close;
-    } else if (key === 'Enter') {
-      return SelectActions.CloseSelect;
+    } else if (key === 'Enter' && !multiSelection) {
+      return SelectActions.SelectClose;
+    } else if (key === 'Enter' && !!multiSelection) {
+      return SelectActions.Select;
     } else if (key === ' ') {
       return SelectActions.Select;
     }
@@ -183,8 +197,8 @@ const Select = ({
 
   // ensure a given child element is within the parent's visible scroll area
   // if the child is not visible, scroll the parent
-  function maintainScrollVisibility(activeElement, scrollParent) {
-    const { offsetHeight, offsetTop } = activeElement;
+  function maintainScrollVisibility(elem, scrollParent) {
+    const { offsetHeight, offsetTop } = elem;
     const { offsetHeight: parentOffsetHeight, scrollTop } = scrollParent;
 
     const isAbove = offsetTop < scrollTop;
@@ -197,76 +211,75 @@ const Select = ({
     }
   }
 
-  const selectOption = (index) => {
-    // update state
-    setActiveIndex(index);
+  const updateMenuState = (newOpenValue) => {
+    if (allwaysOpen) {
+      return;
+    }
 
-    const optionsElems = listboxRef.current?.querySelectorAll('[role=option]');
+    setIsOpen((lastValue) => {
+      if (lastValue === newOpenValue) {
+        return lastValue;
+      }
 
-    if (multiSelection) {
-      setActiveIndexes((lastValue: number[]) => {
-        let newVal: number[];
-        if (lastValue.indexOf(index) >= 0) {
-          newVal = lastValue.filter((i) => i !== index);
-        } else {
-          newVal = lastValue.concat(index);
+      // update aria-expanded and styles
+      setIsComboExpanded(newOpenValue);
+
+      if (newOpenValue) {
+        // move focus back to the combobox, if needed
+        comboRef.current?.focus();
+
+        // scroll combo into view
+        if (comboRef.current && !isElementInView(comboRef.current)) {
+          comboRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+          });
         }
+      }
 
-        optionsElems?.forEach((e, i) => {
-          e.classList.remove('option-current');
-          if (newVal.indexOf(i) >= 0) {
-            e.classList.add('option-current');
-          }
-        });
+      return newOpenValue;
+    });
+  };
+
+  const checkOption = (index) => {
+    if (multiSelection) {
+      setCheckedIndexes((last) => {
+        let newVal;
+
+        if (last.includes(index)) {
+          newVal = last.filter((i) => i !== index);
+        } else {
+          newVal = last.concat(index);
+        }
 
         onChange?.(options.filter((_o, i) => newVal.includes(i)));
 
         return newVal;
       });
     } else {
-      optionsElems?.forEach((e, i) => {
-        e.classList.remove('option-current');
-        if (i === index) {
-          e.classList.add('option-current');
-        }
-      });
-
       onChange?.(options[index]);
+      setCheckedIndex(index);
     }
-  };
-
-  const updateMenuState = (open, callFocus = true) => {
-    if (allwaysOpen) {
-      setIsOpen(true);
-      return;
-    }
-
-    if (isOpen === open) {
-      return;
-    }
-
-    // update state
-    setIsOpen(open);
-
-    // update aria-expanded and styles
-    setIsComboExpanded(open);
-
-    if (!open && comboRef.current && !isElementInView(comboRef.current)) {
-      comboRef.current?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-      });
-    }
-
-    // move focus back to the combobox, if needed
-    callFocus && comboRef.current?.focus();
-  };
-
-  const onOptionChange = (index) => {
-    // update state
-    setActiveIndex(index);
 
     const optionsElems = listboxRef.current?.querySelectorAll('[role=option]');
+    optionsElems?.forEach((e, i) => {
+      e.classList.remove('checked');
+      if (i === index) {
+        e.classList.add('checked');
+      }
+    });
+  };
+
+  const selectOption = (index) => {
+    setSelectedIndex(index);
+
+    const optionsElems = listboxRef.current?.querySelectorAll('[role=option]');
+    optionsElems?.forEach((e, i) => {
+      e.classList.remove('selected');
+      if (i === index) {
+        e.classList.add('selected');
+      }
+    });
 
     if (optionsElems) {
       if (isScrollable(listboxRef.current)) {
@@ -281,57 +294,45 @@ const Select = ({
           });
         }
       }
-
-      //  ADD CLASS HOVER FOR KEYBOARD NAVIGATION "HOVER"
-      optionsElems.forEach((e) => e.classList.remove('hover'));
-      optionsElems[index].classList.add('hover');
-    }
-  };
-
-  const onComboBlur = () => {
-    // do not do blur action if ignoreBlur flag has been set
-    if (ignoreBlur) {
-      setIgnoreBlur(false);
-      return;
-    }
-
-    // select current option and close
-    if (isOpen) {
-      updateMenuState(false, false);
     }
   };
 
   const onComboClick = () => {
     if (!disabled) {
-      updateMenuState(!isOpen, false);
+      updateMenuState(!isOpen);
     }
   };
 
   const onOptionClick = (index) => {
-    onOptionChange(index);
-    selectOption(index);
+    if (options[index].disabled) {
+      return;
+    }
+
+    checkOption(index);
 
     if (!multiSelection) {
       updateMenuState(false);
     }
   };
 
-  const onOptionMouseDown = () => {
-    setIgnoreBlur(true);
-  };
-
   const onOptionMouseOver = (evt: MouseEvent<HTMLDivElement>) => {
-    evt.preventDefault();
-
     if (!(evt.target as HTMLDivElement).classList.contains('combo-option')) {
       return;
     }
 
     const optionsElems = listboxRef.current?.querySelectorAll('[role=option]');
     if (optionsElems) {
-      optionsElems.forEach((e) => e.classList.remove('hover'));
+      optionsElems.forEach((e) => e.classList.remove('selected'));
     }
-    (evt.target as HTMLDivElement).classList.add('hover');
+    (evt.target as HTMLDivElement).classList.add('selected');
+  };
+
+  const onMenuKeyDown = (event) => {
+    // move focus back to the combobox, if needed
+    comboRef.current?.focus();
+
+    // business as usual
+    onComboKeyDown(event);
   };
 
   const onComboKeyDown = (event) => {
@@ -348,24 +349,16 @@ const Select = ({
     switch (action) {
       case SelectActions.Last:
       case SelectActions.First:
-        event.preventDefault();
         updateMenuState(true);
-        return onOptionChange(getUpdatedIndex(activeIndex, max, action));
+        return selectOption(getUpdatedIndex(selectedIndex, max, action));
 
       case SelectActions.Next:
       case SelectActions.Previous:
       case SelectActions.PageUp:
       case SelectActions.PageDown:
-        event.preventDefault();
-        return onOptionChange(getUpdatedIndex(activeIndex, max, action));
-
-      case SelectActions.CloseSelect:
-        event.preventDefault();
-        selectOption(activeIndex);
-        return updateMenuState(false);
+        return selectOption(getUpdatedIndex(selectedIndex, max, action));
 
       case SelectActions.Close:
-        event.preventDefault();
         return updateMenuState(false);
 
       case SelectActions.Type:
@@ -376,21 +369,25 @@ const Select = ({
         return false;
 
       case SelectActions.Open:
-        event.preventDefault();
         return updateMenuState(true);
 
+      case SelectActions.SelectClose:
+        if (options[selectedIndex].disabled) {
+          return;
+        }
+
+        checkOption(selectedIndex);
+        return updateMenuState(false);
+
       case SelectActions.Select:
-        event.preventDefault();
+        if (options[selectedIndex].disabled) {
+          return;
+        }
 
         if (!searchable) {
-          return selectOption(activeIndex);
+          return checkOption(selectedIndex);
         }
 
-        if (multiSelection) {
-          return selectOption(activeIndex);
-        }
-
-        updateMenuState(true);
         return onComboType(key);
     }
   };
@@ -414,7 +411,7 @@ const Select = ({
 
     if (searchIndex >= 0) {
       // if a match was found, go to it
-      onOptionChange(searchIndex);
+      selectOption(searchIndex);
     } else {
       // if no matches, clear the timeout and search string
       window.clearTimeout(searchTimeout);
@@ -422,14 +419,28 @@ const Select = ({
     }
   };
 
-  useOutsideElementClick(comboWrapperRef, () => onComboBlur());
+  useOutsideElementClick(comboWrapperRef, () => updateMenuState(false));
 
-  const wrapperClassNames = classNames(
-    'combo',
-    className,
-    { open: isOpen },
-    { disabled }
-  );
+  const { activeElement } = useActiveElement();
+
+  // Dismiss if active element is not contained in combo ref
+  useEffect(() => {
+    if (!activeElement) {
+      return;
+    }
+
+    if (!isOpen || !comboWrapperRef.current) {
+      return;
+    }
+
+    if (
+      !(comboWrapperRef.current as HTMLElement).contains(
+        activeElement as HTMLElement
+      )
+    ) {
+      updateMenuState(false);
+    }
+  }, [activeElement]);
 
   useEffect(() => {
     setIsInitialized(true);
@@ -442,7 +453,7 @@ const Select = ({
     }
 
     if (multiSelection && Array.isArray(active)) {
-      setActiveIndexes(
+      setCheckedIndexes(
         options
           .filter((opt: SelectOption) => {
             return active.find((activeOption) => {
@@ -452,23 +463,21 @@ const Select = ({
           .map((_o, i) => i)
       );
     } else if (!multiSelection && !!active && !Array.isArray(active)) {
-      setActiveIndex(options.findIndex((o) => o.label === active.label));
+      setCheckedIndex(options.findIndex((o) => o.label === active.label));
     }
 
     if (allwaysOpen) {
-      updateMenuState(true, true);
+      updateMenuState(true);
     }
   }, []);
 
-  const getActiveDescendantValue = (): string => {
-    if (multiSelection) {
-      return activeIndexes.length > 0
-        ? `${singleSelectId}-option-${activeIndexes[activeIndexes.length - 1]}`
-        : '';
-    }
-
-    return activeIndex >= 0 ? `${singleSelectId}-option-${activeIndex}` : '';
-  };
+  const wrapperClassNames = classNames(
+    className,
+    'combo',
+    { open: isOpen },
+    { disabled },
+    { multiselection: multiSelection }
+  );
 
   return (
     <div
@@ -477,29 +486,30 @@ const Select = ({
       aria-disabled={disabled}
     >
       <div
-        className="combo-input p-16 w-100 d-flex align-items-center"
+        className="combo-input p-16 w-100 d-flex align-items-center justify-content-between"
         ref={comboRef}
         aria-controls={selectControlsId}
         aria-expanded={isComboExpanded}
         aria-haspopup="listbox"
         aria-labelledby={labelledby}
-        aria-activedescendant={getActiveDescendantValue()}
+        aria-activedescendant={
+          selectedIndex >= 0 ? `${singleSelectId}-option-${selectedIndex}` : ''
+        }
         id={singleSelectId}
         role="combobox"
         tabIndex={0}
-        onBlur={onComboBlur}
         onClick={onComboClick}
         onKeyDown={onComboKeyDown}
       >
-        <div className="tags w-100 d-flex flex-wrap">
+        <div className="tags me-10 d-flex flex-wrap">
           {!multiSelection &&
-            (activeIndex < 0 ? placeholder : options[activeIndex].label)}
+            (checkedIndex < 0 ? placeholder : options[checkedIndex].label)}
 
           {multiSelection &&
-            (activeIndexes.length <= 0
+            (checkedIndexes.length <= 0
               ? placeholder
               : options
-                  .filter((_o, i) => activeIndexes.includes(i))
+                  .filter((_o, i) => checkedIndexes.includes(i))
                   .map((o, i) => {
                     return (
                       <div
@@ -512,62 +522,63 @@ const Select = ({
                   }))}
         </div>
 
-        <Icon
-          icon={isOpen ? 'ama-chevron-up' : 'ama-chevron-down'}
-          size={size}
-          ariaHidden={true}
-        />
+        <div className="ms-auto">
+          <Icon
+            icon={isOpen ? 'ama-chevron-up' : 'ama-chevron-down'}
+            size={size}
+            ariaHidden={true}
+          />
+        </div>
       </div>
 
       <div
         ref={listboxRef}
-        className={
-          isOpen
-            ? 'combo-menu d-block w-100 py-16 px-0 bg-neutral-white '
-            : 'd-none'
-        }
+        className={isOpen ? 'combo-menu d-block w-100 py-16 px-0' : 'd-none'}
         role="listbox"
         aria-multiselectable={multiSelection}
         id={selectControlsId}
         aria-labelledby={labelledby}
+        onKeyDown={onMenuKeyDown}
         tabIndex={-1}
       >
         {options.map((o, i) => {
-          const isSelected = multiSelection
-            ? activeIndexes.indexOf(i) >= 0
-            : activeIndex === i;
+          const isChecked = multiSelection
+            ? checkedIndexes.indexOf(i) >= 0
+            : checkedIndex === i;
+
+          const isSelected = selectedIndex === i;
 
           return (
             <div
               role="option"
               key={i}
               id={`${singleSelectId}-option-${i}`}
-              className={
-                'combo-option w-100 d-flex align-items-center py-8 px-16'
+              className={`combo-option w-100 d-flex align-items-center py-8 px-16 ${
+                isChecked ? 'checked' : ''
               }
+              ${isSelected ? 'selected' : ''}
+              `}
               onClick={() => onOptionClick(i)}
-              onMouseDown={onOptionMouseDown}
               onMouseOver={onOptionMouseOver}
-              aria-selected={
-                multiSelection
-                  ? activeIndexes.indexOf(i) >= 0
-                  : activeIndex === i
-              }
+              aria-selected={isChecked}
             >
-              {multiSelection && isSelected && (
+              {multiSelection && isChecked && (
                 <span className="icon me-16">
                   <Icon icon="ama-checkbox-checked" />
                 </span>
               )}
 
-              {multiSelection && !isSelected && (
+              {multiSelection && !isChecked && (
                 <span className="icon me-16">
                   <Icon icon="ama-checkbox" />
                 </span>
               )}
 
-              <span aria-label={isSelected ? `${o.label} selected` : o.label}>
-                {o.label}
+              <span
+                className="combo-option-content w-100"
+                aria-label={isChecked ? `${o.label} selected` : o.label}
+              >
+                {o.labelElement || o.label}
               </span>
             </div>
           );

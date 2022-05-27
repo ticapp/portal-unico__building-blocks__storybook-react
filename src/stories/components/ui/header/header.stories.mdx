@@ -14,16 +14,126 @@ import { Meta } from '@storybook/addon-docs';
 </p>
 
 ```jsx
-<Header isHomepage={false} homepageLink={'/'} />
+const links: HorizontalMenuLink[] = [
+  {
+    id: '1',
+    label: 'Serviços',
+    link: '/services',
+  },
+  {
+    id: '2',
+    label: 'Entidades',
+    link: '/entities',
+  },
+  {
+    id: '3',
+    label: 'Atendimento',
+    link: '/attendance',
+  },
+  {
+    id: '4',
+    label: 'Notícias',
+    link: '/news',
+  },
+];
+
+const options = [
+  {
+    authenticatedOption: false,
+    link: '/login',
+    icon: 'ama-login',
+    label: 'Entrar no portal',
+  },
+  {
+    authenticatedOption: false,
+    link: '/register',
+    icon: 'ama-add-user',
+    label: 'Criar registo',
+  },
+
+  {
+    authenticatedOption: true,
+    link: '/user-area',
+    icon: 'ama-user',
+    label: 'Area Reservada',
+  },
+  {
+    authenticatedOption: true,
+    link: 'logout',
+    icon: 'ama-logout',
+    label: 'Terminar sessão',
+  },
+] as UserAreaOption[];
+
+<Header isHomepage={false} homepageLink={'/'} options={options} links={links} />
 ```
 
 <p>With language list provided.</p>
 
 ```jsx
+const links: HorizontalMenuLink[] = [
+  {
+    id: '1',
+    label: 'Serviços',
+    link: '/services',
+  },
+  {
+    id: '2',
+    label: 'Entidades',
+    link: '/entities',
+  },
+  {
+    id: '3',
+    label: 'Atendimento',
+    link: '/attendance',
+  },
+  {
+    id: '4',
+    label: 'Notícias',
+    link: '/news',
+  },
+];
+
+const options = [
+  {
+    authenticatedOption: false,
+    link: '/login',
+    icon: 'ama-login',
+    label: 'Entrar no portal',
+  },
+  {
+    authenticatedOption: false,
+    link: '/register',
+    icon: 'ama-add-user',
+    label: 'Criar registo',
+  },
+
+  {
+    authenticatedOption: true,
+    link: '/user-area',
+    icon: 'ama-user',
+    label: 'Area Reservada',
+  },
+  {
+    authenticatedOption: true,
+    link: 'logout',
+    icon: 'ama-logout',
+    label: 'Terminar sessão',
+  },
+] as UserAreaOption[];
+
+const languages: SelectOption[] = [
+  { label: 'PT', value: 'pt' },
+  { label: 'EN', value: 'en' },
+  { label: 'ES', value: 'es' },
+];
+
 <Header
   isHomepage={false}
   homepageLink={'/'}
-  languages={{ pt: 'PT', en: 'EN', es: 'ES' }}
-  activeLanguage={'pt'}
+  languages={languages}
+  activeLanguage={languages[0]}
+  options={options}
+  links={links}
 />
 ```

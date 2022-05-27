@@ -3,10 +3,10 @@
 .ama {
   &-user-area {
     min-height: 44px;
-    min-width: 44px;
+    min-width: 250px;
 
     svg {
-      fill: black;
+      fill: index.$neutral-black;
     }
 
     .spacing {
@@ -14,11 +14,12 @@
     }
 
     .drop-down-container {
+      z-index: 900;
       .combo {
         &.user-area-options {
           height: 100%;
           .tags {
-            visibility: hidden;
+            display: none !important;
           }
 
           .combo-input {
@@ -28,6 +29,65 @@
 
             &:focus {
               border: 1px solid transparent;
+            }
+          }
+        }
+
+        &.open {
+          &.user-area-options {
+            .combo-menu {
+              border: 1px solid index.$brand-green-main;
+
+              .combo-option {
+                .combo-option-content {
+                  display: flex;
+                  a {
+                    display: flex;
+                    width: 100%;
+                    justify-content: start;
+                    color: index.$brand-green-main;
+
+                    text-decoration: none;
+                    a:link,
+                    a:hover {
+                      text-decoration: none;
+                    }
+                  }
+
+                  .option-icon {
+                    margin-right: map-get(index.$spacers, 10);
+                  }
+
+                  .option-label {
+                    @include index.text-big-bold;
+
+                    position: relative;
+                    &::after {
+                      content: '';
+                      position: absolute;
+                      bottom: -2px;
+                      left: 0;
+                      width: 100%;
+                      border-bottom: 2px solid index.$brand-green-main;
+                    }
+                  }
+                }
+                &.checked,
+                &.selected {
+                  background-color: rgba(0, 103, 47, 0.5);
+                  .combo-option-content {
+                    a {
+                      color: index.$neutral-black;
+                    }
+
+                    .option-label {
+                      &::after {
+                        border-bottom: 2px solid index.$neutral-black;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

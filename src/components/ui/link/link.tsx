@@ -22,9 +22,24 @@ export interface LinkProps {
   replace?: boolean;
   /** Scroll to the top of the page after a navigation. Defaults to true */
   scroll?: boolean;
+  /** Set link role */
+  role?: string;
+  /** Set link tab-index */
+  tabIndex?: number;
 }
 
-export function Link({ children, link, target = '_self', isExternal = false, title = '', className = '', replace = false, scroll }: LinkProps) {
+export function Link({
+  children,
+  link,
+  target = '_self',
+  isExternal = false,
+  title = '',
+  className = '',
+  replace = false,
+  scroll,
+  role,
+  tabIndex = 0,
+}: LinkProps) {
   const isNextJS = !window;
 
   const renderNextJSAnchor = (props) => {
@@ -44,6 +59,8 @@ export function Link({ children, link, target = '_self', isExternal = false, tit
       className,
       replace,
       scroll,
+      role,
+      tabIndex,
     };
 
     return renderNextJSAnchor(nextJsLinkProps as NextJSAnchorProps);
@@ -58,16 +75,26 @@ export function Link({ children, link, target = '_self', isExternal = false, tit
       className,
       replace,
       scroll,
+      role,
+      tabIndex,
     };
 
-    return renderReactDomAnchor(internalReactDomLinkProps as ReactDomAnchorType);
+    return renderReactDomAnchor(
+      internalReactDomLinkProps as ReactDomAnchorType
+    );
   }
 
   const externalReactDomLinkProps = {
     to: '',
     component: () => {
       return (
-        <a href={link.toString()} target={target} title={title} className={className}>
+        <a
+          href={link.toString()}
+          target={target}
+          title={title}
+          className={className}
+          tabIndex={tabIndex}
+        >
           {children}
         </a>
       );

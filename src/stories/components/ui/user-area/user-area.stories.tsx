@@ -1,74 +1,101 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
-import { SelectOption, UserArea, UserAreaProps } from '../../../../components';
+import { Col, Container, Row } from 'react-bootstrap';
+import { BrowserRouter } from 'react-router-dom';
+import {
+  UserArea, UserAreaOption, UserAreaProps
+} from '../../../../components';
 
 export default {
   title: 'Components/User Area',
 } as ComponentMeta<typeof UserArea>;
 
 export const Authenticated: Story<UserAreaProps> = () => {
-  const authenticatedOptions = [
+  const options = [
     {
-      label: 'Area reservada',
-      value: 'user-area',
+      authenticatedOption: false,
+      link: '/login',
+      icon: 'ama-login',
+      label: 'Entrar no portal',
     },
     {
-      label: 'Terminar sessão',
-      value: 'logout',
+      authenticatedOption: false,
+      link: '/register',
+      icon: 'ama-add-user',
+      label: 'Criar registo',
     },
-  ] as SelectOption[];
-  const anonymousOptions = [
-    {
-      label: 'Login',
-      value: 'login',
-    },
-  ] as SelectOption[];
 
-  const handleSelectOption = (val: SelectOption | SelectOption[]) => {
-    console.log(val);
-  };
+    {
+      authenticatedOption: true,
+      link: '/user-area',
+      icon: 'ama-user',
+      label: 'Area Reservada',
+    },
+    {
+      authenticatedOption: true,
+      link: 'logout',
+      icon: 'ama-logout',
+      label: 'Terminar sessão',
+    },
+  ] as UserAreaOption[];
 
   return (
-    <UserArea
-      isAuthenticated={true}
-      label={'User Name'}
-      anonymousOptions={anonymousOptions}
-      authenticatedOptions={authenticatedOptions}
-      onMenuAction={handleSelectOption}
-    />
+    <BrowserRouter>
+      <Container>
+        <Row className="d-flex justify-content-center">
+          <Col xs={4}>
+            <UserArea
+              options={options}
+              isAuthenticated={true}
+              username={'John Doe'}
+            />
+          </Col>
+        </Row>
+      </Container>
+    </BrowserRouter>
   );
 };
 Authenticated.storyName = 'Authenticated User';
 
 export const Anonymous: Story<UserAreaProps> = () => {
-  const authenticatedOptions = [
+  const options = [
     {
-      label: 'Area reservada',
-      value: 'user-area',
+      authenticatedOption: false,
+      link: '/login',
+      icon: 'ama-login',
+      label: 'Entrar no portal',
     },
     {
-      label: 'Terminar sessão',
-      value: 'logout',
+      authenticatedOption: false,
+      link: '/register',
+      icon: 'ama-add-user',
+      label: 'Criar registo',
     },
-  ] as SelectOption[];
-  const anonymousOptions = [
-    {
-      label: 'Login',
-      value: 'login',
-    },
-  ] as SelectOption[];
 
-  const handleSelectOption = (val: SelectOption | SelectOption[]) => {
-    console.log(val);
-  };
+    {
+      authenticatedOption: true,
+      link: '/user-area',
+      icon: 'ama-user',
+      label: 'Area Reservada',
+    },
+    {
+      authenticatedOption: true,
+      link: 'logout',
+      icon: 'ama-logout',
+      label: 'Terminar sessão',
+    },
+  ] as UserAreaOption[];
 
   return (
-    <UserArea
-      isAuthenticated={false}
-      anonymousOptions={anonymousOptions}
-      authenticatedOptions={authenticatedOptions}
-      onMenuAction={handleSelectOption}
-    />
+    <BrowserRouter>
+      <Container>
+        <Row className="d-flex justify-content-center">
+          <Col xs={4}>
+            <UserArea options={options} isAuthenticated={false} />
+          </Col>
+        </Row>
+      </Container>
+    </BrowserRouter>
   );
 };
 Anonymous.storyName = 'Anonymous User';
