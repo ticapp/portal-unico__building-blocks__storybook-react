@@ -1,0 +1,51 @@
+@use '../../../scss/index'as index;
+
+
+.datalist-container {
+    width: 696px;
+    height: 456px;
+
+    padding: 32px 40px;
+
+
+
+    background-color: index.$neutral-light;
+
+
+    h5 {
+        width: 100%;
+        @include index.h5-bold;
+        text-align: start;
+    }
+
+}
+
+.items-container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+    
+    width: 100%;
+}
+
+.items-content {
+    width: 50%;
+
+    margin-bottom: 24px;
+    
+    dt {
+        @include index.text-big-normal;
+        color: index.$neutral-black;
+        margin-bottom: 8px;
+    }
+
+    dd {
+        @include index.text-medium-normal;
+        color: index.$neutral-dark;
+
+        margin: 0;
+    }
+
+
+}
