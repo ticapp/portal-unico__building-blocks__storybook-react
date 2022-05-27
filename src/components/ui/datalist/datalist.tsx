@@ -1,9 +1,10 @@
-import classNames from 'classnames';
 import React from 'react';
-import { useWindowSize } from '../../hooks';
-import { v4 as uuidv4 } from 'uuid';
+// import { useWindowSize } from '../../hooks';
+// import { v4 as uuidv4 } from 'uuid';
 
 import './datalist.scss';
+import { Col, Container, Row } from 'react-bootstrap';
+import classNames from 'classnames';
 
 
 interface DataListValues {
@@ -20,28 +21,33 @@ export interface DatalistProps {
 
 export const Datalist = ({ title, data }: DatalistProps) => {
 
-    const { width } = useWindowSize();
-
+    const itemsclassName = classNames('items-content mb-16 mb-sm-24');
 
     return (
         <>
-            <div className='datalist-container d-flex align-items-center justify-content-start flex-column m-0'>
-                <h5 className='d-flex mb-32'>{title}</h5>
+            <Container className='datalist-container py-32 px-24 px-sm-32 py-sm-48'>
 
-                <dl className='items-container'>
+                <Row>
+                    <Col className='d-flex mb-32' xs={12} >
+                        <h5>{title}</h5>
+                    </Col>
+                </Row>
+                <Row>
                     {data && data.map(item => {
 
-                        const itemsclassName = classNames('items-content', width <= 360 && 'mobile');
 
                         return (
-                            <div key={uuidv4()}className={itemsclassName}>
-                                <dt>{item.label}</dt>
-                                <dd>{item.value}</dd>
-                            </div>
+                            <Col xs={12} sm={5} className={itemsclassName}>
+                                <dt className='mb-8'> {item.label}</dt>
+                                <dd className='mb-0'>{item.value}</dd>
+                            </Col>
                         )
                     })}
-                </dl>
-            </div>
+                </Row>
+
+
+
+            </Container>
         </>
     )
 }

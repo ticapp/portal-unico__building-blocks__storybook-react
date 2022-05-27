@@ -2,13 +2,6 @@
 
 
 .datalist-container {
-    max-width: 696px;
-    min-height: 456px;
-
-    padding: 32px 40px;
-
-
-
 
     background-color: index.$neutral-light;
 
@@ -21,20 +14,8 @@
 
 }
 
-.items-container {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    flex-wrap: wrap;
-    
-    width: 100%;
-}
 
 .items-content {
-    width: calc(50% - 16px);
-
-    margin-bottom: 24px;
-    margin-right: 16px;
 
     dt {
         @include index.text-big-normal;
@@ -45,11 +26,6 @@
         @include index.text-medium-normal;
         color: index.$neutral-dark;
 
-        margin: 0;
-    }
-
-    &.mobile{
-        width: 100%;
     }
 
 }
