@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { useWindowSize } from '../../hooks';
+import { v4 as uuidv4 } from 'uuid';
 
 import './datalist.scss';
 
@@ -28,12 +29,12 @@ export const Datalist = ({ title, data }: DatalistProps) => {
                 <h5 className='d-flex mb-32'>{title}</h5>
 
                 <dl className='items-container'>
-                    {data && data.map((item, index) => {
+                    {data && data.map(item => {
 
                         const itemsclassName = classNames('items-content', width <= 360 && 'mobile');
 
                         return (
-                            <div className={itemsclassName}>
+                            <div key={uuidv4()}className={itemsclassName}>
                                 <dt>{item.label}</dt>
                                 <dd>{item.value}</dd>
                             </div>
