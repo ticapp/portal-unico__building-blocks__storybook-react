@@ -21,16 +21,10 @@ const args = {
     },
     {
       name: "Histórico de infrações",
-      url: "/violations/history",
+      url: "/iframe.html",
     },
   ],
-  crumbSelectedUrl: "/violations/history",
 };
 
-return (
-  <Breadcrumb
-    breadcrumbs={args.breadcrumbs}
-    crumbSelectedUrl={args.crumbSelectedUrl}
-  />
-);
+return <Breadcrumb breadcrumbs={args.breadcrumbs} />;
 ```

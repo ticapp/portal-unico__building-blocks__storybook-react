@@ -21,15 +21,14 @@ export const BasicBreadCrumb: Story<BreadCrumbProps> = () => {
             },
             {
                 name: 'Histórico de infrações',
-                url: '/violations/history'
+                url: '/iframe.html'
             }
-        ],
-        crumbSelectedUrl: '/violations/history',
+        ]
     } as BreadCrumbProps;
 
     return (
         <BrowserRouter>
-            <BreadCrumb breadcrumbs={args.breadcrumbs} crumbSelectedUrl={args.crumbSelectedUrl} />
+            <BreadCrumb breadcrumbs={args.breadcrumbs} />
         </BrowserRouter>
 
     )

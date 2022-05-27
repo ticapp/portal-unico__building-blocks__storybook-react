@@ -5,7 +5,7 @@ import './breadcrumb.scss';
 import classNames from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from '../link';
-import { useOutsideElementClick, useWindowSize } from '../../hooks';
+import { useOutsideElementClick, usePathname, useWindowSize } from '../../hooks';
 
 interface CrumbItems {
     url: string,
@@ -18,7 +18,7 @@ export interface BreadCrumbProps {
     /** Set an array pages in breadcrumb with name and url */
     breadcrumbs: Array<CrumbItems>;
     /** Get selected crumb url*/
-    crumbSelectedUrl: string;
+    crumbSelectedUrl?: string;
 }
 
 const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCrumbProps) => {
@@ -41,7 +41,6 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCr
 
                             <Link
                                 link={page.url}
-
                                 aria-label={isSelected && 'page'}
                                 className={linkClassNames}
                             >
@@ -134,9 +133,11 @@ const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCru
     )
 }
 
-export const BreadCrumb = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCrumbProps) => {
+export const BreadCrumb = ({ className, breadcrumbs }: BreadCrumbProps) => {
 
     const { width } = useWindowSize();
+
+    const crumbSelectedUrl = usePathname();
 
     if (width >= 1366) {
         return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} crumbSelectedUrl={crumbSelectedUrl} />
