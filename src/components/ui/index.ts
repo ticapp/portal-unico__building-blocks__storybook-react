@@ -18,3 +18,4 @@ export * from './card';
 export * from './jumbotron';
 export * from './tabs';
 export * from './accordion';
+export * from './vertical-menu';

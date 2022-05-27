@@ -18,6 +18,8 @@ export interface SelectOption {
   label: string;
   /** If specified, will render in label element */
   labelElement?: ReactNode;
+  /** Disable select option */
+  disabled?: boolean;
 }
 
 export interface SelectProps {
@@ -302,6 +304,10 @@ const Select = ({
   };
 
   const onOptionClick = (index) => {
+    if (options[index].disabled) {
+      return;
+    }
+
     checkOption(index);
 
     if (!multiSelection) {
@@ -310,8 +316,6 @@ const Select = ({
   };
 
   const onOptionMouseOver = (evt: MouseEvent<HTMLDivElement>) => {
-    evt.preventDefault();
-
     if (!(evt.target as HTMLDivElement).classList.contains('combo-option')) {
       return;
     }
@@ -345,7 +349,6 @@ const Select = ({
     switch (action) {
       case SelectActions.Last:
       case SelectActions.First:
-        event.preventDefault();
         updateMenuState(true);
         return selectOption(getUpdatedIndex(selectedIndex, max, action));
 
@@ -353,11 +356,9 @@ const Select = ({
       case SelectActions.Previous:
       case SelectActions.PageUp:
       case SelectActions.PageDown:
-        event.preventDefault();
         return selectOption(getUpdatedIndex(selectedIndex, max, action));
 
       case SelectActions.Close:
-        event.preventDefault();
         return updateMenuState(false);
 
       case SelectActions.Type:
@@ -368,16 +369,20 @@ const Select = ({
         return false;
 
       case SelectActions.Open:
-        event.preventDefault();
         return updateMenuState(true);
 
       case SelectActions.SelectClose:
-        event.preventDefault();
+        if (options[selectedIndex].disabled) {
+          return;
+        }
+
         checkOption(selectedIndex);
         return updateMenuState(false);
 
       case SelectActions.Select:
-        event.preventDefault();
+        if (options[selectedIndex].disabled) {
+          return;
+        }
 
         if (!searchable) {
           return checkOption(selectedIndex);

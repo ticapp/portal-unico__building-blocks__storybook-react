@@ -67,7 +67,7 @@ export const BasicHorizontalMenu: Story<HorizontalMenuProps> = () => {
 
   return (
     <BrowserRouter>
-      <HorizontalMenu links={links} options={options} />
+      <HorizontalMenu username='Area reservada' links={links} options={options} />
     </BrowserRouter>
   );
 };

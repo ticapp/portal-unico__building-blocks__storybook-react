@@ -1,0 +1,118 @@
+@use '../../../scss/index.scss' as index;
+
+.ama {
+  &-vertical-menu {
+    &-desktop {
+      ul {
+        list-style: none;
+
+        &.root {
+          > li {
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        li {
+          // Text Styling
+          .label {
+            cursor: default;
+            @include index.text-big-normal;
+            color: index.$neutral-black;
+            min-width: 44px;
+            min-height: 44px;
+          }
+
+          &.parent-active {
+            > .tree-item-container {
+              > .label {
+                @include index.text-big-bold;
+              }
+            }
+          }
+
+          // Spacing Styling
+          &.with-children {
+            margin-bottom: 0 !important;
+            ul {
+              li {
+                &:first-of-type {
+                  margin-top: map-get(index.$spacers, 16);
+                }
+              }
+            }
+          }
+
+          // Link Styling
+          .vertical-nav-link {
+            text-decoration: none;
+
+            &,
+            &:active,
+            &:visited {
+              color: index.$neutral-black;
+            }
+
+            > .label {
+              cursor: pointer;
+              position: relative;
+            }
+
+            &:hover {
+              > .label {
+                &:after {
+                  content: '';
+                  position: absolute;
+                  left: 0;
+                  bottom: -2px;
+                  border: 1px solid index.$neutral-light-grey !important;
+                  width: 100%;
+                }
+              }
+            }
+
+            &.active {
+              > .label {
+                @include index.text-big-bold;
+                &:after {
+                  content: '';
+                  position: absolute;
+                  left: 0;
+                  bottom: -2px;
+                  border: 1px solid index.$neutral-black;
+                  width: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &-mobile {
+      .tags {
+        @include index.text-medium-normal;
+        color: index.$neutral-black;
+      }
+
+      .vertical-nav-link {
+        text-decoration: none;
+
+        &,
+        &:active,
+        &:visited {
+          color: index.$neutral-black;
+        }
+      }
+
+      .label {
+        cursor: default;
+        @include index.text-medium-normal;
+        color: index.$neutral-black;
+        min-width: 44px;
+        min-height: 44px;
+      }
+    }
+  }
+}
