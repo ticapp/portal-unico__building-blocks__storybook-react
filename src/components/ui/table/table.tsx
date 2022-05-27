@@ -5,6 +5,7 @@ import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useSortTableData } from '../../hooks';
 import { Pagination, PaginationProps } from '../pagination';
+import { Icon } from '../icon';
 
 export interface TableProps extends BsTableProps {
   /** Add classes to the Table component */
@@ -28,7 +29,7 @@ export const Table = ({ className, tableHeaders, tableData, linesOptions, ...pro
     }
   }, [value]);
 
-  const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, null);
+  const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, value, null);
   const cssTable = classNames('ama-table', className);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -36,12 +37,22 @@ export const Table = ({ className, tableHeaders, tableData, linesOptions, ...pro
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
+
   const renderThead = (item, keys) => {
     return item?.map((data, i) => {
       return (
         <th key={uuidv4()}>
-          <button type='button' onClick={() => requestSort(keys[i])} className={getClassNamesFor(keys[i])}>
-            {data}
+          <button type='button' onClick={() => requestSort(keys[i])} className={getClassNamesFor(keys[i]) ? getClassNamesFor(keys[i]) + ' d-flex' : ' d-flex'}>
+            <span className='pe-8'>{data}</span>
+            {getClassNamesFor(keys[i]) === 'ascending' && <Icon icon='ama-expand' ariaHidden='true'></Icon>}
+            {getClassNamesFor(keys[i]) === 'descending' && <Icon icon='ama-collapse' ariaHidden='true'></Icon>}
+
+            {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && (
+              <span className='d-flex flex-column lh-1'>
+                <Icon icon='ama-collapse' ariaHidden='true' size='xs'></Icon>
+                <Icon icon='ama-expand' ariaHidden='true' size='xs'></Icon>
+              </span>
+            )}
           </button>
         </th>
       );
