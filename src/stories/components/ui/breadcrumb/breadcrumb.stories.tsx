@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom'
 import { ComponentMeta, Story } from '@storybook/react';
-import { BreadCrumb, BreadCrumbProps } from '../../../../components/ui';
+import { BreadCrumb, BreadCrumbProps } from '../../../../components';
 
 export default {
     title: 'Components/Breadcrumb',
