@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Table, TableProps } from '../../../../components/ui';
+import { Table, TableProps, PaginationProps } from '../../../../components/ui';
 import { Context } from '../../../../components/ui/table/table';
 
 export default {
@@ -8,7 +8,7 @@ export default {
   component: Table,
 } as ComponentMeta<typeof Table>;
 
-export const BasicTable: Story<TableProps> = (args) => {
+export const BasicTable: Story<TableProps & PaginationProps> = (args) => {
   const [value, setValue] = React.useState(null);
 
   return (
@@ -92,7 +92,21 @@ BasicTable.args = {
       col_08: '800',
     },
   ],
-} as TableProps;
+  linesOptions: [
+    {
+      value: 2,
+      label: '2',
+    },
+    {
+      value: 4,
+      label: '4',
+    },
+    {
+      value: 10,
+      label: '10',
+    },
+  ],
+} as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};
 

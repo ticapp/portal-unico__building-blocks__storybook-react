@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { SelectOption } from './../../ui/select/select';
 
 export const usePaginationData = (linesPage, data) => {
-  const [contentPerPage] = useState(linesPage);
+  const [contentPerPage, setContentPerPage] = useState(linesPage);
   const [totalPageCount] = useState(Math.ceil(data.length / contentPerPage));
   const [currentPage, setCurrentPage] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
@@ -41,6 +42,20 @@ export const usePaginationData = (linesPage, data) => {
     });
   };
 
+  const linesOptionChangeHandler = (val: SelectOption | SelectOption[]) => {
+    console.log(val['value']);
+    setContentPerPage(val['value']);
+    setCurrentData(() => {
+      const startIndex = currentPage * val['value'] - val['value'];
+      const endIndex = startIndex + val['value'];
+      const currentData = data.slice(startIndex, endIndex);
+      setStartIndex(startIndex);
+      setEndIndex(currentData.length === val['value'] ? endIndex : endIndex - (val['value'] - currentData.length));
+      debugger;
+      return currentData;
+    });
+  };
+
   return {
     contentPerPage,
     totalPageCount,
@@ -50,5 +65,6 @@ export const usePaginationData = (linesPage, data) => {
     currentData,
     startIndex,
     endIndex,
+    linesOptionChangeHandler,
   };
 };

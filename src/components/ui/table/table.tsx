@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useSortTableData } from '../../hooks';
-import { Pagination } from '../pagination';
+import { Pagination, PaginationProps } from '../pagination';
 
 export interface TableProps extends BsTableProps {
   /** Add classes to the Table component */
@@ -19,7 +19,7 @@ export interface TableProps extends BsTableProps {
 
 export const Context = React.createContext({ value: null, setValue: null as any });
 
-export const Table = ({ className, tableHeaders, tableData, ...props }: TableProps) => {
+export const Table = ({ className, tableHeaders, tableData, linesOptions, ...props }: TableProps & PaginationProps) => {
   const [elementsPerPage, setElementsPerPage] = useState();
   const { value } = React.useContext(Context) as any;
   useEffect(() => {
@@ -70,7 +70,7 @@ export const Table = ({ className, tableHeaders, tableData, ...props }: TablePro
         </thead>
         <tbody>{renderTr(items)}</tbody>
       </BsTable>
-      <Pagination data={tableData}></Pagination>
+      <Pagination data={tableData} linesOptions={linesOptions}></Pagination>
     </>
   );
 };
