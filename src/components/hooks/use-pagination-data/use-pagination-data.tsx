@@ -3,7 +3,7 @@ import { SelectOption } from './../../ui/select/select';
 
 export const usePaginationData = (linesPage, data) => {
   const [contentPerPage, setContentPerPage] = useState(linesPage);
-  const [totalPageCount] = useState(Math.ceil(data.length / contentPerPage));
+  const [totalPageCount, setTotalPageCount] = useState(Math.ceil(data.length / contentPerPage));
   const [currentPage, setCurrentPage] = useState(1);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(0);
@@ -43,15 +43,15 @@ export const usePaginationData = (linesPage, data) => {
   };
 
   const linesOptionChangeHandler = (val: SelectOption | SelectOption[]) => {
-    console.log(val['value']);
+    setCurrentPage(1);
     setContentPerPage(val['value']);
     setCurrentData(() => {
-      const startIndex = currentPage * val['value'] - val['value'];
+      const startIndex = 1 * val['value'] - val['value'];
       const endIndex = startIndex + val['value'];
       const currentData = data.slice(startIndex, endIndex);
       setStartIndex(startIndex);
       setEndIndex(currentData.length === val['value'] ? endIndex : endIndex - (val['value'] - currentData.length));
-      debugger;
+      setTotalPageCount(Math.ceil(data.length / val['value']));
       return currentData;
     });
   };
