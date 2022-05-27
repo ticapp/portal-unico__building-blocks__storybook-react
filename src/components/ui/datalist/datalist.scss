@@ -2,10 +2,11 @@
 
 
 .datalist-container {
-    width: 696px;
-    height: 456px;
+    max-width: 696px;
+    min-height: 456px;
 
     padding: 32px 40px;
+
 
 
 
@@ -30,14 +31,14 @@
 }
 
 .items-content {
-    width: 50%;
+    width: calc(50% - 16px);
 
     margin-bottom: 24px;
-    
+    margin-right: 16px;
+
     dt {
         @include index.text-big-normal;
         color: index.$neutral-black;
-        margin-bottom: 8px;
     }
 
     dd {
@@ -47,5 +48,8 @@
         margin: 0;
     }
 
+    &.mobile{
+        width: 100%;
+    }
 
 }
