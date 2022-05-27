@@ -17,12 +17,12 @@ export interface BreadCrumbProps {
     className?: string;
     /** Set an array pages in breadcrumb with name and url */
     breadcrumbs: Array<CrumbItems>;
-    /** Get selected crumb url*/
-    crumbSelectedUrl?: string;
 }
 
-const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCrumbProps) => {
+const BreadCrumbDesktop = ({ className, breadcrumbs }: BreadCrumbProps) => {
     const cssBreadCrumbDesktop = classNames('ama-breadcrumb-desktop', className);
+
+    const crumbSelectedUrl = usePathname();
 
     return (
         <nav className={cssBreadCrumbDesktop} aria-label="Breadcrumb">
@@ -65,11 +65,12 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCr
     )
 }
 
-const BreadCrumbMobile = ({ className, breadcrumbs, crumbSelectedUrl }: BreadCrumbProps) => {
+const BreadCrumbMobile = ({ className, breadcrumbs }: BreadCrumbProps) => {
     const historyCrumbRef = useRef(null);
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const crumbSelectedUrl = usePathname();
 
     const cssBreadCrumbMobile = classNames('ama-breadcrumb-mobile', className, 'd-flex align-items-start justify-content-center flex-column');
     const cssBreadCrumbTableHistoryButton = classNames('history-button', 'd-flex align-items-center justify-content-center');
@@ -137,13 +138,12 @@ export const BreadCrumb = ({ className, breadcrumbs }: BreadCrumbProps) => {
 
     const { width } = useWindowSize();
 
-    const crumbSelectedUrl = usePathname();
 
     if (width >= 1366) {
-        return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} crumbSelectedUrl={crumbSelectedUrl} />
+        return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs}  />
     }
     else {
-        return <BreadCrumbMobile className={className} breadcrumbs={breadcrumbs} crumbSelectedUrl={crumbSelectedUrl} />
+        return <BreadCrumbMobile className={className} breadcrumbs={breadcrumbs}  />
     }
 
 }
