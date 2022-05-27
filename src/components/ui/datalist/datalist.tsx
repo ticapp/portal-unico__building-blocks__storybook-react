@@ -21,11 +21,13 @@ export interface DatalistProps {
 
 export const Datalist = ({ title, data }: DatalistProps) => {
 
-    const itemsclassName = classNames('items-content mb-16 mb-sm-24');
+    const itemsClassName = classNames('items-content mb-16 mb-sm-24');
+    const datalistClassName = classNames('datalist-container py-32 px-24 px-sm-32 py-sm-48')
 
     return (
         <>
-            <Container className='datalist-container py-32 px-24 px-sm-32 py-sm-48'>
+            <Container className={datalistClassName}>
+
 
                 <Row>
                     <Col className='d-flex mb-32' xs={12} >
@@ -37,14 +39,13 @@ export const Datalist = ({ title, data }: DatalistProps) => {
 
 
                         return (
-                            <Col xs={12} sm={5} className={itemsclassName}>
+                            <Col xs={12} sm={5} className={itemsClassName}>
                                 <dt className='mb-8'> {item.label}</dt>
                                 <dd className='mb-0'>{item.value}</dd>
                             </Col>
                         )
                     })}
                 </Row>
-
 
 
             </Container>
