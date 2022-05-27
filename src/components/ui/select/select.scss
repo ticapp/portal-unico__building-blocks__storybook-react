@@ -1,20 +1,10 @@
-@use '../../../scss/index' as index;
+@use '../../../scss/index.scss' as index;
 
 .combo {
-  position: relative;
+  @include index.text-medium-normal;
+
   cursor: default;
-
-  &.disabled {
-    pointer-events: none;
-    color: index.$neutral-dark-grey;
-    .combo-input {
-      border: 1px solid index.$neutral-light-grey;
-
-      svg {
-        fill: index.$neutral-dark-grey;
-      }
-    }
-  }
+  position: relative;
 
   .combo-input {
     border: 1px solid index.$neutral-black;
@@ -32,17 +22,11 @@
     }
   }
 
-  &.open {
-    .combo-input {
-      &:focus {
-        border: 1px solid index.$neutral-black;
-      }
-    }
-  }
-
   .combo-menu {
     @include index.shadow;
     @include index.scrollbars;
+    
+    background-color: index.$neutral-white;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -64,8 +48,45 @@
         margin-bottom: 0px;
       }
 
-      &.hover {
+      &.checked,
+      &.selected {
         background-color: index.$neutral-light;
+      }
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    color: index.$neutral-dark-grey;
+    .combo-input {
+      border: 1px solid index.$neutral-light-grey;
+
+      svg {
+        fill: index.$neutral-dark-grey;
+      }
+    }
+  }
+
+  &.open {
+    .combo-input {
+      &:focus {
+        border: 1px solid index.$neutral-black;
+      }
+    }
+  }
+
+  &.multiselection {
+    .combo-menu {
+      .combo-option {
+        &.selected {
+          background-color: index.$neutral-light-grey;
+          &.checked {
+            background-color: index.$neutral-light-grey;
+          }
+          &:not(.checked) {
+            background-color: index.$neutral-light;
+          }
+        }
       }
     }
   }

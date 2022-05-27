@@ -11,27 +11,47 @@ import { Meta } from '@storybook/addon-docs';
 <h2>Component usage</h2>
 
 ```jsx
-const authenticatedOptions = [
+const options = [
   {
-    label: 'Area reservada',
-    value: 'user-area',
+    authenticatedOption: false,
+    link: '/login',
+    icon: 'ama-login',
+    label: 'Entrar no portal',
   },
   {
-    label: 'Terminar sessão',
-    value: 'logout',
+    authenticatedOption: false,
+    link: '/register',
+    icon: 'ama-add-user',
+    label: 'Criar registo',
   },
-] as SelectOption[];
-const anonymousOptions = [
-  {
-    label: 'Login',
-    value: 'login',
-  },
-] as SelectOption[];
 
-<UserArea
-  isAuthenticated={true}
-  label={'User Name'}
-  anonymousOptions={anonymousOptions}
-  authenticatedOptions={authenticatedOptions}
-/>
+  {
+    authenticatedOption: true,
+    link: '/user-area',
+    icon: 'ama-user',
+    label: 'Area Reservada',
+  },
+  {
+    authenticatedOption: true,
+    link: 'logout',
+    icon: 'ama-logout',
+    label: 'Terminar sessão',
+  },
+] as UserAreaOption[];
+
+return (
+  <BrowserRouter>
+    <Container>
+      <Row className="d-flex justify-content-center">
+        <Col xs={4}>
+          <UserArea
+            options={options}
+            isAuthenticated={true}
+            label={'John Doe'}
+          />
+        </Col>
+      </Row>
+    </Container>
+  </BrowserRouter>
+);
 ```
