@@ -42,13 +42,13 @@ export const Table = ({ className, tableHeaders, tableData, linesOptions, ...pro
     return item?.map((data, i) => {
       return (
         <th key={uuidv4()}>
-          <button type='button' onClick={() => requestSort(keys[i])} className={getClassNamesFor(keys[i]) ? getClassNamesFor(keys[i]) + ' d-flex' : ' d-flex'}>
+          <button type='button' onClick={() => requestSort(keys[i])} className={getClassNamesFor(keys[i]) ? getClassNamesFor(keys[i]) : ''}>
             <span className='pe-8'>{data}</span>
             {getClassNamesFor(keys[i]) === 'ascending' && <Icon icon='ama-expand' ariaHidden='true'></Icon>}
             {getClassNamesFor(keys[i]) === 'descending' && <Icon icon='ama-collapse' ariaHidden='true'></Icon>}
 
             {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && (
-              <span className='d-flex flex-column lh-1'>
+              <span className='text-nowrap lh-1'>
                 <Icon icon='ama-collapse' ariaHidden='true' size='xs'></Icon>
                 <Icon icon='ama-expand' ariaHidden='true' size='xs'></Icon>
               </span>
