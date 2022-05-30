@@ -17,15 +17,17 @@ export interface BreadCrumbProps {
     className?: string;
     /** Set an array pages in breadcrumb with name and url */
     breadcrumbs: Array<CrumbItems>;
+    //** Set nav arial label */
+    navAriaLabel: string;
 }
 
-const BreadCrumbDesktop = ({ className, breadcrumbs }: BreadCrumbProps) => {
+const BreadCrumbDesktop = ({ className, breadcrumbs, navAriaLabel }: BreadCrumbProps) => {
     const cssBreadCrumbDesktop = classNames('ama-breadcrumb-desktop', className);
 
     const crumbSelectedUrl = usePathname();
 
     return (
-        <nav className={cssBreadCrumbDesktop} aria-label="Breadcrumb">
+        <nav className={cssBreadCrumbDesktop} aria-label={navAriaLabel}>
             <ol className="d-flex align-items-center justify-content-start p-0 m-0">
                 {breadcrumbs.map((page, index) => {
 
@@ -65,7 +67,7 @@ const BreadCrumbDesktop = ({ className, breadcrumbs }: BreadCrumbProps) => {
     )
 }
 
-const BreadCrumbMobile = ({ className, breadcrumbs }: BreadCrumbProps) => {
+const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel }: BreadCrumbProps) => {
     const historyCrumbRef = useRef(null);
 
     const [isOpen, setIsOpen] = useState(false);
@@ -106,7 +108,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs }: BreadCrumbProps) => {
                 <nav
                     ref={historyCrumbRef}
                     className={cssHistoryContainer}
-                    aria-label="Breadcrumb"
+                    aria-label={navAriaLabel}
                 >
                     <ol>
                         {breadcrumbs.map((page) => {
@@ -134,16 +136,16 @@ const BreadCrumbMobile = ({ className, breadcrumbs }: BreadCrumbProps) => {
     )
 }
 
-export const BreadCrumb = ({ className, breadcrumbs }: BreadCrumbProps) => {
+export const BreadCrumb = ({ className, breadcrumbs, navAriaLabel }: BreadCrumbProps) => {
 
     const { width } = useWindowSize();
 
 
     if (width >= 1366) {
-        return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs}  />
+        return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} />
     }
     else {
-        return <BreadCrumbMobile className={className} breadcrumbs={breadcrumbs}  />
+        return <BreadCrumbMobile className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} />
     }
 
 }
