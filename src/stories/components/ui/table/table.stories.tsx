@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Table, TableProps, PaginationProps } from '../../../../components/ui';
+import { Table, TableProps, PaginationProps, Icon } from '../../../../components/ui';
 import { Context } from '../../../../components/ui/table/table';
 
 export default {
@@ -22,14 +22,18 @@ BasicTable.args = {
   tableHeaders: ['Infração', 'N.º processo', 'Data', 'Veículo', 'Local da infração', 'Estado', 'Coima', 'Sanção acessória'],
   tableData: [
     {
-      col_01: 1,
-      col_02: 2,
-      col_03: 3,
-      col_04: 4,
-      col_05: 560,
-      col_06: 6,
-      col_07: 7,
-      col_08: 8,
+      col_01: (
+        <span>
+          <Icon icon='ama-circle-solid' className='me-8' size='xxs' ariaHidden='true'></Icon>Muito grave
+        </span>
+      ),
+      col_02: 104779934,
+      col_03: 2018 - 10 - 17,
+      col_04: '45 QG 56',
+      col_05: 'Rua das Beatas, em frente ao número 36, Lisboa',
+      col_06: 'Concluído',
+      col_07: 'Pago',
+      col_08: 'Não aplicável',
     },
     {
       col_01: 10,

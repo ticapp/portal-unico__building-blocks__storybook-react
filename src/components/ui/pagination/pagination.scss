@@ -1,0 +1,33 @@
+@use '../../../scss/index' as index;
+
+.ama-pagination {
+  background-color: index.$neutral-light;
+  border: 1px solid index.$neutral-light-grey;
+  li {
+    &:not(:first-of-type) {
+      border-left: 2px solid index.$neutral-light-grey;
+    }
+    .lines-selector {
+      .combo-input {
+        padding: 7px !important;
+        border: 1px solid transparent;
+        @include index.text-medium-normal;
+      }
+    }
+  }
+  .page-link {
+    min-height: 44px;
+    min-width: 44px;
+    border-radius: 0 !important;
+  }
+  .page-item {
+    &.disabled {
+      .page-link {
+        background-color: index.$neutral-light;
+        svg {
+          fill: index.$neutral-light-grey;
+        }
+      }
+    }
+  }
+}
