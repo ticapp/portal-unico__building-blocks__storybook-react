@@ -1,0 +1,93 @@
+@use '../../../scss/index'as index;
+
+
+.ama-breadcrumb-desktop {
+    
+
+    .items {
+        text-decoration: underline;
+        text-underline-offset: 8px;
+        min-height: 44px;
+
+        color: index.$brand-green-main;
+        background-color: transparent;
+        border: transparent;
+
+        @include index.text-big-normal;
+
+        &.selected {
+            @include index.text-big-bold;
+            text-decoration: none;
+        }
+
+    }
+
+    .icon-container {
+        width: 16px;
+        min-height: 44px;
+
+        .icon-style {
+            width: 16px;
+            height: 16px;
+            color: index.$brand-green-main;
+
+            fill: index.$brand-green-main;
+
+        }
+    }
+
+
+
+}
+
+.ama-breadcrumb-mobile {
+
+    li{ 
+        list-style: none;
+        
+        @for $i from 0 through 5 {
+            &:nth-child(#{$i}) {
+                margin-left: calc($i * map-get(index.$spacers, 8));
+            }
+        }
+    }
+
+    .history-container {
+        min-width: 296px;
+        min-height: 168px;
+
+        background-color: index.$neutral-white;
+    }
+
+    .items {
+        @include index.text-medium-normal;
+        text-decoration: none;
+        color: index.$neutral-black;
+
+        &.selected{
+            color: index.$neutral-dark-grey
+        }
+    }
+
+    .title {
+        color: index.$brand-green-main;
+        @include index.text-medium-normal;
+
+    }
+
+    .history-button {
+        background-color: transparent;
+        border: transparent;
+        @include index.text-medium-bold;
+        color: index.$brand-green-main;
+    }
+
+    .icon-style {
+        width: 16px;
+        height: 16px;
+        color: index.$brand-green-main;
+
+        fill: index.$brand-green-main;
+    }
+
+}
