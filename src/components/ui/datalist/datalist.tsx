@@ -17,12 +17,14 @@ export interface DatalistProps {
     title: string;
     // Add all data to describe list
     data: Array<DataListValues>;
+    // Set classNames in the component
+    className?: string;
 }
 
-export const Datalist = ({ title, data }: DatalistProps) => {
+export const Datalist = ({ title, data, className }: DatalistProps) => {
 
     const itemsClassName = classNames('items-content mb-16 mb-sm-24');
-    const datalistClassName = classNames('datalist-container py-32 px-24 px-sm-32 py-sm-48')
+    const datalistClassName = classNames('datalist-container py-32 px-24 px-sm-32 py-sm-48', className)
 
     return (
         <>
