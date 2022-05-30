@@ -74,11 +74,8 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, navAriaLabel, linkAriaLabel
                             </Link>
                             {!isAtualLink &&
                                 (
-                                    <span
-                                        key={uuidv4()}
-                                        className={iconContainerClassNames}
-                                    >
-                                        <Icon key={uuidv4()} className='icon-style' icon='ama-chevron-right' />
+                                    <span className={iconContainerClassNames}>
+                                        <Icon className='icon-style' icon='ama-chevron-right' />
                                     </span>
                                 )
                             }
@@ -91,7 +88,7 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, navAriaLabel, linkAriaLabel
     )
 }
 
-const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabel, ariaHasPopUp, breadCrumbMobileTitle}: BreadCrumbMobileProps) => {
+const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabel, ariaHasPopUp, breadCrumbMobileTitle }: BreadCrumbMobileProps) => {
     const historyCrumbRef = useRef(null);
 
     const [isOpen, setIsOpen] = useState(false);
@@ -125,7 +122,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabe
                 aria-haspopup={ariaHasPopUp}
                 aria-label={buttonAriaLabel}
             >
-                <Icon key={uuidv4()} className='icon-style me-8' icon="ama-chevron-left" ariaHidden={true} /> {selectedCrumb?.name}
+                <Icon className='icon-style me-8' icon="ama-chevron-left" ariaHidden={true} /> {selectedCrumb?.name}
             </button>
 
             {isOpen && (
