@@ -1,6 +1,5 @@
 import React from 'react';
-// import { useWindowSize } from '../../hooks';
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import './datalist.scss';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -42,7 +41,7 @@ export const Datalist = ({ title, data, className }: DatalistProps) => {
 
 
                             return (
-                                <Col xs={12} sm={5} className={itemsClassName}>
+                                <Col key={uuidv4()} xs={12} sm={5} className={itemsClassName}>
                                     <dt className='mb-8'> {item.label}</dt>
                                     <dd className='mb-0'>{item.value}</dd>
                                 </Col>

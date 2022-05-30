@@ -2,6 +2,8 @@ export * from './rich-text';
 export * from './alert';
 export * from './footer';
 export * from './header';
+export * from './breadcrumb';
+export * from './datalist';
 export * from './horizontal-menu';
 export * from './icon';
 export * from './link';
