@@ -1,9 +1,7 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 
 import { Datalist, DatalistProps } from '../../../../components/ui/datalist';
-
 
 export default {
     title: 'Components/Datalist',
@@ -52,9 +50,7 @@ export const BasicHorizontalMenu: Story<DatalistProps> = () => {
     }
 
     return (
-        <BrowserRouter>
-            <Datalist {...args} />
-        </BrowserRouter>
+        <Datalist {...args} />
     );
 };
 BasicHorizontalMenu.storyName = 'Basic Horizontal Menu';
