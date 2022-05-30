@@ -31,23 +31,22 @@ export const Datalist = ({ title, data }: DatalistProps) => {
 
                 <Row>
                     <Col className='d-flex mb-32' xs={12} >
-                        <h5>{title}</h5>
+                        <h2 className='w-100 text-start'>{title}</h2>
                     </Col>
                 </Row>
-                <Row>
-                    {data && data.map(item => {
+                    <dl className='row'>
+
+                        {data && data.map(item => {
 
 
-                        return (
-                            <Col xs={12} sm={5} className={itemsClassName}>
-                                <dt className='mb-8'> {item.label}</dt>
-                                <dd className='mb-0'>{item.value}</dd>
-                            </Col>
-                        )
-                    })}
-                </Row>
-
-
+                            return (
+                                <Col xs={12} sm={5} className={itemsClassName}>
+                                    <dt className='mb-8'> {item.label}</dt>
+                                    <dd className='mb-0'>{item.value}</dd>
+                                </Col>
+                            )
+                        })}
+                    </dl>
             </Container>
         </>
     )

@@ -6,10 +6,8 @@
     background-color: index.$neutral-light;
 
 
-    h5 {
-        width: 100%;
+    h2 {
         @include index.h5-bold;
-        text-align: start;
     }
 
 }

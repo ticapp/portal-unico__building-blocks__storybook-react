@@ -53,7 +53,7 @@ export const BasicHorizontalMenu: Story<DatalistProps> = () => {
 
     return (
         <BrowserRouter>
-            <Datalist title={args.title} data={args.data} />
+            <Datalist {...args} />
         </BrowserRouter>
     );
 };
