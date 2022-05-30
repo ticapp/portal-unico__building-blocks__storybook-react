@@ -3,7 +3,6 @@ import React from 'react';
 
 import { Datalist, DatalistProps } from '../../../../components/ui/datalist';
 
-
 export default {
     title: 'Components/Datalist',
     component: Datalist,
