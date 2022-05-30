@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useWindowSize } from '../../hooks';
-import { NavLink } from '../../ui';
 import { Icon } from '../icon';
+import { NavLink } from '../navlink';
 import { UserArea, UserAreaProps } from '../user-area';
 import './horizontal-menu.scss';
 

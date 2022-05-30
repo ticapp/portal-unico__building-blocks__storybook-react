@@ -1,11 +1,8 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import {
-  VerticalMenu,
-  VerticalMenuLink,
-  VerticalMenuProps,
-} from '../../../../components';
+import { VerticalMenu, VerticalMenuLink, VerticalMenuProps } from '../../../../components';
+
 
 export default {
   title: 'Components/Vertical Menu',
