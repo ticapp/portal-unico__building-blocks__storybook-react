@@ -14,6 +14,7 @@ export const BasicBreadCrumb: Story<BreadCrumbProps> = () => {
         ariaHasPopUp: true,
         linkAriaLabel: "page",
         buttonAriaLabel: "Open Breadcrumb",
+        breadCrumbMobileTitle: "Você está aqui:",
         breadcrumbs: [
             {
                 name: 'Início',
@@ -27,19 +28,13 @@ export const BasicBreadCrumb: Story<BreadCrumbProps> = () => {
                 name: 'Histórico de infrações',
                 url: '/iframe.html'
             }
-        ],
-
-
+        ]
     } as BreadCrumbProps;
 
     return (
         <BrowserRouter>
             <BreadCrumb
-                breadcrumbs={args.breadcrumbs}
-                navAriaLabel={args.navAriaLabel}
-                ariaHasPopUp={args.ariaHasPopUp}
-                linkAriaLabel={args.linkAriaLabel}
-                buttonAriaLabel={args.buttonAriaLabel}
+                {...args}
             />
         </BrowserRouter>
 

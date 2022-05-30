@@ -10,6 +10,11 @@ import {Meta} from "@storybook/addon-docs";
 
 ```jsx
 const args = {
+  navAriaLabel: "Breadcrumb",
+  ariaHasPopUp: true,
+  linkAriaLabel: "page",
+  buttonAriaLabel: "Open Breadcrumb",
+  breadcrumbTitle: "Você está aqui:",
   breadcrumbs: [
     {
       name: "Início",
@@ -26,11 +31,5 @@ const args = {
   ],
 };
 
-<BreadCrumb
-  breadcrumbs={args.breadcrumbs}
-  navAriaLabel="Breadcrumb"
-  ariaHasPopUp={true}
-  linkAriaLabel="page"
-  buttonAriaLabel="Open Breadcrumb"
-/>;
+<BreadCrumb {...args} />;
 ```

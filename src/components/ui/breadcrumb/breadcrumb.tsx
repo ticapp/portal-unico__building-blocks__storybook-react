@@ -12,20 +12,20 @@ interface CrumbItems {
     name: string
 }
 
-interface CommomBreadCrumbProps {
+interface CommonBreadCrumbProps {
     className?: string;
     breadcrumbs: Array<CrumbItems>;
     navAriaLabel: string;
-
 }
 
-interface BreadCrumbDesktopProps extends CommomBreadCrumbProps {
+interface BreadCrumbDesktopProps extends CommonBreadCrumbProps {
     linkAriaLabel: string;
 }
 
-interface BreadCrumbMobileProps extends CommomBreadCrumbProps {
+interface BreadCrumbMobileProps extends CommonBreadCrumbProps {
     buttonAriaLabel: string;
     ariaHasPopUp: boolean;
+    breadCrumbMobileTitle: string;
 }
 
 export interface BreadCrumbProps {
@@ -41,6 +41,8 @@ export interface BreadCrumbProps {
     linkAriaLabel: string;
     //** Set if aria has popup in Mobile Breadcrumb */
     ariaHasPopUp: boolean;
+    // ** Set Breadcrumb Mobile Title*/
+    breadCrumbMobileTitle: string;
 }
 
 const BreadCrumbDesktop = ({ className, breadcrumbs, navAriaLabel, linkAriaLabel }: BreadCrumbDesktopProps) => {
@@ -89,7 +91,7 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, navAriaLabel, linkAriaLabel
     )
 }
 
-const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabel, ariaHasPopUp }: BreadCrumbMobileProps) => {
+const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabel, ariaHasPopUp, breadCrumbMobileTitle}: BreadCrumbMobileProps) => {
     const historyCrumbRef = useRef(null);
 
     const [isOpen, setIsOpen] = useState(false);
@@ -114,7 +116,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabe
 
     return (
         <div className={cssBreadCrumbMobile}>
-            <p className='title mb-8'>Você está aqui:</p>
+            <p className='title mb-8'>{breadCrumbMobileTitle}</p>
 
             <button
                 aria-expanded={isOpen}
@@ -123,7 +125,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabe
                 aria-haspopup={ariaHasPopUp}
                 aria-label={buttonAriaLabel}
             >
-                <Icon className='icon-style me-8' icon="ama-chevron-left" ariaHidden={true} /> {selectedCrumb?.name}
+                <Icon key={uuidv4()} className='icon-style me-8' icon="ama-chevron-left" ariaHidden={true} /> {selectedCrumb?.name}
             </button>
 
             {isOpen && (
@@ -158,7 +160,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabe
     )
 }
 
-export const BreadCrumb = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabel, ariaHasPopUp, linkAriaLabel }: BreadCrumbProps) => {
+export const BreadCrumb = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabel, ariaHasPopUp, linkAriaLabel, breadCrumbMobileTitle }: BreadCrumbProps) => {
 
     const { width } = useWindowSize();
 
@@ -167,7 +169,7 @@ export const BreadCrumb = ({ className, breadcrumbs, navAriaLabel, buttonAriaLab
         return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} linkAriaLabel={linkAriaLabel} />
     }
     else {
-        return <BreadCrumbMobile className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} buttonAriaLabel={buttonAriaLabel} ariaHasPopUp={ariaHasPopUp} />
+        return <BreadCrumbMobile className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} buttonAriaLabel={buttonAriaLabel} ariaHasPopUp={ariaHasPopUp} breadCrumbMobileTitle={breadCrumbMobileTitle} />
     }
 
 }
