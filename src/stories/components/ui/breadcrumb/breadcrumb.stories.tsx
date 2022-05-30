@@ -28,7 +28,7 @@ export const BasicBreadCrumb: Story<BreadCrumbProps> = () => {
 
     return (
         <BrowserRouter>
-            <BreadCrumb breadcrumbs={args.breadcrumbs} navAriaLabel="Breadcrumb" />
+            <BreadCrumb breadcrumbs={args.breadcrumbs} navAriaLabel="Breadcrumb" ariaHasPopUp={true} linkAriaLabel="page" buttonAriaLabel="Open Breadcrumb" />
         </BrowserRouter>
 
     )
