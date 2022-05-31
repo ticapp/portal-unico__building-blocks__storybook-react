@@ -13,15 +13,18 @@ export interface TableProps extends BsTableProps {
   className?: string;
 
   /** Array string names of headers table */
-  tableHeaders: Array<string>;
+  tableHeaders: Array<{ value: string | ReactNode; sorting: boolean }>;
 
   /** Array of data table */
   tableData: Array<{ [key: string]: string | number | boolean | ReactNode }>;
+
+  /** Table with/without pagination */
+  pagination?: boolean;
 }
 
 export const Context = React.createContext({ value: null, setValue: null as any });
 
-export const Table = ({ className, tableHeaders, tableData, linesOptions, ...props }: TableProps & PaginationProps) => {
+export const Table = ({ className, tableHeaders, tableData, linesOptions, pagination = false, ...props }: TableProps & PaginationProps) => {
   const [elementsPerPage, setElementsPerPage] = useState();
   const { value } = React.useContext(Context) as any;
   useEffect(() => {
@@ -48,12 +51,13 @@ export const Table = ({ className, tableHeaders, tableData, linesOptions, ...pro
             size='sm'
             onClick={() => requestSort(keys[i])}
             className={getClassNamesFor(keys[i]) ? getClassNamesFor(keys[i]) + ' shadow-none' : 'shadow-none'}
+            disabled={!data.sorting}
           >
-            <span className='pe-8 text-medium-normal'>{data}</span>
-            {getClassNamesFor(keys[i]) === 'ascending' && <Icon icon='ama-expand' ariaHidden='true'></Icon>}
-            {getClassNamesFor(keys[i]) === 'descending' && <Icon icon='ama-collapse' ariaHidden='true'></Icon>}
+            <span className='pe-8 text-medium-normal'>{data.value}</span>
+            {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && <Icon icon='ama-expand' ariaHidden='true' size='sm'></Icon>}
+            {getClassNamesFor(keys[i]) === 'descending' && data.sorting && <Icon icon='ama-collapse' ariaHidden='true' size='sm'></Icon>}
 
-            {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && (
+            {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && data.sorting && (
               <span className='text-nowrap lh-1 text-medium-normal'>
                 <Icon icon='ama-collapse' ariaHidden='true' size='xs'></Icon>
                 <Icon icon='ama-expand' ariaHidden='true' size='xs'></Icon>
@@ -95,7 +99,7 @@ export const Table = ({ className, tableHeaders, tableData, linesOptions, ...pro
         </thead>
         <tbody>{renderTr(items)}</tbody>
       </BsTable>
-      <Pagination data={tableData} linesOptions={linesOptions}></Pagination>
+      {pagination && <Pagination data={tableData} linesOptions={linesOptions} pagesCounter={props.pagesCounter} itemsCounter={props.itemsCounter}></Pagination>}
     </>
   );
 };

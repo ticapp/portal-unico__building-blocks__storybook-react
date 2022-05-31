@@ -3,6 +3,14 @@
 .ama-table {
   thead {
     background-color: index.$neutral-dark;
+    button {
+      &:disabled {
+        opacity: 1;
+      }
+      &:hover {
+        border-width: 1px;
+      }
+    }
     th {
       background-color: transparent;
     }

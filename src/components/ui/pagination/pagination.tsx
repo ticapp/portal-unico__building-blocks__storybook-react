@@ -14,11 +14,17 @@ export interface PaginationProps extends BsPaginationProps {
   /** Lines Options */
   linesOptions?: SelectOption[];
 
-  /**Data Info*/
+  /** Data Info*/
   data?: Array<{ [key: string]: string | number | boolean | ReactNode }>;
+
+  /** Show/Hide label items counter */
+  itemsCounter?: boolean;
+
+  /**Show/Hide label pages counter */
+  pagesCounter?: boolean;
 }
 
-export const Pagination = ({ className, linesOptions = [], data, ...props }: PaginationProps) => {
+export const Pagination = ({ className, linesOptions = [], data, itemsCounter = true, pagesCounter = true, ...props }: PaginationProps) => {
   const cssPagination = classNames('ama-pagination', className);
   let pageData = usePaginationData(linesOptions[0].value, data);
   const { setValue } = useContext(Context) as any;
@@ -48,12 +54,16 @@ export const Pagination = ({ className, linesOptions = [], data, ...props }: Pag
         </li>
         <li className='px-16'>
           <div className='h-100 d-flex align-items-center'>
-            <span className='text-medium-normal px-8'>
-              {pageData.startIndex} - {pageData.endIndex} de {data?.length} items
-            </span>
-            <span className='text-medium-normal px-8'>
-              {pageData.currentPage} de {pageData.totalPageCount} páginas
-            </span>
+            {itemsCounter && (
+              <span className='text-medium-normal px-8'>
+                {pageData.startIndex} - {pageData.endIndex} de {data?.length} items
+              </span>
+            )}
+            {pagesCounter && (
+              <span className='text-medium-normal px-8'>
+                {pageData.currentPage} de {pageData.totalPageCount} páginas
+              </span>
+            )}
           </div>
         </li>
         <BsPagination.Prev className='ms-auto' onClick={pageData.gotToPreviousPage} disabled={pageData.currentPage === 1}>

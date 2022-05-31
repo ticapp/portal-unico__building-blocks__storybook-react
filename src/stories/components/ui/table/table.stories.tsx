@@ -19,7 +19,16 @@ export const BasicTable: Story<TableProps & PaginationProps> = (args) => {
 };
 
 BasicTable.args = {
-  tableHeaders: ['Infração', 'N.º processo', 'Data', 'Veículo', 'Local da infração', 'Estado', 'Coima', 'Sanção acessória'],
+  tableHeaders: [
+    { value: 'Infração', sorting: false },
+    { value: 'N.º processo', sorting: true },
+    { value: 'Data', sorting: true },
+    { value: 'Veículo', sorting: true },
+    { value: 'Local da infração', sorting: true },
+    { value: 'Estado', sorting: false },
+    { value: 'Coima', sorting: true },
+    { value: 'Sanção acessória', sorting: true },
+  ],
   tableData: [
     {
       col_01: (
@@ -110,6 +119,9 @@ BasicTable.args = {
       label: '10',
     },
   ],
+  pagination: true,
+  itemsCounter: true,
+  pagesCounter: true,
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};
