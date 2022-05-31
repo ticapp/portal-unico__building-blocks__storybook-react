@@ -11,7 +11,9 @@
       .combo-input {
         padding: 7px !important;
         border: 1px solid transparent;
-        @include index.text-medium-normal;
+        .tags {
+          @include index.text-medium-normal;
+        }
       }
     }
   }
