@@ -2,12 +2,7 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import { Col, Container, Nav, Offcanvas, Row } from 'react-bootstrap';
 import { UrlObject } from 'url';
-import {
-  HorizontalMenu,
-  HorizontalMenuLink,
-  NavLink,
-  UserAreaOption,
-} from '../..';
+
 import { useWindowSize } from '../../hooks';
 import { Button } from '../buttons';
 import { Icon } from '../icon';
@@ -17,6 +12,9 @@ import { Select, SelectOption } from '../select';
 import { v4 as uuidv4 } from 'uuid';
 
 import './header.scss';
+import { UserAreaOption } from '../user-area';
+import { NavLink } from '../navlink';
+import { HorizontalMenu, HorizontalMenuLink } from '../horizontal-menu';
 
 declare type Url = string | UrlObject;
 
