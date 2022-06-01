@@ -14,6 +14,8 @@ export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     /** Set if is disable */
     isDisabled?: boolean;
+    /** Set input name */
+    name: string;
 }
 
 export const InputText = ({
@@ -21,6 +23,7 @@ export const InputText = ({
     type = 'text',
     placeholder,
     label,
+    name,
     isDisabled = false,
     ...rest
 }: InputTextProps) => {
@@ -35,7 +38,7 @@ export const InputText = ({
         return (
             <span className={containerClassNames} >
                 <label className='mb-8' htmlFor={inputId}>{label}</label>
-                <input disabled className={inputTextClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
+                <input name={name} disabled className={inputTextClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
             </span>
         )
 
@@ -45,9 +48,9 @@ export const InputText = ({
         const inputTextClassNames = classNames('input-text', 'w-100 p-16')
 
         return (
-            <span className={containerClassNames} >
+            <span className={containerClassNames}>
                 <label className='mb-8' htmlFor={inputId}>{label}</label>
-                <input className={inputTextClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
+                <input name={name} className={inputTextClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
             </span>
         )
     }

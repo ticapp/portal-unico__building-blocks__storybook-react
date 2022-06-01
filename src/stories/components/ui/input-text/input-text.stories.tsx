@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { InputText } from '../../../../components/ui/input-text';
 
 export default {
@@ -9,9 +9,15 @@ export default {
 
 export const BasicInputText: ComponentStory<typeof InputText> = (args) => {
 
+    const [inputValue, setInputValue] = useState('');
+
     return (
         <>
-            <InputText {...args} />
+            <InputText
+                {...args}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+            />
         </>
     );
 };
@@ -21,6 +27,7 @@ BasicInputText.storyName = 'Basic Input Text';
 BasicInputText.args = {
     label: 'Label',
     placeholder: 'Placeholder',
+    name: 'input-text1',
     value: '',
     isDisabled: false
 }
