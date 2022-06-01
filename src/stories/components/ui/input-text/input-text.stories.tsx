@@ -13,7 +13,10 @@ export const BasicInputText: Story<InputTextProps> = () => {
     const [inputValue, setInputValue] = useState('');
 
     return (
+        <>
         <InputText label='Label' placeholder='Placeholder' value={inputValue} onChange={e => setInputValue(e.target.value)} />
+        <InputText label='Disabled' isDisabled placeholder='Disabled' value={inputValue} onChange={e => setInputValue(e.target.value)} />
+        </>
     );
 };
 BasicInputText.storyName = 'Basic Input Text';

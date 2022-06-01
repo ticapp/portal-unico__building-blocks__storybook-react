@@ -1,6 +1,7 @@
 @use '../../../scss/index'as index;
 
 .ama-input-container {
+    background-color: index.$neutral-white;
 
     label {
         @include index.text-medium-normal;
@@ -26,4 +27,35 @@
 
         }
     }
+
+}
+
+.ama-input-container-disabled {
+    background-color: index.$neutral-light;
+
+
+
+    label {
+        @include index.text-medium-normal;
+        color: index.$neutral-dark-grey;
+    }
+
+
+    .input-text-disabled {
+        height: 56px;
+        border: 1px solid index.$neutral-light-grey;
+
+        @include index.text-medium-normal;
+        color: index.$neutral-dark-grey;
+
+        &::placeholder {
+            color: index.$neutral-dark-grey;
+        }
+        
+        &:hover{
+            cursor: not-allowed;
+        }
+    }
+
+
 }
