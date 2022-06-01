@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Table, TableProps, PaginationProps, Icon } from '../../../../components/ui';
+import { Table, TableProps, PaginationProps, Icon, TableContextType } from '../../../../components/ui';
 import { Context } from '../../../../components/ui/table/table';
 
 export default {
@@ -9,10 +9,10 @@ export default {
 } as ComponentMeta<typeof Table>;
 
 export const BasicTable: Story<TableProps & PaginationProps> = (args) => {
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = useState(null);
 
   return (
-    <Context.Provider value={{ value, setValue }}>
+    <Context.Provider value={{ value, setValue } as TableContextType}>
       <Table {...args}></Table>
     </Context.Provider>
   );

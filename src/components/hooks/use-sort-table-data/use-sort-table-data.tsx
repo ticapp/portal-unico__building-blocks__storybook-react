@@ -1,11 +1,15 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, ReactNode } from 'react';
 
-export const useSortTableData = (items, originalData, value, config) => {
-  const [sortConfig, setSortConfig] = useState(config);
-  const sortedItems = useMemo(() => {
-    let sortableItems = [...originalData];
-    if (sortConfig !== null) {
-      sortableItems.sort((a, b) => {
+type sortDataType = { [key: string]: string | number | boolean | ReactNode } | null[];
+
+type sortConfigType = { direction: string; key: string } | null;
+
+export const useSortTableData = (items: sortDataType[], originalData: sortDataType[], value, config: sortConfigType) => {
+  const [sortConfig, setSortConfig] = useState<sortConfigType>(config);
+
+  const itemsSort = (sortableItems: sortDataType[]) => {
+    if (sortConfig) {
+      sortableItems.sort((a: sortDataType, b: sortDataType) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
           return sortConfig.direction === 'ascending' ? -1 : 1;
         }
@@ -15,16 +19,25 @@ export const useSortTableData = (items, originalData, value, config) => {
         return 0;
       });
     }
-    if (value) {
-      const startIndex = value.currentPage * value.contentPerPage - value.contentPerPage;
-      const endIndex = startIndex + value.contentPerPage;
-      sortableItems = sortableItems.slice(startIndex, endIndex);
-    }
+  };
 
-    return sortableItems;
+  const ifHasContextValue = (sortableItems: sortDataType[]) => {
+    if (value) {
+      const startIndex: number = value.currentPage * value.contentPerPage - value.contentPerPage;
+      const endIndex: number = startIndex + value.contentPerPage;
+      return sortableItems.slice(startIndex, endIndex);
+    } else {
+      return;
+    }
+  };
+
+  const sortedItems = useMemo(() => {
+    let sortableItems = [...originalData] as sortDataType[];
+    itemsSort(sortableItems);
+    return ifHasContextValue(sortableItems);
   }, [items, sortConfig]);
 
-  const requestSort = (key) => {
+  const requestSort = (key: string) => {
     let direction = 'ascending';
     if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
       direction = 'descending';

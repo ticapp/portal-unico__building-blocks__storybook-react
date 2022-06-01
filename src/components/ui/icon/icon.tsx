@@ -67,16 +67,23 @@ export const Icon: FC<IconProps> = ({ size = 'md', icon = '', alt = '', classNam
   });
 
   useEffect(() => {
+    let isMounted = true;
     if (isBundledIcon(icon) && !iconsCache[icon]) {
       loadIcon(icon).then(({ component }) => {
-        iconsCache[icon] = (() => component) as unknown as FC<SVGProps<SVGSVGElement>>;
-        setCurrentIcon(iconsCache[icon]);
-        onIconLoad?.();
+        if (isMounted) {
+          iconsCache[icon] = (() => component) as unknown as FC<SVGProps<SVGSVGElement>>;
+          setCurrentIcon(iconsCache[icon]);
+          onIconLoad?.();
+        }
       });
-    } else {
+    } else if (isMounted) {
       setCurrentIcon(iconsCache[icon]);
       onIconLoad?.();
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [icon, onIconLoad]);
 
   if (!isBundledIcon(icon)) {

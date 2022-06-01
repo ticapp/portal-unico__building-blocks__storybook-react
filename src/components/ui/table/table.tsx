@@ -3,10 +3,11 @@ import './table.scss';
 import classNames from 'classnames';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { useSortTableData } from '../../hooks';
+import { paginationDataType, usePaginationDataType, useSortTableData } from '../../hooks';
 import { Pagination, PaginationProps } from '../pagination';
 import { Icon } from '../icon';
 import { Button } from '../buttons';
+import { useWindowSize } from './../../hooks/use-window-size/use-window-size';
 
 export interface TableProps extends BsTableProps {
   /** Add classes to the Table component */
@@ -22,18 +23,24 @@ export interface TableProps extends BsTableProps {
   pagination?: boolean;
 }
 
-export const Context = React.createContext({ value: null, setValue: null as any });
+export type TableContextType = {
+  value: usePaginationDataType;
+  setValue: (value: usePaginationDataType) => void;
+} | null;
 
-export const Table = ({ className, tableHeaders, tableData, linesOptions, pagination = false, ...props }: TableProps & PaginationProps) => {
-  const [elementsPerPage, setElementsPerPage] = useState();
-  const { value } = React.useContext(Context) as any;
+export const Context = React.createContext<TableContextType>(null);
+
+const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagination = false, ...props }: TableProps & PaginationProps) => {
+  const { pagesCounter, itemsCounter, ...tableProps } = props;
+  const [elementsPerPage, setElementsPerPage] = useState<paginationDataType[]>();
+  const context = React.useContext<TableContextType>(Context);
   useEffect(() => {
-    if (value) {
-      setElementsPerPage(value.currentData);
+    if (context) {
+      setElementsPerPage(context.value?.currentData);
     }
-  }, [value]);
+  }, [context?.value]);
 
-  const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, value, null);
+  const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, context?.value, null);
   const cssTable = classNames('ama-table', className, 'mb-0');
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -93,13 +100,28 @@ export const Table = ({ className, tableHeaders, tableData, linesOptions, pagina
 
   return (
     <>
-      <BsTable {...props} className={cssTable} borderless striped hover>
+      <BsTable {...tableProps} className={cssTable} borderless striped hover>
         <thead>
           <tr>{renderThead(tableHeaders, dataKeys(tableData))}</tr>
         </thead>
         <tbody>{renderTr(items)}</tbody>
       </BsTable>
-      {pagination && <Pagination data={tableData} linesOptions={linesOptions} pagesCounter={props.pagesCounter} itemsCounter={props.itemsCounter}></Pagination>}
+      {pagination && <Pagination data={tableData} linesOptions={linesOptions} pagesCounter={pagesCounter} itemsCounter={itemsCounter}></Pagination>}
+    </>
+  );
+};
+
+const TableMobile = () => {
+  return <div>Mobile</div>;
+};
+
+export const Table = ({ ...props }: TableProps & PaginationProps) => {
+  const { width } = useWindowSize();
+
+  return (
+    <>
+      {width >= 1280 && <TableDesktop {...props}></TableDesktop>}
+      {width < 1280 && <TableMobile {...props}></TableMobile>}
     </>
   );
 };

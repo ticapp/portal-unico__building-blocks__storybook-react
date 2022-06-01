@@ -1,44 +1,51 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { SelectOption } from './../../ui/select/select';
 
-export const usePaginationData = (linesPage, data) => {
-  const [contentPerPage, setContentPerPage] = useState(linesPage);
-  const [totalPageCount, setTotalPageCount] = useState(Math.ceil(data.length / contentPerPage));
-  const [currentPage, setCurrentPage] = useState(1);
-  const [startIndex, setStartIndex] = useState(0);
-  const [endIndex, setEndIndex] = useState(0);
+export type paginationDataType = { [key: string]: string | number | boolean | ReactNode } | null[];
 
-  //TODO: Criar funcao do current
-  const [currentData, setCurrentData] = useState(() => {
-    const startIndex = currentPage * contentPerPage - contentPerPage;
-    const endIndex = startIndex + contentPerPage;
-    const currentData = data.slice(startIndex, endIndex);
-    setStartIndex(startIndex + 1);
-    setEndIndex(currentData.length === contentPerPage ? endIndex : endIndex - (contentPerPage - currentData.length));
-    return currentData;
+export type usePaginationDataType = {
+  contentPerPage: number;
+  totalPageCount: number;
+  currentPage: number;
+  goToNextPage: () => void;
+  gotToPreviousPage: () => void;
+  currentData: paginationDataType[];
+  startIndex: number;
+  endIndex: number;
+  linesOptionChangeHandler: (val: SelectOption | SelectOption[]) => void;
+} | null;
+
+export const usePaginationData = (linesPage: number, data: paginationDataType[]) => {
+  const [contentPerPage, setContentPerPage] = useState<number>(linesPage);
+  const [totalPageCount, setTotalPageCount] = useState<number>(Math.ceil(data.length / contentPerPage));
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [startIndex, setStartIndex] = useState<number>(0);
+  const [endIndex, setEndIndex] = useState<number>(0);
+
+  const updateCurrentData = (updateCurrentPage: number, updateContentPerPage: number) => {
+    const newStartIndex = updateCurrentPage * updateContentPerPage - updateContentPerPage;
+    const newEndIndex = newStartIndex + updateContentPerPage;
+    const newCurrentData = data.slice(newStartIndex, newEndIndex);
+    setStartIndex(newStartIndex + 1);
+    setEndIndex(newCurrentData.length === updateContentPerPage ? newEndIndex : newEndIndex - (updateContentPerPage - newCurrentData.length));
+    return newCurrentData;
+  };
+
+  const [currentData, setCurrentData] = useState<paginationDataType[]>(() => {
+    return updateCurrentData(currentPage, contentPerPage);
   });
 
   const goToNextPage = () => {
     setCurrentPage((page) => page + 1);
     setCurrentData(() => {
-      const startIndex = (currentPage + 1) * contentPerPage - contentPerPage;
-      const endIndex = startIndex + contentPerPage;
-      const currentData = data.slice(startIndex, endIndex);
-      setStartIndex(startIndex + 1);
-      setEndIndex(currentData.length === contentPerPage ? endIndex : endIndex - (contentPerPage - currentData.length));
-      return currentData;
+      return updateCurrentData(currentPage + 1, contentPerPage);
     });
   };
 
   const gotToPreviousPage = () => {
     setCurrentPage((page) => page - 1);
     setCurrentData(() => {
-      const startIndex = (currentPage - 1) * contentPerPage - contentPerPage;
-      const endIndex = startIndex + contentPerPage;
-      const currentData = data.slice(startIndex, endIndex);
-      setStartIndex(startIndex + 1);
-      setEndIndex(currentData.length === contentPerPage ? endIndex : endIndex - (contentPerPage - currentData.length));
-      return currentData;
+      return updateCurrentData(currentPage - 1, contentPerPage);
     });
   };
 
@@ -46,13 +53,8 @@ export const usePaginationData = (linesPage, data) => {
     setCurrentPage(1);
     setContentPerPage(val['value']);
     setCurrentData(() => {
-      const startIndex = 1 * val['value'] - val['value'];
-      const endIndex = startIndex + val['value'];
-      const currentData = data.slice(startIndex, endIndex);
-      setStartIndex(startIndex + 1);
-      setEndIndex(currentData.length === val['value'] ? endIndex : endIndex - (val['value'] - currentData.length));
       setTotalPageCount(Math.ceil(data.length / val['value']));
-      return currentData;
+      return updateCurrentData(1, val['value']);
     });
   };
 
@@ -66,5 +68,5 @@ export const usePaginationData = (linesPage, data) => {
     startIndex,
     endIndex,
     linesOptionChangeHandler,
-  };
+  } as usePaginationDataType;
 };

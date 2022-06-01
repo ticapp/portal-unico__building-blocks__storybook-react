@@ -6,6 +6,7 @@ import { usePaginationData } from '../../hooks';
 import { Context } from '../table/table';
 import { Select, SelectOption } from '../select';
 import { Icon } from '../icon';
+import { TableContextType } from '../table';
 
 export interface PaginationProps extends BsPaginationProps {
   /** Add classes to the Card component */
@@ -24,16 +25,16 @@ export interface PaginationProps extends BsPaginationProps {
   pagesCounter?: boolean;
 }
 
-export const Pagination = ({ className, linesOptions = [], data, itemsCounter = true, pagesCounter = true, ...props }: PaginationProps) => {
+export const Pagination = ({ className, linesOptions = [], data = [], itemsCounter = true, pagesCounter = true, ...props }: PaginationProps) => {
   const cssPagination = classNames('ama-pagination', className);
   let pageData = usePaginationData(linesOptions[0].value, data);
-  const { setValue } = useContext(Context) as any;
+  const context = useContext<TableContextType>(Context);
 
   useLayoutEffect(() => {
-    if (setValue) {
-      setValue(pageData);
+    if (context) {
+      context.setValue(pageData);
     }
-  }, [pageData.currentPage, pageData.contentPerPage]);
+  }, [pageData?.currentPage, pageData?.contentPerPage]);
 
   return (
     <>
@@ -46,7 +47,7 @@ export const Pagination = ({ className, linesOptions = [], data, itemsCounter = 
             className='lines-selector d-inline-flex'
             labelledby='lines-per-page'
             options={linesOptions}
-            onChange={pageData.linesOptionChangeHandler}
+            onChange={pageData?.linesOptionChangeHandler}
             active={linesOptions[0]}
             disabled={linesOptions.length <= 1}
             size='xs'
@@ -56,20 +57,20 @@ export const Pagination = ({ className, linesOptions = [], data, itemsCounter = 
           <div className='h-100 d-flex align-items-center'>
             {itemsCounter && (
               <span className='text-medium-normal px-8'>
-                {pageData.startIndex} - {pageData.endIndex} de {data?.length} items
+                {pageData?.startIndex} - {pageData?.endIndex} de {data?.length} items
               </span>
             )}
             {pagesCounter && (
               <span className='text-medium-normal px-8'>
-                {pageData.currentPage} de {pageData.totalPageCount} páginas
+                {pageData?.currentPage} de {pageData?.totalPageCount} páginas
               </span>
             )}
           </div>
         </li>
-        <BsPagination.Prev className='ms-auto' onClick={pageData.gotToPreviousPage} disabled={pageData.currentPage === 1}>
+        <BsPagination.Prev className='ms-auto' onClick={pageData?.gotToPreviousPage} disabled={pageData?.currentPage === 1}>
           <Icon icon='ama-chevron-left' aria-label='Anterior' size='xs'></Icon>
         </BsPagination.Prev>
-        <BsPagination.Next onClick={pageData.goToNextPage} disabled={pageData.currentPage === pageData.totalPageCount}>
+        <BsPagination.Next onClick={pageData?.goToNextPage} disabled={pageData?.currentPage === pageData?.totalPageCount}>
           <Icon icon='ama-chevron-right' aria-label='Próximo' size='xs'></Icon>
         </BsPagination.Next>
       </BsPagination>
