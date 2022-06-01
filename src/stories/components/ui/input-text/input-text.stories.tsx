@@ -1,23 +1,26 @@
-import { ComponentMeta, Story } from '@storybook/react';
-import React, { useState } from 'react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
 import { InputText } from '../../../../components/ui/input-text';
-import { InputTextProps } from '../../../../components/ui/input-text/input-text';
 
 export default {
-    title: 'Components/Input',
+    title: 'Components/Inputs',
     component: InputText,
 } as ComponentMeta<typeof InputText>;
 
-export const BasicInputText: Story<InputTextProps> = () => {
-
-    const [inputValue, setInputValue] = useState('');
+export const BasicInputText: ComponentStory<typeof InputText> = (args) => {
 
     return (
         <>
-        <InputText label='Label' placeholder='Placeholder' value={inputValue} onChange={e => setInputValue(e.target.value)} />
-        <InputText label='Disabled' isDisabled placeholder='Disabled' value={inputValue} onChange={e => setInputValue(e.target.value)} />
+            <InputText {...args} />
         </>
     );
 };
+
 BasicInputText.storyName = 'Basic Input Text';
 
+BasicInputText.args = {
+    label: 'Label',
+    placeholder: 'Placeholder',
+    value: '',
+    isDisabled: false
+}

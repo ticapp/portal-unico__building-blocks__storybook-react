@@ -16,8 +16,6 @@ export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
     isDisabled?: boolean;
 }
 
-
-
 export const InputText = ({
     className = '',
     type = 'text',
