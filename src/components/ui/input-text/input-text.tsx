@@ -18,6 +18,34 @@ export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
 }
 
+const InputTextDisabled = ({ className, placeholder, label, name, ...rest }: InputTextProps) => {
+    const inputId = uuidv4();
+
+    const containerClassNames = classNames('ama-input-container-disabled', 'd-flex align-items-start justify-content-center flex-column', className);
+    const inputTextClassNames = classNames('input-text-disabled', 'w-100 p-16')
+
+    return (
+        <span className={containerClassNames} >
+            <label className='mb-8' htmlFor={inputId}>{label}</label>
+            <input name={name} disabled className={inputTextClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
+        </span>
+    )
+
+}
+
+const InputTextEnabled = ({ className, placeholder, label, name, ...rest }: InputTextProps) => {
+    const inputId = uuidv4();
+
+    const containerDisabledClassNames = classNames('ama-input-container', 'd-flex align-items-start justify-content-center flex-column', className);
+    const inputTextDisabledClassNames = classNames('input-text', 'w-100 p-16')
+
+    return (
+        <span className={containerDisabledClassNames}>
+            <label className='mb-8' htmlFor={inputId}>{label}</label>
+            <input name={name} className={inputTextDisabledClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
+        </span>
+    )
+}
 export const InputText = ({
     className = '',
     type = 'text',
@@ -28,30 +56,15 @@ export const InputText = ({
     ...rest
 }: InputTextProps) => {
 
-    const inputId = uuidv4();
-
 
     if (isDisabled) {
-        const containerClassNames = classNames('ama-input-container-disabled', 'd-flex align-items-start justify-content-center flex-column', className);
-        const inputTextClassNames = classNames('input-text-disabled', 'w-100 p-16')
-
         return (
-            <span className={containerClassNames} >
-                <label className='mb-8' htmlFor={inputId}>{label}</label>
-                <input name={name} disabled className={inputTextClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
-            </span>
+            <InputTextDisabled {...rest} label={label} name={name} placeholder={placeholder} />
         )
-
     }
     else {
-        const containerClassNames = classNames('ama-input-container', 'd-flex align-items-start justify-content-center flex-column', className);
-        const inputTextClassNames = classNames('input-text', 'w-100 p-16')
-
         return (
-            <span className={containerClassNames}>
-                <label className='mb-8' htmlFor={inputId}>{label}</label>
-                <input name={name} className={inputTextClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
-            </span>
+            <InputTextEnabled {...rest} label={label} name={name} placeholder={placeholder} />
         )
     }
 
