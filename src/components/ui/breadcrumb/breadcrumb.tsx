@@ -116,6 +116,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabe
             <p className='title mb-8'>{breadCrumbMobileTitle}</p>
 
             <button
+                type='button'
                 aria-expanded={isOpen}
                 className={cssBreadCrumbTableHistoryButton}
                 onClick={setIsOpenHandler}
@@ -162,7 +163,7 @@ export const BreadCrumb = ({ className, breadcrumbs, navAriaLabel, buttonAriaLab
     const { width } = useWindowSize();
 
 
-    if (width >= 1366) {
+    if (width >= 1280) {
         return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} linkAriaLabel={linkAriaLabel} />
     }
     else {
