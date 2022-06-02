@@ -24,6 +24,9 @@ export interface TableProps extends BsTableProps {
 
   /** Label when no data */
   noDataLabel?: string;
+
+  /** Total table */
+  totalTable?: boolean;
 }
 
 export type TableContextType = {
@@ -40,6 +43,7 @@ const TableDesktop = ({
   linesOptions,
   pagination = false,
   noDataLabel = 'No data found',
+  totalTable = false,
   ...props
 }: TableProps & PaginationProps) => {
   const {
@@ -61,7 +65,7 @@ const TableDesktop = ({
   }, [context?.value]);
 
   const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, context?.value, null);
-  const cssTable = classNames('ama-table', className, 'mb-0');
+  const cssTable = classNames('ama-table', className, 'mb-0', totalTable && 'ama-table-total');
   const getClassNamesFor = (name: string) => {
     return sortConfig?.key === name ? sortConfig?.direction : undefined;
   };
@@ -123,7 +127,7 @@ const TableDesktop = ({
         </thead>
         <tbody>
           {items && renderTr(items)}
-          {!items && (
+          {items['length'] === 0 && (
             <tr>
               {tableHeaders.map((_value, index) => {
                 return index === 0 ? (

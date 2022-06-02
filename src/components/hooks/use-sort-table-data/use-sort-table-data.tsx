@@ -26,13 +26,12 @@ export const useSortTableData = (items: sortDataType[], originalData: sortDataTy
       const startIndex: number = value.currentPage * value.contentPerPage - value.contentPerPage;
       const endIndex: number = startIndex + value.contentPerPage;
       return sortableItems.slice(startIndex, endIndex);
-    } else {
-      return;
     }
+    return sortableItems;
   };
 
   const sortedItems = useMemo(() => {
-    let sortableItems = [...originalData] as sortDataType[];
+    const sortableItems = [...originalData] as sortDataType[];
     itemsSort(sortableItems);
     return ifHasContextValue(sortableItems);
   }, [items, sortConfig]);

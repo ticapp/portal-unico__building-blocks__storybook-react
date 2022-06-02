@@ -15,4 +15,20 @@
       background-color: transparent;
     }
   }
+  &-total {
+    tbody {
+      tr {
+        &:not(:last-of-type) {
+          td {
+            background-color: index.$neutral-white;
+          }
+        }
+        &:last-of-type {
+          td {
+            @include index.text-medium-bold;
+          }
+        }
+      }
+    }
+  }
 }

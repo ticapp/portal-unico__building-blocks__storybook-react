@@ -190,3 +190,58 @@ NoDataTable.args = {
 NoDataTable.argTypes = {};
 
 NoDataTable.storyName = 'Table without data';
+
+export const TotalTable: Story<TableProps & PaginationProps> = (args) => {
+  const [value, setValue] = useState(null);
+
+  return (
+    <Context.Provider value={useMemo(() => ({ value, setValue } as TableContextType), [value])}>
+      <Table {...args} />
+    </Context.Provider>
+  );
+};
+
+TotalTable.args = {
+  tableHeaders: [
+    { value: 'Movimentos', sorting: false },
+    { value: 'Pontos', sorting: false }
+  ],
+  tableData: [
+    {
+      moves: 'Saldo inicial',
+      score: 12
+    },
+    {
+      moves: '3 anos sem infrações',
+      score: +3
+    },
+    {
+      total: 'Total',
+      score: 15
+    }
+  ],
+
+  linesOptions: [
+    {
+      value: 2,
+      label: '2'
+    },
+    {
+      value: 5,
+      label: '5'
+    },
+    {
+      value: 10,
+      label: '10'
+    }
+  ],
+  noDataLabel: 'Não existem Movimentos',
+  borderless: true,
+  striped: false,
+  hover: true,
+  totalTable: true
+} as TableProps & PaginationProps;
+
+TotalTable.argTypes = {};
+
+TotalTable.storyName = 'Total Table data';

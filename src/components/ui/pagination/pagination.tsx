@@ -25,10 +25,10 @@ export interface PaginationProps extends BsPaginationProps {
   pagesCounter?: boolean;
 
   /** Next button aria-label */
-  nextAriaLabel: string;
+  nextAriaLabel?: string;
 
   /** Previous button aria-label */
-  previousAriaLabel: string;
+  previousAriaLabel?: string;
 
   /** Label for linesOptions */
   lineOptionsLabel?: string;
@@ -54,7 +54,7 @@ export const Pagination = ({
   ...props
 }: PaginationProps) => {
   const cssPagination = classNames('ama-pagination', className);
-  const pageData = usePaginationData(linesOptions[0]?.value, data);
+  const pageData = usePaginationData(linesOptions[0]?.value || (data.length as string | number), data);
   const context = useContext<TableContextType>(Context);
 
   useLayoutEffect(() => {
