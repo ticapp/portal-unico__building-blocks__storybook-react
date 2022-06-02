@@ -1,7 +1,7 @@
 import React, { DOMAttributes } from 'react';
+import classNames from 'classnames';
 import { Link } from '../link';
 import { Icon } from '../icon';
-import classNames from 'classnames';
 import './skip-navigation.scss';
 
 export interface SkipNavigationProps extends DOMAttributes<Element> {
@@ -22,8 +22,8 @@ export function SkipNavigation({ className, ariaLabel, idLink, content }: SkipNa
   const cssSkipNavigation = classNames('ama-skipNavigation', className);
   return (
     <div aria-label={ariaLabel} className={cssSkipNavigation}>
-      <Link link={'#' + idLink} isExternal={true} target='_self'>
-        <Icon icon='ama-download' /> {content}
+      <Link link={`#${idLink}`} isExternal target="_self">
+        <Icon icon="ama-download" /> {content}
       </Link>
     </div>
   );

@@ -5,7 +5,7 @@ import { Page404 } from '../../../../components';
 
 export default {
   title: 'Pages/404',
-  component: Page404,
+  component: Page404
 } as ComponentMeta<typeof Page404>;
 
 const Template: ComponentStory<typeof Page404> = (args) => (
@@ -19,6 +19,6 @@ BasicPage404.args = {
   pageInfo: {
     title: 'Página 404',
     description: 'A página que procura não se encontra disponível',
-    button: { link: '/', isExternal: false, target: '_self', label: 'Voltar à pagina inicial' },
-  },
+    button: { link: '/', isExternal: false, target: '_self', label: 'Voltar à pagina inicial' }
+  }
 };

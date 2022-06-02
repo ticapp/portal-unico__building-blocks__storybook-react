@@ -1,11 +1,5 @@
 import classNames from 'classnames';
-import React, {
-  MouseEvent,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react';
 import { v4 } from 'uuid';
 import { useActiveElement, useOutsideElementClick } from '../../hooks';
 import { Icon } from '../icon';
@@ -13,7 +7,7 @@ import './select.scss';
 
 export interface SelectOption {
   /** Value of the select option */
-  value: any;
+  value: string | number;
   /** Label of the select option */
   label: string;
   /** If specified, will render in label element */
@@ -25,7 +19,7 @@ export interface SelectOption {
 export interface SelectProps {
   /** Additional class names to add */
   className?: string;
-  /** Id of the select element*/
+  /** Id of the select element */
   id?: string;
   /** Id of the label element to be associated with the select */
   labelledby?: string;
@@ -64,7 +58,7 @@ const Select = ({
   disabled = false,
   active,
   size,
-  allwaysOpen,
+  allwaysOpen
 }: SelectProps) => {
   const guid = v4();
   const singleSelectId = id || `ama-select-id-${guid}`;
@@ -96,31 +90,42 @@ const Select = ({
     Previous: 7,
     Select: 8,
     Type: 9,
-    SelectClose: 10,
+    SelectClose: 10
   };
 
   // Get action when menu open
-  function getActionWithMenuOpen(key: string, altKey: boolean) {
+  function getActionWithMenuOpen(key: string, altKey: boolean): number | null {
     if (key === 'ArrowUp' && altKey) {
       return SelectActions.Select;
-    } else if (key === 'ArrowDown' && !altKey) {
+    }
+    if (key === 'ArrowDown' && !altKey) {
       return SelectActions.Next;
-    } else if (key === 'ArrowUp') {
+    }
+    if (key === 'ArrowUp') {
       return SelectActions.Previous;
-    } else if (key === 'PageUp') {
+    }
+    if (key === 'PageUp') {
       return SelectActions.PageUp;
-    } else if (key === 'PageDown') {
+    }
+    if (key === 'PageDown') {
       return SelectActions.PageDown;
-    } else if (key === 'Escape') {
+    }
+    if (key === 'Escape') {
       return SelectActions.Close;
-    } else if (key === 'Enter' && !multiSelection) {
+    }
+    if (key === 'Enter' && !multiSelection) {
       return SelectActions.SelectClose;
-    } else if (key === 'Enter' && !!multiSelection) {
-      return SelectActions.Select;
-    } else if (key === ' ') {
+    }
+    if (key === 'Enter' && !!multiSelection) {
       return SelectActions.Select;
     }
+    if (key === ' ') {
+      return SelectActions.Select;
+    }
+
+    return null;
   }
+
   // map a key press to an action
   function getActionFromKey(event, menuOpen) {
     const { key, altKey, ctrlKey, metaKey } = event;
@@ -134,11 +139,7 @@ const Select = ({
       return SelectActions.Last;
     }
     // handle typing characters when open or closed
-    if (
-      key === 'Backspace' ||
-      key === 'Clear' ||
-      (key.length === 1 && key !== ' ' && !altKey && !ctrlKey && !metaKey)
-    ) {
+    if (key === 'Backspace' || key === 'Clear' || (key.length === 1 && key !== ' ' && !altKey && !ctrlKey && !metaKey)) {
       return SelectActions.Type;
     }
 
@@ -178,15 +179,13 @@ const Select = ({
 
   // check if element is visible in browser view port
   function isElementInView(element) {
-    var bounding = element.getBoundingClientRect();
+    const bounding = element.getBoundingClientRect();
 
     return (
       bounding.top >= 0 &&
       bounding.left >= 0 &&
-      bounding.bottom <=
-        (window.innerHeight || document.documentElement.clientHeight) &&
-      bounding.right <=
-        (window.innerWidth || document.documentElement.clientWidth)
+      bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
 
@@ -232,7 +231,7 @@ const Select = ({
         if (comboRef.current && !isElementInView(comboRef.current)) {
           comboRef.current?.scrollIntoView({
             behavior: 'smooth',
-            block: 'nearest',
+            block: 'nearest'
           });
         }
       }
@@ -290,7 +289,7 @@ const Select = ({
         if (!isElementInView(curr)) {
           curr.scrollIntoView({
             behavior: 'smooth',
-            block: 'nearest',
+            block: 'nearest'
           });
         }
       }
@@ -325,14 +324,6 @@ const Select = ({
       optionsElems.forEach((e) => e.classList.remove('selected'));
     }
     (evt.target as HTMLDivElement).classList.add('selected');
-  };
-
-  const onMenuKeyDown = (event) => {
-    // move focus back to the combobox, if needed
-    comboRef.current?.focus();
-
-    // business as usual
-    onComboKeyDown(event);
   };
 
   const onComboKeyDown = (event) => {
@@ -392,6 +383,14 @@ const Select = ({
     }
   };
 
+  const onMenuKeyDown = (event) => {
+    // move focus back to the combobox, if needed
+    comboRef.current?.focus();
+
+    // business as usual
+    onComboKeyDown(event);
+  };
+
   const onComboType = (letter) => {
     // find the index of the first matching option
     if (typeof searchTimeout === 'number') {
@@ -403,7 +402,7 @@ const Select = ({
     }, 500);
 
     // add most recent letter to saved search string
-    searchString = searchString + letter;
+    searchString += letter;
 
     const searchIndex = options.findIndex((opt) => {
       return opt.label.toLowerCase().indexOf(searchString.toLowerCase()) === 0;
@@ -433,11 +432,7 @@ const Select = ({
       return;
     }
 
-    if (
-      !(comboWrapperRef.current as HTMLElement).contains(
-        activeElement as HTMLElement
-      )
-    ) {
+    if (!(comboWrapperRef.current as HTMLElement).contains(activeElement as HTMLElement)) {
       updateMenuState(false);
     }
   }, [activeElement]);
@@ -457,7 +452,7 @@ const Select = ({
         options
           .filter((opt: SelectOption) => {
             return active.find((activeOption) => {
-              return opt.label == activeOption.label;
+              return opt.label === activeOption.label;
             });
           })
           .map((_o, i) => i)
@@ -471,20 +466,10 @@ const Select = ({
     }
   }, []);
 
-  const wrapperClassNames = classNames(
-    className,
-    'combo',
-    { open: isOpen },
-    { disabled },
-    { multiselection: multiSelection }
-  );
+  const wrapperClassNames = classNames(className, 'combo', { open: isOpen }, { disabled }, { multiselection: multiSelection });
 
   return (
-    <div
-      ref={comboWrapperRef}
-      className={wrapperClassNames}
-      aria-disabled={disabled}
-    >
+    <div ref={comboWrapperRef} className={wrapperClassNames} aria-disabled={disabled}>
       <div
         className="combo-input p-16 w-100 d-flex align-items-center justify-content-between"
         ref={comboRef}
@@ -492,9 +477,7 @@ const Select = ({
         aria-expanded={isComboExpanded}
         aria-haspopup="listbox"
         aria-labelledby={labelledby}
-        aria-activedescendant={
-          selectedIndex >= 0 ? `${singleSelectId}-option-${selectedIndex}` : ''
-        }
+        aria-activedescendant={selectedIndex >= 0 ? `${singleSelectId}-option-${selectedIndex}` : ''}
         id={singleSelectId}
         role="combobox"
         tabIndex={0}
@@ -502,8 +485,7 @@ const Select = ({
         onKeyDown={onComboKeyDown}
       >
         <div className="tags me-10 d-flex flex-wrap">
-          {!multiSelection &&
-            (checkedIndex < 0 ? placeholder : options[checkedIndex].label)}
+          {!multiSelection && (checkedIndex < 0 ? placeholder : options[checkedIndex].label)}
 
           {multiSelection &&
             (checkedIndexes.length <= 0
@@ -512,10 +494,7 @@ const Select = ({
                   .filter((_o, i) => checkedIndexes.includes(i))
                   .map((o, i) => {
                     return (
-                      <div
-                        className="tag bg-neutral-dark d-flex align-items-center m-4 py-8 px-16"
-                        key={`${guid}-${i}`}
-                      >
+                      <div className="tag bg-neutral-dark d-flex align-items-center m-4 py-8 px-16" key={`${guid}-${i}`}>
                         <span>{o.label}</span>
                       </div>
                     );
@@ -523,11 +502,7 @@ const Select = ({
         </div>
 
         <div className="ms-auto">
-          <Icon
-            icon={isOpen ? 'ama-chevron-up' : 'ama-chevron-down'}
-            size={size}
-            ariaHidden={true}
-          />
+          <Icon icon={isOpen ? 'ama-chevron-up' : 'ama-chevron-down'} size={size} ariaHidden />
         </div>
       </div>
 
@@ -542,9 +517,7 @@ const Select = ({
         tabIndex={-1}
       >
         {options.map((o, i) => {
-          const isChecked = multiSelection
-            ? checkedIndexes.indexOf(i) >= 0
-            : checkedIndex === i;
+          const isChecked = multiSelection ? checkedIndexes.indexOf(i) >= 0 : checkedIndex === i;
 
           const isSelected = selectedIndex === i;
 
@@ -553,9 +526,7 @@ const Select = ({
               role="option"
               key={i}
               id={`${singleSelectId}-option-${i}`}
-              className={`combo-option w-100 d-flex align-items-center py-8 px-16 ${
-                isChecked ? 'checked' : ''
-              }
+              className={`combo-option w-100 d-flex align-items-center py-8 px-16 ${isChecked ? 'checked' : ''}
               ${isSelected ? 'selected' : ''}
               `}
               onClick={() => onOptionClick(i)}
@@ -574,10 +545,7 @@ const Select = ({
                 </span>
               )}
 
-              <span
-                className="combo-option-content w-100"
-                aria-label={isChecked ? `${o.label} selected` : o.label}
-              >
+              <span className="combo-option-content w-100" aria-label={isChecked ? `${o.label} selected` : o.label}>
                 {o.labelElement || o.label}
               </span>
             </div>

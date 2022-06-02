@@ -32,14 +32,9 @@ const Logo: FC<LogoProps> = ({
   height,
   title = 'Voltar a página de entrada',
   homepageLink = '/',
-  isHomepage = false,
+  isHomepage = false
 }: LogoProps) => {
-  const classes = classNames(
-    'ama-logo',
-    'd-flex',
-    isHomepage ? '' : 'h1',
-    'mb-0'
-  );
+  const classes = classNames('ama-logo', 'd-flex', isHomepage ? '' : 'h1', 'mb-0');
   return (
     <>
       {isHomepage && (

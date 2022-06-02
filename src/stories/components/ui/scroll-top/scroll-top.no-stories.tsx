@@ -4,7 +4,7 @@ import { ScrollTop } from '../../../../components';
 
 export default {
   title: 'Components/Scroll Top',
-  component: ScrollTop,
+  component: ScrollTop
 } as ComponentMeta<typeof ScrollTop>;
 
 const Template: ComponentStory<typeof ScrollTop> = () => (
@@ -88,4 +88,3 @@ const Template: ComponentStory<typeof ScrollTop> = () => (
   </div>
 );
 export const BasicSkipNavigation = Template.bind({});
-

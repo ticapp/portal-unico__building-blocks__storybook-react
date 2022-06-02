@@ -133,7 +133,7 @@ const iconList: Record<string, string> = {
   'ama-wifi': './AmaWifi',
   'ama-youtube': './AmaYoutube',
   'ama-zoom-in': './AmaZoomIn',
-  'ama-zoom-out': './AmaZoomOut',
+  'ama-zoom-out': './AmaZoomOut'
 };
 
 export type IconName = keyof typeof iconList;
