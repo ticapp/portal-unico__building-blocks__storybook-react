@@ -13,7 +13,7 @@ export interface PaginationProps extends BsPaginationProps {
   className?: string;
 
   /** Lines Options */
-  linesOptions?: SelectOption[];
+  linesOptions: SelectOption[];
 
   /** Data Info*/
   data?: Array<{ [key: string]: string | number | boolean | ReactNode }>;
@@ -21,11 +21,38 @@ export interface PaginationProps extends BsPaginationProps {
   /** Show/Hide label items counter */
   itemsCounter?: boolean;
 
-  /**Show/Hide label pages counter */
+  /** Show/Hide label pages counter */
   pagesCounter?: boolean;
+
+  /** Next button aria-label*/
+  nextAriaLabel: string;
+
+  /** Previous button aria-label*/
+  previousAriaLabel: string;
+
+  /** Label for linesOptions */
+  lineOptionsLabel?: string;
+
+  /** Items counter label */
+  itemsCounterLabel?: Array<string>;
+
+  /** Pages counter label */
+  pagesCounterLabel?: Array<string>;
 }
 
-export const Pagination = ({ className, linesOptions = [], data = [], itemsCounter = true, pagesCounter = true, ...props }: PaginationProps) => {
+export const Pagination = ({
+  className,
+  linesOptions = [],
+  data = [],
+  itemsCounter = true,
+  pagesCounter = true,
+  nextAriaLabel = 'Próxima página da tabela',
+  previousAriaLabel = 'Página anterior da tabela',
+  lineOptionsLabel,
+  itemsCounterLabel = ['-', 'de', 'items'],
+  pagesCounterLabel = ['de', 'páginas'],
+  ...props
+}: PaginationProps) => {
   const cssPagination = classNames('ama-pagination', className);
   let pageData = usePaginationData(linesOptions[0].value, data);
   const context = useContext<TableContextType>(Context);
@@ -40,9 +67,11 @@ export const Pagination = ({ className, linesOptions = [], data = [], itemsCount
     <>
       <BsPagination {...props} className={cssPagination}>
         <li className='px-16 align-middle'>
-          <label className='text-medium-normal' id='lines-per-page'>
-            Linhas por página:
-          </label>
+          {lineOptionsLabel && (
+            <label className='text-medium-normal' id='lines-per-page'>
+              {lineOptionsLabel}
+            </label>
+          )}
           <Select
             className='lines-selector d-inline-flex'
             labelledby='lines-per-page'
@@ -57,21 +86,23 @@ export const Pagination = ({ className, linesOptions = [], data = [], itemsCount
           <div className='h-100 d-flex align-items-center'>
             {itemsCounter && (
               <span className='text-medium-normal px-8'>
-                {pageData?.startIndex} - {pageData?.endIndex} de {data?.length} items
+                {pageData?.startIndex}
+                {itemsCounterLabel[0]}
+                {pageData?.endIndex} {itemsCounterLabel[1]} {data?.length} {itemsCounterLabel[2]}
               </span>
             )}
             {pagesCounter && (
               <span className='text-medium-normal px-8'>
-                {pageData?.currentPage} de {pageData?.totalPageCount} páginas
+                {pageData?.currentPage} {pagesCounterLabel[0]} {pageData?.totalPageCount} {pagesCounterLabel[1]}
               </span>
             )}
           </div>
         </li>
         <BsPagination.Prev className='ms-auto' onClick={pageData?.gotToPreviousPage} disabled={pageData?.currentPage === 1}>
-          <Icon icon='ama-chevron-left' aria-label='Anterior' size='xs'></Icon>
+          <Icon icon='ama-chevron-left' aria-label={previousAriaLabel} size='xs'></Icon>
         </BsPagination.Prev>
         <BsPagination.Next onClick={pageData?.goToNextPage} disabled={pageData?.currentPage === pageData?.totalPageCount}>
-          <Icon icon='ama-chevron-right' aria-label='Próximo' size='xs'></Icon>
+          <Icon icon='ama-chevron-right' aria-label={nextAriaLabel} size='xs'></Icon>
         </BsPagination.Next>
       </BsPagination>
     </>

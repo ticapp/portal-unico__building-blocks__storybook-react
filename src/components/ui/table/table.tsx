@@ -1,13 +1,18 @@
-import React, { ReactNode, useEffect, useState } from 'react';
-import './table.scss';
 import classNames from 'classnames';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { paginationDataType, sortDataType, usePaginationDataType, useSortTableData } from '../../hooks';
-import { Pagination, PaginationProps } from '../pagination';
-import { Icon } from '../icon';
+import {
+  paginationDataType,
+  sortDataType,
+  usePaginationDataType,
+  useSortTableData,
+} from '../../hooks';
 import { Button } from '../buttons';
+import { Icon } from '../icon';
+import { Pagination, PaginationProps } from '../pagination';
 import { useWindowSize } from './../../hooks/use-window-size/use-window-size';
+import './table.scss';
 
 export interface TableProps extends BsTableProps {
   /** Add classes to the Table component */
@@ -21,6 +26,9 @@ export interface TableProps extends BsTableProps {
 
   /** Table with/without pagination */
   pagination?: boolean;
+
+  /** Label when no data */
+  noDataLabel?: string;
 }
 
 export type TableContextType = {
@@ -30,9 +38,27 @@ export type TableContextType = {
 
 export const Context = React.createContext<TableContextType>(null);
 
-const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagination = false, ...props }: TableProps & PaginationProps) => {
-  const { pagesCounter, itemsCounter, ...tableProps } = props;
-  const [elementsPerPage, setElementsPerPage] = useState<paginationDataType[]>();
+const TableDesktop = ({
+  className,
+  tableHeaders,
+  tableData,
+  linesOptions,
+  pagination = false,
+  noDataLabel = 'No data found',
+  ...props
+}: TableProps & PaginationProps) => {
+  const {
+    pagesCounter,
+    itemsCounter,
+    nextAriaLabel,
+    previousAriaLabel,
+    lineOptionsLabel,
+    itemsCounterLabel,
+    pagesCounterLabel,
+    ...tableProps
+  } = props;
+  const [elementsPerPage, setElementsPerPage] =
+    useState<paginationDataType[]>();
   const context = React.useContext<TableContextType>(Context);
   useEffect(() => {
     if (context) {
@@ -40,7 +66,12 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
     }
   }, [context?.value]);
 
-  const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, context?.value, null);
+  const { items, requestSort, sortConfig } = useSortTableData(
+    elementsPerPage || tableData,
+    tableData,
+    context?.value,
+    null
+  );
   const cssTable = classNames('ama-table', className, 'mb-0');
   const getClassNamesFor = (name: string) => {
     if (!sortConfig) {
@@ -49,27 +80,40 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
-  const renderThead = (item: Array<{ value: string | ReactNode; sorting: boolean }>, keys: string[]) => {
+  const renderThead = (
+    item: Array<{ value: string | ReactNode; sorting: boolean }>,
+    keys: string[]
+  ) => {
     return item?.map((data, i) => {
       return (
-        <th key={uuidv4()} className='p-5 align-middle'>
+        <th key={uuidv4()} className="p-5 align-middle">
           <Button
-            variant='neutral-dark'
-            size='sm'
+            variant="neutral-dark"
+            size="sm"
             onClick={() => requestSort(keys[i])}
-            className={getClassNamesFor(keys[i]) ? getClassNamesFor(keys[i]) + ' shadow-none' : 'shadow-none'}
+            className={
+              getClassNamesFor(keys[i])
+                ? getClassNamesFor(keys[i]) + ' shadow-none'
+                : 'shadow-none'
+            }
             disabled={!data.sorting}
           >
-            <span className='pe-8 text-medium-normal'>{data.value}</span>
-            {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && <Icon icon='ama-expand' ariaHidden='true' size='sm'></Icon>}
-            {getClassNamesFor(keys[i]) === 'descending' && data.sorting && <Icon icon='ama-collapse' ariaHidden='true' size='sm'></Icon>}
-
-            {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && data.sorting && (
-              <span className='text-nowrap lh-1 text-medium-normal'>
-                <Icon icon='ama-collapse' ariaHidden='true' size='xs'></Icon>
-                <Icon icon='ama-expand' ariaHidden='true' size='xs'></Icon>
-              </span>
+            <span className="pe-8 text-medium-normal">{data.value}</span>
+            {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && (
+              <Icon icon="ama-expand" ariaHidden="true" size="sm"></Icon>
             )}
+            {getClassNamesFor(keys[i]) === 'descending' && data.sorting && (
+              <Icon icon="ama-collapse" ariaHidden="true" size="sm"></Icon>
+            )}
+
+            {getClassNamesFor(keys[i]) !== 'ascending' &&
+              getClassNamesFor(keys[i]) !== 'descending' &&
+              data.sorting && (
+                <span className="text-nowrap lh-1 text-medium-normal">
+                  <Icon icon="ama-collapse" ariaHidden="true" size="xs"></Icon>
+                  <Icon icon="ama-expand" ariaHidden="true" size="xs"></Icon>
+                </span>
+              )}
           </Button>
         </th>
       );
@@ -79,7 +123,7 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
   const renderTr = (item: sortDataType[]) => {
     return item?.map((content: sortDataType) => {
       return (
-        <tr key={uuidv4()} className='align-middle'>
+        <tr key={uuidv4()} className="align-middle">
           {renderTd(content)}
         </tr>
       );
@@ -88,13 +132,15 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
 
   const renderTd = (content: sortDataType) => {
     return Object.keys(content).map((k) => (
-      <td className='text-medium-normal' key={uuidv4()}>
+      <td className="text-medium-normal" key={uuidv4()}>
         {content[k]}
       </td>
     ));
   };
 
-  const dataKeys = (content: Array<{ [key: string]: string | number | boolean | ReactNode }>) => {
+  const dataKeys = (
+    content: Array<{ [key: string]: string | number | boolean | ReactNode }>
+  ) => {
     return Object.keys(Object.assign({}, ...content));
   };
 
@@ -104,9 +150,38 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
         <thead>
           <tr>{renderThead(tableHeaders, dataKeys(tableData))}</tr>
         </thead>
-        <tbody>{items && renderTr(items)}</tbody>
+        <tbody>
+          {items && renderTr(items)}
+          {!!!items && (
+            <tr>
+              {tableHeaders.map((_value, index) => {
+                return index === 0 ? (
+                  <td className="text-medium-normal" key={uuidv4()}>
+                    {noDataLabel}
+                  </td>
+                ) : (
+                  <td className="text-medium-normal" key={uuidv4()}>
+                    -
+                  </td>
+                );
+              })}
+            </tr>
+          )}
+        </tbody>
       </BsTable>
-      {pagination && <Pagination data={tableData} linesOptions={linesOptions} pagesCounter={pagesCounter} itemsCounter={itemsCounter}></Pagination>}
+      {pagination && tableData && tableData.length > 0 && (
+        <Pagination
+          data={tableData}
+          linesOptions={linesOptions}
+          pagesCounter={pagesCounter}
+          itemsCounter={itemsCounter}
+          nextAriaLabel={nextAriaLabel}
+          previousAriaLabel={previousAriaLabel}
+          lineOptionsLabel={lineOptionsLabel}
+          itemsCounterLabel={itemsCounterLabel}
+          pagesCounterLabel={pagesCounterLabel}
+        ></Pagination>
+      )}
     </>
   );
 };

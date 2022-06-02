@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Table, TableProps, PaginationProps, Icon, TableContextType } from '../../../../components/ui';
+import React, { useState } from 'react';
+import {
+  Icon,
+  PaginationProps,
+  Table,
+  TableContextType,
+  TableProps,
+} from '../../../../components/ui';
 import { Context } from '../../../../components/ui/table/table';
 
 export default {
@@ -32,8 +38,14 @@ BasicTable.args = {
   tableData: [
     {
       col_01: (
-        <span>
-          <Icon icon='ama-circle-solid' className='me-8' size='xxs' ariaHidden='true'></Icon>Muito grave
+        <span className="text-medium-normal">
+          <Icon
+            icon="ama-circle-solid"
+            className="me-8"
+            size="xxs"
+            ariaHidden="true"
+          ></Icon>
+          Muito grave
         </span>
       ),
       col_02: 104779934,
@@ -122,8 +134,64 @@ BasicTable.args = {
   pagination: true,
   itemsCounter: true,
   pagesCounter: true,
+  nextAriaLabel: 'Próxima página da tabela',
+  previousAriaLabel: 'Página anterior da tabela',
+  lineOptionsLabel: 'Linhas por página:',
+  itemsCounterLabel: ['-', 'de', 'items'],
+  pagesCounterLabel: ['de', 'páginas'],
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};
 
 BasicTable.storyName = 'Table';
+
+export const NoDataTable: Story<TableProps & PaginationProps> = (args) => {
+  const [value, setValue] = useState(null);
+
+  return (
+    <Context.Provider value={{ value, setValue } as TableContextType}>
+      <Table {...args}></Table>
+    </Context.Provider>
+  );
+};
+
+NoDataTable.args = {
+  tableHeaders: [
+    { value: 'Infração', sorting: false },
+    { value: 'N.º processo', sorting: true },
+    { value: 'Data', sorting: true },
+    { value: 'Veículo', sorting: true },
+    { value: 'Local da infração', sorting: true },
+    { value: 'Estado', sorting: false },
+    { value: 'Coima', sorting: true },
+    { value: 'Sanção acessória', sorting: true },
+  ],
+  tableData: [],
+  linesOptions: [
+    {
+      value: 2,
+      label: '2',
+    },
+    {
+      value: 5,
+      label: '5',
+    },
+    {
+      value: 10,
+      label: '10',
+    },
+  ],
+  pagination: true,
+  itemsCounter: true,
+  pagesCounter: true,
+  nextAriaLabel: 'Próxima página da tabela',
+  previousAriaLabel: 'Página anterior da tabela',
+  lineOptionsLabel: 'Linhas por página:',
+  itemsCounterLabel: ['-', 'de', 'items'],
+  pagesCounterLabel: ['de', 'páginas'],
+  noDataLabel: 'Não existem infrações',
+} as TableProps & PaginationProps;
+
+NoDataTable.argTypes = {};
+
+NoDataTable.storyName = 'Table without data';
