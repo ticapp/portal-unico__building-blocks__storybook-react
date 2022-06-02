@@ -1,0 +1,7 @@
+.storybook
+dist
+infrastructure
+node_modules
+storybook-static
+/*.js
+/*.jsx

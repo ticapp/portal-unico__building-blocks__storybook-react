@@ -18,6 +18,6 @@ export const useWindowSize = () => {
 
   return {
     width,
-    height,
+    height
   };
 };

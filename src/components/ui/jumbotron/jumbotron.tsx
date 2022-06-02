@@ -9,7 +9,7 @@ export interface JumbotronProps {
   /** Title of Jumbotron */
   jumboTitle: Array<string>;
 
-  /**Description of title */
+  /** Description of title */
   description?: string;
 }
 
@@ -20,25 +20,24 @@ export const Jumbotron = ({ className, jumboTitle, description, ...props }: Jumb
     return jumboTitle?.map((title, i) => {
       if (jumboTitle.length - 1 === i) {
         return (
-          <span className='h4-bold' key={uuidv4()}>
+          <span className="h4-bold" key={uuidv4()}>
             {title}
           </span>
         );
-      } else {
-        return (
-          <React.Fragment key={uuidv4()}>
-            <span className='h4-bold'>{title}</span>
-            <br />
-          </React.Fragment>
-        );
       }
+      return (
+        <React.Fragment key={uuidv4()}>
+          <span className="h4-bold">{title}</span>
+          <br />
+        </React.Fragment>
+      );
     });
   };
 
   return (
     <div className={cssJumbotron} {...props}>
-      <h1 className='h4-bold'>{renderTitle()}</h1>
-      {description && <p className='p-0'>{description}</p>}
+      <h1 className="h4-bold">{renderTitle()}</h1>
+      {description && <p className="p-0">{description}</p>}
     </div>
   );
 };

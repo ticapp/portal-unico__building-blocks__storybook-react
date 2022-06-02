@@ -2,12 +2,7 @@ import classNames from 'classnames';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  paginationDataType,
-  sortDataType,
-  usePaginationDataType,
-  useSortTableData,
-} from '../../hooks';
+import { paginationDataType, sortDataType, usePaginationDataType, useSortTableData } from '../../hooks';
 import { Button } from '../buttons';
 import { Icon } from '../icon';
 import { Pagination, PaginationProps } from '../pagination';
@@ -57,8 +52,7 @@ const TableDesktop = ({
     pagesCounterLabel,
     ...tableProps
   } = props;
-  const [elementsPerPage, setElementsPerPage] =
-    useState<paginationDataType[]>();
+  const [elementsPerPage, setElementsPerPage] = useState<paginationDataType[]>();
   const context = React.useContext<TableContextType>(Context);
   useEffect(() => {
     if (context) {
@@ -66,12 +60,7 @@ const TableDesktop = ({
     }
   }, [context?.value]);
 
-  const { items, requestSort, sortConfig } = useSortTableData(
-    elementsPerPage || tableData,
-    tableData,
-    context?.value,
-    null
-  );
+  const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, context?.value, null);
   const cssTable = classNames('ama-table', className, 'mb-0');
   const getClassNamesFor = (name: string) => {
     if (!sortConfig) {
@@ -80,10 +69,7 @@ const TableDesktop = ({
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
-  const renderThead = (
-    item: Array<{ value: string | ReactNode; sorting: boolean }>,
-    keys: string[]
-  ) => {
+  const renderThead = (item: Array<{ value: string | ReactNode; sorting: boolean }>, keys: string[]) => {
     return item?.map((data, i) => {
       return (
         <th key={uuidv4()} className="p-5 align-middle">
@@ -91,29 +77,19 @@ const TableDesktop = ({
             variant="neutral-dark"
             size="sm"
             onClick={() => requestSort(keys[i])}
-            className={
-              getClassNamesFor(keys[i])
-                ? getClassNamesFor(keys[i]) + ' shadow-none'
-                : 'shadow-none'
-            }
+            className={getClassNamesFor(keys[i]) ? getClassNamesFor(keys[i]) + ' shadow-none' : 'shadow-none'}
             disabled={!data.sorting}
           >
             <span className="pe-8 text-medium-normal">{data.value}</span>
-            {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && (
-              <Icon icon="ama-expand" ariaHidden="true" size="sm"></Icon>
-            )}
-            {getClassNamesFor(keys[i]) === 'descending' && data.sorting && (
-              <Icon icon="ama-collapse" ariaHidden="true" size="sm"></Icon>
-            )}
+            {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && <Icon icon="ama-expand" ariaHidden="true" size="sm"></Icon>}
+            {getClassNamesFor(keys[i]) === 'descending' && data.sorting && <Icon icon="ama-collapse" ariaHidden="true" size="sm"></Icon>}
 
-            {getClassNamesFor(keys[i]) !== 'ascending' &&
-              getClassNamesFor(keys[i]) !== 'descending' &&
-              data.sorting && (
-                <span className="text-nowrap lh-1 text-medium-normal">
-                  <Icon icon="ama-collapse" ariaHidden="true" size="xs"></Icon>
-                  <Icon icon="ama-expand" ariaHidden="true" size="xs"></Icon>
-                </span>
-              )}
+            {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && data.sorting && (
+              <span className="text-nowrap lh-1 text-medium-normal">
+                <Icon icon="ama-collapse" ariaHidden="true" size="xs"></Icon>
+                <Icon icon="ama-expand" ariaHidden="true" size="xs"></Icon>
+              </span>
+            )}
           </Button>
         </th>
       );
@@ -138,15 +114,13 @@ const TableDesktop = ({
     ));
   };
 
-  const dataKeys = (
-    content: Array<{ [key: string]: string | number | boolean | ReactNode }>
-  ) => {
+  const dataKeys = (content: Array<{ [key: string]: string | number | boolean | ReactNode }>) => {
     return Object.keys(Object.assign({}, ...content));
   };
 
   return (
     <>
-      <BsTable {...tableProps} className={cssTable} borderless striped hover>
+      <BsTable {...tableProps} className={cssTable}>
         <thead>
           <tr>{renderThead(tableHeaders, dataKeys(tableData))}</tr>
         </thead>

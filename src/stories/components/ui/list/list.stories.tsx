@@ -1,11 +1,11 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { List } from '../../../../components';
 import { BrowserRouter } from 'react-router-dom';
+import { List } from '../../../../components';
 
 export default {
   title: 'Components/List',
-  component: List,
+  component: List
 } as ComponentMeta<typeof List>;
 
 const Template: ComponentStory<typeof List> = (args) => (
@@ -21,15 +21,15 @@ BasicList.args = {
       value: 'Contactos ePortugal (external Link)',
       hasExternalLink: false,
       link: '',
-      title: '',
+      title: ''
     },
     {
       value: 'Componente Logo (inside link)',
       hasExternalLink: false,
       link: '',
-      title: '',
-    },
-  ],
+      title: ''
+    }
+  ]
 };
 
 export const ListBulletsImg = Template.bind({});
@@ -39,16 +39,16 @@ ListBulletsImg.args = {
       value: 'Contactos ePortugal (external Link)',
       hasExternalLink: true,
       link: 'https://eportugal.gov.pt/contactos',
-      title: 'external link',
+      title: 'external link'
     },
     {
       value: 'Componente Logo (inside link)',
       hasExternalLink: false,
       link: '/react/ui/logo',
-      title: 'internal link',
-    },
+      title: 'internal link'
+    }
   ],
-  listStyleImageUrl: 'https://picsum.photos/14/14',
+  listStyleImageUrl: 'https://picsum.photos/14/14'
 };
 
 export const ListLinkBulletsInside = Template.bind({});
@@ -58,17 +58,17 @@ ListLinkBulletsInside.args = {
       value: 'Contactos ePortugal (external Link)',
       hasExternalLink: true,
       link: 'https://eportugal.gov.pt/contactos',
-      title: 'external link',
+      title: 'external link'
     },
     {
       value: 'Componente Logo (inside link)',
       hasExternalLink: false,
       link: '/react/ui/logo',
-      title: 'internal link',
-    },
+      title: 'internal link'
+    }
   ],
   listStylePosition: 'inside',
-  listStyleType: 'square',
+  listStyleType: 'square'
 };
 
 export const ListLinkBulletsOutside = Template.bind({});
@@ -78,17 +78,17 @@ ListLinkBulletsOutside.args = {
       value: 'Contactos ePortugal (external Link)',
       hasExternalLink: true,
       link: 'https://eportugal.gov.pt/contactos',
-      title: 'external link',
+      title: 'external link'
     },
     {
       value: 'Componente Logo (inside link)',
       hasExternalLink: false,
       link: '/react/ui/logo',
-      title: 'internal link',
-    },
+      title: 'internal link'
+    }
   ],
   listStylePosition: 'outside',
-  listStyleType: 'square',
+  listStyleType: 'square'
 };
 
 export const ListLinkBulletsNumbers = Template.bind({});
@@ -98,14 +98,14 @@ ListLinkBulletsNumbers.args = {
       value: 'Contactos ePortugal (external Link)',
       hasExternalLink: true,
       link: 'https://eportugal.gov.pt/contactos',
-      title: 'external link',
+      title: 'external link'
     },
     {
       value: 'Componente Logo (inside link)',
       hasExternalLink: false,
       link: '/react/ui/logo',
-      title: 'internal link',
-    },
+      title: 'internal link'
+    }
   ],
-  listStyleType: 'decimal',
+  listStyleType: 'decimal'
 };

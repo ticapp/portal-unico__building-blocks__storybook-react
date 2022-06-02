@@ -1,17 +1,11 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React, { useState } from 'react';
-import {
-  Icon,
-  PaginationProps,
-  Table,
-  TableContextType,
-  TableProps,
-} from '../../../../components/ui';
+import { Icon, PaginationProps, Table, TableContextType, TableProps } from '../../../../components/ui';
 import { Context } from '../../../../components/ui/table/table';
 
 export default {
   title: 'Components/Table',
-  component: Table,
+  component: Table
 } as ComponentMeta<typeof Table>;
 
 export const BasicTable: Story<TableProps & PaginationProps> = (args) => {
@@ -33,18 +27,13 @@ BasicTable.args = {
     { value: 'Local da infração', sorting: true },
     { value: 'Estado', sorting: false },
     { value: 'Coima', sorting: true },
-    { value: 'Sanção acessória', sorting: true },
+    { value: 'Sanção acessória', sorting: true }
   ],
   tableData: [
     {
       col_01: (
         <span className="text-medium-normal">
-          <Icon
-            icon="ama-circle-solid"
-            className="me-8"
-            size="xxs"
-            ariaHidden="true"
-          ></Icon>
+          <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true"></Icon>
           Muito grave
         </span>
       ),
@@ -54,7 +43,7 @@ BasicTable.args = {
       col_05: 'Rua das Beatas, em frente ao número 36, Lisboa',
       col_06: 'Concluído',
       col_07: 'Pago',
-      col_08: 'Não aplicável',
+      col_08: 'Não aplicável'
     },
     {
       col_01: 10,
@@ -64,7 +53,7 @@ BasicTable.args = {
       col_05: 50,
       col_06: 60,
       col_07: 70,
-      col_08: 80,
+      col_08: 80
     },
     {
       col_01: 100,
@@ -74,7 +63,7 @@ BasicTable.args = {
       col_05: 500,
       col_06: 600,
       col_07: 700,
-      col_08: 800,
+      col_08: 800
     },
     {
       col_01: 1000,
@@ -84,7 +73,7 @@ BasicTable.args = {
       col_05: 5000,
       col_06: 6000,
       col_07: 7000,
-      col_08: 8000,
+      col_08: 8000
     },
     {
       col_01: 10000,
@@ -94,7 +83,7 @@ BasicTable.args = {
       col_05: 590,
       col_06: 600,
       col_07: 700,
-      col_08: 800,
+      col_08: 800
     },
     {
       col_01: 1000000,
@@ -104,7 +93,7 @@ BasicTable.args = {
       col_05: 520,
       col_06: 600,
       col_07: 700,
-      col_08: 800,
+      col_08: 800
     },
     {
       col_01: 1000000,
@@ -114,22 +103,22 @@ BasicTable.args = {
       col_05: 550,
       col_06: 600,
       col_07: 700,
-      col_08: 800,
-    },
+      col_08: 800
+    }
   ],
   linesOptions: [
     {
       value: 2,
-      label: '2',
+      label: '2'
     },
     {
       value: 5,
-      label: '5',
+      label: '5'
     },
     {
       value: 10,
-      label: '10',
-    },
+      label: '10'
+    }
   ],
   pagination: true,
   itemsCounter: true,
@@ -139,6 +128,9 @@ BasicTable.args = {
   lineOptionsLabel: 'Linhas por página:',
   itemsCounterLabel: ['-', 'de', 'items'],
   pagesCounterLabel: ['de', 'páginas'],
+  borderless,
+  striped,
+  hover
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};
@@ -164,22 +156,22 @@ NoDataTable.args = {
     { value: 'Local da infração', sorting: true },
     { value: 'Estado', sorting: false },
     { value: 'Coima', sorting: true },
-    { value: 'Sanção acessória', sorting: true },
+    { value: 'Sanção acessória', sorting: true }
   ],
   tableData: [],
   linesOptions: [
     {
       value: 2,
-      label: '2',
+      label: '2'
     },
     {
       value: 5,
-      label: '5',
+      label: '5'
     },
     {
       value: 10,
-      label: '10',
-    },
+      label: '10'
+    }
   ],
   pagination: true,
   itemsCounter: true,
@@ -190,6 +182,9 @@ NoDataTable.args = {
   itemsCounterLabel: ['-', 'de', 'items'],
   pagesCounterLabel: ['de', 'páginas'],
   noDataLabel: 'Não existem infrações',
+  borderless,
+  striped,
+  hover
 } as TableProps & PaginationProps;
 
 NoDataTable.argTypes = {};

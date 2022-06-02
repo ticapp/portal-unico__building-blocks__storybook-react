@@ -51,6 +51,7 @@ const iconList: Record<string, string> = {
   'ama-facebook': './AmaFacebook',
   'ama-file': './AmaFile',
   'ama-files': './AmaFiles',
+  'ama-first-page': './AmaFirstPage',
   'ama-flag': './AmaFlag',
   'ama-flickr-square': './AmaFlickrSquare',
   'ama-flickr': './AmaFlickr',
@@ -68,6 +69,7 @@ const iconList: Record<string, string> = {
   'ama-instagram': './AmaInstagram',
   'ama-key': './AmaKey',
   'ama-lang': './AmaLang',
+  'ama-last-page': './AmaLastPage',
   'ama-less-circle': './AmaLessCircle',
   'ama-link': './AmaLink',
   'ama-linkedin-square': './AmaLinkedinSquare',
@@ -132,7 +134,7 @@ const iconList: Record<string, string> = {
   'ama-wifi': './AmaWifi',
   'ama-youtube': './AmaYoutube',
   'ama-zoom-in': './AmaZoomIn',
-  'ama-zoom-out': './AmaZoomOut',
+  'ama-zoom-out': './AmaZoomOut'
 };
 
 export type IconName = keyof typeof iconList;

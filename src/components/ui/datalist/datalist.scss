@@ -1,29 +1,21 @@
-@use '../../../scss/index'as index;
-
+@use '../../../scss/index' as index;
 
 .datalist-container {
+  background-color: index.$neutral-light;
 
-    background-color: index.$neutral-light;
-
-
-    h2 {
-        @include index.h5-bold;
-    }
-
+  h2 {
+    @include index.h5-bold;
+  }
 }
 
-
 .items-content {
+  dt {
+    @include index.text-big-normal;
+    color: index.$neutral-black;
+  }
 
-    dt {
-        @include index.text-big-normal;
-        color: index.$neutral-black;
-    }
-
-    dd {
-        @include index.text-medium-normal;
-        color: index.$neutral-dark;
-
-    }
-
+  dd {
+    @include index.text-medium-normal;
+    color: index.$neutral-dark;
+  }
 }

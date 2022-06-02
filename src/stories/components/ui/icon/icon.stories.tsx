@@ -4,7 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import { allIcons, Icon, IconProps } from '../../../../components';
 
 export default {
-  title: 'Components/Icon',
+  title: 'Components/Icon'
 } as ComponentMeta<typeof Icon>;
 
 export const Size: Story<IconProps> = ({ icon }: IconProps) => {
@@ -12,13 +12,11 @@ export const Size: Story<IconProps> = ({ icon }: IconProps) => {
   const dimensions = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
   return (
-    <>
-      <div style={{ backgroundColor: '#ebebeb' }}>
-        {dimensions.map((size) => (
-          <Icon className="p-1" key={size} size={size} icon={icon} />
-        ))}
-      </div>
-    </>
+    <div style={{ backgroundColor: '#ebebeb' }}>
+      {dimensions.map((size) => (
+        <Icon className="p-1" key={size} size={size} icon={icon} />
+      ))}
+    </div>
   );
 };
 Size.storyName = 'Size';
@@ -27,33 +25,29 @@ Size.argTypes = {
     description: 'Icon name or external image url',
     control: {
       type: 'select',
-      options: allIcons,
-    },
-  },
+      options: allIcons
+    }
+  }
 };
 
 export const ExternalImage: Story<IconProps> = ({ icon, size }: IconProps) => {
   icon = icon || 'https://picsum.photos/50';
   size = size || 'md';
-  return (
-    <>
-      <Icon icon={icon} size={size} />
-    </>
-  );
+  return <Icon icon={icon} size={size} />;
 };
 ExternalImage.storyName = 'External Image';
 ExternalImage.argTypes = {
   icon: {
     description: 'Icon name or external image url',
-    control: 'text',
+    control: 'text'
   },
   size: {
     description: 'Icon size to be used',
     control: {
       type: 'inline-radio',
-      options: ['xl', 'lg', 'md', 'sm', 'xs'],
-    },
-  },
+      options: ['xl', 'lg', 'md', 'sm', 'xs']
+    }
+  }
 };
 
 export const IconList: Story<IconProps> = ({ size }: IconProps) => {
@@ -75,7 +69,7 @@ IconList.argTypes = {
     description: 'Icon size to be used',
     control: {
       type: 'inline-radio',
-      options: ['xl', 'lg', 'md', 'sm', 'xs'],
-    },
-  },
+      options: ['xl', 'lg', 'md', 'sm', 'xs']
+    }
+  }
 };

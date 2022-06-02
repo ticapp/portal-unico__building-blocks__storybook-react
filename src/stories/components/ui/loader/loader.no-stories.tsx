@@ -4,7 +4,7 @@ import { Loader } from '../../../../components';
 
 export default {
   title: 'Components/Loader',
-  component: Loader,
+  component: Loader
 } as ComponentMeta<typeof Loader>;
 
 const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;
@@ -14,15 +14,15 @@ DefaultLoader.args = {};
 
 export const SpinnerTwoHalfLoader = Template.bind({});
 SpinnerTwoHalfLoader.args = {
-  type: 'spinner-two-half',
+  type: 'spinner-two-half'
 };
 
 export const SpinnerHalfLoader = Template.bind({});
 SpinnerHalfLoader.args = {
-  type: 'spinner-half',
+  type: 'spinner-half'
 };
 
 export const DotsLoader = Template.bind({});
 DotsLoader.args = {
-  type: 'dots',
+  type: 'dots'
 };

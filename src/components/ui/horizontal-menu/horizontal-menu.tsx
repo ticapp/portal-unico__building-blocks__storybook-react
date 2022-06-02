@@ -31,27 +31,19 @@ const HorizontalMenu: FC<HorizontalMenuProps> = ({
   username = '',
   isAuthenticated = false,
   options,
-  icon = 'ama-home',
+  icon = 'ama-home'
 }: HorizontalMenuProps) => {
-  const classes = classNames(
-    'ama-horizontal-menu',
-    className,
-    'd-flex justify-content-between'
-  );
+  const classes = classNames('ama-horizontal-menu', className, 'd-flex justify-content-between');
 
   const { width } = useWindowSize();
 
   return (
     <div className={classes}>
       <nav aria-label={ariaLabel}>
-        <ul
-          role="menubar"
-          aria-label={ariaLabel}
-          className="h-100 d-flex justify-content-start align-items-center m-0"
-        >
+        <ul role="menubar" aria-label={ariaLabel} className="h-100 d-flex justify-content-start align-items-center m-0">
           <li role="none">
             <NavLink
-              exact={true}
+              exact
               href={homepageLink}
               className="navbar-brand d-flex justify-content-start align-items-center m-0"
               activeClassName="active"
@@ -62,16 +54,13 @@ const HorizontalMenu: FC<HorizontalMenuProps> = ({
           </li>
 
           <li role="none">
-            <ul
-              role="none"
-              className="h-100 w-100 d-flex justify-content-between align-items-center m-0"
-            >
+            <ul role="none" className="h-100 w-100 d-flex justify-content-between align-items-center m-0">
               {links &&
                 links.map((l: HorizontalMenuLink) => {
                   return (
                     <li key={l.id} role="none">
                       <NavLink
-                        exact={true}
+                        exact
                         href={l.link}
                         className="nav-link py-0 px-8 d-flex justify-content-start align-items-center"
                         activeClassName="active"
@@ -89,11 +78,7 @@ const HorizontalMenu: FC<HorizontalMenuProps> = ({
 
       {width >= 768 && (
         <div>
-          <UserArea
-            username={username}
-            options={options}
-            isAuthenticated={isAuthenticated}
-          />
+          <UserArea username={username} options={options} isAuthenticated={isAuthenticated} />
         </div>
       )}
     </div>

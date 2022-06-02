@@ -3,13 +3,14 @@ import classNames from 'classnames';
 import { Tab as BsTab, Tabs as BsTabs, TabsProps as BsTabsProps, TabProps as BsTabProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import './tabs.scss';
+
 export interface TabsProps extends BsTabsProps {
   /** Add classes to the Tabs component */
   className?: string;
 }
 
 export interface TabProps extends BsTabProps {
-  /**Tabs Names */
+  /** Tabs Names */
   tabsName: Array<{ label: string; children: ReactNode; keyTab: string; disabled: boolean }>;
 }
 

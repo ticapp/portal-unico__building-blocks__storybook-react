@@ -63,7 +63,7 @@ export const Icon: FC<IconProps> = ({ size = 'md', icon = '', alt = '', classNam
 
   const classes = classNames('icon', className, {
     [`icon-${size}`]: size,
-    'icon-padded': padding,
+    'icon-padded': padding
   });
 
   useEffect(() => {
@@ -93,12 +93,12 @@ export const Icon: FC<IconProps> = ({ size = 'md', icon = '', alt = '', classNam
 
   const iconAttributes = {
     alt,
-    title: alt,
+    title: alt
   };
 
   if (!IconComponent) {
-    return <EmptyIcon className={classes} role='img' aria-hidden={ariaHidden} {...iconAttributes} />;
+    return <EmptyIcon className={classes} role="img" aria-hidden={ariaHidden} {...iconAttributes} />;
   }
 
-  return <IconComponent className={classes} role='img' aria-hidden={ariaHidden} {...iconAttributes} />;
+  return <IconComponent className={classes} role="img" aria-hidden={ariaHidden} {...iconAttributes} />;
 };
