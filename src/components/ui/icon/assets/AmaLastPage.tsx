@@ -2,7 +2,8 @@ import * as React from "react";
 export const component = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <path d="M22 16L12 26L10.6 24.6L19.2 16L10.6 7.4L12 6L22 16Z" />
+      <path d="M18 16L7.99998 26L6.59998 24.6L15.2 16L6.59998 7.4L7.99998 6L18 16Z" />
+      <path d="M24 4H22V28H24V4Z" />
     </svg>
   );
 };

@@ -21,3 +21,4 @@ export * from './jumbotron';
 export * from './tabs';
 export * from './accordion';
 export * from './vertical-menu';
+export * from './date-picker';
