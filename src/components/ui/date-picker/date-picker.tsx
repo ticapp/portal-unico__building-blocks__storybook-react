@@ -261,19 +261,19 @@ export const DatePicker = ({
   };
 
   const selectDate = (dateString: string): void => {
-    const date = parseDateString(dateString);
+    const d = parseDateString(dateString);
 
-    setDateValues(date);
+    setDateValues(d);
 
     hideDialog();
 
-    onChange?.(date);
+    onChange?.(d);
   };
 
-  const setDateValues = (date: Date) => {
-    setCurrentDate(date);
+  const setDateValues = (d: Date) => {
+    setCurrentDate(d);
     if (inputRef.current) {
-      (inputRef.current as HTMLInputElement).value = getDateString(date);
+      (inputRef.current as HTMLInputElement).value = getDateString(d);
     }
   };
 
@@ -290,9 +290,9 @@ export const DatePicker = ({
       if (key === "Enter") {
         setIsDialogVisible(true);
 
-        const date = parseInputDate(el.value);
-        if (date) {
-          setCurrentDate(date);
+        const d = parseInputDate(el.value);
+        if (d) {
+          setCurrentDate(d);
         }
 
         focusCurrentDate();
@@ -592,7 +592,7 @@ export const DatePicker = ({
 
     const d = new Date(firstDayOfMonth);
 
-    return Array.from(Array(7).keys()).map((day, idx) => {
+    return Array.from(Array(7).keys()).map(() => {
       const isInCurrentMonth = d.getMonth() === currentDate.getMonth();
       const isSelectedDate = isSameDay(d, currentDate);
 
