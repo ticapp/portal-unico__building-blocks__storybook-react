@@ -1,6 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react/jsx-boolean-value */
 import { ComponentMeta, Story } from '@storybook/react';
 import React, { useMemo, useState } from 'react';
-import { Icon, PaginationProps, Table, TableContextType, TableProps } from '../../../../components/ui';
+import { BrowserRouter } from 'react-router-dom';
+import { Icon, PaginationProps, Table, TableContextType, TableProps, Link } from '../../../../components/ui';
 import { Context } from '../../../../components/ui/table/table';
 
 export default {
@@ -245,3 +248,67 @@ TotalTable.args = {
 TotalTable.argTypes = {};
 
 TotalTable.storyName = 'Total Table data';
+
+export const ClickableRowsTable: Story<TableProps & PaginationProps> = (args) => {
+  const [value, setValue] = useState(null);
+
+  return (
+    <BrowserRouter>
+      <Context.Provider value={useMemo(() => ({ value, setValue } as TableContextType), [value])}>
+        <Table {...args} />
+      </Context.Provider>
+    </BrowserRouter>
+  );
+};
+
+ClickableRowsTable.args = {
+  tableHeaders: [
+    { value: 'Movimentos', sorting: false },
+    { value: 'Pontos', sorting: false },
+    { value: '', sorting: false }
+  ],
+  tableData: [
+    {
+      moves: 'Link 1',
+      score: 12,
+      url: (
+        <Link link="https://www.example.com" title="title" isExternal={true} className="stretched-link">
+          <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
+        </Link>
+      )
+    },
+    {
+      moves: 'Link2',
+      score: +3,
+      url: null
+    },
+    {
+      moves: 'Link 3',
+      score: 15,
+      url: null
+    }
+  ],
+
+  linesOptions: [
+    {
+      value: 2,
+      label: '2'
+    },
+    {
+      value: 5,
+      label: '5'
+    },
+    {
+      value: 10,
+      label: '10'
+    }
+  ],
+  noDataLabel: 'Não existem Movimentos',
+  borderless: true,
+  striped: true,
+  hover: true
+} as unknown as TableProps & PaginationProps;
+
+ClickableRowsTable.argTypes = {};
+
+ClickableRowsTable.storyName = 'Clickable Table data';

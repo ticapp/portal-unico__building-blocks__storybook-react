@@ -108,7 +108,7 @@ const TableDesktop = ({
   const renderTr = (item: sortDataType[]) => {
     return item?.map((content: sortDataType) => {
       return (
-        <tr key={uuidv4()} className="align-middle">
+        <tr key={uuidv4()} className="align-middle position-relative">
           {renderTd(content)}
         </tr>
       );
@@ -128,7 +128,7 @@ const TableDesktop = ({
         <tbody>
           {items && renderTr(items)}
           {items['length'] === 0 && (
-            <tr>
+            <tr className="align-middle position-relative">
               {tableHeaders.map((_value, index) => {
                 return index === 0 ? (
                   <td className="text-medium-normal" key={uuidv4()}>
