@@ -42,7 +42,7 @@ $theme-colors: map-merge(
     'semantic-success': $semantic-success,
     'semantic-info': $semantic-info,
     'semantic-alerts': $semantic-alerts,
-    'details-links-visited': $details-links-visited,
+    'details-links-visited': $details-links-visited
   )
 );
 
@@ -64,5 +64,5 @@ $colors: (
   'semantic-success': $semantic-success,
   'semantic-info': $semantic-info,
   'semantic-alerts': $semantic-alerts,
-  'details-links-visited': $details-links-visited,
+  'details-links-visited': $details-links-visited
 );

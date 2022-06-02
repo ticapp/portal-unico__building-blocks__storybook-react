@@ -15,12 +15,7 @@
   },
   "plugins": ["react", "@typescript-eslint", "eslint-plugin-import-helpers", "prettier"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "trailingComma": "none"
-      }
-    ],
+    "prettier/prettier": "error",
 
     "import/no-extraneous-dependencies": ["error", { "packageDir": "./" }],
     "import/extensions": "off",

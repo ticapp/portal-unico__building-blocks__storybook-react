@@ -2,5 +2,6 @@ root = true
 
 [*]
 charset = utf-8
-indent_style = tab
+indent_style = space
 tab_width = 2
+end_of_line = crlf

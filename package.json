@@ -17,7 +17,7 @@
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "lint": "eslint ./src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix ./src/**/*.{js,jsx,ts,tsx,json}",
-    "format": "prettier --write ./src/**/*.{js,jsx,ts,tsx,css,mdx,json} --config ./.prettierrc"
+    "format": "prettier --write ./src/**/*.{js,jsx,ts,tsx,css,scss,mdx,md,json} --config ./.prettierrc"
   },
   "author": "TicApp",
   "license": "MIT",

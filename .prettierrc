@@ -6,5 +6,6 @@
   "singleQuote": true,
   "quoteProps": "consistent",
   "trailingComma": "none",
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "endOfLine": "crlf"
 }
