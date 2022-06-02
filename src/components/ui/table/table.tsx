@@ -3,7 +3,7 @@ import './table.scss';
 import classNames from 'classnames';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { paginationDataType, usePaginationDataType, useSortTableData } from '../../hooks';
+import { paginationDataType, sortDataType, usePaginationDataType, useSortTableData } from '../../hooks';
 import { Pagination, PaginationProps } from '../pagination';
 import { Icon } from '../icon';
 import { Button } from '../buttons';
@@ -42,14 +42,14 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
 
   const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, context?.value, null);
   const cssTable = classNames('ama-table', className, 'mb-0');
-  const getClassNamesFor = (name) => {
+  const getClassNamesFor = (name: string) => {
     if (!sortConfig) {
       return;
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
-  const renderThead = (item, keys) => {
+  const renderThead = (item: Array<{ value: string | ReactNode; sorting: boolean }>, keys: string[]) => {
     return item?.map((data, i) => {
       return (
         <th key={uuidv4()} className='p-5 align-middle'>
@@ -76,8 +76,8 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
     });
   };
 
-  const renderTr = (item) => {
-    return item?.map((content) => {
+  const renderTr = (item: sortDataType[]) => {
+    return item?.map((content: sortDataType) => {
       return (
         <tr key={uuidv4()} className='align-middle'>
           {renderTd(content)}
@@ -86,7 +86,7 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
     });
   };
 
-  const renderTd = (content) => {
+  const renderTd = (content: sortDataType) => {
     return Object.keys(content).map((k) => (
       <td className='text-medium-normal' key={uuidv4()}>
         {content[k]}
@@ -94,7 +94,7 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
     ));
   };
 
-  const dataKeys = (content) => {
+  const dataKeys = (content: Array<{ [key: string]: string | number | boolean | ReactNode }>) => {
     return Object.keys(Object.assign({}, ...content));
   };
 
@@ -104,7 +104,7 @@ const TableDesktop = ({ className, tableHeaders, tableData, linesOptions, pagina
         <thead>
           <tr>{renderThead(tableHeaders, dataKeys(tableData))}</tr>
         </thead>
-        <tbody>{renderTr(items)}</tbody>
+        <tbody>{items && renderTr(items)}</tbody>
       </BsTable>
       {pagination && <Pagination data={tableData} linesOptions={linesOptions} pagesCounter={pagesCounter} itemsCounter={itemsCounter}></Pagination>}
     </>

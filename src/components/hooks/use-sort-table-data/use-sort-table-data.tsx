@@ -1,6 +1,6 @@
 import { useState, useMemo, ReactNode } from 'react';
 
-type sortDataType = { [key: string]: string | number | boolean | ReactNode } | null[];
+export type sortDataType = { [key: string]: string | number | boolean | ReactNode } | null[];
 
 type sortConfigType = { direction: string; key: string } | null;
 
