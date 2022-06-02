@@ -4,14 +4,14 @@ import { Pagination, PaginationProps } from '../../../../components/ui';
 
 export default {
   title: 'Components/Pagination',
-  component: Pagination,
+  component: Pagination
 } as ComponentMeta<typeof Pagination>;
 
 export const TablePagination: Story<PaginationProps> = (args) => {
-  return <Pagination {...args}></Pagination>;
+  return <Pagination {...args} />;
 };
 
-//Todo:Falta passar dados dummy
+// Todo:Falta passar dados dummy
 TablePagination.args = {} as PaginationProps;
 
 TablePagination.argTypes = {};

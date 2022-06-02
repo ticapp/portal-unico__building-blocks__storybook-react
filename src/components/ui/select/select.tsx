@@ -153,6 +153,7 @@ const Select = ({
     if (menuOpen) {
       return getActionWithMenuOpen(key, altKey);
     }
+    return null;
   }
 
   // get an updated option index after performing an action
@@ -326,6 +327,32 @@ const Select = ({
     (evt.target as HTMLDivElement).classList.add('selected');
   };
 
+  const onComboType = (letter) => {
+    // find the index of the first matching option
+    if (typeof searchTimeout === 'number') {
+      window.clearTimeout(searchTimeout);
+    }
+
+    searchTimeout = window.setTimeout(() => {
+      searchString = '';
+    }, 500);
+
+    // add most recent letter to saved search string
+    searchString += letter;
+
+    const searchIndex = options.findIndex((opt) => {
+      return opt.label.toLowerCase().indexOf(searchString.toLowerCase()) === 0;
+    });
+
+    if (searchIndex >= 0) {
+      // if a match was found, go to it
+      selectOption(searchIndex);
+    } else {
+      // if no matches, clear the timeout and search string
+      window.clearTimeout(searchTimeout);
+      searchString = '';
+    }
+  };
   const onComboKeyDown = (event) => {
     if (disabled) {
       return;
@@ -380,6 +407,8 @@ const Select = ({
         }
 
         return onComboType(key);
+      default:
+        break;
     }
   };
 
@@ -389,33 +418,6 @@ const Select = ({
 
     // business as usual
     onComboKeyDown(event);
-  };
-
-  const onComboType = (letter) => {
-    // find the index of the first matching option
-    if (typeof searchTimeout === 'number') {
-      window.clearTimeout(searchTimeout);
-    }
-
-    searchTimeout = window.setTimeout(() => {
-      searchString = '';
-    }, 500);
-
-    // add most recent letter to saved search string
-    searchString += letter;
-
-    const searchIndex = options.findIndex((opt) => {
-      return opt.label.toLowerCase().indexOf(searchString.toLowerCase()) === 0;
-    });
-
-    if (searchIndex >= 0) {
-      // if a match was found, go to it
-      selectOption(searchIndex);
-    } else {
-      // if no matches, clear the timeout and search string
-      window.clearTimeout(searchTimeout);
-      searchString = '';
-    }
   };
 
   useOutsideElementClick(comboWrapperRef, () => updateMenuState(false));

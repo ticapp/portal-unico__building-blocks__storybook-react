@@ -1,12 +1,12 @@
-import React, { ReactNode, useContext, useLayoutEffect } from 'react';
-import './pagination.scss';
 import classNames from 'classnames';
+import React, { ReactNode, useContext, useLayoutEffect } from 'react';
 import { Pagination as BsPagination, PaginationProps as BsPaginationProps } from 'react-bootstrap';
 import { usePaginationData } from '../../hooks';
-import { Context } from '../table/table';
-import { Select, SelectOption } from '../select';
 import { Icon } from '../icon';
+import { Select, SelectOption } from '../select';
 import { TableContextType } from '../table';
+import { Context } from '../table/table';
+import './pagination.scss';
 
 export interface PaginationProps extends BsPaginationProps {
   /** Add classes to the Card component */
@@ -15,7 +15,7 @@ export interface PaginationProps extends BsPaginationProps {
   /** Lines Options */
   linesOptions: SelectOption[];
 
-  /** Data Info*/
+  /** Data Info */
   data?: Array<{ [key: string]: string | number | boolean | ReactNode }>;
 
   /** Show/Hide label items counter */
@@ -24,10 +24,10 @@ export interface PaginationProps extends BsPaginationProps {
   /** Show/Hide label pages counter */
   pagesCounter?: boolean;
 
-  /** Next button aria-label*/
+  /** Next button aria-label */
   nextAriaLabel: string;
 
-  /** Previous button aria-label*/
+  /** Previous button aria-label */
   previousAriaLabel: string;
 
   /** Label for linesOptions */
@@ -54,7 +54,7 @@ export const Pagination = ({
   ...props
 }: PaginationProps) => {
   const cssPagination = classNames('ama-pagination', className);
-  let pageData = usePaginationData(linesOptions[0].value, data);
+  const pageData = usePaginationData(linesOptions[0]?.value, data);
   const context = useContext<TableContextType>(Context);
 
   useLayoutEffect(() => {
@@ -64,47 +64,46 @@ export const Pagination = ({
   }, [pageData?.currentPage, pageData?.contentPerPage]);
 
   return (
-    <>
-      <BsPagination {...props} className={cssPagination}>
-        <li className='px-16 align-middle'>
-          {lineOptionsLabel && (
-            <label className='text-medium-normal' id='lines-per-page'>
-              {lineOptionsLabel}
-            </label>
+    <BsPagination {...props} className={cssPagination}>
+      <li className="px-16 align-middle">
+        {lineOptionsLabel && (
+          <label className="text-medium-normal" id="lines-per-page" htmlFor="ama-lines-selector">
+            {lineOptionsLabel}
+          </label>
+        )}
+        <Select
+          id="ama-lines-selector"
+          className="lines-selector d-inline-flex"
+          labelledby="lines-per-page"
+          options={linesOptions}
+          onChange={pageData?.linesOptionChangeHandler}
+          active={linesOptions[0]}
+          disabled={linesOptions.length <= 1}
+          size="xs"
+        />
+      </li>
+      <li className="px-16">
+        <div className="h-100 d-flex align-items-center">
+          {itemsCounter && (
+            <span className="text-medium-normal px-8">
+              {pageData?.startIndex}
+              {itemsCounterLabel[0]}
+              {pageData?.endIndex} {itemsCounterLabel[1]} {data?.length} {itemsCounterLabel[2]}
+            </span>
           )}
-          <Select
-            className='lines-selector d-inline-flex'
-            labelledby='lines-per-page'
-            options={linesOptions}
-            onChange={pageData?.linesOptionChangeHandler}
-            active={linesOptions[0]}
-            disabled={linesOptions.length <= 1}
-            size='xs'
-          />
-        </li>
-        <li className='px-16'>
-          <div className='h-100 d-flex align-items-center'>
-            {itemsCounter && (
-              <span className='text-medium-normal px-8'>
-                {pageData?.startIndex}
-                {itemsCounterLabel[0]}
-                {pageData?.endIndex} {itemsCounterLabel[1]} {data?.length} {itemsCounterLabel[2]}
-              </span>
-            )}
-            {pagesCounter && (
-              <span className='text-medium-normal px-8'>
-                {pageData?.currentPage} {pagesCounterLabel[0]} {pageData?.totalPageCount} {pagesCounterLabel[1]}
-              </span>
-            )}
-          </div>
-        </li>
-        <BsPagination.Prev className='ms-auto' onClick={pageData?.gotToPreviousPage} disabled={pageData?.currentPage === 1}>
-          <Icon icon='ama-chevron-left' aria-label={previousAriaLabel} size='xs'></Icon>
-        </BsPagination.Prev>
-        <BsPagination.Next onClick={pageData?.goToNextPage} disabled={pageData?.currentPage === pageData?.totalPageCount}>
-          <Icon icon='ama-chevron-right' aria-label={nextAriaLabel} size='xs'></Icon>
-        </BsPagination.Next>
-      </BsPagination>
-    </>
+          {pagesCounter && (
+            <span className="text-medium-normal px-8">
+              {pageData?.currentPage} {pagesCounterLabel[0]} {pageData?.totalPageCount} {pagesCounterLabel[1]}
+            </span>
+          )}
+        </div>
+      </li>
+      <BsPagination.Prev className="ms-auto" onClick={pageData?.gotToPreviousPage} disabled={pageData?.currentPage === 1}>
+        <Icon icon="ama-chevron-left" aria-label={previousAriaLabel} size="xs" />
+      </BsPagination.Prev>
+      <BsPagination.Next onClick={pageData?.goToNextPage} disabled={pageData?.currentPage === pageData?.totalPageCount}>
+        <Icon icon="ama-chevron-right" aria-label={nextAriaLabel} size="xs" />
+      </BsPagination.Next>
+    </BsPagination>
   );
 };

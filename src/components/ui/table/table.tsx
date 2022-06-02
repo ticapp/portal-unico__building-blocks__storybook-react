@@ -6,7 +6,7 @@ import { paginationDataType, sortDataType, usePaginationDataType, useSortTableDa
 import { Button } from '../buttons';
 import { Icon } from '../icon';
 import { Pagination, PaginationProps } from '../pagination';
-import { useWindowSize } from './../../hooks/use-window-size/use-window-size';
+import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
 import './table.scss';
 
 export interface TableProps extends BsTableProps {
@@ -63,10 +63,7 @@ const TableDesktop = ({
   const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, context?.value, null);
   const cssTable = classNames('ama-table', className, 'mb-0');
   const getClassNamesFor = (name: string) => {
-    if (!sortConfig) {
-      return;
-    }
-    return sortConfig.key === name ? sortConfig.direction : undefined;
+    return sortConfig?.key === name ? sortConfig?.direction : undefined;
   };
 
   const renderThead = (item: Array<{ value: string | ReactNode; sorting: boolean }>, keys: string[]) => {
@@ -77,31 +74,21 @@ const TableDesktop = ({
             variant="neutral-dark"
             size="sm"
             onClick={() => requestSort(keys[i])}
-            className={getClassNamesFor(keys[i]) ? getClassNamesFor(keys[i]) + ' shadow-none' : 'shadow-none'}
+            className={getClassNamesFor(keys[i]) ? `${getClassNamesFor(keys[i])} shadow-none` : 'shadow-none'}
             disabled={!data.sorting}
           >
             <span className="pe-8 text-medium-normal">{data.value}</span>
-            {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && <Icon icon="ama-expand" ariaHidden="true" size="sm"></Icon>}
-            {getClassNamesFor(keys[i]) === 'descending' && data.sorting && <Icon icon="ama-collapse" ariaHidden="true" size="sm"></Icon>}
+            {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && <Icon icon="ama-expand" ariaHidden="true" size="sm" />}
+            {getClassNamesFor(keys[i]) === 'descending' && data.sorting && <Icon icon="ama-collapse" ariaHidden="true" size="sm" />}
 
             {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && data.sorting && (
               <span className="text-nowrap lh-1 text-medium-normal">
-                <Icon icon="ama-collapse" ariaHidden="true" size="xs"></Icon>
-                <Icon icon="ama-expand" ariaHidden="true" size="xs"></Icon>
+                <Icon icon="ama-collapse" ariaHidden="true" size="xs" />
+                <Icon icon="ama-expand" ariaHidden="true" size="xs" />
               </span>
             )}
           </Button>
         </th>
-      );
-    });
-  };
-
-  const renderTr = (item: sortDataType[]) => {
-    return item?.map((content: sortDataType) => {
-      return (
-        <tr key={uuidv4()} className="align-middle">
-          {renderTd(content)}
-        </tr>
       );
     });
   };
@@ -112,6 +99,16 @@ const TableDesktop = ({
         {content[k]}
       </td>
     ));
+  };
+
+  const renderTr = (item: sortDataType[]) => {
+    return item?.map((content: sortDataType) => {
+      return (
+        <tr key={uuidv4()} className="align-middle">
+          {renderTd(content)}
+        </tr>
+      );
+    });
   };
 
   const dataKeys = (content: Array<{ [key: string]: string | number | boolean | ReactNode }>) => {
@@ -126,7 +123,7 @@ const TableDesktop = ({
         </thead>
         <tbody>
           {items && renderTr(items)}
-          {!!!items && (
+          {!items && (
             <tr>
               {tableHeaders.map((_value, index) => {
                 return index === 0 ? (
@@ -154,7 +151,7 @@ const TableDesktop = ({
           lineOptionsLabel={lineOptionsLabel}
           itemsCounterLabel={itemsCounterLabel}
           pagesCounterLabel={pagesCounterLabel}
-        ></Pagination>
+        />
       )}
     </>
   );
@@ -169,8 +166,8 @@ export const Table = ({ ...props }: TableProps & PaginationProps) => {
 
   return (
     <>
-      {width >= 1280 && <TableDesktop {...props}></TableDesktop>}
-      {width < 1280 && <TableMobile {...props}></TableMobile>}
+      {width >= 1280 && <TableDesktop {...props} />}
+      {width < 1280 && <TableMobile {...props} />}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { ComponentMeta, Story } from '@storybook/react';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Icon, PaginationProps, Table, TableContextType, TableProps } from '../../../../components/ui';
 import { Context } from '../../../../components/ui/table/table';
 
@@ -12,8 +12,8 @@ export const BasicTable: Story<TableProps & PaginationProps> = (args) => {
   const [value, setValue] = useState(null);
 
   return (
-    <Context.Provider value={{ value, setValue } as TableContextType}>
-      <Table {...args}></Table>
+    <Context.Provider value={useMemo(() => ({ value, setValue } as TableContextType), [value])}>
+      <Table {...args} />
     </Context.Provider>
   );
 };
@@ -33,7 +33,7 @@ BasicTable.args = {
     {
       col_01: (
         <span className="text-medium-normal">
-          <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true"></Icon>
+          <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />
           Muito grave
         </span>
       ),
@@ -128,9 +128,9 @@ BasicTable.args = {
   lineOptionsLabel: 'Linhas por página:',
   itemsCounterLabel: ['-', 'de', 'items'],
   pagesCounterLabel: ['de', 'páginas'],
-  borderless,
-  striped,
-  hover
+  borderless: true,
+  striped: true,
+  hover: true
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};
@@ -141,8 +141,8 @@ export const NoDataTable: Story<TableProps & PaginationProps> = (args) => {
   const [value, setValue] = useState(null);
 
   return (
-    <Context.Provider value={{ value, setValue } as TableContextType}>
-      <Table {...args}></Table>
+    <Context.Provider value={useMemo(() => ({ value, setValue } as TableContextType), [value])}>
+      <Table {...args} />
     </Context.Provider>
   );
 };
@@ -182,9 +182,9 @@ NoDataTable.args = {
   itemsCounterLabel: ['-', 'de', 'items'],
   pagesCounterLabel: ['de', 'páginas'],
   noDataLabel: 'Não existem infrações',
-  borderless,
-  striped,
-  hover
+  borderless: true,
+  striped: true,
+  hover: true
 } as TableProps & PaginationProps;
 
 NoDataTable.argTypes = {};
