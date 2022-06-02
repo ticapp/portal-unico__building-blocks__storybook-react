@@ -163,7 +163,7 @@ export const BreadCrumb = ({ className, breadcrumbs, navAriaLabel, buttonAriaLab
     const { width } = useWindowSize();
 
 
-    if (width >= 1366) {
+    if (width >= 1280) {
         return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} linkAriaLabel={linkAriaLabel} />
     }
     else {
