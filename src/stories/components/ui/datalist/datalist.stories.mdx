@@ -1,0 +1,52 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title='Components/Datalist/Datalist Docs' />
+
+<h2>Description</h2>
+
+<p>Render Datalist component</p>
+
+<h2>Component usage</h2>
+
+```js
+const args = {
+        title: 'Carta de condução',
+        data: [
+            {
+                label: 'Nome',
+                value: 'Marta Pereira Rodrigues'
+            },
+            {
+                label: 'Data de nascimento',
+                value: '18/07/1991'
+            },
+            {
+                label: 'Morada',
+                value: 'Rua da Liberdade, nº 1'
+            },
+            {
+                label: 'País',
+                value: 'Portugal'
+            },
+
+            {
+                label: 'N. da carta de condução',
+                value: '123456789'
+            },
+            {
+                label: 'Categorias',
+                value: 'A, B, C'
+            },
+            {
+                label: 'Data de início',
+                value: '18/07/2019'
+            },
+            {
+                label: 'Data de validade',
+                value: '18/07/2021'
+            }
+        ]
+    }
+    
+  <Datalist {...args} />
+```
