@@ -26,22 +26,22 @@ export const PageError = ({ title = 'Error', message = 'An error occurred. Try a
   return (
     <div className={classes}>
       <Container>
-        <Row className='d-flex flex-column-reverse flex-md-row pt-3'>
+        <Row className="d-flex flex-column-reverse flex-md-row pt-3">
           <Col xs={12} md={8}>
-            <h1 className='text-center text-md-start'>{title}</h1>
-            <p className='text-center text-md-start'>{message}</p>
+            <h1 className="text-center text-md-start">{title}</h1>
+            <p className="text-center text-md-start">{message}</p>
           </Col>
-          <Col xs={12} md={4} className='d-flex justify-content-center'>
-            <Icon size='xl' icon='ama-error' />
+          <Col xs={12} md={4} className="d-flex justify-content-center">
+            <Icon size="xl" icon="ama-error" />
           </Col>
         </Row>
         {link && (
-          <Row className='d-flex justify-content-center pt-3'>
+          <Row className="d-flex justify-content-center pt-3">
             <Col xs={12} md={3}>
-              <Button variant='primary' className='w-100'>
+              <Button variant="primary" className="w-100">
                 <Link link={link.url || '/'} isExternal={link.isExternal || false} target={link.target || '_self'}>
-                  <Icon icon='ama-arrow-left-circle' />
-                  <span className='back-label'>{link.label || 'Back'}</span>
+                  <Icon icon="ama-arrow-left-circle" />
+                  <span className="back-label">{link.label || 'Back'}</span>
                 </Link>
               </Button>
             </Col>

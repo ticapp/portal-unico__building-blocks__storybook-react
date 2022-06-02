@@ -2,6 +2,12 @@ import getPkce from 'oauth-pkce';
 
 import jwtDecode from 'jwt-decode';
 
+export interface OpenIdEndpoints {
+  authorization_endpoint: string;
+  end_session_endpoint: string;
+  token_endpoint: string;
+}
+
 export type PKCECodePair = {
   codeVerifier: string;
   codeChallenge: string;
@@ -54,12 +60,17 @@ const getCodeFromLocation = (): string | null => {
     return null;
   }
   const pairs = split[1].split('&');
-  for (const pair of pairs) {
-    const [key, value] = pair.split('=');
-    if (key === 'code') {
-      return decodeURIComponent(value || '');
-    }
+
+  const codePair = pairs.find((pair) => {
+    const key = pair.split('=').shift();
+    return key === 'code';
+  });
+
+  if (codePair) {
+    const val = codePair.split('=').pop();
+    return decodeURIComponent(val || '');
   }
+
   return null;
 };
 
@@ -74,14 +85,10 @@ const removeCodeFromLocation = (): void => {
     .filter(([key]) => key !== 'code')
     .map((keyAndVal) => keyAndVal.join('='))
     .join('&');
-  window.history.replaceState(
-    window.history.state,
-    'null',
-    base + (newSearch.length ? `?${newSearch}` : '')
-  );
+  window.history.replaceState(window.history.state, 'null', base + (newSearch.length ? `?${newSearch}` : ''));
 };
 
-const toUrlEncoded = (obj: any): string => {
+const toUrlEncoded = (obj = {}): string => {
   return Object.keys(obj)
     .map((k) => {
       const snakeCasedKey = k
@@ -104,7 +111,7 @@ const generatePKCECodes = (): Promise<PKCECodePair> => {
         resolve({
           codeVerifier: verifier,
           codeChallenge: challenge,
-          createdAt: new Date(),
+          createdAt: new Date()
         } as PKCECodePair);
       }
 
@@ -115,35 +122,33 @@ const generatePKCECodes = (): Promise<PKCECodePair> => {
 
 export class AuthService<TIDToken = JWTIDToken> {
   private props: AuthServiceProps;
+
   private timeout?: number;
-  private discoveredEndpoints: any;
+
+  private discoveredEndpoints: OpenIdEndpoints | null;
 
   constructor(props: AuthServiceProps) {
+    this.discoveredEndpoints = null;
     this.props = props;
   }
 
   public async discover(): Promise<void> {
     const { provider } = this.props;
 
-    const response = await fetch(
-      `${provider}/.well-known/openid-configuration`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'GET',
-      }
-    );
+    const response = await fetch(`${provider}/.well-known/openid-configuration`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'GET'
+    });
 
     if (!response.ok) {
-      throw new Error(
-        'Provider does not support discovery endpoint (/.well-known/openid-configuration)'
-      );
+      throw new Error('Provider does not support discovery endpoint (/.well-known/openid-configuration)');
     }
 
     const json = await response.json();
 
-    this.discoveredEndpoints = json;
+    this.discoveredEndpoints = json as OpenIdEndpoints;
 
     //  TRY TO RESUME ONGOING FLOW
     this.resumeFlow();
@@ -151,12 +156,11 @@ export class AuthService<TIDToken = JWTIDToken> {
 
   public async login(): Promise<void> {
     // this will do a full page reload and to to the OAuth2 provider's login page and then redirect back to redirectUri
-    const { clientId, authorizeEndpoint, redirectUri, scopes, audience } =
-      this.props;
+    const { clientId, authorizeEndpoint, redirectUri, scopes, audience } = this.props;
 
     const pkce = await generatePKCECodes();
 
-    const codeChallenge = pkce.codeChallenge;
+    const { codeChallenge } = pkce;
 
     this.setItem('pkce', JSON.stringify(pkce));
     this.setItem('preAuthUri', window.location.href);
@@ -170,12 +174,10 @@ export class AuthService<TIDToken = JWTIDToken> {
       redirectUri,
       ...(audience && { audience }),
       codeChallenge,
-      codeChallengeMethod: 'S256',
+      codeChallengeMethod: 'S256'
     };
 
-    const endpoint = authorizeEndpoint
-      ? authorizeEndpoint
-      : this.Endpoints?.authorization_endpoint || '';
+    const endpoint = authorizeEndpoint || this.Endpoints?.authorization_endpoint || '';
 
     // Should responds with a 302 redirect
     const url = `${endpoint}?${toUrlEncoded(query)}`;
@@ -183,7 +185,7 @@ export class AuthService<TIDToken = JWTIDToken> {
     window.location.replace(url);
   }
 
-  public logout(endSession: boolean = false): void {
+  public logout(endSession = false): void {
     this.removeItem('pkce');
     this.removeItem('auth');
     this.removeItem('preAuthUri');
@@ -195,12 +197,10 @@ export class AuthService<TIDToken = JWTIDToken> {
 
       const query = {
         client_id: clientId,
-        post_logout_redirect_uri: redirectUri,
+        post_logout_redirect_uri: redirectUri
       };
 
-      const endpoint = logoutEndpoint
-        ? logoutEndpoint
-        : this.Endpoints?.end_session_endpoint || '';
+      const endpoint = logoutEndpoint || this.Endpoints?.end_session_endpoint || '';
 
       const url = `${endpoint}?${toUrlEncoded(query)}`;
       window.location.replace(url);
@@ -208,7 +208,7 @@ export class AuthService<TIDToken = JWTIDToken> {
   }
 
   get User(): TIDToken | null {
-    if (null === this.Tokens) {
+    if (this.Tokens === null) {
       return null;
     }
 
@@ -219,7 +219,7 @@ export class AuthService<TIDToken = JWTIDToken> {
     return JSON.parse(this.getItem('auth') || '{}');
   }
 
-  get Endpoints(): any {
+  get Endpoints(): OpenIdEndpoints | null {
     return this.discoveredEndpoints;
   }
 
@@ -250,58 +250,46 @@ export class AuthService<TIDToken = JWTIDToken> {
         this.removeItem('pkce');
         this.removeItem('auth');
         removeCodeFromLocation();
-        console.error(e);
       }
     } else if (this.props.autoRefresh) {
       this.startTimer();
     }
   }
 
-  private async fetchTokens(
-    code: string,
-    isRefresh: boolean
-  ): Promise<AuthTokens> {
+  private async fetchTokens(code: string, isRefresh: boolean): Promise<AuthTokens> {
     // this happens after a full page reload. Read the code from localstorage
-    const {
-      clientId,
-      contentType,
-      tokenEndpoint,
-      redirectUri,
-      autoRefresh = true,
-    } = this.props;
+    const { clientId, contentType, tokenEndpoint, redirectUri, autoRefresh = true } = this.props;
 
     let payload: TokenRequestBody = {
       clientId,
       redirectUri,
-      grantType: 'authorization_code',
+      grantType: 'authorization_code'
     };
 
     if (isRefresh) {
       payload = {
         ...payload,
         grantType: 'refresh_token',
-        refresh_token: code,
+        refresh_token: code
       };
     } else {
       const pkce: PKCECodePair = this.getPkce();
-      const codeVerifier = pkce.codeVerifier;
+      const { codeVerifier } = pkce;
       payload = {
         ...payload,
         code,
-        codeVerifier,
+        codeVerifier
       };
     }
 
-    const endpoint = tokenEndpoint
-      ? tokenEndpoint
-      : this.Endpoints?.token_endpoint || '';
+    const endpoint = tokenEndpoint || this.Endpoints?.token_endpoint || '';
 
     const response = await fetch(`${endpoint}`, {
       headers: {
-        'Content-Type': contentType || 'application/x-www-form-urlencoded',
+        'Content-Type': contentType || 'application/x-www-form-urlencoded'
       },
       method: 'POST',
-      body: toUrlEncoded(payload),
+      body: toUrlEncoded(payload)
     });
 
     if (!response.ok) {
@@ -310,7 +298,7 @@ export class AuthService<TIDToken = JWTIDToken> {
 
     this.removeItem('pkce');
 
-    let json = await response.json();
+    const json = await response.json();
 
     if (isRefresh && !json.refresh_token) {
       json.refresh_token = payload.refresh_token;
@@ -339,7 +327,7 @@ export class AuthService<TIDToken = JWTIDToken> {
 
   private getPkce(): PKCECodePair {
     const pkce = this.getItem('pkce');
-    if (null === pkce) {
+    if (pkce === null) {
       throw new Error('PKCE pair not found in local storage');
     } else {
       return JSON.parse(pkce);
@@ -373,7 +361,7 @@ export class AuthService<TIDToken = JWTIDToken> {
             removeCodeFromLocation();
           }
         })
-        .catch((_e) => {
+        .catch(() => {
           this.removeItem('auth');
           removeCodeFromLocation();
         });

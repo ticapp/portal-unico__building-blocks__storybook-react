@@ -1,11 +1,11 @@
 import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Button, ButtonProps } from '../../../../components/ui';
 import { Col, Row } from 'react-bootstrap';
+import { Button, ButtonProps } from '../../../../components/ui';
 
 export default {
   title: 'Components/Buttons',
-  component: Button,
+  component: Button
 } as ComponentMeta<typeof Button>;
 
 export const BasicButtons: Story<ButtonProps> = () => {
@@ -13,7 +13,7 @@ export const BasicButtons: Story<ButtonProps> = () => {
     className: 'shadow-none',
     children: 'Default',
     variant: 'brand-green-main',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsDisabled = {
@@ -21,14 +21,14 @@ export const BasicButtons: Story<ButtonProps> = () => {
     children: 'Default',
     variant: 'brand-green-main',
     disabled: true,
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsSM = {
     className: 'shadow-none',
     children: 'Default',
     variant: 'brand-green-main',
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsSMDisabled = {
@@ -36,21 +36,21 @@ export const BasicButtons: Story<ButtonProps> = () => {
     children: 'Default',
     variant: 'brand-green-main',
     disabled: true,
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsFull = {
     className: 'shadow-none w-100',
     children: 'Default',
     variant: 'brand-green-main',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsOutline = {
     className: 'shadow-none',
     children: 'Default',
     variant: 'outline-brand-green-main',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsOutlineDisabled = {
@@ -58,14 +58,14 @@ export const BasicButtons: Story<ButtonProps> = () => {
     children: 'Default',
     variant: 'outline-brand-green-main',
     disabled: true,
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsOutlineSM = {
     className: 'shadow-none',
     children: 'Default',
     variant: 'outline-brand-green-main',
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsOutlineSMDisabled = {
@@ -73,71 +73,71 @@ export const BasicButtons: Story<ButtonProps> = () => {
     children: 'Default',
     variant: 'outline-brand-green-main',
     disabled: true,
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsOutlineFull = {
     className: 'shadow-none w-100',
     children: 'Default',
     variant: 'outline-brand-green-main',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   return (
     <>
       <h4>Size LG of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...args} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsDisabled} />
         </Col>
       </Row>
       <h4>Size SM of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsSM} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsSMDisabled} />
         </Col>
       </Row>
       <h4>Full width column</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
           <Button {...argsFull} />
         </Col>
       </Row>
       <hr />
       <h4>Size LG of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsOutline} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsOutlineDisabled} />
         </Col>
       </Row>
       <h4>Size SM of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsOutlineSM} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsOutlineSMDisabled} />
         </Col>
       </Row>
       <h4>Full width column</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
           <Button {...argsOutlineFull} />
         </Col>
@@ -154,7 +154,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     variant: 'brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
   const argsDisabled = {
     className: 'shadow-none',
@@ -163,7 +163,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
     disabled: true,
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsSM = {
@@ -172,7 +172,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     variant: 'brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsSMDisabled = {
@@ -182,7 +182,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
     disabled: true,
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsFull = {
@@ -191,7 +191,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     variant: 'brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsOutline = {
@@ -200,7 +200,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     variant: 'outline-brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsOutlineDisabled = {
@@ -210,7 +210,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
     disabled: true,
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsOutlineSM = {
@@ -219,7 +219,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     variant: 'outline-brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsOutlineSMDisabled = {
@@ -229,7 +229,7 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
     disabled: true,
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsOutlineFull = {
@@ -238,63 +238,63 @@ export const ButtonRightIcon: Story<ButtonProps> = () => {
     variant: 'outline-brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'right',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
   return (
     <>
       <h4>Size LG of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...args} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsDisabled} />
         </Col>
       </Row>
       <h4>Size SM of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsSM} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsSMDisabled} />
         </Col>
       </Row>
       <h4>Full width column</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
           <Button {...argsFull} />
         </Col>
       </Row>
       <hr />
       <h4>Size LG of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsOutline} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsOutlineDisabled} />
         </Col>
       </Row>
       <h4>Size SM of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsOutlineSM} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsOutlineSMDisabled} />
         </Col>
       </Row>
       <h4>Full width column</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
           <Button {...argsOutlineFull} />
         </Col>
@@ -311,7 +311,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     variant: 'brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
   const argsDisabled = {
     className: 'shadow-none',
@@ -320,7 +320,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
     disabled: true,
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsSM = {
@@ -329,7 +329,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     variant: 'brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsSMDisabled = {
@@ -339,7 +339,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
     disabled: true,
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsFull = {
@@ -348,7 +348,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     variant: 'brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
   const argsOutline = {
     className: 'shadow-none',
@@ -356,7 +356,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     variant: 'outline-brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsOutlineDisabled = {
@@ -366,7 +366,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
     disabled: true,
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
 
   const argsOutlineSM = {
@@ -375,7 +375,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     variant: 'outline-brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsOutlineSMDisabled = {
@@ -385,7 +385,7 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
     disabled: true,
-    size: 'sm',
+    size: 'sm'
   } as ButtonProps;
 
   const argsOutlineFull = {
@@ -394,63 +394,63 @@ export const ButtonLeftIcon: Story<ButtonProps> = () => {
     variant: 'outline-brand-green-main',
     iconName: 'ama-arrow-right',
     iconDirection: 'left',
-    size: 'lg',
+    size: 'lg'
   } as ButtonProps;
   return (
     <>
       <h4>Size LG of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...args} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsDisabled} />
         </Col>
       </Row>
       <h4>Size SM of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsSM} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsSMDisabled} />
         </Col>
       </Row>
       <h4>Full width column</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
           <Button {...argsFull} />
         </Col>
       </Row>
       <hr />
       <h4>Size LG of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsOutline} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsOutlineDisabled} />
         </Col>
       </Row>
       <h4>Size SM of buttons</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
-          <div className='strong'>Normal</div>
+          <div className="strong">Normal</div>
           <Button {...argsOutlineSM} />
         </Col>
         <Col xs={4}>
-          <div className='strong'>Disabled</div>
+          <div className="strong">Disabled</div>
           <Button {...argsOutlineSMDisabled} />
         </Col>
       </Row>
       <h4>Full width column</h4>
-      <Row className='mb-16'>
+      <Row className="mb-16">
         <Col xs={4}>
           <Button {...argsOutlineFull} />
         </Col>
@@ -465,29 +465,27 @@ export const ButtonLink: Story<ButtonProps> = () => {
     className: 'shadow-none',
     children: 'Default',
     variant: 'link',
-    href: 'https://www.google.pt',
+    href: 'https://www.google.pt'
   } as ButtonProps;
 
   const argsDisabled = {
     className: 'shadow-none',
     children: 'Default',
     variant: 'link',
-    disabled: true,
+    disabled: true
   } as ButtonProps;
 
   return (
-    <>
-      <Row className='mb-16'>
-        <Col xs={4}>
-          <div className='strong'>Normal</div>
-          <Button {...args} />
-        </Col>
-        <Col xs={4}>
-          <div className='strong'>Disabled</div>
-          <Button {...argsDisabled} />
-        </Col>
-      </Row>
-    </>
+    <Row className="mb-16">
+      <Col xs={4}>
+        <div className="strong">Normal</div>
+        <Button {...args} />
+      </Col>
+      <Col xs={4}>
+        <div className="strong">Disabled</div>
+        <Button {...argsDisabled} />
+      </Col>
+    </Row>
   );
 };
 

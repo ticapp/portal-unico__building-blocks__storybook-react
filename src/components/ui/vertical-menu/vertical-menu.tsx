@@ -20,18 +20,13 @@ export interface VerticalMenuProps {
   links: VerticalMenuLink[];
 }
 
-const VerticalMenuMobile: FC<VerticalMenuProps> = ({
-  ariaLabel,
-  links,
-}: VerticalMenuProps) => {
+const VerticalMenuMobile: FC<VerticalMenuProps> = ({ ariaLabel, links }: VerticalMenuProps) => {
   const flatLinks = (link: VerticalMenuLink, lvl: number) => {
     if (!link.children) {
-      return { ...link, lvl: lvl };
+      return { ...link, lvl };
     }
 
-    return [{ ...link, lvl: lvl }].concat(
-      link.children.map((innerLink) => flatLinks(innerLink, lvl + 1)).flat()
-    );
+    return [{ ...link, lvl }].concat(link.children.map((innerLink) => flatLinks(innerLink, lvl + 1)).flat());
   };
 
   const flatLinkArray = links.map((l) => flatLinks(l, 0)).flat();
@@ -44,28 +39,18 @@ const VerticalMenuMobile: FC<VerticalMenuProps> = ({
       labelElement: (
         <span className={`ps-${l.lvl * 24}`}>
           {l.link && (
-            <NavLink
-              exact={true}
-              href={l.link}
-              className="vertical-nav-link w-100"
-              tabIndex={-1}
-            >
-              <span className="label d-inline-flex align-items-center">
-                {l.label}
-              </span>
+            <NavLink exact href={l.link} className="vertical-nav-link w-100" tabIndex={-1}>
+              <span className="label d-inline-flex align-items-center">{l.label}</span>
             </NavLink>
           )}
 
           {!l.link && (
-            <span
-              className="label d-inline-flex align-items-center"
-              tabIndex={-1}
-            >
+            <span className="label d-inline-flex align-items-center" tabIndex={-1}>
               {l.label}
             </span>
           )}
         </span>
-      ),
+      )
     } as SelectOption;
   });
 
@@ -98,10 +83,7 @@ const VerticalMenuMobile: FC<VerticalMenuProps> = ({
   );
 };
 
-const VerticalMenuDesktop: FC<VerticalMenuProps> = ({
-  ariaLabel,
-  links,
-}: VerticalMenuProps) => {
+const VerticalMenuDesktop: FC<VerticalMenuProps> = ({ ariaLabel, links }: VerticalMenuProps) => {
   const pathname = usePathname();
 
   const classes = classNames('ama-vertical-menu-desktop');
@@ -115,11 +97,7 @@ const VerticalMenuDesktop: FC<VerticalMenuProps> = ({
   };
 
   const buildMenuItem = (item: VerticalMenuLink, lvl: number) => {
-    const liClasses = classNames(
-      `${hasActiveDescendant(item) ? 'parent-active' : ''}`,
-      `${item.children ? 'with-children' : ''}`,
-      'mb-16'
-    );
+    const liClasses = classNames(`${hasActiveDescendant(item) ? 'parent-active' : ''}`, `${item.children ? 'with-children' : ''}`, 'mb-16');
 
     const liId = uuidv4();
     const subMenuId = uuidv4();
@@ -129,16 +107,14 @@ const VerticalMenuDesktop: FC<VerticalMenuProps> = ({
         <div className="tree-item-container">
           {item.link && (
             <NavLink
-              exact={true}
+              exact
               href={item.link}
               className="vertical-nav-link"
               activeClassName="active"
               role="treeitem"
               aria-owns={item.children ? subMenuId : ''}
             >
-              <span className="label d-inline-flex align-items-center">
-                {item.label}
-              </span>
+              <span className="label d-inline-flex align-items-center">{item.label}</span>
             </NavLink>
           )}
 
@@ -154,15 +130,8 @@ const VerticalMenuDesktop: FC<VerticalMenuProps> = ({
           )}
 
           {item.children && (
-            <ul
-              className="ms-24"
-              aria-label={item.label}
-              id={subMenuId}
-              role="group"
-            >
-              {item.children.map((itemChildren) =>
-                buildMenuItem(itemChildren, lvl + 1)
-              )}
+            <ul className="ms-24" aria-label={item.label} id={subMenuId} role="group">
+              {item.children.map((itemChildren) => buildMenuItem(itemChildren, lvl + 1))}
             </ul>
           )}
         </div>
@@ -179,23 +148,16 @@ const VerticalMenuDesktop: FC<VerticalMenuProps> = ({
   );
 };
 
-const VerticalMenu: FC<VerticalMenuProps> = ({
-  ariaLabel = 'Vertical Navigation Menu',
-  links = [],
-}: VerticalMenuProps) => {
+const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation Menu', links = [] }: VerticalMenuProps) => {
   const { width } = useWindowSize();
 
   const classes = classNames('ama-vertical-menu');
 
   return (
     <div className={classes}>
-      {width >= 768 && (
-        <VerticalMenuDesktop ariaLabel={ariaLabel} links={links} />
-      )}
+      {width >= 768 && <VerticalMenuDesktop ariaLabel={ariaLabel} links={links} />}
 
-      {width < 768 && (
-        <VerticalMenuMobile ariaLabel={ariaLabel} links={links} />
-      )}
+      {width < 768 && <VerticalMenuMobile ariaLabel={ariaLabel} links={links} />}
     </div>
   );
 };

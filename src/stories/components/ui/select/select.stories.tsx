@@ -5,7 +5,7 @@ import { Select, SelectOption, SelectProps } from '../../../../components';
 export default {
   title: 'Components/Select',
   component: Select,
-  parameters: { controls: { sort: 'requiredFirst' } },
+  parameters: { controls: { sort: 'requiredFirst' } }
 } as ComponentMeta<typeof Select>;
 
 export const SingleSelect: Story<SelectProps> = (args) => {
@@ -26,49 +26,49 @@ SingleSelect.args = {
     { value: 4, label: 'Billy Doe' },
     { value: 5, label: 'Martha Doe' },
     { value: 6, label: 'Daisy Doe' },
-    { value: 7, label: 'Jane Doe' },
-  ] as SelectOption[],
+    { value: 7, label: 'Jane Doe' }
+  ] as SelectOption[]
 };
 SingleSelect.argTypes = {
   disabled: {
     description: 'Change the availability of the select element',
-    control: 'boolean',
+    control: 'boolean'
   },
   multiSelection: {
     description: 'Allow or disallow multiple selection of options',
-    control: 'boolean',
+    control: 'boolean'
   },
   searchable: {
     description: 'Allow or disallow typing to search for option',
-    control: 'boolean',
+    control: 'boolean'
   },
   options: {
     description: 'Options to render inside select',
-    control: { control: 'object' },
+    control: { control: 'object' }
   },
   id: {
     disable: true,
-    control: false,
+    control: false
   },
   labelledby: {
     disable: true,
-    control: false,
+    control: false
   },
   allwaysOpen: {
     description: 'Keep select dropdown always open',
-    control: 'boolean',
+    control: 'boolean'
   },
   className: {
     description: 'Additional css class names',
-    control: 'text',
-  },
+    control: 'text'
+  }
 };
 
 export const MultiSelect: Story<SelectProps> = (args) => {
   return (
     <>
       <label id="select-label">My Options</label>
-      <Select {...args} multiSelection={true} labelledby="select-label" />
+      <Select {...args} multiSelection labelledby="select-label" />
     </>
   );
 };
@@ -82,40 +82,40 @@ MultiSelect.args = {
     { value: 4, label: 'Billy Doe' },
     { value: 5, label: 'Martha Doe' },
     { value: 6, label: 'Daisy Doe' },
-    { value: 7, label: 'Jane Doe' },
-  ] as SelectOption[],
+    { value: 7, label: 'Jane Doe' }
+  ] as SelectOption[]
 };
 MultiSelect.argTypes = {
   disabled: {
     description: 'Change the availability of the select element',
-    control: 'boolean',
+    control: 'boolean'
   },
   multiSelection: {
     description: 'Allow or disallow multiple selection of options',
-    control: 'boolean',
+    control: 'boolean'
   },
   searchable: {
     description: 'Allow or disallow typing to search for option',
-    control: 'boolean',
+    control: 'boolean'
   },
   options: {
     description: 'Options to render inside select',
-    control: { control: 'object' },
+    control: { control: 'object' }
   },
   id: {
     disable: true,
-    control: false,
+    control: false
   },
   labelledby: {
     disable: true,
-    control: false,
+    control: false
   },
   allwaysOpen: {
     description: 'Keep select dropdown always open',
-    control: 'boolean',
+    control: 'boolean'
   },
   className: {
     description: 'Additional css class names',
-    control: 'text',
-  },
+    control: 'text'
+  }
 };

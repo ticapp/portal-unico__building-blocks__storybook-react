@@ -52,7 +52,10 @@ $threshold: 55%;
 
 @each $color, $value in index.$theme-colors {
   .btn-outline-#{$color} {
-    @include index.button-outline-variant($color: $value, $color-hover: contrast-color(check-light($value, index.$color-contrast-light), index.$neutral-white, $value));
+    @include index.button-outline-variant(
+      $color: $value,
+      $color-hover: contrast-color(check-light($value, index.$color-contrast-light), index.$neutral-white, $value)
+    );
     &:hover {
       svg {
         fill: contrast-color($value, $value, index.$neutral-white);
