@@ -18,6 +18,11 @@ export const BasicStatusBar: ComponentStory<typeof StatusBar> = (args) => {
 
 BasicStatusBar.storyName = 'StatusBar Example';
 
-BasicStatusBar.bind({}).args = {
+BasicStatusBar.args = {
     url: 'https://www.google.com',
+    title: 'Pontos da carta de condução',
+    subtitle: '15 pontos',
+    icon: 'ama-badge',
+    backButtonText: 'Voltar ao início',
+
 }

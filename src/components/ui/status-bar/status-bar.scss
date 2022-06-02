@@ -63,3 +63,56 @@
     }
 
 }
+
+.ama-status-bar-container-mobile {
+
+    max-height: 64px;
+    background-color: index.$brand-green-main;
+
+    .info-container {
+        color: index.$neutral-white;
+
+        svg {
+            width: 48px;
+            height: 48px;
+            fill: index.$neutral-white;
+        }
+
+    }
+
+    .status-bar-content-mobile {
+        height: 64px;
+
+
+        button {
+
+            background-color: transparent;
+            border: transparent;
+
+
+
+            svg {
+                width: 28px;
+                height: 28px;
+
+                fill: index.$neutral-white;
+            }
+        }
+
+    }
+
+    .info-content {
+        height: 100%;
+
+
+        p {
+            @include index.text-medium-bold;
+        }
+
+        span {
+            @include index.text-medium-normal;
+        }
+
+    }
+
+}
