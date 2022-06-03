@@ -13,6 +13,7 @@
             width: 48px;
             height: 48px;
             fill: index.$neutral-white;
+
         }
 
     }
@@ -22,7 +23,8 @@
         height: 72px;
 
 
-        button {
+        .redirect {
+            text-decoration: transparent;
 
             background-color: index.$neutral-white;
             border: transparent;
@@ -84,8 +86,9 @@
         height: 64px;
 
 
-        button {
+        .redirect {
 
+            text-decoration: transparent;
             background-color: transparent;
             border: transparent;
 
@@ -96,6 +99,7 @@
                 height: 28px;
 
                 fill: index.$neutral-white;
+
             }
         }
 

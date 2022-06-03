@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { useWindowSize } from '../../hooks';
 import { Icon } from '../icon';
+import { Link } from '../link';
 
 import './status-bar.scss';
 
@@ -24,10 +25,6 @@ export interface StatusBarPropsMobile {
 
 export const StatusBarMobile = ({ className, url, icon, title, subtitle }: StatusBarPropsMobile) => {
 
-    function RedirectTo() {
-        window.location.href = url;
-    }
-
 
     const containerClassName = classNames('ama-status-bar-container-mobile', 'w-100 d-flex align-items-center justify-content-center', className)
     const infoContainerClassName = classNames('status-bar-content-mobile', 'w-100 d-flex align-items-center justify-content-between my-0 mx-auto');
@@ -36,9 +33,9 @@ export const StatusBarMobile = ({ className, url, icon, title, subtitle }: Statu
         <div className={containerClassName}>
             <div className={infoContainerClassName}>
 
-                <button className='d-flex align-items-center justify-content-center pl-16 py-8' onClick={() => RedirectTo()}>
+                <Link link={url} className='redirect d-flex align-items-center justify-content-center pl-16 py-8'>
                     <Icon className='me-8' ariaHidden={true} icon="ama-arrow-left" />
-                </button>
+                </Link>
 
                 <div className='info-container py-8 pe-12 m-0 d-flex align-items-center justify-content-center'>
                     <div className='info-content me-24'>
@@ -60,11 +57,6 @@ export const StatusBar = ({ className, url, icon, backButtonText, title, subtitl
     const containerClassName = classNames('ama-status-bar-container', 'w-100 d-flex align-items-center justify-content-center', className)
     const infoContainerClassName = classNames('status-bar-content', 'w-100 d-flex align-items-center justify-content-between my-0 mx-auto');
 
-
-    function RedirectTo() {
-        window.location.href = url;
-    }
-
     const { width } = useWindowSize();
 
     if (width >= 768) {
@@ -72,10 +64,10 @@ export const StatusBar = ({ className, url, icon, backButtonText, title, subtitl
             <div className={containerClassName}>
                 <div className={infoContainerClassName}>
 
-                    <button className='d-flex align-items-center justify-content-center py-10 px-16' onClick={() => RedirectTo()}>
+                    <Link link={url} className='redirect d-flex align-items-center justify-content-center py-10 px-16' >
                         <Icon className='me-8' ariaHidden={true} icon="ama-arrow-left" />
                         <p className='w-100 m-0'>{backButtonText}</p>
-                    </button>
+                    </Link>
 
                     <div className='info-container py-8 m-0 d-flex align-items-center justify-content-center'>
                         <div className='info-content me-24'>

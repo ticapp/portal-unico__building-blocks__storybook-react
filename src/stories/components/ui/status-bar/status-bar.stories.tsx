@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { StatusBar } from '../../../../components/ui/status-bar';
 
 
@@ -12,7 +13,9 @@ export const BasicStatusBar: ComponentStory<typeof StatusBar> = (args) => {
 
 
     return (
-        <StatusBar {...args} />
+        <BrowserRouter>
+            <StatusBar {...args} />
+        </BrowserRouter>
     );
 };
 
