@@ -7,5 +7,5 @@
   "quoteProps": "consistent",
   "trailingComma": "none",
   "bracketSpacing": true,
-  "endOfLine": "crlf"
+  "endOfLine": "auto"
 }

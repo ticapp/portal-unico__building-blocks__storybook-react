@@ -17,7 +17,7 @@ export const Example: Story = () => {
     }
   };
 
-  const clickHandler = () => {
+  const handleActionInside = () => {
     if (dummyRef.current) {
       const elem = dummyRef.current as HTMLDivElement;
       elem.innerHTML = 'You clicked inside a dummy div... click outside of the div element';
@@ -25,10 +25,18 @@ export const Example: Story = () => {
     }
   };
 
+  const clickHandler = () => {
+    handleActionInside();
+  };
+
+  const keyDownHandler = () => {
+    handleActionInside();
+  };
+
   useOutsideElementClick(dummyRef, () => customCallback());
 
   return (
-    <div ref={dummyRef} onClick={clickHandler} style={{ backgroundColor: 'salmon' }}>
+    <div tabIndex={0} ref={dummyRef} role="button" onKeyDown={keyDownHandler} onClick={clickHandler} style={{ backgroundColor: 'salmon' }}>
       Click me.
     </div>
   );

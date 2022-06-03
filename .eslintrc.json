@@ -21,6 +21,7 @@
     "import/extensions": "off",
     "import/prefer-default-export": "off",
 
+    "react/prop-types": "off",
     "react/require-default-props": "off",
     "react/function-component-definition": "off",
     "react/jsx-filename-extension": "off",
@@ -29,7 +30,8 @@
 
     "dot-notation": "off",
 
-    "jsx-a11y/no-noninteractive-tabindex": "off"
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "jsx-a11y/anchor-is-valid": "off"
   },
   "settings": {
     "import/resolver": {
