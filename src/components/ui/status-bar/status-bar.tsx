@@ -26,7 +26,7 @@ export interface StatusBarPropsMobile {
 export const StatusBarMobile = ({ className, url, icon, title, subtitle }: StatusBarPropsMobile) => {
 
 
-    const containerClassName = classNames('ama-status-bar-container-mobile', 'w-100 d-flex align-items-center justify-content-center', className)
+    const containerClassName = classNames('ama-status-bar-container-mobile', 'w-100 px-16 d-flex align-items-center justify-content-center', className)
     const infoContainerClassName = classNames('status-bar-content-mobile', 'w-100 d-flex align-items-center justify-content-between my-0 mx-auto');
 
     return (
