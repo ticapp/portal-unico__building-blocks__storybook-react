@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { KeyboardEvent } from 'react';
 import { Icon } from '../icon';
 import './scroll-top.scss';
 
@@ -11,12 +11,26 @@ export type ScrollTopProps = {
 export function ScrollTop({ className }: ScrollTopProps) {
   const classes = classNames('ama-scroll-top', className, 'd-flex', 'justify-content-center', 'align-items-center', 'rounded-circle');
 
+  const scrollTop = () => {
+    if (window) {
+      window.scrollTo(0, 0);
+    }
+  };
+
   const onClickHandler = () => {
-    window && window.scrollTo(0, 0);
+    scrollTop();
+  };
+
+  const onkeydownHandler = (evt: KeyboardEvent) => {
+    const { key } = evt;
+
+    if (key === 'Enter') {
+      scrollTop();
+    }
   };
 
   return (
-    <div className={classes} onClick={onClickHandler}>
+    <div tabIndex={0} role="button" className={classes} onClick={onClickHandler} onKeyDown={onkeydownHandler}>
       <Icon icon="ama-collapse" />
     </div>
   );

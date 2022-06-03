@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,18 +13,18 @@ export default {
 
 export const BasicFooter: Story<FooterProps> = () => {
   const args = {
-    headerTitle_01: 'Contactos e sites Públicos',
-    contentInfo_01: [
+    headerTitle01: 'Contactos e sites Públicos',
+    contentInfo01: [
       { label: 'Centro de Contacto Cidadão (dias úteis: 9h - 18h)', value: '300 003 990 ou 210 489 010' },
       { label: 'Centro de Contacto Empresas (dias úteis: 9h - 18h)', value: '300 003 980 ou 210 489 010' }
     ],
-    headerTitle_02: 'Links úteis',
-    headerTitle_03: 'Redes sociais',
+    headerTitle02: 'Links úteis',
+    headerTitle03: 'Redes sociais',
     classFooterCopyright: 'text-center fw-bold',
-    classFooterCol_01: 'bg-brand-yellow-terciary',
-    classFooterCol_02: 'bg-brand-yellow-secondary border border-white border-1',
-    classFooterCol_03: 'bg-brand-yellow-main border border-white border-1',
-    listDataCol_01: [
+    classFooterCol01: 'bg-brand-yellow-terciary',
+    classFooterCol02: 'bg-brand-yellow-secondary border border-white border-1',
+    classFooterCol03: 'bg-brand-yellow-main border border-white border-1',
+    listDataCol01: [
       {
         value: (
           <>
@@ -58,7 +59,7 @@ export const BasicFooter: Story<FooterProps> = () => {
         title: 'internal link'
       }
     ],
-    listDataCol_02: [
+    listDataCol02: [
       {
         value: (
           <>
@@ -104,7 +105,7 @@ export const BasicFooter: Story<FooterProps> = () => {
         title: 'internal link'
       }
     ],
-    listDataCol_03: [
+    listDataCol03: [
       {
         value: <Icon ariaHidden="true" icon="ama-facebook" alt="AMA Facebook" />,
         hasExternalLink: true,
@@ -180,8 +181,8 @@ export const BasicFooter: Story<FooterProps> = () => {
         title: 'A sua Europa'
       }
     ],
-    listDataCol_01_Type: 'none',
-    listDataCol_02_Type: 'none'
+    listDataCol01Type: 'none',
+    listDataCol02Type: 'none'
   } as FooterProps;
 
   return (

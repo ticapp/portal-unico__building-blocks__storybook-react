@@ -1,9 +1,9 @@
-import React, { ReactNode } from 'react';
-import './card.scss';
 import classNames from 'classnames';
+import React, { ReactNode } from 'react';
 import { Card as BsCard, CardProps as BsCardProps, Col, Container, Row } from 'react-bootstrap';
 import { Icon } from '../icon';
 import { Link } from '../link';
+import './card.scss';
 
 export interface CardProps extends BsCardProps {
   /** Add classes to the Card component */

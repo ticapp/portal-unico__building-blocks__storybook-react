@@ -1,3 +1,5 @@
+const EslintWebpackPlugin = require('eslint-webpack-plugin');
+
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(ts|tsx)'],
   addons: [
@@ -9,7 +11,8 @@ module.exports = {
   ],
   framework: '@storybook/react',
   core: {
-    builder: '@storybook/builder-webpack5'
+    builder: '@storybook/builder-webpack5',
+    disableTelemetry: true
   },
   typescript: {
     check: false,
@@ -23,5 +26,16 @@ module.exports = {
           : true;
       }
     }
+  },
+
+  webpackFinal: (config) => {
+    return {
+      ...config,
+      plugins: config.plugins.filter((plugin) => {
+        // Remove the eslint-webpack-plugin: We already check our code, storybook doesn't need to bother
+        // doing it again with potentially different options.
+        return !(plugin instanceof EslintWebpackPlugin);
+      })
+    };
   }
 };

@@ -1,6 +1,7 @@
 @use '../../../scss/index' as index;
 
 $threshold: 55%;
+
 @function contrast-color($color, $dark, $light) {
   @return if(lightness($color) < $threshold, $light, $dark);
 }
@@ -30,7 +31,7 @@ $threshold: 55%;
     );
     &:hover {
       svg {
-        fill: contrast-color($value, index.$neutral-white, $value);
+        fill: contrast-color($value, $value, index.$neutral-white);
       }
     }
     .btn-check:focus + &,
@@ -43,7 +44,6 @@ $threshold: 55%;
         fill: contrast-color($value, $value, index.$neutral-white);
       }
     }
-
     svg {
       fill: contrast-color($value, $value, index.$neutral-white);
     }
@@ -71,7 +71,6 @@ $threshold: 55%;
         fill: contrast-color($value, index.$neutral-white, $value);
       }
     }
-
     svg {
       fill: contrast-color($value, index.$neutral-white, $value);
     }
