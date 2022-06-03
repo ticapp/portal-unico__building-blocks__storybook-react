@@ -207,9 +207,10 @@ const TableMobile = ({ ...props }: TableProps) => {
       <dl key={uuidv4()} className="row">
         {dataShown}
       </dl>
-      <button type="button" onClick={toggle}>
+
+      <Button className="shadow-none" variant="link" onClick={toggle}>
         {seeMore ? 'more' : 'less'}
-      </button>
+      </Button>
     </div>
   );
 };

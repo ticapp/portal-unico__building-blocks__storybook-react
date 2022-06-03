@@ -82,4 +82,7 @@ $threshold: 55%;
   &:visited {
     color: index.$details-links-visited !important;
   }
+  &:focus {
+    border: 1px solid index.$neutral-black;
+  }
 }
