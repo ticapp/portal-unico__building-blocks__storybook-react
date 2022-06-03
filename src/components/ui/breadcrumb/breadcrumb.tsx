@@ -116,6 +116,7 @@ const BreadCrumbMobile = ({ className, breadcrumbs, navAriaLabel, buttonAriaLabe
             <p className='title mb-8'>{breadCrumbMobileTitle}</p>
 
             <button
+                type='button'
                 aria-expanded={isOpen}
                 className={cssBreadCrumbTableHistoryButton}
                 onClick={setIsOpenHandler}
