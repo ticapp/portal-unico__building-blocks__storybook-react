@@ -161,7 +161,8 @@ const TableDesktop = ({
   );
 };
 
-const TableMobile = ({ className, tableHeaders, tableData, ...props }: TableProps) => {
+const TableMobile = ({ ...props }: TableProps) => {
+  const { className, tableHeaders, tableData } = { ...props };
   const cssTableMobile = classNames('ama-table-mobile', className);
   const [seeMore, setSeeMore] = useState<boolean>(true);
   const [itemsShown, setItemsShown] = useState<number>(2);
