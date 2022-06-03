@@ -26,7 +26,7 @@ const InputTextDisabled = ({ className, placeholder, label, name, ...rest }: Inp
 
     return (
         <span className={containerClassNames} >
-            <label className='mb-8' htmlFor={inputId}>{label}</label>
+            {label && <label className='mb-8' htmlFor={inputId}>{label}</label>}
             <input name={name} disabled className={inputTextClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
         </span>
     )
@@ -41,7 +41,7 @@ const InputTextEnabled = ({ className, placeholder, label, name, ...rest }: Inpu
 
     return (
         <span className={containerDisabledClassNames}>
-            <label className='mb-8' htmlFor={inputId}>{label}</label>
+            {label && <label className='mb-8' htmlFor={inputId}>{label}</label>}
             <input name={name} className={inputTextDisabledClassNames} placeholder={placeholder} id={inputId} type='text' {...rest} />
         </span>
     )
