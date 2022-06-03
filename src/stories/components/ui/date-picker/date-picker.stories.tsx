@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { DatePicker, DatePickerProps, DaysLabels, MonthsLabels, ModalAriaLabels } from '../../../../components/ui';

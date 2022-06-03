@@ -24,6 +24,13 @@ build-metadata:
     - mkdir $METADATA_PATH
     - cat package.json | grep -e '\"version\"' | grep -oe '[0-9]\.[0-9]\.[0-9]' > $METADATA_PATH/version.ver
 
+lint:
+  stage: publish
+  image: node:14.16.1-alpine3.13
+  script:
+    - npm install
+    - npm run lint
+
 sonarqube-check:
   stage: code-quality
   image:
@@ -72,7 +79,7 @@ publish-storybook-image-docker-hub:
 
 publish-design-system-library:
   stage: publish
-  image: docker:20.10.13
+  image: node:14.16.1-alpine3.13
   script:
     - npm install
     - npm run build

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+
 import classNames from 'classnames';
 import React, { KeyboardEvent, useEffect, useMemo, useRef, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -589,6 +591,8 @@ export const DatePicker = ({
       <Row className="ama-date-picker-input">
         <Col>
           <div
+            role="button"
+            tabIndex={0}
             className="input-container d-flex align-items-center p-16"
             onClick={() => setIsDialogVisible(true)}
             onKeyDown={onInputKeyDown}

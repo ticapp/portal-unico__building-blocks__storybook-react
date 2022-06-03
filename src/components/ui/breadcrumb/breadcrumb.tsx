@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
-import { Icon } from '../icon';
-import './breadcrumb.scss';
 import classNames from 'classnames';
+import React, { useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from '../link';
+import { Icon } from '../..';
 import { useOutsideElementClick, usePathname, useWindowSize } from '../../hooks';
+import { Link } from '../link';
+import './breadcrumb.scss';
 
 interface CrumbItems {
   url: string;
