@@ -2,12 +2,10 @@ import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { BrowserRouter } from 'react-router-dom';
-import {
-  UserArea, UserAreaOption, UserAreaProps
-} from '../../../../components';
+import { UserArea, UserAreaOption, UserAreaProps } from '../../../../components';
 
 export default {
-  title: 'Components/User Area',
+  title: 'Components/User Area'
 } as ComponentMeta<typeof UserArea>;
 
 export const Authenticated: Story<UserAreaProps> = () => {
@@ -16,27 +14,27 @@ export const Authenticated: Story<UserAreaProps> = () => {
       authenticatedOption: false,
       link: '/login',
       icon: 'ama-login',
-      label: 'Entrar no portal',
+      label: 'Entrar no portal'
     },
     {
       authenticatedOption: false,
       link: '/register',
       icon: 'ama-add-user',
-      label: 'Criar registo',
+      label: 'Criar registo'
     },
 
     {
       authenticatedOption: true,
       link: '/user-area',
       icon: 'ama-user',
-      label: 'Area Reservada',
+      label: 'Area Reservada'
     },
     {
       authenticatedOption: true,
       link: 'logout',
       icon: 'ama-logout',
-      label: 'Terminar sessão',
-    },
+      label: 'Terminar sessão'
+    }
   ] as UserAreaOption[];
 
   return (
@@ -44,11 +42,7 @@ export const Authenticated: Story<UserAreaProps> = () => {
       <Container>
         <Row className="d-flex justify-content-center">
           <Col xs={4}>
-            <UserArea
-              options={options}
-              isAuthenticated={true}
-              username={'John Doe'}
-            />
+            <UserArea options={options} isAuthenticated username="John Doe" />
           </Col>
         </Row>
       </Container>
@@ -63,27 +57,27 @@ export const Anonymous: Story<UserAreaProps> = () => {
       authenticatedOption: false,
       link: '/login',
       icon: 'ama-login',
-      label: 'Entrar no portal',
+      label: 'Entrar no portal'
     },
     {
       authenticatedOption: false,
       link: '/register',
       icon: 'ama-add-user',
-      label: 'Criar registo',
+      label: 'Criar registo'
     },
 
     {
       authenticatedOption: true,
       link: '/user-area',
       icon: 'ama-user',
-      label: 'Area Reservada',
+      label: 'Area Reservada'
     },
     {
       authenticatedOption: true,
       link: 'logout',
       icon: 'ama-logout',
-      label: 'Terminar sessão',
-    },
+      label: 'Terminar sessão'
+    }
   ] as UserAreaOption[];
 
   return (

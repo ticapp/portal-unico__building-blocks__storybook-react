@@ -12,6 +12,7 @@
 /build
 /dist
 /storybook-static
+/.vscode
 
 # misc
 .DS_Store

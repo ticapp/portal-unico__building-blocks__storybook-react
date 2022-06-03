@@ -3,13 +3,12 @@ import React, { useState } from 'react';
 import { Col, Container, Nav, Offcanvas, Row } from 'react-bootstrap';
 import { UrlObject } from 'url';
 
+import { v4 as uuidv4 } from 'uuid';
 import { useWindowSize } from '../../hooks';
 import { Button } from '../buttons';
 import { Icon } from '../icon';
 import { Logo } from '../logo';
 import { Select, SelectOption } from '../select';
-
-import { v4 as uuidv4 } from 'uuid';
 
 import './header.scss';
 import { UserAreaOption } from '../user-area';
@@ -72,7 +71,7 @@ const Header = ({
   links,
 
   isAuthenticated = false,
-  username = 'Area Reservada',
+  username = 'Area Reservada'
 }: HeaderProps) => {
   const { width } = useWindowSize();
   const [showMenuOverlay, setShowMenuOverlay] = useState(false);
@@ -103,7 +102,7 @@ const Header = ({
           <span>PT</span>
           <Icon className="ms-8 marker" icon="ama-check" size="sm" />
         </span>
-      ),
+      )
     } as SelectOption);
 
     parsedActiveLanguage = parsedLanguages[0];
@@ -119,13 +118,11 @@ const Header = ({
             <span>{l.label}</span>
             <Icon className="ms-8 marker" icon="ama-check" size="sm" />
           </span>
-        ),
+        )
       };
     });
 
-    parsedActiveLanguage =
-      parsedLanguages.find((pl) => pl.value === activeLanguage?.value) ||
-      parsedLanguages[0];
+    parsedActiveLanguage = parsedLanguages.find((pl) => pl.value === activeLanguage?.value) || parsedLanguages[0];
   }
 
   const [currentLanguage, setCurrentLanguage] = useState(parsedActiveLanguage);
@@ -137,11 +134,7 @@ const Header = ({
     }
   };
 
-  const classes = classNames(
-    'ama-header',
-    className,
-    'w-100 pt-0 pb-0 pt-md-24 pb-md-16'
-  );
+  const classes = classNames('ama-header', className, 'w-100 pt-0 pb-0 pt-md-24 pb-md-16');
 
   const buildUserAreaOption = (o: UserAreaOption) => {
     return (
@@ -153,13 +146,9 @@ const Header = ({
     );
   };
 
-  const authenticatedOptions = options
-    .filter((o) => o.authenticatedOption)
-    .map(buildUserAreaOption);
+  const authenticatedOptions = options.filter((o) => o.authenticatedOption).map(buildUserAreaOption);
 
-  const unauthenticatedOptions = options
-    .filter((o) => !o.authenticatedOption)
-    .map(buildUserAreaOption);
+  const unauthenticatedOptions = options.filter((o) => !o.authenticatedOption).map(buildUserAreaOption);
 
   return (
     <header className={classes}>
@@ -204,7 +193,7 @@ const Header = ({
                   onChange={languageChangeHandler}
                   active={currentLanguage}
                   disabled={parsedLanguages.length <= 1}
-                  size={'sm'}
+                  size="sm"
                 />
               </Col>
             </>
@@ -217,12 +206,7 @@ const Header = ({
           <Row>
             <Col className="p-0 m-0">
               <div className="mx-16">
-                <HorizontalMenu
-                  isAuthenticated={isAuthenticated}
-                  username={username}
-                  options={options}
-                  links={links}
-                />
+                <HorizontalMenu isAuthenticated={isAuthenticated} username={username} options={options} links={links} />
               </div>
             </Col>
           </Row>
@@ -244,7 +228,7 @@ const Header = ({
               onClick={offCanvasCloseHandler}
               aria-controls="navigation-menu-offcanvas"
             >
-              <Icon icon="ama-close" size="lg" ariaHidden={true} />
+              <Icon icon="ama-close" size="lg" ariaHidden />
             </Button>
 
             <label className="d-none" id="label-for-offcanvas-language">
@@ -257,7 +241,7 @@ const Header = ({
               onChange={languageChangeHandler}
               active={currentLanguage}
               disabled={parsedLanguages.length <= 1}
-              size={'sm'}
+              size="sm"
             />
           </Offcanvas.Header>
           <Offcanvas.Body>
@@ -266,12 +250,7 @@ const Header = ({
                 links.map((l, i) => {
                   return (
                     <li key={`offcanvas-link-${i}`} role="menuitem">
-                      <NavLink
-                        activeClassName="active"
-                        className="nav-link"
-                        exact={true}
-                        href={l.link}
-                      >
+                      <NavLink activeClassName="active" className="nav-link" exact href={l.link}>
                         <span className="nav-link-label">{l.label}</span>
                       </NavLink>
                     </li>

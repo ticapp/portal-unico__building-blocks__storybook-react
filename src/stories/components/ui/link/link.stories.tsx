@@ -1,11 +1,11 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Link } from '../../../../components';
 import { BrowserRouter } from 'react-router-dom';
+import { Link } from '../../../../components';
 
 export default {
   title: 'Components/Link',
-  component: Link,
+  component: Link
 } as ComponentMeta<typeof Link>;
 
 const Template: ComponentStory<typeof Link> = (args) => (
@@ -19,5 +19,5 @@ BasicReactRouterDomLink.args = {
   link: 'https://www.google.com',
   isExternal: true,
   target: '_blank',
-  children: 'Redirect To Google',
+  children: 'Redirect To Google'
 };

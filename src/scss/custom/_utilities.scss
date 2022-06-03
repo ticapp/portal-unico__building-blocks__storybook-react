@@ -10,71 +10,71 @@ $utilities: map-merge(
         monospace: var(--#{$variable-prefix}font-monospace),
         lato: $font-family-lato,
         lato-bold: $font-family-lato-bold,
-        lato-extra-bold: $font-family-lato-extra-bold,
-      ),
+        lato-extra-bold: $font-family-lato-extra-bold
+      )
     ),
     'font-size': (
       rfs: true,
       property: font-size,
       class: fs,
-      values: $font-sizes,
+      values: $font-sizes
     ),
     'font-weight': (
       property: font-weight,
       class: fw,
-      values: $font-weights,
+      values: $font-weights
     ),
     'line-height': (
       property: line-height,
       class: lh,
-      values: $line-heights,
+      values: $line-heights
     ),
     'background-color': (
       property: background-color,
       class: bg,
-      values: map-merge($utilities-bg-colors, $colors),
+      values: map-merge($utilities-bg-colors, $colors)
     ),
     'padding': (
       responsive: true,
       property: padding,
       class: p,
-      values: $spacers,
+      values: $spacers
     ),
     'padding-x': (
       responsive: true,
       property: padding-right padding-left,
       class: px,
-      values: $spacers,
+      values: $spacers
     ),
     'padding-y': (
       responsive: true,
       property: padding-top padding-bottom,
       class: py,
-      values: $spacers,
+      values: $spacers
     ),
     'padding-top': (
       responsive: true,
       property: padding-top,
       class: pt,
-      values: $spacers,
+      values: $spacers
     ),
     'padding-end': (
       responsive: true,
       property: padding-right,
       class: pe,
-      values: $spacers,
+      values: $spacers
     ),
     'padding-bottom': (
       responsive: true,
       property: padding-bottom,
       class: pb,
-      values: $spacers,
+      values: $spacers
     ),
     'padding-start': (
       responsive: true,
       property: padding-left,
       class: ps,
-      values: $spacers,
+      values: $spacers
     ),
     'margin': (
       responsive: true,
@@ -84,9 +84,9 @@ $utilities: map-merge(
         map-merge(
           $spacers,
           (
-            auto: auto,
+            auto: auto
           )
-        ),
+        )
     ),
     'margin-x': (
       responsive: true,
@@ -96,9 +96,9 @@ $utilities: map-merge(
         map-merge(
           $spacers,
           (
-            auto: auto,
+            auto: auto
           )
-        ),
+        )
     ),
     'margin-y': (
       responsive: true,
@@ -108,9 +108,9 @@ $utilities: map-merge(
         map-merge(
           $spacers,
           (
-            auto: auto,
+            auto: auto
           )
-        ),
+        )
     ),
     'margin-top': (
       responsive: true,
@@ -120,9 +120,9 @@ $utilities: map-merge(
         map-merge(
           $spacers,
           (
-            auto: auto,
+            auto: auto
           )
-        ),
+        )
     ),
     'margin-end': (
       responsive: true,
@@ -132,9 +132,9 @@ $utilities: map-merge(
         map-merge(
           $spacers,
           (
-            auto: auto,
+            auto: auto
           )
-        ),
+        )
     ),
     'margin-bottom': (
       responsive: true,
@@ -144,9 +144,9 @@ $utilities: map-merge(
         map-merge(
           $spacers,
           (
-            auto: auto,
+            auto: auto
           )
-        ),
+        )
     ),
     'margin-start': (
       responsive: true,
@@ -156,15 +156,15 @@ $utilities: map-merge(
         map-merge(
           $spacers,
           (
-            auto: auto,
+            auto: auto
           )
-        ),
+        )
     ),
     'zindex': (
       responsive: true,
       property: z-index,
       class: z,
-      values: $zindexes,
-    ),
+      values: $zindexes
+    )
   )
 );

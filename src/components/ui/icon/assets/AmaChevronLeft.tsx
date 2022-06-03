@@ -1,8 +1,9 @@
 import * as React from 'react';
+
 export const component = (props: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' {...props}>
-      <path d='M14.6 17.2L9 11.6 14.6 6l.8.7-4.9 4.9 4.9 4.9z' />
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <path d="M10 16L20 6L21.4 7.4L12.8 16L21.4 24.6L20 26L10 16Z" />
     </svg>
   );
 };

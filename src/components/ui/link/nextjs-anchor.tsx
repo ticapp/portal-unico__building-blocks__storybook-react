@@ -6,12 +6,7 @@ export interface NextJSAnchorProps extends LinkProps {
   children?: ReactNode;
 }
 
-export function NextJSAnchor({
-  children,
-  href = '/',
-  role,
-  ...props
-}: NextJSAnchorProps) {
+export function NextJSAnchor({ children, href = '/', role, ...props }: NextJSAnchorProps) {
   return (
     <Link href={href} {...props}>
       <a role={role}>{children}</a>
