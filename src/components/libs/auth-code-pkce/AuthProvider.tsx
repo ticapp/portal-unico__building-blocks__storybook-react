@@ -1,19 +1,18 @@
-import React, { ReactElement, ReactNode } from 'react';
-
+import React, { ReactElement, ReactNode, useMemo } from 'react';
+import { AuthContext, AuthContextProps } from './AuthContext';
 import { AuthService } from './AuthService';
-import { AuthContext } from './AuthContext';
 
 interface AuthProviderProps {
   children: ReactNode;
   authService: AuthService;
 }
 
-export const AuthProvider = (props: AuthProviderProps): ReactElement => {
-  const { authService, children } = props;
+export const AuthProvider = ({ children, authService }: AuthProviderProps): ReactElement => {
+  const providerValue = useMemo(() => {
+    return {
+      authService
+    } as AuthContextProps;
+  }, [authService]);
 
-  return (
-    <AuthContext.Provider value={{ authService }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={providerValue}>{children}</AuthContext.Provider>;
 };

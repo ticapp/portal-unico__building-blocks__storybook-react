@@ -5,7 +5,7 @@ import { PageError } from '../../../../components';
 
 export default {
   title: 'Pages/Error',
-  component: PageError,
+  component: PageError
 } as ComponentMeta<typeof PageError>;
 
 const Template: ComponentStory<typeof PageError> = (args) => (
@@ -25,6 +25,6 @@ CustomPageError.args = {
     url: '#',
     isExternal: false,
     label: 'Back',
-    target: '_self',
-  },
+    target: '_self'
+  }
 };

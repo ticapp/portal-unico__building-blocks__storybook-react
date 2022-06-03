@@ -1,17 +1,11 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import {
-  Header,
-  HeaderProps,
-  HorizontalMenuLink,
-  SelectOption,
-  UserAreaOption,
-} from '../../../../components';
+import { Header, HeaderProps, HorizontalMenuLink, SelectOption, UserAreaOption } from '../../../../components';
 
 export default {
   title: 'Components/Header',
-  component: Header,
+  component: Header
 } as ComponentMeta<typeof Header>;
 
 export const HeaderExample: Story<HeaderProps> = (props) => {
@@ -19,23 +13,23 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
     {
       id: '1',
       label: 'Serviços',
-      link: '/services',
+      link: '/services'
     },
     {
       id: '2',
       label: 'Entidades',
-      link: '/entities',
+      link: '/entities'
     },
     {
       id: '3',
       label: 'Atendimento',
-      link: '/attendance',
+      link: '/attendance'
     },
     {
       id: '4',
       label: 'Notícias',
-      link: '/news',
-    },
+      link: '/news'
+    }
   ];
 
   const options = [
@@ -43,42 +37,42 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
       authenticatedOption: false,
       link: '/login',
       icon: 'ama-login',
-      label: 'Entrar no portal',
+      label: 'Entrar no portal'
     },
     {
       authenticatedOption: false,
       link: '/register',
       icon: 'ama-add-user',
-      label: 'Criar registo',
+      label: 'Criar registo'
     },
 
     {
       authenticatedOption: true,
       link: '/user-area',
       icon: 'ama-user',
-      label: 'Area Reservada',
+      label: 'Area Reservada'
     },
     {
       authenticatedOption: true,
       link: 'logout',
       icon: 'ama-logout',
-      label: 'Terminar sessão',
-    },
+      label: 'Terminar sessão'
+    }
   ] as UserAreaOption[];
 
   const languages: SelectOption[] = [
     { label: 'PT', value: 'pt' },
     { label: 'EN', value: 'en' },
-    { label: 'ES', value: 'es' },
+    { label: 'ES', value: 'es' }
   ];
 
   return (
     <BrowserRouter>
       <Header
-        isHomepage={true}
+        isHomepage
         isAuthenticated={props.isAuthenticated}
-        username={'Area reservada'}
-        homepageLink={'/'}
+        username="Area reservada"
+        homepageLink="/"
         languages={languages}
         activeLanguage={languages[0]}
         options={options}

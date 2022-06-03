@@ -12,7 +12,7 @@ export function NavLink(props) {
 
   const reactProps = {
     ...newProps,
-    to: props.href,
+    to: props.href
   };
 
   return <ReactNavLink {...reactProps} />;

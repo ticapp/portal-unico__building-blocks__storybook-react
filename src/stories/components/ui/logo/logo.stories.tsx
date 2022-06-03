@@ -5,7 +5,7 @@ import { Logo, LogoProps } from '../../../../components/ui';
 
 export default {
   title: 'Components/Logo',
-  component: Logo,
+  component: Logo
 } as ComponentMeta<typeof Logo>;
 
 export const NoRedirect: Story<LogoProps> = () => {
@@ -20,7 +20,7 @@ NoRedirect.storyName = 'Logo with homepage redirect';
 export const Redirect: Story<LogoProps> = () => {
   return (
     <BrowserRouter>
-      <Logo isHomepage={true} />
+      <Logo isHomepage />
     </BrowserRouter>
   );
 };

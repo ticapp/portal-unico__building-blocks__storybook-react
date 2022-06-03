@@ -1,4 +1,4 @@
-import {Meta} from "@storybook/addon-docs";
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Breadcrumb/Breadcrumb Docs" />
 
@@ -10,25 +10,25 @@ import {Meta} from "@storybook/addon-docs";
 
 ```jsx
 const args = {
-  navAriaLabel: "Breadcrumb",
+  navAriaLabel: 'Breadcrumb',
   ariaHasPopUp: true,
-  linkAriaLabel: "page",
-  buttonAriaLabel: "Open Breadcrumb",
-  breadcrumbTitle: "Você está aqui:",
+  linkAriaLabel: 'page',
+  buttonAriaLabel: 'Open Breadcrumb',
+  breadcrumbTitle: 'Você está aqui:',
   breadcrumbs: [
     {
-      name: "Início",
-      url: "/home",
+      name: 'Início',
+      url: '/home'
     },
     {
-      name: "Infrações",
-      url: "/violations",
+      name: 'Infrações',
+      url: '/violations'
     },
     {
-      name: "Histórico de infrações",
-      url: "/iframe.html",
-    },
-  ],
+      name: 'Histórico de infrações',
+      url: '/iframe.html'
+    }
+  ]
 };
 
 <BreadCrumb {...args} />;
