@@ -106,7 +106,7 @@ BasicTable.args = {
       col_05: 550,
       col_06: 600,
       col_07: 700,
-      col_08: 800
+      col_08: 860
     }
   ],
   linesOptions: [
@@ -272,7 +272,7 @@ ClickableRowsTable.args = {
       moves: 'Link 1',
       score: 12,
       url: (
-        <Link link="https://www.example.com" title="title" isExternal={true} className="stretched-link">
+        <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
         </Link>
       )

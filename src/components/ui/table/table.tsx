@@ -3,10 +3,10 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { paginationDataType, sortDataType, usePaginationDataType, useSortTableData } from '../../hooks';
+import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
 import { Button } from '../buttons';
 import { Icon } from '../icon';
 import { Pagination, PaginationProps } from '../pagination';
-import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
 import './table.scss';
 
 export interface TableProps extends BsTableProps {
@@ -161,8 +161,56 @@ const TableDesktop = ({
   );
 };
 
-const TableMobile = () => {
-  return <div>Mobile</div>;
+const TableMobile = ({ className, tableHeaders, tableData, ...props }: TableProps) => {
+  const cssTableMobile = classNames('ama-table-mobile', className);
+  const [seeMore, setSeeMore] = useState<boolean>(true);
+  const [itemsShown, setItemsShown] = useState<number>(2);
+  const totalItems = tableData.length;
+
+  const dataListItem = tableData.map((item) => {
+    return Object.entries(item).map((value, key) => {
+      return (
+        <React.Fragment key={uuidv4()}>
+          <dt className="col-6" key={uuidv4()}>
+            {tableHeaders[key].value}
+          </dt>
+          <dd className="col-6" key={uuidv4()}>
+            {value[1]}
+          </dd>
+        </React.Fragment>
+      );
+    });
+  });
+
+  const [dataShown, setDataShown] = useState<ReactNode[]>(dataListItem.slice(0, itemsShown));
+
+  const getItems = () => {
+    if (seeMore) {
+      setItemsShown(itemsShown + 2);
+      setDataShown(dataListItem.slice(0, itemsShown));
+      return dataListItem.slice(0, itemsShown);
+    }
+    setItemsShown(2);
+    setDataShown(dataListItem.slice(0, 2));
+    return dataListItem.slice(0, 2);
+  };
+
+  const toggle = () => {
+    getItems();
+    if (totalItems <= itemsShown) {
+      setSeeMore(!seeMore);
+    }
+  };
+  return (
+    <div key={uuidv4()} className={cssTableMobile}>
+      <dl key={uuidv4()} className="row">
+        {dataShown}
+      </dl>
+      <button type="button" onClick={toggle}>
+        {seeMore ? 'more' : 'less'}
+      </button>
+    </div>
+  );
 };
 
 export const Table = ({ ...props }: TableProps & PaginationProps) => {

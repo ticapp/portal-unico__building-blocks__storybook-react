@@ -35,4 +35,14 @@
       }
     }
   }
+  &-mobile {
+    border-left: 1px solid index.$neutral-light;
+    border-right: 1px solid index.$neutral-light;
+
+    dd,
+    dt {
+      border-top: 1px solid index.$neutral-light;
+      border-bottom: 1px solid index.$neutral-light;
+    }
+  }
 }

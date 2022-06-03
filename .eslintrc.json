@@ -26,7 +26,8 @@
     "react/jsx-filename-extension": "off",
     "react/jsx-props-no-spreading": "off",
     "react/destructuring-assignment": "off",
-    "dot-notation": "off", //Write arrays like array['key']
+
+    "dot-notation": "off",
 
     "jsx-a11y/no-noninteractive-tabindex": "off"
   },
