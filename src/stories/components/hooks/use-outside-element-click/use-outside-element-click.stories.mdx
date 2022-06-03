@@ -5,8 +5,8 @@ import { Meta } from '@storybook/addon-docs';
 <h2>Description</h2>
 
 <p>
-  Hook to detect and execute a callback whenever the user click outside of the
-  provided element. Must be used in conjunction with a element ref
+  Hook to detect and execute a callback whenever the user click outside of the provided element. Must be used in conjunction with a element
+  ref
 </p>
 
 <h2>Hook usage</h2>
@@ -21,8 +21,7 @@ const dummyComponent = () => {
 
   const customCallback = () => {
     if (dummyRef) {
-      (dummyRef.current as HTMLDivElement).innerHTML =
-        'Clicked outside of dummy component';
+      (dummyRef.current as HTMLDivElement).innerHTML = 'Clicked outside of dummy component';
     }
   };
 

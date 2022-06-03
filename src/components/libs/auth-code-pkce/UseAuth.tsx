@@ -37,11 +37,11 @@ export const useAuth = (): UseAuthProps => {
 
   return {
     login: () => authService.login(),
-    logout: (endSession: boolean = false) => authService.logout(endSession),
+    logout: (endSession = false) => authService.logout(endSession),
     getUser: () => authService.User,
     getTokens: () => authService.Tokens,
     isReady: () => isReady,
     isPending: () => authService.Pending,
-    isAuthenticated: () => authService.Authenticated,
+    isAuthenticated: () => authService.Authenticated
   };
 };

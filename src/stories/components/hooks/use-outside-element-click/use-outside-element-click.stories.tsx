@@ -3,13 +3,11 @@ import React, { useRef } from 'react';
 import { useOutsideElementClick } from '../../../../components';
 
 export default {
-  title: 'Hooks/Use Outside Element Click',
+  title: 'Hooks/Use Outside Element Click'
 };
 
 export const Example: Story = () => {
   const dummyRef = useRef(null);
-
-  useOutsideElementClick(dummyRef, () => customCallback());
 
   const customCallback = () => {
     if (dummyRef.current) {
@@ -27,12 +25,10 @@ export const Example: Story = () => {
     }
   };
 
+  useOutsideElementClick(dummyRef, () => customCallback());
+
   return (
-    <div
-      ref={dummyRef}
-      onClick={clickHandler}
-      style={{ backgroundColor: 'salmon' }}
-    >
+    <div ref={dummyRef} onClick={clickHandler} style={{ backgroundColor: 'salmon' }}>
       Click me.
     </div>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 import { useWindowSize } from '../../../../components';
 
 export default {
-  title: 'Hooks/Use Window Size',
+  title: 'Hooks/Use Window Size'
 };
 
 export const Example: Story = () => {

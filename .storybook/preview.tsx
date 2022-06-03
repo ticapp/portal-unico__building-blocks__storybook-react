@@ -5,7 +5,7 @@ export const parameters = {
     expanded: true,
     matchers: {
       color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
+      date: /Date$/
+    }
+  }
 };

@@ -1,10 +1,10 @@
-import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
+import React from 'react';
 import { Accordion, AccordionProps } from '../../../../components/ui';
 
 export default {
   title: 'Components/Accordion',
-  component: Accordion,
+  component: Accordion
 } as ComponentMeta<typeof Accordion>;
 
 export const BasicAccordion: Story<AccordionProps> = () => {
@@ -15,23 +15,25 @@ export const BasicAccordion: Story<AccordionProps> = () => {
         title: 'Como são atribuídos?',
         children: (
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Senectus quis fringilla risus natoque fusce malesuada diam sagittis. Urna euismod auctor lectus et scelerisque
-            nisl ornare urna, porttitor. A cras dictum semper condimentum volutpat mauris. Aliquam ultricies elementum vitae ultricies et sit orci fusce.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Senectus quis fringilla risus natoque fusce malesuada diam sagittis.
+            Urna euismod auctor lectus et scelerisque nisl ornare urna, porttitor. A cras dictum semper condimentum volutpat mauris. Aliquam
+            ultricies elementum vitae ultricies et sit orci fusce.
           </div>
-        ),
+        )
       },
       {
         title: 'Como são atribuídos?',
         children: (
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Senectus quis fringilla risus natoque fusce malesuada diam sagittis. Urna euismod auctor lectus et scelerisque
-            nisl ornare urna, porttitor. A cras dictum semper condimentum volutpat mauris. Aliquam ultricies elementum vitae ultricies et sit orci fusce.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Senectus quis fringilla risus natoque fusce malesuada diam sagittis.
+            Urna euismod auctor lectus et scelerisque nisl ornare urna, porttitor. A cras dictum semper condimentum volutpat mauris. Aliquam
+            ultricies elementum vitae ultricies et sit orci fusce.
           </div>
-        ),
-      },
-    ],
+        )
+      }
+    ]
   } as AccordionProps;
 
-  return <Accordion {...args}></Accordion>;
+  return <Accordion {...args} />;
 };
 BasicAccordion.storyName = 'Basic Accordion';

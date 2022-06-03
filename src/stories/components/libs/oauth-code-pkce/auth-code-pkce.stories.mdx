@@ -1,18 +1,14 @@
 import { Meta } from '@storybook/addon-docs';
 
-<Meta title='Libs/OAuth Code PKCE/OAuth Code PKCE Docs' />
+<Meta title="Libs/OAuth Code PKCE/OAuth Code PKCE Docs" />
 
 <h2>Description</h2>
 
-<p>
-  Provider for authentication. It uses Authorization Code Flow with Proof Key
-  for Code Exchange (PKCE)
-</p>
+<p>Provider for authentication. It uses Authorization Code Flow with Proof Key for Code Exchange (PKCE)</p>
 
 <p>
-  This library is only for React usage. It may require the development of a
-  webservice if the token endpoint is protected and requires usage of a
-  client_secret
+  This library is only for React usage. It may require the development of a webservice if the token endpoint is protected and requires usage
+  of a client_secret
 </p>
 
 <h2>Usage</h2>
@@ -22,10 +18,9 @@ import { Meta } from '@storybook/addon-docs';
 ```tsx
 const authService = new AuthService({
   clientId: 'ticapp-open',
-  provider:
-    'https://dev-apigw-2-pdun.northeurope.cloudapp.azure.com:8443/realms/fa',
+  provider: 'https://dev-apigw-2-pdun.northeurope.cloudapp.azure.com:8443/realms/fa',
   scopes: ['openid'],
-  redirectUri: window.location.href,
+  redirectUri: window.location.href
 });
 
 <AuthProvider authService={authService}>
@@ -38,11 +33,10 @@ const authService = new AuthService({
 ```tsx
 const authService = new AuthService({
   clientId: 'ticapp-open',
-  provider:
-    'https://dev-apigw-2-pdun.northeurope.cloudapp.azure.com:8443/realms/fa',
+  provider: 'https://dev-apigw-2-pdun.northeurope.cloudapp.azure.com:8443/realms/fa',
   tokenEndpoint: 'http://myprotected-token-service',
   scopes: ['openid'],
-  redirectUri: window.location.href,
+  redirectUri: window.location.href
 });
 
 <AuthProvider authService={authService}>

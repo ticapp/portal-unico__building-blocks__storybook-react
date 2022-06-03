@@ -9,14 +9,7 @@ export type ScrollTopProps = {
 };
 
 export function ScrollTop({ className }: ScrollTopProps) {
-  const classes = classNames(
-    'ama-scroll-top',
-    className,
-    'd-flex',
-    'justify-content-center',
-    'align-items-center',
-    'rounded-circle'
-  );
+  const classes = classNames('ama-scroll-top', className, 'd-flex', 'justify-content-center', 'align-items-center', 'rounded-circle');
 
   const onClickHandler = () => {
     window && window.scrollTo(0, 0);

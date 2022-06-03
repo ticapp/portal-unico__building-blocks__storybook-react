@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Date Picker/Date Picker Docs" />
+
+<h2>Description </h2>
+<p>A component that renders a date picker.</p>
+
+<h2>Component usage</h2>
+
+```jsx
+<DatePicker />
+```
+
+<h2>Custom component usage</h2>
+
+```jsx
+const date = new Date("1987-06-25T00:00:00.000Z");
+
+const days = {
+    sunday: "Sunday",
+    monday: "Monday",
+    tuesday: "Tuesday",
+    wednesday: "Wednesday",
+    thursday: "Thursday",
+    friday: "Friday",
+    saturday: "Saturday"
+} as DaysLabels;
+
+const months = {
+    january: "January",
+    february: "February",
+    march: "March",
+    april: "April",
+    may: "May",
+    june: "June",
+    july: "July",
+    august: "August",
+    september: "September",
+    october: "October",
+    november: "November",
+    december: "December"
+} as MonthsLabels;
+
+const modalAriaLabels = {
+    title: "Pick a date",
+    description: "You can navigate the picker using the keyboard",
+    currentDay:"Day",
+    nextMonth:'Next month',
+    nextYear:'Next Year',
+    previousMonth:'Previous month',
+    previousYear:'Previous year'
+} as ModalAriaLabels;
+
+
+<label id="date-picker-label">Pick a date:</label>
+<DatePicker
+    labeledBy="date-picker-label"
+    placeholder="dd-mm-yyyy"
+    date={date}
+    days={days}
+    months={months}
+    modalAriaLabels={modalAriaLabels}
+/>
+```

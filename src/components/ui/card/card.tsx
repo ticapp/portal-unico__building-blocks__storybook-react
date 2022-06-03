@@ -21,10 +21,10 @@ export interface CardProps extends BsCardProps {
   /** Subtitle */
   description?: string;
 
-  /**Content Icon name */
+  /** Content Icon name */
   contentIcon?: string;
 
-  /**Content */
+  /** Content */
   content?: ReactNode | string;
 
   /** Content class, add extra class that only works on light theme */
@@ -45,13 +45,13 @@ export interface CardProps extends BsCardProps {
   /** Icon link */
   linkIcon?: string;
 
-  /** theme card*/
+  /** theme card */
   cardTheme?: 'ama-card-light' | 'ama-card-brand-green-main ' | string;
 
   /** All card as clickable area */
   stretchedLink?: boolean;
 
-  /**Type of link */
+  /** Type of link */
   isLinkLabel?: boolean;
 
   /** Card with/without link */
@@ -81,43 +81,48 @@ export const Card = ({
   const cssCard = classNames('ama-card', className, cardTheme);
   const cssContent = classNames('ama-card-content', contentClass, 'mt-16 mt-xl-32');
   return (
-    <BsCard className={cssCard} {...props} border='light'>
-      <Container fluid className='p-24 p-xl-32'>
+    <BsCard className={cssCard} {...props} border="light">
+      <Container fluid className="p-24 p-xl-32">
         <Row>
           {preTitle && (
             <Col xs={12} md={12} xl={12}>
-              <div className='text-medium-normal mb-8'>{preTitle}</div>
+              <div className="text-medium-normal mb-8">{preTitle}</div>
             </Col>
           )}
 
           {mainTitle && description && (
             <Col xs={12} md={12} xl={12}>
-              {mainTitle && <h3 className='h5-bold'>{mainTitle}</h3>}
-              {description && <p className='text-medium-normal m-0'>{description}</p>}
+              {mainTitle && <h3 className="h5-bold">{mainTitle}</h3>}
+              {description && <p className="text-medium-normal m-0">{description}</p>}
             </Col>
           )}
           {(children || (contentIcon && content)) && (
             <Col xs={12} md={12} xl={12} className={cssContent}>
               {contentIcon && content && (
-                <div className='d-flex align-items-center'>
-                  <Icon icon={contentIcon} ariaHidden='true' />
-                  <span className='h4-bold'>{content}</span>
+                <div className="d-flex align-items-center">
+                  <Icon icon={contentIcon} ariaHidden="true" />
+                  <span className="h4-bold">{content}</span>
                 </div>
               )}
               {children}
             </Col>
           )}
           {isLinkLabel && cardHasLink && (
-            <Col xs={6} md={6} xl={6} className='mt-16 mt-xl-32'>
-              <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato-bold'}>
+            <Col xs={6} md={6} xl={6} className="mt-16 mt-xl-32">
+              <Link
+                link={link}
+                title={title}
+                isExternal={isExternal}
+                className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato-bold'}
+              >
                 {linkLabel}
               </Link>
             </Col>
           )}
           {!isLinkLabel && cardHasLink && (
-            <Col xs={{ span: 6, offset: 6 }} md={{ span: 6, offset: 6 }} xl={{ span: 6, offset: 6 }} className='text-end mt-16 mt-xl-32'>
+            <Col xs={{ span: 6, offset: 6 }} md={{ span: 6, offset: 6 }} xl={{ span: 6, offset: 6 }} className="text-end mt-16 mt-xl-32">
               <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? 'stretched-link' : ''}>
-                <Icon icon={linkIcon} ariaHidden='true' />
+                <Icon icon={linkIcon} ariaHidden="true" />
               </Link>
             </Col>
           )}

@@ -38,7 +38,7 @@ export function Link({
   replace = false,
   scroll,
   role,
-  tabIndex = 0,
+  tabIndex = 0
 }: LinkProps) {
   const isNextJS = !window;
 
@@ -60,7 +60,7 @@ export function Link({
       replace,
       scroll,
       role,
-      tabIndex,
+      tabIndex
     };
 
     return renderNextJSAnchor(nextJsLinkProps as NextJSAnchorProps);
@@ -76,25 +76,17 @@ export function Link({
       replace,
       scroll,
       role,
-      tabIndex,
+      tabIndex
     };
 
-    return renderReactDomAnchor(
-      internalReactDomLinkProps as ReactDomAnchorType
-    );
+    return renderReactDomAnchor(internalReactDomLinkProps as ReactDomAnchorType);
   }
 
   const externalReactDomLinkProps = {
     to: '',
     component: () => {
       return (
-        <a
-          href={link.toString()}
-          target={target}
-          title={title}
-          className={className}
-          tabIndex={tabIndex}
-        >
+        <a href={link.toString()} target={target} title={title} className={className} tabIndex={tabIndex}>
           {children}
         </a>
       );
@@ -103,7 +95,7 @@ export function Link({
     title,
     className,
     replace,
-    scroll,
+    scroll
   };
 
   return renderReactDomAnchor(externalReactDomLinkProps as ReactDomAnchorType);

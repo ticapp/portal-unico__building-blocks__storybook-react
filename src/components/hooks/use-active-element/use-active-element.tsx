@@ -7,7 +7,7 @@ export const useActiveElement = () => {
     setActiveElement(evt.target.window ? null : evt.target);
   };
 
-  const onBlur = (_evt) => {
+  const onBlur = () => {
     setActiveElement(null);
   };
 
@@ -25,6 +25,6 @@ export const useActiveElement = () => {
   }, []);
 
   return {
-    activeElement,
+    activeElement
   };
 };
