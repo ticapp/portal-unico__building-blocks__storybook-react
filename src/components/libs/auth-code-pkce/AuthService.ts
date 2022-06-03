@@ -1,6 +1,5 @@
-import getPkce from 'oauth-pkce';
-
 import jwtDecode from 'jwt-decode';
+import getPkce from 'oauth-pkce';
 
 export interface OpenIdEndpoints {
   authorization_endpoint: string;
@@ -115,7 +114,7 @@ const generatePKCECodes = (): Promise<PKCECodePair> => {
         } as PKCECodePair);
       }
 
-      reject('failed');
+      reject(new Error('failed'));
     });
   });
 };
@@ -127,9 +126,12 @@ export class AuthService<TIDToken = JWTIDToken> {
 
   private discoveredEndpoints: OpenIdEndpoints | null;
 
+  private storage;
+
   constructor(props: AuthServiceProps) {
     this.discoveredEndpoints = null;
     this.props = props;
+    this.storage = window.localStorage;
   }
 
   public async discover(): Promise<void> {
@@ -314,15 +316,15 @@ export class AuthService<TIDToken = JWTIDToken> {
   }
 
   private getItem(key: string): string | null {
-    return window.localStorage.getItem(key);
+    return this.storage.getItem(key);
   }
 
   private setItem(key: string, value: string): void {
-    window.localStorage.setItem(key, value);
+    this.storage.setItem(key, value);
   }
 
   private removeItem(key: string): void {
-    window.localStorage.removeItem(key);
+    this.storage.removeItem(key);
   }
 
   private getPkce(): PKCECodePair {
@@ -336,9 +338,15 @@ export class AuthService<TIDToken = JWTIDToken> {
 
   private setAuthTokens(auth: AuthTokens): void {
     const { refreshSlack = 5 } = this.props;
+
     const now = new Date().getTime();
-    auth.expires_at = now + (auth.expires_in + refreshSlack) * 1000;
-    this.setItem('auth', JSON.stringify(auth));
+
+    const authData = {
+      ...auth,
+      expires_at: now + (auth.expires_in + refreshSlack) * 1000
+    };
+
+    this.setItem('auth', JSON.stringify(authData));
   }
 
   private armRefreshTimer(refreshToken: string, timeoutDuration: number): void {
