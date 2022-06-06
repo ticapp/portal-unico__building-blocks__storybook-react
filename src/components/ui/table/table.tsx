@@ -65,6 +65,11 @@ const TableDesktop = ({
     pagesCounterLabel,
     ...tableProps
   } = props;
+
+  delete tableProps.mobileLegendRow;
+  delete tableProps.labelSeeMore;
+  delete tableProps.labelSeeLess;
+
   const [elementsPerPage, setElementsPerPage] = useState<paginationDataType[]>();
   const context = React.useContext<TableContextType>(Context);
   useEffect(() => {
@@ -172,8 +177,8 @@ const TableMobile = ({ ...props }: TableProps) => {
     tableHeaders,
     tableData,
     noDataLabel,
-    mobileLegendRow = null,
     totalTable,
+    mobileLegendRow = null,
     labelSeeMore = 'Ver mais',
     labelSeeLess = 'Ver menos'
   } = { ...props };
