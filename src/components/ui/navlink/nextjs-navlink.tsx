@@ -7,11 +7,14 @@ export function NextJsNavLink({ href, exact = false, activeClassName = 'active',
 
   const isActive = exact ? pathname === href : pathname.startsWith(href);
 
-  props.className += `${isActive ? activeClassName : ''}`;
+  const newProps = {
+    ...props,
+    className: `${props.className} ${isActive ? activeClassName : ''}`
+  };
 
   return (
     <Link href={href}>
-      <a {...props}>{children}</a>
+      <a {...newProps}>{children}</a>
     </Link>
   );
 }

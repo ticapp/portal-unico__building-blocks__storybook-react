@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
 import React, { FC, ReactNode } from 'react';
 import { v4 as uuidv4 } from 'uuid';

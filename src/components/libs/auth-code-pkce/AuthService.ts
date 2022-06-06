@@ -1,6 +1,5 @@
-import getPkce from 'oauth-pkce';
-
 import jwtDecode from 'jwt-decode';
+import getPkce from 'oauth-pkce';
 
 export interface OpenIdEndpoints {
   authorization_endpoint: string;
@@ -115,7 +114,7 @@ const generatePKCECodes = (): Promise<PKCECodePair> => {
         } as PKCECodePair);
       }
 
-      reject('failed');
+      reject(new Error('failed'));
     });
   });
 };
@@ -127,9 +126,12 @@ export class AuthService<TIDToken = JWTIDToken> {
 
   private discoveredEndpoints: OpenIdEndpoints | null;
 
+  private storage;
+
   constructor(props: AuthServiceProps) {
     this.discoveredEndpoints = null;
     this.props = props;
+    this.storage = new Storage();
   }
 
   public async discover(): Promise<void> {
@@ -162,10 +164,10 @@ export class AuthService<TIDToken = JWTIDToken> {
 
     const { codeChallenge } = pkce;
 
-    this.setItem('pkce', JSON.stringify(pkce));
-    this.setItem('preAuthUri', window.location.href);
+    this.storage.setItem('pkce', JSON.stringify(pkce));
+    this.storage.setItem('preAuthUri', window.location.href);
 
-    this.removeItem('auth');
+    this.storage.removeItem('auth');
 
     const query = {
       clientId,
@@ -186,9 +188,9 @@ export class AuthService<TIDToken = JWTIDToken> {
   }
 
   public logout(endSession = false): void {
-    this.removeItem('pkce');
-    this.removeItem('auth');
-    this.removeItem('preAuthUri');
+    this.storage.removeItem('pkce');
+    this.storage.removeItem('auth');
+    this.storage.removeItem('preAuthUri');
 
     if (!endSession) {
       window.location.reload();
@@ -216,7 +218,7 @@ export class AuthService<TIDToken = JWTIDToken> {
   }
 
   get Tokens(): AuthTokens {
-    return JSON.parse(this.getItem('auth') || '{}');
+    return JSON.parse(this.storage.getItem('auth') || '{}');
   }
 
   get Endpoints(): OpenIdEndpoints | null {
@@ -224,11 +226,11 @@ export class AuthService<TIDToken = JWTIDToken> {
   }
 
   get Pending(): boolean {
-    return this.getItem('pkce') !== null && this.getItem('auth') === null;
+    return this.storage.getItem('pkce') !== null && this.storage.getItem('auth') === null;
   }
 
   get Authenticated(): boolean {
-    return this.getItem('auth') !== null;
+    return this.storage.getItem('auth') !== null;
   }
 
   private async resumeFlow(): Promise<void> {
@@ -238,8 +240,8 @@ export class AuthService<TIDToken = JWTIDToken> {
       try {
         await this.fetchTokens(code, false);
 
-        const uri = this.getItem('preAuthUri');
-        this.removeItem('preAuthUri');
+        const uri = this.storage.getItem('preAuthUri');
+        this.storage.removeItem('preAuthUri');
 
         if (uri !== null) {
           window.location.replace(uri);
@@ -247,8 +249,8 @@ export class AuthService<TIDToken = JWTIDToken> {
 
         removeCodeFromLocation();
       } catch (e) {
-        this.removeItem('pkce');
-        this.removeItem('auth');
+        this.storage.removeItem('pkce');
+        this.storage.removeItem('auth');
         removeCodeFromLocation();
       }
     } else if (this.props.autoRefresh) {
@@ -296,7 +298,7 @@ export class AuthService<TIDToken = JWTIDToken> {
       throw new Error('Failed to fetch token');
     }
 
-    this.removeItem('pkce');
+    this.storage.removeItem('pkce');
 
     const json = await response.json();
 
@@ -313,20 +315,8 @@ export class AuthService<TIDToken = JWTIDToken> {
     return this.Tokens;
   }
 
-  private getItem(key: string): string | null {
-    return window.localStorage.getItem(key);
-  }
-
-  private setItem(key: string, value: string): void {
-    window.localStorage.setItem(key, value);
-  }
-
-  private removeItem(key: string): void {
-    window.localStorage.removeItem(key);
-  }
-
   private getPkce(): PKCECodePair {
-    const pkce = this.getItem('pkce');
+    const pkce = this.storage.getItem('pkce');
     if (pkce === null) {
       throw new Error('PKCE pair not found in local storage');
     } else {
@@ -336,9 +326,15 @@ export class AuthService<TIDToken = JWTIDToken> {
 
   private setAuthTokens(auth: AuthTokens): void {
     const { refreshSlack = 5 } = this.props;
+
     const now = new Date().getTime();
-    auth.expires_at = now + (auth.expires_in + refreshSlack) * 1000;
-    this.setItem('auth', JSON.stringify(auth));
+
+    const authData = {
+      ...auth,
+      expires_at: now + (auth.expires_in + refreshSlack) * 1000
+    };
+
+    this.storage.setItem('auth', JSON.stringify(authData));
   }
 
   private armRefreshTimer(refreshToken: string, timeoutDuration: number): void {
@@ -357,12 +353,12 @@ export class AuthService<TIDToken = JWTIDToken> {
           if (timeout > 0) {
             this.armRefreshTimer(newRefreshToken, timeout);
           } else {
-            this.removeItem('auth');
+            this.storage.removeItem('auth');
             removeCodeFromLocation();
           }
         })
         .catch(() => {
-          this.removeItem('auth');
+          this.storage.removeItem('auth');
           removeCodeFromLocation();
         });
     }, timeoutDuration);
@@ -386,7 +382,7 @@ export class AuthService<TIDToken = JWTIDToken> {
     if (timeout > 0) {
       this.armRefreshTimer(refreshToken, timeout);
     } else {
-      this.removeItem('auth');
+      this.storage.removeItem('auth');
       removeCodeFromLocation();
     }
   }
