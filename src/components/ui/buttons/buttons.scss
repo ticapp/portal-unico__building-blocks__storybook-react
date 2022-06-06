@@ -78,6 +78,7 @@ $threshold: 55%;
 }
 
 .btn-link {
+  text-underline-offset: 8px;
   &:active,
   &:visited {
     color: index.$details-links-visited !important;

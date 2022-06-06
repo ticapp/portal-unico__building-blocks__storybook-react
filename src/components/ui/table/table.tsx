@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useLayoutEffect, useState } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { paginationDataType, sortDataType, usePaginationDataType, useSortTableData } from '../../hooks';
@@ -27,6 +27,15 @@ export interface TableProps extends BsTableProps {
 
   /** Total table */
   totalTable?: boolean;
+
+  /** Mobile table row with legend */
+  mobileLegendRow?: ReactNode | string | number;
+
+  /** Label See More */
+  labelSeeMore?: string;
+
+  /** Label See Less */
+  labelSeeLess?: string;
 }
 
 export type TableContextType = {
@@ -130,13 +139,9 @@ const TableDesktop = ({
           {items['length'] === 0 && (
             <tr className="align-middle position-relative">
               {tableHeaders.map((_value, index) => {
-                return index === 0 ? (
+                return (
                   <td className="text-medium-normal" key={uuidv4()}>
-                    {noDataLabel}
-                  </td>
-                ) : (
-                  <td className="text-medium-normal" key={uuidv4()}>
-                    -
+                    {index > 0 ? '-' : noDataLabel}
                   </td>
                 );
               })}
@@ -162,55 +167,95 @@ const TableDesktop = ({
 };
 
 const TableMobile = ({ ...props }: TableProps) => {
-  const { className, tableHeaders, tableData } = { ...props };
-  const cssTableMobile = classNames('ama-table-mobile', className);
-  const [seeMore, setSeeMore] = useState<boolean>(true);
-  const [itemsShown, setItemsShown] = useState<number>(2);
+  const {
+    className,
+    tableHeaders,
+    tableData,
+    noDataLabel,
+    mobileLegendRow = null,
+    totalTable,
+    labelSeeMore = 'Ver mais',
+    labelSeeLess = 'Ver menos'
+  } = { ...props };
+  const cssTableMobile = classNames('ama-table-mobile', className, totalTable && 'ama-table-mobile-total');
+
   const totalItems = tableData.length;
+  const [seeMore, setSeeMore] = useState<boolean>(true);
+  const [itemsShown, setItemsShown] = useState<number>(totalTable ? totalItems : 2);
+  const [seeMoreItems, setSeeMoreItems] = useState<number>(totalItems);
 
   const dataListItem = tableData.map((item) => {
-    return Object.entries(item).map((value, key) => {
-      return (
-        <React.Fragment key={uuidv4()}>
-          <dt className="col-6" key={uuidv4()}>
-            {tableHeaders[key].value}
-          </dt>
-          <dd className="col-6" key={uuidv4()}>
-            {value[1]}
-          </dd>
-        </React.Fragment>
-      );
-    });
+    return (
+      <React.Fragment key={uuidv4()}>
+        {mobileLegendRow && <dt className="p-16">{mobileLegendRow}</dt>}
+        {Object.entries(item).map((value, key) => {
+          return (
+            <React.Fragment key={uuidv4()}>
+              <dt className="col-6 m-0 p-16" key={uuidv4()}>
+                {tableHeaders[key].value}
+              </dt>
+              <dd className="col-6 m-0 p-16 position-relative" key={uuidv4()}>
+                {value[1]}
+              </dd>
+            </React.Fragment>
+          );
+        })}
+      </React.Fragment>
+    );
   });
 
   const [dataShown, setDataShown] = useState<ReactNode[]>(dataListItem.slice(0, itemsShown));
 
   const getItems = () => {
     if (seeMore) {
-      setItemsShown(itemsShown + 2);
       setDataShown(dataListItem.slice(0, itemsShown));
       return dataListItem.slice(0, itemsShown);
     }
-    setItemsShown(2);
     setDataShown(dataListItem.slice(0, 2));
     return dataListItem.slice(0, 2);
   };
 
   const toggle = () => {
     getItems();
+  };
+
+  useLayoutEffect(() => {
+    if (seeMore) {
+      setSeeMoreItems(seeMoreItems - 2);
+      setItemsShown(itemsShown + 2);
+    } else {
+      setSeeMoreItems(totalItems - 2);
+      setItemsShown(4);
+    }
     if (totalItems <= itemsShown) {
       setSeeMore(!seeMore);
     }
-  };
+  }, [dataShown]);
+
   return (
     <div key={uuidv4()} className={cssTableMobile}>
       <dl key={uuidv4()} className="row">
-        {dataShown}
+        {dataShown.length > 0 && dataShown}
+        {dataShown.length === 0 &&
+          tableHeaders.map((item, index) => {
+            return (
+              <React.Fragment key={uuidv4()}>
+                <dt className="col-6 m-0 p-16" key={uuidv4()}>
+                  {item.value}
+                </dt>
+                <dd className="col-6 m-0 p-16 position-relative" key={uuidv4()}>
+                  {index > 0 ? '-' : noDataLabel}
+                </dd>
+              </React.Fragment>
+            );
+          })}
       </dl>
 
-      <Button className="shadow-none" variant="link" onClick={toggle}>
-        {seeMore ? 'more' : 'less'}
-      </Button>
+      {dataShown.length > 0 && !totalTable && (
+        <Button className="shadow-none mx-auto" variant="link" onClick={toggle}>
+          {seeMore ? `${labelSeeMore} (${seeMoreItems})` : `${labelSeeLess}`}
+        </Button>
+      )}
     </div>
   );
 };

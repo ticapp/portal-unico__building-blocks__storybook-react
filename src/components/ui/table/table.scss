@@ -36,13 +36,33 @@
     }
   }
   &-mobile {
-    border-left: 1px solid index.$neutral-light;
-    border-right: 1px solid index.$neutral-light;
+    dl {
+      border: 1px solid index.$neutral-light;
+      &:last-child,
+      :nth-last-child(-n + 2) {
+        border-bottom: none;
+      }
+    }
 
     dd,
     dt {
-      border-top: 1px solid index.$neutral-light;
       border-bottom: 1px solid index.$neutral-light;
+    }
+
+    dt {
+      @include index.text-medium-bold;
+    }
+    dd {
+      @include index.text-medium-normal;
+    }
+
+    &-total {
+      dl {
+        :nth-last-child(-n + 4) {
+          border-bottom: none;
+          background-color: index.$neutral-light;
+        }
+      }
     }
   }
 }

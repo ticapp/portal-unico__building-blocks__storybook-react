@@ -36,7 +36,7 @@ BasicTable.args = {
     {
       col_01: (
         <span className="text-medium-normal">
-          <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />
+          <Icon icon="ama-circle-solid" className="me-8 d-none d-xl-inline" size="xxs" ariaHidden="true" />
           Muito grave
         </span>
       ),
@@ -133,7 +133,10 @@ BasicTable.args = {
   pagesCounterLabel: ['de', 'páginas'],
   borderless: true,
   striped: true,
-  hover: true
+  hover: true,
+  mobileLegendRow: <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
+  labelSeeLess: 'Ver menos',
+  labelSeeMore: 'Ver mais'
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};
@@ -263,14 +266,16 @@ export const ClickableRowsTable: Story<TableProps & PaginationProps> = (args) =>
 
 ClickableRowsTable.args = {
   tableHeaders: [
-    { value: 'Movimentos', sorting: false },
-    { value: 'Pontos', sorting: false },
+    { value: 'Entidade', sorting: true },
+    { value: 'Tipo de dados', sorting: true },
+    { value: 'Último acesso', sorting: true },
     { value: '', sorting: false }
   ],
   tableData: [
     {
-      moves: 'Link 1',
-      score: 12,
+      entity: 'Instituto dos Registos e Notariado',
+      dataType: 'Completos',
+      lastAccess: '29/05/2002-14:36',
       url: (
         <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
@@ -278,22 +283,38 @@ ClickableRowsTable.args = {
       )
     },
     {
-      moves: 'Link2',
-      score: +3,
-      url: null
+      entity: 'Segurança Social',
+      dataType: 'Completos',
+      lastAccess: '29/05/2002-14:36',
+      url: (
+        <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
+          <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
+        </Link>
+      )
     },
     {
-      moves: 'Link 3',
-      score: 15,
-      url: null
+      entity: 'Banco de Portugal',
+      dataType: 'Completos',
+      lastAccess: '29/05/2002-14:36',
+      url: (
+        <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
+          <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
+        </Link>
+      )
+    },
+    {
+      entity: 'Instituto do Emprego e Formação Profissional',
+      dataType: 'Completos',
+      lastAccess: '29/05/2002-14:36',
+      url: (
+        <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
+          <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
+        </Link>
+      )
     }
   ],
 
   linesOptions: [
-    {
-      value: 2,
-      label: '2'
-    },
     {
       value: 5,
       label: '5'
