@@ -3,6 +3,20 @@
 .ama-input-radio-container {
   height: 44px;
 
+
+  .radio-icon {
+    width: 28px;
+    height: 28px;
+
+    fill: white;
+    cursor: pointer;
+
+
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+
   .input-radio {
     width: 28px;
     height: 28px;
@@ -12,7 +26,6 @@
     &:focus {
       accent-color: index.$brand-green-fourth;
     }
-
 
   }
 

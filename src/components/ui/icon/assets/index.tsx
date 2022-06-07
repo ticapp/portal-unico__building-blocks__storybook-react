@@ -133,7 +133,13 @@ const iconList: Record<string, string> = {
   'ama-wifi': './AmaWifi',
   'ama-youtube': './AmaYoutube',
   'ama-zoom-in': './AmaZoomIn',
-  'ama-zoom-out': './AmaZoomOut'
+  'ama-zoom-out': './AmaZoomOut',
+  'ama-radio-unselected': './AmaRadioUnselected',
+  'ama-radio-selected': './AmaRadioSelected',
+  'ama-radio-selected-focus': './AmaRadioSelectedFocus',
+  'ama-radio-focus': './AmaRadioFocus',
+  'ama-radio-disabled-unselected': './AmaRadioDisabledUnselected',
+  'ama-radio-disabled-selected': './AmaRadioDisabledSelected'
 };
 
 export type IconName = keyof typeof iconList;

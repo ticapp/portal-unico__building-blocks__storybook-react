@@ -9,13 +9,13 @@ export default {
 } as ComponentMeta<typeof InputRadio>;
 
 export const BasicInputRadio: ComponentStory<typeof InputRadio> = (args) => {
-  const [inputCheckedValue, setInputCheckedValue] = useState('');
+  const [inputRadioSelected, setInputRadioSelected] = useState('');
 
-  const changeSelected = (e: string) => {
-    setInputCheckedValue(e);
+  const handleChangeRadioSelected = (value: string) => {
+    setInputRadioSelected(value);
   };
 
-  return <InputRadio {...args} checked={inputCheckedValue === args.name} onClick={() => changeSelected(args.name)} />;
+  return <InputRadio {...args} isChecked={inputRadioSelected === args.name} onClick={() => handleChangeRadioSelected(args.name)} />;
 };
 
 BasicInputRadio.storyName = 'Basic Input Radio';
@@ -23,7 +23,6 @@ BasicInputRadio.storyName = 'Basic Input Radio';
 BasicInputRadio.args = {
   label: 'Label',
   name: 'input-text1',
-  value: '',
   inputId: uuidv4(),
   isDisabled: false
 };
