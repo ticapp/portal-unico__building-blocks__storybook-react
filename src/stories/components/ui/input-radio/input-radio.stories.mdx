@@ -19,12 +19,5 @@ const args = {
   isDisabled: false
 };
 
-
-<InputRadio 
-    value={inputValue} 
-    {...args}  
-    onChange={e => setInputValue(e.target.value)} 
-/>
-
-
+<InputRadio value={inputValue} {...args} onChange={(e) => setInputValue(e.target.value)} />;
 ```
