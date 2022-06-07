@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode, useContext, useLayoutEffect } from 'react';
+import React, { HtmlHTMLAttributes, ReactNode, useContext, useLayoutEffect } from 'react';
 import { Pagination as BsPagination, PaginationProps as BsPaginationProps } from 'react-bootstrap';
 import { usePaginationData } from '../../hooks';
 import { Icon } from '../icon';
@@ -53,6 +53,8 @@ export const Pagination = ({
   pagesCounterLabel = ['de', 'páginas'],
   ...props
 }: PaginationProps) => {
+  const prevRef = React.useRef<HTMLSpanElement>(null);
+  const nextRef = React.useRef<HTMLSpanElement>(null);
   const cssPagination = classNames('ama-pagination', className);
   const pageData = usePaginationData(linesOptions[0]?.value || (data.length as string | number), data);
   const context = useContext<TableContextType>(Context);
@@ -61,8 +63,9 @@ export const Pagination = ({
     if (context) {
       context.setValue(pageData);
     }
+    (prevRef.current?.lastChild?.lastChild as HTMLSpanElement).innerText = previousAriaLabel;
+    (nextRef.current?.lastChild?.lastChild as HTMLSpanElement).innerText = nextAriaLabel;
   }, [pageData?.currentPage, pageData?.contentPerPage]);
-
   return (
     <BsPagination {...props} className={cssPagination}>
       <li className="px-16 align-middle">
@@ -98,11 +101,11 @@ export const Pagination = ({
           )}
         </div>
       </li>
-      <BsPagination.Prev className="ms-auto" onClick={pageData?.gotToPreviousPage} disabled={pageData?.currentPage === 1}>
-        <Icon icon="ama-chevron-left" aria-label={previousAriaLabel} size="xs" />
+      <BsPagination.Prev className="ms-auto" onClick={pageData?.gotToPreviousPage} disabled={pageData?.currentPage === 1} ref={prevRef}>
+        <Icon icon="ama-chevron-left" size="xs" />
       </BsPagination.Prev>
-      <BsPagination.Next onClick={pageData?.goToNextPage} disabled={pageData?.currentPage === pageData?.totalPageCount}>
-        <Icon icon="ama-chevron-right" aria-label={nextAriaLabel} size="xs" />
+      <BsPagination.Next onClick={pageData?.goToNextPage} disabled={pageData?.currentPage === pageData?.totalPageCount} ref={nextRef}>
+        <Icon icon="ama-chevron-right" size="xs" />
       </BsPagination.Next>
     </BsPagination>
   );

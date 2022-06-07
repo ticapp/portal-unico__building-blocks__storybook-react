@@ -95,7 +95,7 @@ const TableDesktop = ({
   const renderThead = (item: Array<{ value: string | ReactNode; sorting: boolean }>, keys: string[]) => {
     return item?.map((data, i) => {
       return (
-        <th key={uuidv4()} className="p-5 align-middle" aria-sort={getAriaSort(getClassNamesFor(keys[i]), data.sorting)}>
+        <th key={uuidv4()} scope="col" className="p-5 align-middle" aria-sort={getAriaSort(getClassNamesFor(keys[i]), data.sorting)}>
           {data.sorting && (
             <Button
               variant="neutral-dark"
