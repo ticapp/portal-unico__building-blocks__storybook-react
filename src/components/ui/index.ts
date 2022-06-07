@@ -24,3 +24,4 @@ export * from './table';
 export * from './pagination';
 export * from './vertical-menu';
 export * from './date-picker';
+export * from './infractions-chart';

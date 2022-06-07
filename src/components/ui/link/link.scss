@@ -1,0 +1,24 @@
+@use '../../../scss/index' as index;
+.ama-link {
+  &,
+  a {
+    color: index.$brand-green-main;
+    text-underline-offset: map-get(index.$spacers, 8);
+
+    &:hover {
+      color: index.$neutral-black;
+    }
+
+    &:disabled {
+      color: index.$brand-green-main;
+      opacity: 0.4;
+    }
+
+    &:visited {
+      color: index.$details-links-visited;
+      &:hover {
+        color: index.$neutral-black;
+      }
+    }
+  }
+}

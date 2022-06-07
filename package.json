@@ -10,13 +10,11 @@
   "scripts": {
     "start": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-
     "clean": "gulp clean",
     "build": "npm run clean && npm run build:styles && npm run build:esm && npm run build:cjs",
     "build:styles": "gulp build",
     "build:esm": "tsc",
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
-    
     "lint": "eslint ./src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix ./src/**/*.{js,jsx,ts,tsx,json}",
     "format": "prettier --write ./src/**/*.{js,jsx,ts,tsx,css,scss,mdx,md,json} --config ./.prettierrc"
@@ -66,6 +64,8 @@
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-touch-cmd": "0.0.1",
+    "highcharts": "^10.1.0",
+    "highcharts-react-official": "^3.1.0",
     "jwt-decode": "^3.1.2",
     "next": "12.1.5",
     "oauth-pkce": "0.0.6",

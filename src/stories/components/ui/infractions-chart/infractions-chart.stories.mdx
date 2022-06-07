@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Infractions Chart/Infractions Chart Docs" />
+
+<h2>Description</h2>
+<p>A component that renders a donut chart with provided infractions data.</p>
+
+<h2>Component usage</h2>
+
+```jsx
+const counters = [
+  {
+    label: 'Muito Grave',
+    value: 33,
+    color: '#AA120A'
+  },
+  {
+    label: 'Grave',
+    value: 33,
+    color: '#FBCF5F'
+  },
+  {
+    label: 'Leve',
+    value: 33,
+    color: '#00672F'
+  }
+] as InfractionCounter[];
+
+<InfractionsChart counters={counters} />
+```
