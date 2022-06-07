@@ -22,7 +22,8 @@ export const BasicTable: Story<TableProps & PaginationProps> = (args) => {
 };
 
 BasicTable.args = {
-  tableHeaders: [
+  'aria-label': 'Tabela com as minhas infrações, cabeçalhos com botões para ordenação',
+  'tableHeaders': [
     { value: 'Infração', sorting: false },
     { value: 'N.º processo', sorting: true },
     { value: 'Data', sorting: true },
@@ -32,7 +33,7 @@ BasicTable.args = {
     { value: 'Coima', sorting: true },
     { value: 'Sanção acessória', sorting: true }
   ],
-  tableData: [
+  'tableData': [
     {
       col_01: (
         <span className="text-medium-normal">
@@ -109,7 +110,7 @@ BasicTable.args = {
       col_08: 860
     }
   ],
-  linesOptions: [
+  'linesOptions': [
     {
       value: 2,
       label: '2'
@@ -123,20 +124,20 @@ BasicTable.args = {
       label: '10'
     }
   ],
-  pagination: true,
-  itemsCounter: true,
-  pagesCounter: true,
-  nextAriaLabel: 'Próxima página da tabela',
-  previousAriaLabel: 'Página anterior da tabela',
-  lineOptionsLabel: 'Linhas por página:',
-  itemsCounterLabel: ['-', 'de', 'items'],
-  pagesCounterLabel: ['de', 'páginas'],
-  borderless: true,
-  striped: true,
-  hover: true,
-  mobileLegendRow: <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
-  labelSeeLess: 'Ver menos',
-  labelSeeMore: 'Ver mais'
+  'pagination': true,
+  'itemsCounter': true,
+  'pagesCounter': true,
+  'nextAriaLabel': 'Próxima página da tabela',
+  'previousAriaLabel': 'Página anterior da tabela',
+  'lineOptionsLabel': 'Linhas por página:',
+  'itemsCounterLabel': ['-', 'de', 'items'],
+  'pagesCounterLabel': ['de', 'páginas'],
+  'borderless': true,
+  'striped': true,
+  'hover': true,
+  'mobileLegendRow': <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
+  'labelSeeLess': 'Ver menos',
+  'labelSeeMore': 'Ver mais'
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};
@@ -154,7 +155,8 @@ export const NoDataTable: Story<TableProps & PaginationProps> = (args) => {
 };
 
 NoDataTable.args = {
-  tableHeaders: [
+  'aria-label': 'Tabela com as minhas infrações, cabeçalhos com botões para ordenação',
+  'tableHeaders': [
     { value: 'Infração', sorting: false },
     { value: 'N.º processo', sorting: true },
     { value: 'Data', sorting: true },
@@ -164,8 +166,8 @@ NoDataTable.args = {
     { value: 'Coima', sorting: true },
     { value: 'Sanção acessória', sorting: true }
   ],
-  tableData: [],
-  linesOptions: [
+  'tableData': [],
+  'linesOptions': [
     {
       value: 2,
       label: '2'
@@ -179,18 +181,18 @@ NoDataTable.args = {
       label: '10'
     }
   ],
-  pagination: true,
-  itemsCounter: true,
-  pagesCounter: true,
-  nextAriaLabel: 'Próxima página da tabela',
-  previousAriaLabel: 'Página anterior da tabela',
-  lineOptionsLabel: 'Linhas por página:',
-  itemsCounterLabel: ['-', 'de', 'items'],
-  pagesCounterLabel: ['de', 'páginas'],
-  noDataLabel: 'Não existem infrações',
-  borderless: true,
-  striped: true,
-  hover: true
+  'pagination': true,
+  'itemsCounter': true,
+  'pagesCounter': true,
+  'nextAriaLabel': 'Próxima página da tabela',
+  'previousAriaLabel': 'Página anterior da tabela',
+  'lineOptionsLabel': 'Linhas por página:',
+  'itemsCounterLabel': ['-', 'de', 'items'],
+  'pagesCounterLabel': ['de', 'páginas'],
+  'noDataLabel': 'Não existem infrações',
+  'borderless': true,
+  'striped': true,
+  'hover': true
 } as TableProps & PaginationProps;
 
 NoDataTable.argTypes = {};
@@ -265,13 +267,14 @@ export const ClickableRowsTable: Story<TableProps & PaginationProps> = (args) =>
 };
 
 ClickableRowsTable.args = {
-  tableHeaders: [
+  'aria-label': 'Tabela com as minhas infrações, cabeçalhos com botões para ordenação',
+  'tableHeaders': [
     { value: 'Entidade', sorting: true },
     { value: 'Tipo de dados', sorting: true },
     { value: 'Último acesso', sorting: true },
     { value: '', sorting: false }
   ],
-  tableData: [
+  'tableData': [
     {
       entity: 'Instituto dos Registos e Notariado',
       dataType: 'Completos',
@@ -314,7 +317,7 @@ ClickableRowsTable.args = {
     }
   ],
 
-  linesOptions: [
+  'linesOptions': [
     {
       value: 5,
       label: '5'
@@ -324,10 +327,10 @@ ClickableRowsTable.args = {
       label: '10'
     }
   ],
-  noDataLabel: 'Não existem Movimentos',
-  borderless: true,
-  striped: true,
-  hover: true
+  'noDataLabel': 'Não existem Movimentos',
+  'borderless': true,
+  'striped': true,
+  'hover': true
 } as unknown as TableProps & PaginationProps;
 
 ClickableRowsTable.argTypes = {};

@@ -7,12 +7,15 @@
       &:disabled {
         opacity: 1;
       }
-      &:hover {
+      &:hover,
+      &:focus {
         border-width: 1px;
+        border-color: index.$neutral-white;
       }
     }
     th {
       background-color: transparent;
+      color: index.$neutral-white;
     }
   }
   .stretched-link {

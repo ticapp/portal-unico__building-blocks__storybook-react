@@ -84,28 +84,45 @@ const TableDesktop = ({
     return sortConfig?.key === name ? sortConfig?.direction : undefined;
   };
 
+  const getAriaSort = (direction, isSorting) => {
+    if (isSorting) {
+      if (direction === 'ascending') return 'ascending';
+      if (direction === 'descending') return 'descending';
+    }
+    return undefined;
+  };
+
   const renderThead = (item: Array<{ value: string | ReactNode; sorting: boolean }>, keys: string[]) => {
     return item?.map((data, i) => {
       return (
-        <th key={uuidv4()} className="p-5 align-middle">
-          <Button
-            variant="neutral-dark"
-            size="sm"
-            onClick={() => requestSort(keys[i])}
-            className={getClassNamesFor(keys[i]) ? `${getClassNamesFor(keys[i])} shadow-none` : 'shadow-none'}
-            disabled={!data.sorting}
-          >
-            <span className="pe-8 text-medium-normal">{data.value}</span>
-            {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && <Icon icon="ama-expand" ariaHidden="true" size="sm" />}
-            {getClassNamesFor(keys[i]) === 'descending' && data.sorting && <Icon icon="ama-collapse" ariaHidden="true" size="sm" />}
+        <th key={uuidv4()} className="p-5 align-middle" aria-sort={getAriaSort(getClassNamesFor(keys[i]), data.sorting)}>
+          {data.sorting && (
+            <Button
+              variant="neutral-dark"
+              size="sm"
+              autoFocus={
+                (getClassNamesFor(keys[i]) === 'ascending' && data.sorting) || (getClassNamesFor(keys[i]) === 'descending' && data.sorting)
+              }
+              onClick={() => {
+                requestSort(keys[i]);
+              }}
+              className={getClassNamesFor(keys[i]) ? `${getClassNamesFor(keys[i])} shadow-none w-100` : 'shadow-none w-100'}
+              disabled={!data.sorting}
+              data-column-index={i}
+            >
+              <span className="pe-8 text-medium-normal">{data.value}</span>
+              {getClassNamesFor(keys[i]) === 'ascending' && data.sorting && <Icon icon="ama-expand" ariaHidden="true" size="sm" />}
+              {getClassNamesFor(keys[i]) === 'descending' && data.sorting && <Icon icon="ama-collapse" ariaHidden="true" size="sm" />}
 
-            {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && data.sorting && (
-              <span className="text-nowrap lh-1 text-medium-normal">
-                <Icon icon="ama-collapse" ariaHidden="true" size="xs" />
-                <Icon icon="ama-expand" ariaHidden="true" size="xs" />
-              </span>
-            )}
-          </Button>
+              {getClassNamesFor(keys[i]) !== 'ascending' && getClassNamesFor(keys[i]) !== 'descending' && data.sorting && (
+                <span className="text-nowrap lh-1 text-medium-normal">
+                  <Icon icon="ama-collapse" ariaHidden="true" size="xs" />
+                  <Icon icon="ama-expand" ariaHidden="true" size="xs" />
+                </span>
+              )}
+            </Button>
+          )}
+          {!data.sorting && <span className="p-16 text-medium-normal">{data.value}</span>}
         </th>
       );
     });
