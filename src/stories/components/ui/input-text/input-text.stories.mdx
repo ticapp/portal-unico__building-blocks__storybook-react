@@ -12,13 +12,11 @@ import { Meta } from '@storybook/addon-docs';
 const [inputValue, setInputValue] = useState('');
 
 <InputText
-    label='Nome' 
-    placeholder='placeholder'
-    value={inputValue} 
-    name="inputName"
-    inputId="inputId_1"
-    onChange={e => setInputValue(e.target.value)} 
-  />
-
-
+  label="Nome"
+  placeholder="placeholder"
+  value={inputValue}
+  name="inputName"
+  inputId="inputId_1"
+  onChange={(e) => setInputValue(e.target.value)}
+/>;
 ```

@@ -3,7 +3,7 @@
 .ama-breadcrumb-desktop {
   .items {
     text-decoration: underline;
-    text-underline-offset: 8px;
+    text-underline-offset: map-get(index.$spacers, 8);
     min-height: 44px;
 
     color: index.$brand-green-main;
