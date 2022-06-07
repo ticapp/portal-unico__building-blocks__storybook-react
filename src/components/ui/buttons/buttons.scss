@@ -78,8 +78,12 @@ $threshold: 55%;
 }
 
 .btn-link {
+  text-underline-offset: map-get(index.$spacers, 8);
   &:active,
   &:visited {
     color: index.$details-links-visited !important;
+  }
+  &:focus {
+    border: 1px solid index.$neutral-black;
   }
 }

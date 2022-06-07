@@ -44,8 +44,8 @@ export const clearIconCache = (iconName?: IconName) => {
 export interface IconProps extends SVGProps<SVGSVGElement> {
   /** Additional classes to use in icon component */
   className?: string;
-  /** Predefined icon dimensions. Possible values: 'xl' | 'lg' | '' | 'sm' | 'xs'  */
-  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+  /** Predefined icon dimensions. Possible values: 'xl' | 'lg' | '' | 'sm' | 'xs'| 'xxs'  */
+  size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs' | 'xxs';
   /** Icon name to be used */
   icon: string;
   /** To use padding in icon container */
@@ -67,16 +67,23 @@ export const Icon: FC<IconProps> = ({ size = 'md', icon = '', alt = '', classNam
   });
 
   useEffect(() => {
+    let isMounted = true;
     if (isBundledIcon(icon) && !iconsCache[icon]) {
       loadIcon(icon).then(({ component }) => {
-        iconsCache[icon] = (() => component) as unknown as FC<SVGProps<SVGSVGElement>>;
-        setCurrentIcon(iconsCache[icon]);
-        onIconLoad?.();
+        if (isMounted) {
+          iconsCache[icon] = (() => component) as unknown as FC<SVGProps<SVGSVGElement>>;
+          setCurrentIcon(iconsCache[icon]);
+          onIconLoad?.();
+        }
       });
-    } else {
+    } else if (isMounted) {
       setCurrentIcon(iconsCache[icon]);
       onIconLoad?.();
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [icon, onIconLoad]);
 
   if (!isBundledIcon(icon)) {

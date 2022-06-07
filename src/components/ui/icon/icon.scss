@@ -1,5 +1,6 @@
 @use '../../../scss/index' as index;
 
+$icon-xxs: 8px;
 $icon-xs: 16px;
 $icon-sm: 24px;
 $icon-md: 32px;
@@ -17,6 +18,14 @@ $icon-xl: 64px;
 
   &.icon-padded {
     padding: 8px;
+  }
+
+  &.icon-xxs {
+    width: $icon-xxs;
+    height: $icon-xxs;
+    &.icon-padded {
+      padding: 2px;
+    }
   }
 
   &.icon-xs {

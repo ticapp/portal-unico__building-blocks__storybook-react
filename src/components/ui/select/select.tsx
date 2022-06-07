@@ -356,7 +356,6 @@ const Select = ({
       searchString = '';
     }
   };
-
   const onComboKeyDown = (event) => {
     if (disabled) {
       return;

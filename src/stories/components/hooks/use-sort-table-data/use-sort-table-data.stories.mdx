@@ -1,0 +1,56 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Hooks/Use Sort Table Data/Use Sort Table Data Docs" />
+
+<h2>Description</h2>
+
+<p>Hook to sort table data</p>
+
+<h2>Hook usage</h2>
+
+```tsx
+import { usePaginationData } from '@ama/usePaginationData';
+import { useSortTableData } from '@ama/useSortTableData';
+
+const dummyComponent = () => {
+  const data = [
+    {
+      entity: 'Instituto dos Registos e Notariado',
+      dataType: 'Completos',
+      lastAccess: '29/05/2002-14:36'
+    },
+    {
+      entity: 'Segurança Social',
+      dataType: 'Completos',
+      lastAccess: '29/05/2002-14:36'
+    },
+    {
+      entity: 'Banco de Portugal',
+      dataType: 'Completos',
+      lastAccess: '29/05/2002-14:36'
+    },
+    {
+      entity: 'Instituto do Emprego e Formação Profissional',
+      dataType: 'Completos',
+      lastAccess: '29/05/2002-14:36'
+    }
+  ];
+  const pageData = usePaginationData(5, data);
+  const { items, requestSort, sortConfig } = useSortTableData(data, data, pageData, null);
+
+  return (
+    <>
+      <p>Items para ordenar: {JSON.stringify(items)}</p>
+      <button
+        type="button"
+        onClick={() => {
+          requestSort('entity');
+        }}
+      >
+        Ordenar por entidade
+      </button>
+      <p>Direção: {sortConfig?.direction}</p>
+    </>
+  );
+};
+```

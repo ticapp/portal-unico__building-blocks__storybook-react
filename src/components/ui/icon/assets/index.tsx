@@ -31,6 +31,7 @@ const iconList: Record<string, string> = {
   'ama-chevron-down': './AmaChevronDown',
   'ama-chevron-left': './AmaChevronLeft',
   'ama-chevron-right': './AmaChevronRight',
+  'ama-circle-solid': './AmaCircleSolid',
   'ama-clip': './AmaClip',
   'ama-clock': './AmaClock',
   'ama-close-big': './AmaCloseBig',
