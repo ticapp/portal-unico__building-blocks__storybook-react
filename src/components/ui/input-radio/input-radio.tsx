@@ -38,7 +38,7 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
   const handleFocus = () => {
     if (isChecked && !isDisabled) {
       setIcon(radioIcons.selectedFocus);
-    } else if (!isChecked) {
+    } else if (!isChecked && !isDisabled) {
       setIcon(radioIcons.focus);
     }
   };
@@ -46,7 +46,7 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
   const handleBlur = () => {
     if (isChecked && !isDisabled) {
       setIcon(radioIcons.selected);
-    } else if (!isChecked) {
+    } else if (!isChecked && !isDisabled) {
       setIcon(radioIcons.unselected);
     }
   };
