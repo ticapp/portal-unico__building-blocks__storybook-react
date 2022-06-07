@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/jsx-boolean-value */
 import { ComponentMeta, Story } from '@storybook/react';
 import React, { useMemo, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
@@ -280,7 +278,7 @@ ClickableRowsTable.args = {
       dataType: 'Completos',
       lastAccess: '29/05/2002-14:36',
       url: (
-        <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
+        <Link link="https://www.example.com" title="Abrir link" isExternal className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
         </Link>
       )
@@ -290,7 +288,7 @@ ClickableRowsTable.args = {
       dataType: 'Completos',
       lastAccess: '29/05/2002-14:36',
       url: (
-        <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
+        <Link link="https://www.example.com" title="Abrir link" isExternal className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
         </Link>
       )
@@ -300,7 +298,7 @@ ClickableRowsTable.args = {
       dataType: 'Completos',
       lastAccess: '29/05/2002-14:36',
       url: (
-        <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
+        <Link link="https://www.example.com" title="Abrir link" isExternal className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
         </Link>
       )
@@ -310,7 +308,7 @@ ClickableRowsTable.args = {
       dataType: 'Completos',
       lastAccess: '29/05/2002-14:36',
       url: (
-        <Link link="https://www.example.com" title="Abrir link" isExternal={true} className="stretched-link">
+        <Link link="https://www.example.com" title="Abrir link" isExternal className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
         </Link>
       )
