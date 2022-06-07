@@ -1,0 +1,20 @@
+@use '../../../scss/index' as index;
+
+.ama {
+  &-donut-chart {
+    .graph-legend {
+      li {
+        margin-bottom: map-get(index.$spacers, 8);
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+
+        .marker {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
