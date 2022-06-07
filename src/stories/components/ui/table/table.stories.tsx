@@ -33,79 +33,79 @@ BasicTable.args = {
   ],
   'tableData': [
     {
-      col_01: (
+      col01: (
         <span className="text-medium-normal">
           <Icon icon="ama-circle-solid" className="me-8 d-none d-xl-inline" size="xxs" ariaHidden="true" />
           Muito grave
         </span>
       ),
-      col_02: 104779934,
-      col_03: 2018 - 10 - 17,
-      col_04: '45 QG 56',
-      col_05: 'Rua das Beatas, em frente ao número 36, Lisboa',
-      col_06: 'Concluído',
-      col_07: 'Pago',
-      col_08: 'Não aplicável'
+      col02: 104779934,
+      col03: 2018 - 10 - 17,
+      col04: '45 QG 56',
+      col05: 'Rua das Beatas, em frente ao número 36, Lisboa',
+      col06: 'Concluído',
+      col07: 'Pago',
+      col08: 'Não aplicável'
     },
     {
-      col_01: 10,
-      col_02: 20,
-      col_03: 30,
-      col_04: 40,
-      col_05: 50,
-      col_06: 60,
-      col_07: 70,
-      col_08: 80
+      col01: 10,
+      col02: 20,
+      col03: 30,
+      col04: 40,
+      col05: 50,
+      col06: 60,
+      col07: 70,
+      col08: 80
     },
     {
-      col_01: 100,
-      col_02: 200,
-      col_03: 300,
-      col_04: 400,
-      col_05: 500,
-      col_06: 600,
-      col_07: 700,
-      col_08: 800
+      col01: 100,
+      col02: 200,
+      col03: 300,
+      col04: 400,
+      col05: 500,
+      col06: 600,
+      col07: 700,
+      col08: 800
     },
     {
-      col_01: 1000,
-      col_02: 201,
-      col_03: 3000,
-      col_04: 4000,
-      col_05: 5000,
-      col_06: 6000,
-      col_07: 7000,
-      col_08: 8000
+      col01: 1000,
+      col02: 201,
+      col03: 3000,
+      col04: 4000,
+      col05: 5000,
+      col06: 6000,
+      col07: 7000,
+      col08: 8000
     },
     {
-      col_01: 10000,
-      col_02: 202,
-      col_03: 300,
-      col_04: 400,
-      col_05: 590,
-      col_06: 600,
-      col_07: 700,
-      col_08: 800
+      col01: 10000,
+      col02: 202,
+      col03: 300,
+      col04: 400,
+      col05: 590,
+      col06: 600,
+      col07: 700,
+      col08: 800
     },
     {
-      col_01: 1000000,
-      col_02: 203,
-      col_03: 300,
-      col_04: 400,
-      col_05: 520,
-      col_06: 600,
-      col_07: 700,
-      col_08: 800
+      col01: 1000000,
+      col02: 203,
+      col03: 300,
+      col04: 400,
+      col05: 520,
+      col06: 600,
+      col07: 700,
+      col08: 800
     },
     {
-      col_01: 1000000,
-      col_02: 204,
-      col_03: 300,
-      col_04: 400,
-      col_05: 550,
-      col_06: 600,
-      col_07: 700,
-      col_08: 860
+      col01: 1000000,
+      col02: 204,
+      col03: 300,
+      col04: 400,
+      col05: 550,
+      col06: 600,
+      col07: 700,
+      col08: 860
     }
   ],
   'linesOptions': [
