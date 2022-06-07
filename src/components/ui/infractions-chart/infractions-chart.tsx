@@ -36,9 +36,9 @@ export interface InfractionsChartProps {
   stretchedLink?: boolean;
 
   /** Title to use in the graphic card */
-  graphicTitle: string;
+  graphicTitle?: string;
   /** Description to use in the graphic card */
-  graphicDescription: string;
+  graphicDescription?: string;
 
   /** Aria label to apply to the graphic */
   ariaLabel?: string;
