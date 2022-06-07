@@ -134,9 +134,10 @@ BasicTable.args = {
   'striped': true,
   'hover': true,
   'mobileLegendRow': <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
-  'labelSeeLess': 'Ver menos',
-  'labelSeeMore': 'Ver mais',
-  'ariaLabelPaginationNav': 'Paginação da tabela'
+  'labelSeeLess': ['Ver menos', ' items da lista'],
+  'labelSeeMore': ['Ver mais', ' items da lista'],
+  'ariaLabelPaginationNav': 'Paginação da tabela',
+  'titleMobileDL': 'Lista de infrações'
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};
@@ -191,7 +192,12 @@ NoDataTable.args = {
   'noDataLabel': 'Não existem infrações',
   'borderless': true,
   'striped': true,
-  'hover': true
+  'hover': true,
+  'mobileLegendRow': <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
+  'labelSeeLess': ['Ver menos', ' items da lista'],
+  'labelSeeMore': ['Ver mais', ' items da lista'],
+  'ariaLabelPaginationNav': 'Paginação da tabela',
+  'titleMobileDL': 'Lista de infrações'
 } as TableProps & PaginationProps;
 
 NoDataTable.argTypes = {};
@@ -209,11 +215,12 @@ export const TotalTable: Story<TableProps & PaginationProps> = (args) => {
 };
 
 TotalTable.args = {
-  tableHeaders: [
+  'aria-label': 'Tabela com os meus movimentos, cabeçalhos com botões para ordenação',
+  'tableHeaders': [
     { value: 'Movimentos', sorting: false },
     { value: 'Pontos', sorting: false }
   ],
-  tableData: [
+  'tableData': [
     {
       moves: 'Saldo inicial',
       score: 12
@@ -228,7 +235,7 @@ TotalTable.args = {
     }
   ],
 
-  linesOptions: [
+  'linesOptions': [
     {
       value: 2,
       label: '2'
@@ -242,11 +249,12 @@ TotalTable.args = {
       label: '10'
     }
   ],
-  noDataLabel: 'Não existem Movimentos',
-  borderless: true,
-  striped: false,
-  hover: true,
-  totalTable: true
+  'noDataLabel': 'Não existem Movimentos',
+  'borderless': true,
+  'striped': false,
+  'hover': true,
+  'totalTable': true,
+  'titleMobileDL': 'Lista de movimentos'
 } as TableProps & PaginationProps;
 
 TotalTable.argTypes = {};
@@ -266,7 +274,7 @@ export const ClickableRowsTable: Story<TableProps & PaginationProps> = (args) =>
 };
 
 ClickableRowsTable.args = {
-  'aria-label': 'Tabela com as minhas infrações, cabeçalhos com botões para ordenação',
+  'aria-label': 'Tabela com os acessos das entidades, cabeçalhos com botões para ordenação',
   'tableHeaders': [
     { value: 'Entidade', sorting: true },
     { value: 'Tipo de dados', sorting: true },
@@ -326,10 +334,22 @@ ClickableRowsTable.args = {
       label: '10'
     }
   ],
-  'noDataLabel': 'Não existem Movimentos',
+  'pagination': true,
+  'itemsCounter': true,
+  'pagesCounter': true,
+  'nextAriaLabel': 'Próxima página da tabela',
+  'previousAriaLabel': 'Página anterior da tabela',
+  'lineOptionsLabel': 'Linhas por página:',
+  'itemsCounterLabel': ['-', 'de', 'items'],
+  'pagesCounterLabel': ['de', 'páginas'],
+  'noDataLabel': 'Não existem entidades',
   'borderless': true,
   'striped': true,
-  'hover': true
+  'hover': true,
+  'labelSeeLess': ['Ver menos', ' items da lista'],
+  'labelSeeMore': ['Ver mais', ' items da lista'],
+  'ariaLabelPaginationNav': 'Paginação da tabela',
+  'titleMobileDL': 'Lista de entidades'
 } as unknown as TableProps & PaginationProps;
 
 ClickableRowsTable.argTypes = {};

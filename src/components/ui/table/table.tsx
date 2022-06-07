@@ -32,10 +32,13 @@ export interface TableProps extends BsTableProps {
   mobileLegendRow?: ReactNode | string | number;
 
   /** Label See More */
-  labelSeeMore?: string;
+  labelSeeMore?: Array<string>;
 
   /** Label See Less */
-  labelSeeLess?: string;
+  labelSeeLess?: Array<string>;
+
+  /** title mobile description list */
+  titleMobileDL?: string;
 }
 
 export type TableContextType = {
@@ -70,6 +73,7 @@ const TableDesktop = ({
   delete tableProps.mobileLegendRow;
   delete tableProps.labelSeeMore;
   delete tableProps.labelSeeLess;
+  delete tableProps.titleMobileDL;
 
   const [elementsPerPage, setElementsPerPage] = useState<paginationDataType[]>();
   const context = React.useContext<TableContextType>(Context);
@@ -90,7 +94,7 @@ const TableDesktop = ({
       if (direction === 'ascending') return 'ascending';
       if (direction === 'descending') return 'descending';
     }
-    return undefined;
+    return 'other';
   };
 
   const renderThead = (item: Array<{ value: string | ReactNode; sorting: boolean }>, keys: string[]) => {
@@ -199,7 +203,8 @@ const TableMobile = ({ ...props }: TableProps) => {
     totalTable,
     mobileLegendRow = null,
     labelSeeMore = 'Ver mais',
-    labelSeeLess = 'Ver menos'
+    labelSeeLess = 'Ver menos',
+    titleMobileDL = 'Lista'
   } = { ...props };
   const cssTableMobile = classNames('ama-table-mobile', className, totalTable && 'ama-table-mobile-total');
 
@@ -211,7 +216,11 @@ const TableMobile = ({ ...props }: TableProps) => {
   const dataListItem = tableData.map((item) => {
     return (
       <React.Fragment key={uuidv4()}>
-        {mobileLegendRow && <dt className="p-16">{mobileLegendRow}</dt>}
+        {mobileLegendRow && (
+          <dt className="p-16" aria-hidden>
+            {mobileLegendRow}
+          </dt>
+        )}
         {Object.entries(item).map((value, key) => {
           return (
             <React.Fragment key={uuidv4()}>
@@ -258,7 +267,7 @@ const TableMobile = ({ ...props }: TableProps) => {
 
   return (
     <div key={uuidv4()} className={cssTableMobile}>
-      <dl key={uuidv4()} className="row">
+      <dl key={uuidv4()} className="row" title={titleMobileDL}>
         {dataShown.length > 0 && dataShown}
         {dataShown.length === 0 &&
           tableHeaders.map((item, index) => {
@@ -277,7 +286,8 @@ const TableMobile = ({ ...props }: TableProps) => {
 
       {dataShown.length > 0 && !totalTable && (
         <Button className="shadow-none mx-auto" variant="link" onClick={toggle}>
-          {seeMore ? `${labelSeeMore} (${seeMoreItems})` : `${labelSeeLess}`}
+          {seeMore ? `${labelSeeMore[0]} (${seeMoreItems})  ` : `${labelSeeLess[0]}`}
+          <span className="visually-hidden"> {labelSeeLess[1]}</span>
         </Button>
       )}
     </div>
