@@ -58,10 +58,8 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
   };
 
   const handleKeyDown = (e) => {
-    if (e.code === 'Space') {
-      if (!isChecked) {
-        onClick();
-      }
+    if (e.code === 'Space' && !isChecked && !isDisabled) {
+      onClick();
     }
   };
 
