@@ -49,6 +49,14 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.code === 'Space') {
+      if (!isChecked) {
+        onClick();
+      }
+    }
+  };
+
   useEffect(() => {
     if (isDisabled) {
       setIcon(isChecked ? radioIcons.disabledSelected : radioIcons.disabled);
@@ -63,9 +71,18 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
   const iconClassName = classNames('radio-icon', { disabled: isDisabled });
 
   return (
-    <div className={inputContainerClassName} onClick={handleOnClick} aria-hidden="true" aria-disabled={isDisabled} ref={radioRef}>
+    <div
+      onFocus={() => setFocus()}
+      className={inputContainerClassName}
+      onClick={handleOnClick}
+      aria-hidden="true"
+      aria-disabled={isDisabled}
+      ref={radioRef}
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+    >
       <input readOnly disabled={isDisabled} checked={isChecked} className="input-radio me-8 d-none" type="radio" name={name} id={inputId} />
-      <Icon onFocus={() => setFocus()} icon={icon} className={iconClassName} />
+      <Icon focusable icon={icon} className={iconClassName} />
       <label className="input-label mx-8" htmlFor={inputId}>
         {label}
       </label>
