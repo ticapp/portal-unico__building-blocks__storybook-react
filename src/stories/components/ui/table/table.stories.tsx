@@ -135,7 +135,8 @@ BasicTable.args = {
   'hover': true,
   'mobileLegendRow': <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
   'labelSeeLess': 'Ver menos',
-  'labelSeeMore': 'Ver mais'
+  'labelSeeMore': 'Ver mais',
+  'ariaLabelPaginationNav': 'Paginação da tabela'
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};

@@ -63,6 +63,7 @@ const TableDesktop = ({
     lineOptionsLabel,
     itemsCounterLabel,
     pagesCounterLabel,
+    ariaLabelPaginationNav,
     ...tableProps
   } = props;
 
@@ -182,6 +183,7 @@ const TableDesktop = ({
           lineOptionsLabel={lineOptionsLabel}
           itemsCounterLabel={itemsCounterLabel}
           pagesCounterLabel={pagesCounterLabel}
+          ariaLabelPaginationNav={ariaLabelPaginationNav}
         />
       )}
     </>
