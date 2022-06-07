@@ -28,18 +28,26 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
     unselected: 'ama-radio-unselected',
     disabledSelected: 'ama-radio-disabled-selected',
     focus: 'ama-radio-focus',
-    checkedFocus: 'ama-radio-selected-focus'
+    selectedFocus: 'ama-radio-selected-focus'
   };
 
   const [icon, setIcon] = useState(radioIcons.focus);
 
   const radioRef = useRef(null);
 
-  const setFocus = () => {
+  const handleFocus = () => {
     if (isChecked && !isDisabled) {
-      setIcon(radioIcons.checkedFocus);
+      setIcon(radioIcons.selectedFocus);
     } else if (!isChecked) {
       setIcon(radioIcons.focus);
+    }
+  };
+
+  const handleBlur = () => {
+    if (isChecked && !isDisabled) {
+      setIcon(radioIcons.selected);
+    } else if (!isChecked) {
+      setIcon(radioIcons.unselected);
     }
   };
 
@@ -71,18 +79,28 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
   const iconClassName = classNames('radio-icon', { disabled: isDisabled });
 
   return (
-    <div
-      onFocus={() => setFocus()}
-      className={inputContainerClassName}
-      onClick={handleOnClick}
-      aria-hidden="true"
-      aria-disabled={isDisabled}
-      ref={radioRef}
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-    >
-      <input readOnly disabled={isDisabled} checked={isChecked} className="input-radio me-8 d-none" type="radio" name={name} id={inputId} />
-      <Icon focusable icon={icon} className={iconClassName} />
+    <div onFocus={() => handleFocus()} onBlur={() => handleBlur()} className={inputContainerClassName}>
+      <div
+        onFocus={() => handleFocus()}
+        onBlur={() => handleBlur()}
+        onClick={handleOnClick}
+        aria-hidden="true"
+        aria-disabled={isDisabled}
+        ref={radioRef}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+      >
+        <input
+          readOnly
+          disabled={isDisabled}
+          checked={isChecked}
+          className="input-radio me-8 d-none"
+          type="radio"
+          name={name}
+          id={inputId}
+        />
+        <Icon focusable icon={icon} className={iconClassName} />
+      </div>
       <label className="input-label mx-8" htmlFor={inputId}>
         {label}
       </label>
