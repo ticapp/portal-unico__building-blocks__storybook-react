@@ -100,10 +100,10 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
           id={inputId}
         />
         <Icon focusable icon={icon} className={iconClassName} />
+        <label className="input-label mx-8" htmlFor={inputId}>
+          {label}
+        </label>
       </div>
-      <label className="input-label mx-8" htmlFor={inputId}>
-        {label}
-      </label>
     </div>
   );
 };
