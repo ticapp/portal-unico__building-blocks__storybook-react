@@ -19,9 +19,11 @@ export interface InputRadioProps {
   checkedRadio: string;
   //* * Set state */
   onClick: () => void;
+  //** Set tabIndex */
+  tabIndex: number;
 }
 
-export const InputRadio = ({ className, label, inputId, name, isDisabled = false, checkedRadio, onClick }: InputRadioProps) => {
+export const InputRadio = ({ className, label, inputId, name, isDisabled = false, tabIndex, checkedRadio, onClick }: InputRadioProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const radioIcons = {
@@ -98,7 +100,7 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
         onBlur={handleBlur}
         onFocus={handleFocus}
         aria-checked={isChecked}
-        tabIndex={0}
+        tabIndex={tabIndex}
         className={containerIconClassName}
       >
         <Icon focusable icon={icon} className={iconClassName} />

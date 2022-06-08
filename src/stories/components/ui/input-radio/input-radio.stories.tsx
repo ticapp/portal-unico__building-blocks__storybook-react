@@ -24,5 +24,6 @@ BasicInputRadio.args = {
   label: 'Label',
   name: 'input-text1',
   inputId: uuidv4(),
-  isDisabled: false
+  isDisabled: false,
+  tabIndex: 0
 };
