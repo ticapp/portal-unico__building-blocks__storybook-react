@@ -2,8 +2,41 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Accordion/Accordion Docs" />
 
+<h1 className="mb-32">
+  <u>Accordion</u>
+</h1>
+
 <h2>Description </h2>
-<p>A component that renders a accordion.</p>
+<p className="fs-16">Accordion allows to expand/collapse info on a block card.</p>
+<p className="fs-16">Check all props available on Docs tab.</p>
 
 <h2>Component usage</h2>
-<p>Consult properties of component for more info</p>
+
+```tsx
+const args = {
+  accordionInfo: [
+    {
+      title: 'Como são atribuídos?',
+      children: (
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Senectus quis fringilla risus natoque fusce malesuada diam sagittis. Urna
+          euismod auctor lectus et scelerisque nisl ornare urna, porttitor. A cras dictum semper condimentum volutpat mauris. Aliquam
+          ultricies elementum vitae ultricies et sit orci fusce.
+        </div>
+      )
+    },
+    {
+      title: 'Como são atribuídos?',
+      children: (
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Senectus quis fringilla risus natoque fusce malesuada diam sagittis. Urna
+          euismod auctor lectus et scelerisque nisl ornare urna, porttitor. A cras dictum semper condimentum volutpat mauris. Aliquam
+          ultricies elementum vitae ultricies et sit orci fusce.
+        </div>
+      )
+    }
+  ]
+};
+
+<Accordion {...args} />;
+```
