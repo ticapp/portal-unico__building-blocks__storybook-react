@@ -7,4 +7,6 @@ export default create({
   brandUrl: 'https://ticappgit.northeurope.cloudapp.azure.com/portal-unico/building-blocks/storybook-react',
   brandImage: logo,
   brandTarget: '_self',
+
+  fontBase: '"Lato", sans-serif',
 });
