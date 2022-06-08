@@ -15,7 +15,7 @@ export const BasicInputRadio: ComponentStory<typeof InputRadio> = (args) => {
     setInputRadioSelected(value);
   };
 
-  return <InputRadio {...args} isChecked={inputRadioSelected === args.name} onClick={() => handleChangeRadioSelected(args.name)} />;
+  return <InputRadio {...args} checkedRadio={inputRadioSelected} onClick={() => handleChangeRadioSelected(args.name)} />;
 };
 
 BasicInputRadio.storyName = 'Basic Input Radio';
