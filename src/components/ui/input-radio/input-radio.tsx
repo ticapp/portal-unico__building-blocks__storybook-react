@@ -81,7 +81,7 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
       <div
         onFocus={() => handleFocus()}
         onBlur={() => handleBlur()}
-        onClick={handleOnClick}
+        onClick={() => handleOnClick()}
         aria-hidden="true"
         aria-disabled={isDisabled}
         ref={radioRef}
