@@ -78,19 +78,14 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
           disabled={disabled}
           aria-label="checkbox"
         />
-        {labelPosition === 'before' && (
+        <div className="ordered-items">
+          <div className="icons" id={checkboxId} onMouseDown={focus} role="none">
+            {iconBuilder()}
+          </div>
           <label id={labelId} htmlFor={checkboxId}>
             {label}
           </label>
-        )}
-        <div className="icons" id={checkboxId} onMouseDown={focus} role="none">
-          {iconBuilder()}
         </div>
-        {labelPosition === 'after' && (
-          <label id={labelId} htmlFor={checkboxId}>
-            {label}
-          </label>
-        )}
       </Stack>
     </div>
   );
