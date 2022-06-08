@@ -35,6 +35,7 @@ const iconList: Record<string, string> = {
   'ama-chevron-down': './AmaChevronDown',
   'ama-chevron-left': './AmaChevronLeft',
   'ama-chevron-right': './AmaChevronRight',
+  'ama-circle-solid': './AmaCircleSolid',
   'ama-clip': './AmaClip',
   'ama-clock': './AmaClock',
   'ama-close-big': './AmaCloseBig',
@@ -142,6 +143,12 @@ const iconList: Record<string, string> = {
 
 export type IconName = keyof typeof iconList;
 
+export const allIcons = Object.keys(iconList);
+
+export function isBundledIcon(name: string): boolean {
+  return !!allIcons.find((i) => i === name);
+}
+
 export const loadIcon = (name: IconName) => {
   if (isBundledIcon(name)) {
     return import(`${iconList[name]}`);
@@ -149,9 +156,3 @@ export const loadIcon = (name: IconName) => {
 
   throw Error(`Icon name not bundled. Requested icon: "${name}"`);
 };
-
-export function isBundledIcon(name: string): boolean {
-  return !!allIcons.find((i) => i === name);
-}
-
-export const allIcons = Object.keys(iconList);

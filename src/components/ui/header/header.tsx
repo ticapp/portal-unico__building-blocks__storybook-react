@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { Col, Container, Nav, Offcanvas, Row } from 'react-bootstrap';
@@ -94,7 +95,7 @@ const Header = ({
   let parsedLanguages: SelectOption[] = [];
   let parsedActiveLanguage: SelectOption;
   if (!languages || !Array.isArray(languages)) {
-    parsedLanguages.push({
+    const defaultOption = {
       label: 'PT',
       value: 'pt',
       labelElement: (
@@ -103,9 +104,10 @@ const Header = ({
           <Icon className="ms-8 marker" icon="ama-check" size="sm" />
         </span>
       )
-    } as SelectOption);
+    } as SelectOption;
 
-    parsedActiveLanguage = parsedLanguages[0];
+    parsedLanguages.push(defaultOption);
+    parsedActiveLanguage = defaultOption;
   } else {
     parsedLanguages = languages.map((l) => {
       if (l.labelElement) {
@@ -247,9 +249,9 @@ const Header = ({
           <Offcanvas.Body>
             <ul role="menu" id="navigation-links" aria-label="Navigation Menu">
               {links &&
-                links.map((l, i) => {
+                links.map((l) => {
                   return (
-                    <li key={`offcanvas-link-${i}`} role="menuitem">
+                    <li key={`offcanvas-link-${uuidv4()}`} role="menuitem">
                       <NavLink activeClassName="active" className="nav-link" exact href={l.link}>
                         <span className="nav-link-label">{l.label}</span>
                       </NavLink>

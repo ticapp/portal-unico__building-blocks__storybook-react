@@ -1,5 +1,7 @@
+import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 import { UrlObject } from 'url';
+import './link.scss';
 import { NextJSAnchor, NextJSAnchorProps } from './nextjs-anchor';
 import { ReactDomAnchor, ReactDomAnchorType } from './react-dom-anchor';
 
@@ -40,6 +42,8 @@ export function Link({
   role,
   tabIndex = 0
 }: LinkProps) {
+  const classes = classNames('ama-link', className);
+
   const isNextJS = !window;
 
   const renderNextJSAnchor = (props) => {
@@ -56,7 +60,7 @@ export function Link({
       children,
       target,
       title,
-      className,
+      className: classes,
       replace,
       scroll,
       role,
@@ -72,7 +76,7 @@ export function Link({
       children,
       target,
       title,
-      className,
+      className: classes,
       replace,
       scroll,
       role,
@@ -93,7 +97,7 @@ export function Link({
     },
     target,
     title,
-    className,
+    className: classes,
     replace,
     scroll
   };

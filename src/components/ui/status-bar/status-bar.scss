@@ -1,0 +1,99 @@
+@use '../../../scss/index' as index;
+
+.ama-status-bar-container {
+  max-height: 72px;
+  background-color: index.$brand-green-main;
+
+  .info-container {
+    color: index.$neutral-white;
+
+    svg {
+      width: 48px;
+      height: 48px;
+      fill: index.$neutral-white;
+    }
+  }
+
+  .status-bar-content {
+    max-width: 1600px;
+    height: 72px;
+
+    .redirect {
+      text-decoration: transparent;
+
+      background-color: index.$neutral-white;
+      border: transparent;
+
+      width: 175px;
+      height: 48px;
+
+      p {
+        color: index.$brand-green-main;
+        @include index.text-big-bold;
+      }
+
+      svg {
+        width: 28px;
+        height: 28px;
+
+        fill: index.$brand-green-main;
+      }
+    }
+  }
+
+  .info-content {
+    height: 100%;
+
+    p {
+      @include index.text-big-bold;
+    }
+
+    span {
+      @include index.text-big-normal;
+    }
+  }
+}
+
+.ama-status-bar-container-mobile {
+  max-height: 64px;
+  background-color: index.$brand-green-main;
+
+  .info-container {
+    color: index.$neutral-white;
+
+    svg {
+      width: 48px;
+      height: 48px;
+      fill: index.$neutral-white;
+    }
+  }
+
+  .status-bar-content-mobile {
+    height: 64px;
+
+    .redirect {
+      text-decoration: transparent;
+      background-color: transparent;
+      border: transparent;
+
+      svg {
+        width: 28px;
+        height: 28px;
+
+        fill: index.$neutral-white;
+      }
+    }
+  }
+
+  .info-content {
+    height: 100%;
+
+    p {
+      @include index.text-medium-bold;
+    }
+
+    span {
+      @include index.text-medium-normal;
+    }
+  }
+}

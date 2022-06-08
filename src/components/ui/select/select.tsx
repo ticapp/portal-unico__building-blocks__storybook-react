@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
 import React, { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react';
 import { v4 } from 'uuid';
@@ -60,9 +63,8 @@ const Select = ({
   size,
   allwaysOpen
 }: SelectProps) => {
-  const guid = v4();
-  const singleSelectId = id || `ama-select-id-${guid}`;
-  const selectControlsId = `ama-select-controls-id-${guid}`;
+  const singleSelectId = id || `ama-select-id-${v4()}`;
+  const selectControlsId = `ama-select-controls-id-${v4()}`;
 
   const comboRef = useRef<HTMLDivElement | null>(null);
   const listboxRef = useRef<HTMLDivElement | null>(null);
@@ -94,7 +96,7 @@ const Select = ({
   };
 
   // Get action when menu open
-  function getActionWithMenuOpen(key: string, altKey: boolean): number | null {
+  function getActionWithMenuOpen(key: string, altKey: boolean): number {
     if (key === 'ArrowUp' && altKey) {
       return SelectActions.Select;
     }
@@ -123,11 +125,11 @@ const Select = ({
       return SelectActions.Select;
     }
 
-    return null;
+    return -1;
   }
 
   // map a key press to an action
-  function getActionFromKey(event, menuOpen) {
+  function getActionFromKey(event, menuOpen): number {
     const { key, altKey, ctrlKey, metaKey } = event;
 
     // home move the selected option when open or closed
@@ -153,6 +155,8 @@ const Select = ({
     if (menuOpen) {
       return getActionWithMenuOpen(key, altKey);
     }
+
+    return -1;
   }
 
   // get an updated option index after performing an action
@@ -326,71 +330,6 @@ const Select = ({
     (evt.target as HTMLDivElement).classList.add('selected');
   };
 
-  const onComboKeyDown = (event) => {
-    if (disabled) {
-      return;
-    }
-
-    const max = options.length - 1;
-
-    const action = getActionFromKey(event, isOpen);
-
-    const { key } = event;
-
-    switch (action) {
-      case SelectActions.Last:
-      case SelectActions.First:
-        updateMenuState(true);
-        return selectOption(getUpdatedIndex(selectedIndex, max, action));
-
-      case SelectActions.Next:
-      case SelectActions.Previous:
-      case SelectActions.PageUp:
-      case SelectActions.PageDown:
-        return selectOption(getUpdatedIndex(selectedIndex, max, action));
-
-      case SelectActions.Close:
-        return updateMenuState(false);
-
-      case SelectActions.Type:
-        if (searchable) {
-          return onComboType(key);
-        }
-
-        return false;
-
-      case SelectActions.Open:
-        return updateMenuState(true);
-
-      case SelectActions.SelectClose:
-        if (options[selectedIndex].disabled) {
-          return;
-        }
-
-        checkOption(selectedIndex);
-        return updateMenuState(false);
-
-      case SelectActions.Select:
-        if (options[selectedIndex].disabled) {
-          return;
-        }
-
-        if (!searchable) {
-          return checkOption(selectedIndex);
-        }
-
-        return onComboType(key);
-    }
-  };
-
-  const onMenuKeyDown = (event) => {
-    // move focus back to the combobox, if needed
-    comboRef.current?.focus();
-
-    // business as usual
-    onComboKeyDown(event);
-  };
-
   const onComboType = (letter) => {
     // find the index of the first matching option
     if (typeof searchTimeout === 'number') {
@@ -416,6 +355,79 @@ const Select = ({
       window.clearTimeout(searchTimeout);
       searchString = '';
     }
+  };
+  const onComboKeyDown = (event) => {
+    if (disabled) {
+      return;
+    }
+
+    const max = options.length - 1;
+
+    const action = getActionFromKey(event, isOpen);
+
+    const { key } = event;
+
+    switch (action) {
+      case SelectActions.Last:
+      case SelectActions.First:
+        updateMenuState(true);
+        selectOption(getUpdatedIndex(selectedIndex, max, action));
+        return;
+
+      case SelectActions.Next:
+      case SelectActions.Previous:
+      case SelectActions.PageUp:
+      case SelectActions.PageDown:
+        selectOption(getUpdatedIndex(selectedIndex, max, action));
+        return;
+
+      case SelectActions.Close:
+        updateMenuState(false);
+        return;
+
+      case SelectActions.Type:
+        if (searchable) {
+          onComboType(key);
+        }
+
+        return;
+
+      case SelectActions.Open:
+        updateMenuState(true);
+        return;
+
+      case SelectActions.SelectClose:
+        if (!options[selectedIndex].disabled) {
+          checkOption(selectedIndex);
+          updateMenuState(false);
+        }
+        return;
+
+      case SelectActions.Select:
+        if (!options[selectedIndex].disabled) {
+          if (!searchable) {
+            checkOption(selectedIndex);
+            return;
+          }
+
+          onComboType(key);
+        }
+        break;
+
+      case -1:
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const onMenuKeyDown = (event) => {
+    // move focus back to the combobox, if needed
+    comboRef.current?.focus();
+
+    // business as usual
+    onComboKeyDown(event);
   };
 
   useOutsideElementClick(comboWrapperRef, () => updateMenuState(false));
@@ -492,9 +504,9 @@ const Select = ({
               ? placeholder
               : options
                   .filter((_o, i) => checkedIndexes.includes(i))
-                  .map((o, i) => {
+                  .map((o) => {
                     return (
-                      <div className="tag bg-neutral-dark d-flex align-items-center m-4 py-8 px-16" key={`${guid}-${i}`}>
+                      <div className="tag bg-neutral-dark d-flex align-items-center m-4 py-8 px-16" key={`${v4()}`}>
                         <span>{o.label}</span>
                       </div>
                     );
@@ -524,7 +536,7 @@ const Select = ({
           return (
             <div
               role="option"
-              key={i}
+              key={v4()}
               id={`${singleSelectId}-option-${i}`}
               className={`combo-option w-100 d-flex align-items-center py-8 px-16 ${isChecked ? 'checked' : ''}
               ${isSelected ? 'selected' : ''}

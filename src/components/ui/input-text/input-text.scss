@@ -1,0 +1,45 @@
+@use '../../../scss/index' as index;
+
+.ama-input-container {
+  label {
+    @include index.text-medium-normal;
+    color: index.$neutral-black;
+  }
+
+  .input-text {
+    height: 56px;
+    border: 1px solid index.$neutral-black;
+
+    @include index.text-medium-normal;
+
+    color: index.$neutral-black;
+    background-color: index.$neutral-white;
+
+    &::placeholder {
+      color: index.$neutral-dark-grey;
+    }
+
+    &:focus {
+      border-width: 2px;
+      outline: none;
+      border-radius: 0;
+    }
+  }
+
+  &.disabled {
+    label {
+      color: index.$neutral-dark-grey;
+    }
+
+    .input-text {
+      border: 1px solid index.$neutral-light-grey;
+
+      color: index.$neutral-dark-grey;
+      background-color: index.$neutral-light;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+  }
+}

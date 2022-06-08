@@ -41,5 +41,5 @@ export const Alert: FC<AlertProps> = (props: AlertProps) => {
     return <InnerAlert onClose={() => setShow(false)} bsPrefix="ama-alert" {...props} />;
   }
 
-  return <></>;
+  return null;
 };

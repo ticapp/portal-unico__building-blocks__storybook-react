@@ -1,0 +1,71 @@
+@use '../../../scss/index' as index;
+
+.ama-table {
+  thead {
+    background-color: index.$neutral-dark;
+    button {
+      &:disabled {
+        opacity: 1;
+      }
+      &:hover,
+      &:focus {
+        border-width: 1px;
+        border-color: index.$neutral-white;
+      }
+    }
+    th {
+      background-color: transparent;
+      color: index.$neutral-white;
+    }
+  }
+  .stretched-link {
+    min-width: 0;
+    min-height: 0;
+  }
+  &-total {
+    tbody {
+      tr {
+        &:not(:last-of-type) {
+          td {
+            background-color: index.$neutral-white;
+          }
+        }
+        &:last-of-type {
+          td {
+            @include index.text-medium-bold;
+          }
+        }
+      }
+    }
+  }
+  &-mobile {
+    dl {
+      border: 1px solid index.$neutral-light;
+      &:last-child,
+      :nth-last-child(-n + 2) {
+        border-bottom: none;
+      }
+    }
+
+    dd,
+    dt {
+      border-bottom: 1px solid index.$neutral-light;
+    }
+
+    dt {
+      @include index.text-medium-bold;
+    }
+    dd {
+      @include index.text-medium-normal;
+    }
+
+    &-total {
+      dl {
+        :nth-last-child(-n + 4) {
+          border-bottom: none;
+          background-color: index.$neutral-light;
+        }
+      }
+    }
+  }
+}

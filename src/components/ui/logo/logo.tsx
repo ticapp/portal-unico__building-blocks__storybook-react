@@ -23,6 +23,7 @@ export interface LogoProps {
   homepageLink?: Url;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const logo = require('../../../assets/img/logo.png');
 
 const Logo: FC<LogoProps> = ({

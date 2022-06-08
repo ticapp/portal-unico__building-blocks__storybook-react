@@ -8,13 +8,12 @@ export default {
 } as ComponentMeta<typeof Icon>;
 
 export const Size: Story<IconProps> = ({ icon }: IconProps) => {
-  icon = icon || 'ama-user';
   const dimensions = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
 
   return (
     <div style={{ backgroundColor: '#ebebeb' }}>
       {dimensions.map((size) => (
-        <Icon className="p-1" key={size} size={size} icon={icon} />
+        <Icon className="p-1" key={size} size={size} icon={icon || 'ama-user'} />
       ))}
     </div>
   );
@@ -31,9 +30,7 @@ Size.argTypes = {
 };
 
 export const ExternalImage: Story<IconProps> = ({ icon, size }: IconProps) => {
-  icon = icon || 'https://picsum.photos/50';
-  size = size || 'md';
-  return <Icon icon={icon} size={size} />;
+  return <Icon icon={icon || 'https://picsum.photos/50'} size={size || 'md'} />;
 };
 ExternalImage.storyName = 'External Image';
 ExternalImage.argTypes = {
@@ -51,12 +48,11 @@ ExternalImage.argTypes = {
 };
 
 export const IconList: Story<IconProps> = ({ size }: IconProps) => {
-  size = size || 'md';
   return (
     <Row>
       {allIcons.map((icon) => (
         <Col md={3} key={icon}>
-          <Icon icon={icon} size={size} />
+          <Icon icon={icon} size={size || 'md'} />
           <span className="ps-3">{icon}</span>
         </Col>
       ))}
