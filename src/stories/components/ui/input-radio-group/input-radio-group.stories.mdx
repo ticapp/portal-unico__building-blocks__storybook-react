@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Inputs Groups/Input Groups Docs" />
+
+<h2>Description</h2>
+
+<p>Render the input radio</p>
+
+<h2>Component usage</h2>
+
+```js
+const [inputValue, setInputValue] = useState('');
+
+  const data = [{
+    label: 'Input Radio 1',
+    inputId: uuidv4(),
+  }, 
+  {
+    label: 'Input Radio 2',
+    inputId: uuidv4()
+  },
+  {
+    label: 'Input Radio 3',
+    inputId: uuidv4(),
+    isDisabled: true
+  },
+  {
+    label: 'Input Radio 3',
+    inputId: uuidv4(),
+  },
+  {
+    label: 'Input Radio 4',
+    inputId: uuidv4()
+  }
+] 
+
+<InputRadioGroup
+    {...args}
+  >
+    {data.map((values, index) => (
+      <InputRadio {...values} checkedRadio={inputChecked} onClick={setInputChecked} tabIndex={index}/>
+    )) }
+</InputRadioGroup>;
+```

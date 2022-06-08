@@ -22,7 +22,6 @@ BasicInputRadio.storyName = 'Basic Input Radio';
 
 BasicInputRadio.args = {
   label: 'Label',
-  name: 'input-text1',
   inputId: uuidv4(),
   isDisabled: false,
   tabIndex: 0

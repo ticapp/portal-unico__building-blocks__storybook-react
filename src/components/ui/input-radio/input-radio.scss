@@ -8,9 +8,12 @@
     height: 28px;
 
     fill: white;
-    cursor: pointer;
 
     pointer-events: none;
+
+    &:hover{
+      cursor: pointer;
+    }
 
     &.disabled {
       cursor: not-allowed;

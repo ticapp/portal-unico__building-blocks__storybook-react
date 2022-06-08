@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Icon } from '../icon';
 import './input-radio.scss';
 
@@ -11,8 +11,6 @@ export interface InputRadioProps {
   label?: string;
   /** Set id */
   inputId: string;
-  /** Set input name */
-  name: string;
   /** Set if is disable */
   isDisabled?: boolean;
   /** Set if is checked */
@@ -23,7 +21,7 @@ export interface InputRadioProps {
   tabIndex: number;
 }
 
-export const InputRadio = ({ className, label, inputId, name, isDisabled = false, tabIndex, checkedRadio, onClick }: InputRadioProps) => {
+export const InputRadio = ({ className, label, inputId,  isDisabled = false, tabIndex, checkedRadio, onClick }: InputRadioProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const radioIcons = {
@@ -36,6 +34,15 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
   };
 
   const [icon, setIcon] = useState(radioIcons.focus);
+
+  const verifyTabIndex = useMemo(() => {
+    if(tabIndex === 0){
+      return 1;
+    }else if (tabIndex > 1){
+      return tabIndex + 1;
+    }
+  }, [tabIndex]);
+
 
   const handleFocus = () => {
     if (isChecked && !isDisabled) {
@@ -83,7 +90,6 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
 
   const inputContainerClassName = classNames('ama-input-radio-container', 'd-flex align-items-center justify-content-start', className);
   const iconClassName = classNames('radio-icon', { disabled: isDisabled });
-  const containerIconClassName = classNames('radio-icon-container');
 
   return (
     <li
@@ -91,17 +97,12 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
       className={inputContainerClassName}
       onKeyDown={handleKeyDown}
       onClick={() => handleOnClick(inputId)}
+      aria-checked={isChecked}
+      tabIndex={verifyTabIndex}
+      onBlur={handleBlur}
+      onFocus={handleFocus}
     >
-      <div
-        aria-disabled={isDisabled}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        aria-checked={isChecked}
-        tabIndex={tabIndex}
-        className={containerIconClassName}
-      >
-        <Icon focusable icon={icon} className={iconClassName} />
-      </div>
+      <Icon focusable icon={icon} className={iconClassName} />
 
       <label className="input-labe mx-8" htmlFor={inputId}>
         {label}
