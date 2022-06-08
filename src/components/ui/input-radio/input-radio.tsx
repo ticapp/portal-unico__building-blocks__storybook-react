@@ -18,7 +18,7 @@ export interface InputRadioProps {
   /** Set if is checked */
   checkedRadio: string;
   //* * Set state */
-  onClick: () => void;
+  onClick: (e: string) => void;
   //** Set tabIndex */
   tabIndex: number;
 }
@@ -53,16 +53,15 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
     }
   };
 
-  const handleOnClick = () => {
-    console.log('test');
+  const handleOnClick = (e: string) => {
     if (!isDisabled) {
-      onClick();
+      onClick(e);
     }
   };
 
   const handleKeyDown = (e) => {
     if (e.code === 'Space' && !isChecked && !isDisabled) {
-      onClick();
+      onClick(inputId);
     }
   };
 
@@ -77,7 +76,7 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
   }, [isChecked, isDisabled]);
 
   useEffect(() => {
-    if (checkedRadio === name) {
+    if (checkedRadio === inputId) {
       setIsChecked(true);
     }
   }, [checkedRadio]);
@@ -90,12 +89,10 @@ export const InputRadio = ({ className, label, inputId, name, isDisabled = false
     <li
       id={inputId}
       className={inputContainerClassName}
-
       onKeyDown={handleKeyDown}
+      onClick={() => handleOnClick(inputId)}
     >
       <div
-        role="radio"
-        onClick={() => handleOnClick()}
         aria-disabled={isDisabled}
         onBlur={handleBlur}
         onFocus={handleFocus}

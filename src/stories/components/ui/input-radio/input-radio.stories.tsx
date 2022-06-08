@@ -11,11 +11,11 @@ export default {
 export const BasicInputRadio: ComponentStory<typeof InputRadio> = (args) => {
   const [inputRadioSelected, setInputRadioSelected] = useState('');
 
-  const handleChangeRadioSelected = (value: string) => {
-    setInputRadioSelected(value);
+  const handleChangeRadioSelected = (inputId: string) => {
+    setInputRadioSelected(inputId);
   };
 
-  return <InputRadio {...args} checkedRadio={inputRadioSelected} onClick={() => handleChangeRadioSelected(args.name)} />;
+  return <InputRadio {...args} checkedRadio={inputRadioSelected} onClick={handleChangeRadioSelected} />;
 };
 
 BasicInputRadio.storyName = 'Basic Input Radio';

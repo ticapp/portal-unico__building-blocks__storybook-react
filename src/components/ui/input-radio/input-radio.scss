@@ -10,6 +10,8 @@
     fill: white;
     cursor: pointer;
 
+    pointer-events: none;
+
     &.disabled {
       cursor: not-allowed;
     }
