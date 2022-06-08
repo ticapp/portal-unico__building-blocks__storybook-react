@@ -27,4 +27,15 @@
       }
     }
   }
+
+  .ordered-items {
+    display: flex;
+    align-items: center;
+    &.before {
+      flex-direction: row-reverse;
+    }
+    &.after {
+      flex-direction: row;
+    }
+  }
 }
