@@ -6,17 +6,17 @@ export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Add classes to the InputText component */
   className?: string;
   /** Set the placeholder of input */
-  placeholder: string;
+  placeholder?: string;
   /** Set the value of input */
-  value: string;
+  value?: string;
   /** Set input label */
   label?: string;
   /** Set if is disable */
   isDisabled?: boolean;
   /** Set input name */
-  name: string;
+  name?: string;
   /** Set input id */
-  inputId: string;
+  inputId?: string;
   //* * Set input type */
   type?: string;
 }
