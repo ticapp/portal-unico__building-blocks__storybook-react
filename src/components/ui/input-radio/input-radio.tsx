@@ -17,11 +17,11 @@ export interface InputRadioProps {
   checkedRadio: string;
   //* * Set state */
   onClick: (e: string) => void;
-  //** Set tabIndex */
+  //* * Set tabIndex */
   tabIndex: number;
 }
 
-export const InputRadio = ({ className, label, inputId,  isDisabled = false, tabIndex, checkedRadio, onClick }: InputRadioProps) => {
+export const InputRadio = ({ className, label, inputId, isDisabled = false, tabIndex, checkedRadio, onClick }: InputRadioProps) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const radioIcons = {
@@ -36,13 +36,14 @@ export const InputRadio = ({ className, label, inputId,  isDisabled = false, tab
   const [icon, setIcon] = useState(radioIcons.focus);
 
   const verifyTabIndex = useMemo(() => {
-    if(tabIndex === 0){
+    if (tabIndex === 0) {
       return 1;
-    }else if (tabIndex > 1){
+    }
+    if (tabIndex >= 1) {
       return tabIndex + 1;
     }
+    return tabIndex;
   }, [tabIndex]);
-
 
   const handleFocus = () => {
     if (isChecked && !isDisabled) {
@@ -92,7 +93,7 @@ export const InputRadio = ({ className, label, inputId,  isDisabled = false, tab
   const iconClassName = classNames('radio-icon', { disabled: isDisabled });
 
   return (
-    <li
+    <div
       id={inputId}
       className={inputContainerClassName}
       onKeyDown={handleKeyDown}
@@ -101,12 +102,13 @@ export const InputRadio = ({ className, label, inputId,  isDisabled = false, tab
       tabIndex={verifyTabIndex}
       onBlur={handleBlur}
       onFocus={handleFocus}
+      role="radio"
     >
       <Icon focusable icon={icon} className={iconClassName} />
 
       <label className="input-labe mx-8" htmlFor={inputId}>
         {label}
       </label>
-    </li>
+    </div>
   );
 };

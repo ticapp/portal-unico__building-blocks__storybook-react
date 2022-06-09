@@ -8,19 +8,17 @@ export interface InputRadioGroupProps {
   className?: string;
   /** Add children */
   children?: React.ReactNode;
-  //** Set Radio checked */
+  //* * Set Radio checked */
   radioCheckedId: string;
   // ** Set aria-labelledby */
   ariaLabelledby: string;
 }
 
-export const InputRadioGroup = ({ className, children,  radioCheckedId, ariaLabelledby }: InputRadioGroupProps) => {
-
-
+export const InputRadioGroup = ({ className, children, radioCheckedId, ariaLabelledby }: InputRadioGroupProps) => {
   const inputRadioGroupClassName = classNames('ama-input-radio-group', className);
 
   return (
-    <ul 
+    <div
       className={inputRadioGroupClassName}
       aria-activedescendant={radioCheckedId}
       role="radiogroup"
@@ -28,6 +26,6 @@ export const InputRadioGroup = ({ className, children,  radioCheckedId, ariaLabe
       aria-labelledby={ariaLabelledby}
     >
       {children}
-    </ul>
+    </div>
   );
 };
