@@ -1,2 +1,46 @@
-.ama-autocomplete {
+// @use '../../../scss/index' as index;
+
+.ama-input-tag {
+  padding: 16px;
+  border: 1px solid black;
+  position: relative;
+
+  .tag {
+    background-color: green;
+    margin: 10px;
+  }
+
+  input {
+    // @include index.text-medium-normal;
+    // color: index.$neutral-black;
+    // background-color: index.$neutral-white;
+    // &::placeholder {
+    //   color: index.$neutral-dark-grey;
+    // }
+
+    padding: 0;
+    margin: 0;
+    border: none;
+
+    &:focus {
+      border: none;
+      outline: none;
+      border-radius: 0;
+    }
+  }
+
+  ul {
+    position: absolute;
+    left: 0;
+    bottom: 200;
+    width: 100%;
+
+    list-style: none;
+
+    li {
+      &.focus {
+        background-color: red;
+      }
+    }
+  }
 }
