@@ -2,8 +2,54 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Tabs/Tabs Docs" />
 
+<h1 className="mb-32">
+  <u>Tabs</u>
+</h1>
+
 <h2> Description </h2>
-<p>A component to shown information on tabs elements</p>
+<p className="fs-16">A component to shown information on tabs elements.</p>
+<p className="fs-16">Check all props available in each example on Docs tab.</p>
 
 <h2>Component usage</h2>
-<p>Consult properties of component for more info</p>
+
+```tsx
+import { Tabs } from '@ama-react-design-system/tabs';
+
+const args = {
+  'defaultActiveKey': 'tab-first',
+  'id': 'basic-tabs',
+  'tabsName': [
+    {
+      label: 'Carta de condução',
+      children: (
+        <div className="mt-48">
+          <h3>Conduza com cuidado!</h3>
+        </div>
+      ),
+      keyTab: 'tab-first'
+    },
+    {
+      label: 'Perguntas frequentes',
+      children: (
+        <div className="mt-48">
+          <h3>Encontre as suas respostas</h3>
+        </div>
+      ),
+      keyTab: 'tab-second'
+    },
+    {
+      label: 'Disabled tab',
+      children: (
+        <div className="mt-48">
+          <h3>Disabled</h3>
+        </div>
+      ),
+      keyTab: 'tab-third',
+      disabled: true
+    }
+  ],
+  'aria-label': 'Separadores do serviço carta de condução'
+};
+
+<Tabs {...args} />;
+```

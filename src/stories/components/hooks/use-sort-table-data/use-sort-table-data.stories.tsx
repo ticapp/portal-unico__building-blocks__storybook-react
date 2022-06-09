@@ -34,16 +34,16 @@ export const Example: Story = () => {
 
   return (
     <>
-      <p>Items para ordenar: {JSON.stringify(items)}</p>
+      <p>Items/Sorted items: {JSON.stringify(items)}</p>
       <button
         type="button"
         onClick={() => {
           requestSort('entity');
         }}
       >
-        Ordenar por entidade
+        Sort by entity
       </button>
-      <p>Direção: {sortConfig?.direction}</p>
+      <p>Direction: {sortConfig?.direction}</p>
     </>
   );
 };
