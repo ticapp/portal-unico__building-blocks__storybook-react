@@ -20,8 +20,8 @@
     height: 0;
   }
 
-  input:disabled {
-    & {
+  input {
+    &:disabled {
       ~ label {
         color: index.$neutral-dark-grey;
       }
