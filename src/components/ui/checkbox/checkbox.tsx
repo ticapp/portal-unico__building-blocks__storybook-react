@@ -78,7 +78,7 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
           disabled={disabled}
           aria-label="checkbox"
         />
-        <div className="ordered-items">
+        <div className={`ordered-items ${labelPosition} d-flex align-items-center`}>
           <div className="icons" id={checkboxId} onMouseDown={focus} role="none">
             {iconBuilder()}
           </div>
