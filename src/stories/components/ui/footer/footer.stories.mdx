@@ -2,13 +2,20 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Footer/Footer Docs" />
 
+<h1 className="mb-32">
+  <u>Footer</u>
+</h1>
+
 <h2>Description </h2>
-<p>A component that renders a footer.</p>
+
+<p className="fs-16">A component that renders a footer with all links and contacts needed.</p>
+<p className="fs-16">Check all props available on Docs tab.</p>
 
 <h2>Component usage</h2>
-<p>Consult properties of component for more info</p>
 
-```jsx
+```tsx
+import { Footer } from '@ama-design-system/footer';
+
 <Footer
   headerTitle_01="Contactos e sites Públicos"
   contentInfo_01={[
@@ -97,5 +104,5 @@ import { Meta } from '@storybook/addon-docs';
   ]}
   listDataCol_01_Type="none"
   listDataCol_02_Type="none"
-></Footer>
+></Footer>;
 ```

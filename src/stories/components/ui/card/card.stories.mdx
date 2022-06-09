@@ -2,11 +2,36 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Card/Card Docs" />
 
+<h1 className="mb-32">
+  <u>Card</u>
+</h1>
+
 <h2>Description </h2>
-<p>
+<p className="fs-16">
   A component that renders cards that could be clickable using{' '}
-  <a href="https://getbootstrap.com/docs/5.1/helpers/stretched-link/">Stretched link</a> by Bootstrap.
+  <a href="https://getbootstrap.com/docs/5.1/helpers/stretched-link/"> Stretched link</a> by Bootstrap. Changing some of props we can change
+  style of card and some elements could be activated/disabled.
 </p>
+<p className="fs-16">Check all props available on Docs tab.</p>
 
 <h2>Component usage</h2>
-<p>Consult properties of component for more info</p>
+
+```tsx
+import { Card } from '@ama-design-system/card';
+
+const args = {
+  mainTitle: 'Consultar pontos da carta de condução',
+  description: 'Número atual de pontos da sua carta de condução',
+  contentIcon: 'ama-badge',
+  content: '15 pontos',
+  link: 'https://www.ama.pt',
+  isExternal: true,
+  title: 'link para o site AMA',
+  linkLabel: 'Default',
+  linkIcon: 'ama-arrow-down-right',
+  isLinkLabel: true,
+  cardHasLink: true
+};
+
+<Card {...args} />;
+```

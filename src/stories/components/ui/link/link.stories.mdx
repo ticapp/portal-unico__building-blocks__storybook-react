@@ -2,27 +2,36 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Link/Link Docs" />
 
+<h1 className="mb-32">
+  <u>Link</u>
+</h1>
+
 <h2>Description</h2>
 
-<p>An abstraction that deals with the rendering of React-Router and NextJS links so it can be used on both platforms</p>
+<p className="fs-16">An abstraction that deals with the rendering of React-Router and NextJS links so it can be used on both platforms.</p>
+<p className="fs-16">Check all props available on Docs tab.</p>
 
 <h2>Component usage</h2>
 
-<p>React-Router</p>
+<label>React-Router</label>
 
-```js
-<Link link={'#'}>hello world!</Link>
+```tsx
+import { Link } from '@ama-design-system/link';
+
+<Link link={'#'}>hello world!</Link>;
 ```
 
-<p>NextJS</p>
+<label>NextJS</label>
 
-```js
-<Link link={'#'}>hello world!</Link>
+```tsx
+import { Link } from '@ama-design-system/link';
+
+<Link link={'#'}>hello world!</Link>;
 ```
 
 <h2>Additional notes:</h2>
 
-<p>
+<p className="fs-16">
   When using NextJS, check the{' '}
   <a href="https://nextjs.org/docs/api-reference/next/link" target="_blank">
     <b>Next/Link</b>
@@ -30,7 +39,7 @@ import { Meta } from '@storybook/addon-docs';
   documentation.
 </p>
 
-<p>
+<p className="fs-16">
   When using React-Router-Dom, check the{' '}
   <a href="https://v5.reactrouter.com/web/api/Link" target="_blank">
     <b>React-Router</b>

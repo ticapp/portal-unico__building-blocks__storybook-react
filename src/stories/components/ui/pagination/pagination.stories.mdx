@@ -2,8 +2,64 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Pagination/Pagination Docs" />
 
+<h1 className="mb-32">
+  <u>Pagination</u>
+</h1>
+
 <h2>Description </h2>
-<p>A component that renders pagination</p>
+<p className="fs-16">A component that renders pagination with custom areas, to show different info.</p>
+<p className="fs-16">Check all props available on Docs tab.</p>
 
 <h2>Component usage</h2>
-<p>Consult properties of component for more info</p>
+
+```tsx
+import { Pagination } from '@ama-design-system/pagination';
+
+TablePagination.args = {
+  data: [
+    {
+      col01: '000-T',
+      col02: 104779934,
+      col03: 2018 - 10 - 17,
+      col04: '45 QG 56',
+      col05: 'Rua das Beatas, em frente ao número 36, Lisboa',
+      col06: 'Concluído',
+      col07: 'Pago',
+      col08: 'Não aplicável'
+    },
+    {
+      col01: 10,
+      col02: 20,
+      col03: 30,
+      col04: 40,
+      col05: 50,
+      col06: 60,
+      col07: 70,
+      col08: 80
+    }
+  ],
+  linesOptions: [
+    {
+      value: 2,
+      label: '2'
+    },
+    {
+      value: 5,
+      label: '5'
+    },
+    {
+      value: 10,
+      label: '10'
+    }
+  ],
+  itemsCounter: true,
+  pagesCounter: true,
+  nextAriaLabel: 'Próxima página da tabela',
+  previousAriaLabel: 'Página anterior da tabela',
+  lineOptionsLabel: 'Linhas por página:',
+  itemsCounterLabel: ['-', 'de', 'items'],
+  pagesCounterLabel: ['de', 'páginas']
+};
+
+<Pagination {...args} />;
+```

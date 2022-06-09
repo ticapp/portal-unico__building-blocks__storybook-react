@@ -2,13 +2,23 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/List/List Docs" />
 
+<h1 className="mb-32">
+  <u>List</u>
+</h1>
+
 <h2> Description </h2>
-<p>A component that renders a **List** with diferent options.</p>
+<p className="fs-16">
+  A component that renders a <b>List</b> with diferent options.
+</p>
+<p className="fs-16">Check all props available on Docs tab.</p>
 
 <h2>Component usage </h2>
-<p>Simple list without links </p>
 
-```jsx
+<label>Simple list without links </label>
+
+```tsx
+import { List } from '@ama-design-system/list';
+
 <List
   listData={[
     {
@@ -24,12 +34,14 @@ import { Meta } from '@storybook/addon-docs';
       title: ''
     }
   ]}
-></List>
+></List>;
 ```
 
-<p>List with/without links and custom bullets. See more info on properties. </p>
+<label>List with/without links and custom bullets. See more info on properties. </label>
 
-```jsx
+```tsx
+import { List } from '@ama-design-system/list';
+
 <List
   listData={[
     {
@@ -49,5 +61,5 @@ import { Meta } from '@storybook/addon-docs';
   listStyleImageUrl="https://picsum.photos/14/14"
   listStylePosition="inside"
   className="own_class"
-></List>
+></List>;
 ```
