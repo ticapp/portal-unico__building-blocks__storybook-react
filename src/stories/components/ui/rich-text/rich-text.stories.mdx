@@ -2,14 +2,20 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Rich Text/Rich Text Docs" />
 
+<h1 className="mb-32">
+  <u>Rich Text</u>
+</h1>
+
 <h2> Description </h2>
-<p>A component to shown a previous generated rich text </p>
+<p className="fs-16">
+  A component to shown a previous generated html. On <b>codeHtml</b> prop pass the html as string.
+</p>
+<p className="fs-16">Check all props available in each example on Docs tab.</p>
 
 <h2>Component usage </h2>
-<p>
-  On <b>codeHtml</b> prop pass the html as string
-</p>
 
-```jsx
-<RichText codeHtml="{Copy declaration here}" className=""></RichText>
+```tsx
+import { RichText } from '@ama-react-design-system/rich-text';
+
+<RichText codeHtml="{Copy declaration here}" />;
 ```
