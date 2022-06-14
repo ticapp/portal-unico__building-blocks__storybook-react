@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from '../icon';
 import './input-radio.scss';
 
@@ -14,15 +14,13 @@ export interface InputRadioProps {
   /** Set if is disable */
   isDisabled?: boolean;
   /** Set if is checked */
-  checkedRadio: string;
+  isChecked: boolean;
   //* * Set state */
   onClick: (e: string) => void;
-  //* * Set tabIndex */
-  tabIndex: number;
 }
 
-export const InputRadio = ({ className, label, inputId, isDisabled = false, tabIndex, checkedRadio, onClick }: InputRadioProps) => {
-  const [isChecked, setIsChecked] = useState(false);
+export const InputRadio = ({ className, label, inputId, isChecked, isDisabled = false, onClick }: InputRadioProps) => {
+  const [radioIsChecked, setRadioIsChecked] = useState(isChecked);
 
   const radioIcons = {
     disabled: 'ama-radio-disabled-unselected',
@@ -34,16 +32,6 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, tabI
   };
 
   const [icon, setIcon] = useState(radioIcons.focus);
-
-  const verifyTabIndex = useMemo(() => {
-    if (tabIndex === 0) {
-      return 1;
-    }
-    if (tabIndex >= 1) {
-      return tabIndex + 1;
-    }
-    return tabIndex;
-  }, [tabIndex]);
 
   const handleFocus = () => {
     if (isChecked && !isDisabled) {
@@ -67,8 +55,9 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, tabI
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (e.code === 'Space' && !isChecked && !isDisabled) {
+  const handleKeyDown = (event) => {
+    event.preventDefault();
+    if (event.code === 'Space' && !isChecked && !isDisabled) {
       onClick(inputId);
     }
   };
@@ -84,10 +73,14 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, tabI
   }, [isChecked, isDisabled]);
 
   useEffect(() => {
-    if (checkedRadio === inputId) {
-      setIsChecked(true);
+    if (isChecked) {
+      setRadioIsChecked(true);
+      setIcon(radioIcons.selected);
+    } else {
+      setRadioIsChecked(false);
+      setIcon(radioIcons.unselected);
     }
-  }, [checkedRadio]);
+  }, []);
 
   const inputContainerClassName = classNames('ama-input-radio-container', 'd-flex align-items-center justify-content-start', className);
   const iconClassName = classNames('radio-icon', { disabled: isDisabled });
@@ -98,13 +91,13 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, tabI
       className={inputContainerClassName}
       onKeyDown={handleKeyDown}
       onClick={() => handleOnClick(inputId)}
-      aria-checked={isChecked}
-      tabIndex={verifyTabIndex}
+      aria-checked={radioIsChecked}
+      tabIndex={0}
       onBlur={handleBlur}
       onFocus={handleFocus}
       role="radio"
     >
-      <Icon focusable icon={icon} className={iconClassName} />
+      <Icon icon={icon} className={iconClassName} />
 
       <label className="input-labe mx-8" htmlFor={inputId}>
         {label}

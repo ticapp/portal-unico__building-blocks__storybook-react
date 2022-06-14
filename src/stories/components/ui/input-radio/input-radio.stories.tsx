@@ -15,7 +15,7 @@ export const BasicInputRadio: ComponentStory<typeof InputRadio> = (args) => {
     setInputRadioSelected(inputId);
   };
 
-  return <InputRadio {...args} checkedRadio={inputRadioSelected} onClick={handleChangeRadioSelected} />;
+  return <InputRadio {...args} onClick={handleChangeRadioSelected} />;
 };
 
 BasicInputRadio.storyName = 'Basic Input Radio';
@@ -23,6 +23,5 @@ BasicInputRadio.storyName = 'Basic Input Radio';
 BasicInputRadio.args = {
   label: 'Label',
   inputId: uuidv4(),
-  isDisabled: false,
-  tabIndex: 0
+  isDisabled: false
 };
