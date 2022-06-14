@@ -133,9 +133,9 @@ export const Footer = ({
   const cssFooter = classNames('ama-footer', className);
   const cssFooterSectionInfo = classNames('ama-footer-section-info', classFooterSectionInfo);
   const cssFooterCopyright = classNames('ama-footer-copyright', classFooterCopyright);
-  const cssFooterCol01 = classNames('ama-footer-section-info-col-01', classFooterCol01, 'pb-34');
-  const cssFooterCol02 = classNames('ama-footer-section-info-col-02', classFooterCol02, 'pb-34', 'pl-30');
-  const cssFooterCol03 = classNames('ama-footer-section-info-col-03', classFooterCol03, 'pb-34', 'pl-30');
+  const cssFooterCol01 = classNames('ama-footer-section-info-col-01', classFooterCol01, 'px-60 py-30');
+  const cssFooterCol02 = classNames('ama-footer-section-info-col-02', classFooterCol02, 'px-60 py-30');
+  const cssFooterCol03 = classNames('ama-footer-section-info-col-03', classFooterCol03, 'px-60 py-30');
   const cssLogos = classNames('ama-footer-logos');
 
   const renderContentInfo01 = () => {
@@ -151,31 +151,31 @@ export const Footer = ({
 
   return (
     <footer className={cssFooter}>
-      <Container fluid>
+      <Container fluid className="p-0">
         <Row className={cssFooterSectionInfo}>
-          <Col xs={12} md={6} xl={6} className={cssFooterCol01}>
+          <Col xs={12} lg={6} xl={6} className={cssFooterCol01}>
             <Row>
-              <h2 className="mb-34">{headerTitle01}</h2>
-              <Col xs={12} md={8} xl={8}>
+              <h2 className="mb-24">{headerTitle01}</h2>
+              <Col xs={12} lg={8} xl={8} className="pe-15 ps-15">
                 {renderContentInfo01()}
               </Col>
-              <Col xs={12} md={4} xl={4}>
+              <Col xs={12} lg={4} xl={4} className="ps-15">
                 <List listData={listDataCol01} listStyleType={listDataCol01Type} />
               </Col>
             </Row>
           </Col>
-          <Col xs={12} md={3} xl={3} className={cssFooterCol02}>
+          <Col xs={12} lg={3} xl={3} className={cssFooterCol02}>
             <Row>
-              <h2 className="mb-34">{headerTitle02}</h2>
+              <h2 className="mb-24">{headerTitle02}</h2>
               <Col>
                 <List listData={listDataCol02} listStyleType={listDataCol02Type} />
               </Col>
             </Row>
           </Col>
-          <Col xs={12} md={3} xl={3} className={cssFooterCol03}>
+          <Col xs={12} lg={3} xl={3} className={cssFooterCol03}>
             <Row>
-              <h2 className="mb-36">{headerTitle03}</h2>
-              <Col xs={9} md={6} xl={6}>
+              <h2 className="mb-24">{headerTitle03}</h2>
+              <Col xs={9} lg={6} xl={6}>
                 <List listData={listDataCol03} listStyleType="none" className="px-0 d-flex justify-content-between" />
               </Col>
             </Row>

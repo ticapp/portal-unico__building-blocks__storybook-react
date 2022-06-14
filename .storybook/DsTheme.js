@@ -4,7 +4,7 @@ import logo from '../src/assets/img/logo_ticapp.png'
 export default create({
   base: 'light',
   brandTitle: 'AMA Design System',
-  brandUrl: 'https://ticappgit.northeurope.cloudapp.azure.com/portal-unico/building-blocks/storybook-react',
+  brandUrl: 'https://github.com/ticapp/portal-unico__building-blocks__storybook-react',
   brandImage: logo,
   brandTarget: '_self',
 

@@ -1,10 +1,10 @@
 /* eslint-disable global-require */
-import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
 import { Image } from 'react-bootstrap';
-import { Footer, FooterProps } from '../../../../components/ui';
+import { BrowserRouter } from 'react-router-dom';
 import { Icon } from '../../../../components';
+import { Footer, FooterProps } from '../../../../components/ui';
 
 export default {
   title: 'Components/Footer',
@@ -22,14 +22,14 @@ export const BasicFooter: Story<FooterProps> = () => {
     headerTitle03: 'Redes sociais',
     classFooterCopyright: 'text-center fw-bold',
     classFooterCol01: 'bg-brand-yellow-terciary',
-    classFooterCol02: 'bg-brand-yellow-secondary border border-white border-1',
-    classFooterCol03: 'bg-brand-yellow-main border border-white border-1',
+    classFooterCol02: 'bg-brand-yellow-secondary border border-white border-bottom-0',
+    classFooterCol03: 'bg-brand-yellow-main border-white border-top',
     listDataCol01: [
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Contactos ePortugal
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1" />
+            <span className="col-11 text-medium-normal">Contactos ePortugal</span>
           </>
         ),
         hasExternalLink: true,
@@ -39,23 +39,23 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Sites e Apps públicos,
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1" />
+            <span className="col-11 text-medium-normal">Sites e Apps públicos</span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: 'https://eportugal.gov.pt/sites',
         title: 'internal link'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Linhas úteis
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1" />
+            <span className="col-11 text-medium-normal"> Linhas úteis </span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: 'https://eportugal.gov.pt/uteis',
         title: 'internal link'
       }
     ],
@@ -63,8 +63,8 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            APP.GOV.PT
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1" />
+            <span className="col-11 text-medium-normal">APP.GOV.PT </span>
           </>
         ),
         hasExternalLink: true,
@@ -74,34 +74,34 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Acessibilidade
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1" />
+            <span className="col-11 text-medium-normal">Acessibilidade </span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: '/react/ui/acessibilidade',
         title: 'internal link'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Linhas úteis
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1" />
+            <span className="col-11 text-medium-normal">Linhas úteis </span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: '/react/ui/uteis',
         title: 'internal link'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Termos e condições
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1" />
+            <span className="col-11 text-medium-normal">Termos e condições</span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: '/react/ui/terms',
         title: 'internal link'
       }
     ],
