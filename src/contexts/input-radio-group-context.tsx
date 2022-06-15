@@ -1,4 +1,4 @@
-import { React, createContext, ReactNode, useContext, useState, useMemo } from 'react';
+import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 
 interface RadioGroupProviderProps {
   children: ReactNode;
@@ -6,14 +6,14 @@ interface RadioGroupProviderProps {
 
 interface RadioGroupValue {
   id: string;
-  isChecked: boolean;
+  isChecked?: boolean;
   label: string;
   isDisabled?: boolean;
-  onClick: (e: string) => void;
 }
 
 interface RadioGroupData {
-  inputRadioChecked: Array<RadioGroupValue>;
+  inputRadioCheckedId: string;
+  inputRadioValues: Array<RadioGroupValue>;
   setRadioChecked: (radioId: string) => void;
   addRadios: (radiosData: Array<RadioGroupValue>) => void;
 }
@@ -21,28 +21,44 @@ interface RadioGroupData {
 const RadioGroupContext = createContext<RadioGroupData>({} as RadioGroupData);
 
 export function RadioProvider({ children }: RadioGroupProviderProps): JSX.Element {
-  const [inputRadioChecked, setInputRadioChecked] = useState<Array<RadioGroupValue>>([]);
+  const [inputRadioValues, setInputRadioValues] = useState<Array<RadioGroupValue>>([]);
+  const [inputRadioCheckedId, setInputRadioCheckedId] = useState<string>('');
 
   const addRadios = (radios: Array<RadioGroupValue>): void => {
-    setInputRadioChecked([...radios]);
+    const setInitialCheckedValue = radios.map((data) => {
+      return {
+        ...data,
+        isChecked: false
+      };
+    });
+
+    setInputRadioValues([...setInitialCheckedValue]);
   };
 
   const setRadioChecked = (radioId: string) => {
-    const radioToCheckState = inputRadioChecked.find((radio) => radio.id === radioId && !radio.isChecked);
-    const radiosUncheckState = inputRadioChecked.filter((radio) => radio.id !== radioId);
+    const radioToCheckedIndex = inputRadioValues.findIndex((radio) => radio.id === radioId && !radio.isChecked);
+    const oldRadioCheckedIndex = inputRadioValues.findIndex((radio) => radio.id !== radioId && radio.isChecked);
 
-    if (radioToCheckState && radiosUncheckState.length > 0) {
-      radioToCheckState.isChecked = true;
-      setInputRadioChecked([...radiosUncheckState, radioToCheckState]);
+    if (inputRadioValues[radioToCheckedIndex]) {
+      inputRadioValues[radioToCheckedIndex].isChecked = true;
+      setInputRadioCheckedId(radioId);
     }
+    if (inputRadioValues[oldRadioCheckedIndex]) {
+      inputRadioValues[oldRadioCheckedIndex].isChecked = false;
+    }
+
+    setInputRadioValues([...inputRadioValues]);
   };
 
-  const radioProviderValues = useMemo(() => ({ inputRadioChecked, setRadioChecked, addRadios }), []);
+  const radioProviderValues = useMemo(
+    () => ({ inputRadioValues, inputRadioCheckedId, setRadioChecked, addRadios }),
+    [inputRadioValues, inputRadioCheckedId]
+  );
 
   return <RadioGroupContext.Provider value={radioProviderValues}>{children}</RadioGroupContext.Provider>;
 }
 
-export function UseRadio(): RadioGroupData {
+export function useRadio(): RadioGroupData {
   const context = useContext(RadioGroupContext);
 
   return context;

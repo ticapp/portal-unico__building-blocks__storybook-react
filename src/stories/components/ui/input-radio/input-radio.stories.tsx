@@ -1,27 +1,28 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
 import { InputRadio } from '../../../../components/ui/input-radio';
+import { InputRadioGroup } from '../../../../components/ui/input-radio-group';
+import { RadioProvider } from '../../../../contexts/input-radio-group-context';
 
 export default {
   title: 'Components/Inputs',
   component: InputRadio
 } as ComponentMeta<typeof InputRadio>;
 
-export const BasicInputRadio: ComponentStory<typeof InputRadio> = (args) => {
-  const [inputRadioSelected, setInputRadioSelected] = useState('');
+export const BasicInputRadio: ComponentStory<typeof InputRadio> = () => {
+  const data = [
+    {
+      label: 'Input Radio 4',
+      id: 'input-radio-4',
+      isDisabled: false
+    }
+  ];
 
-  const handleChangeRadioSelected = (inputId: string) => {
-    setInputRadioSelected(inputId);
-  };
-
-  return <InputRadio {...args} onClick={handleChangeRadioSelected} />;
+  return (
+    <RadioProvider>
+      <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />
+    </RadioProvider>
+  );
 };
 
 BasicInputRadio.storyName = 'Basic Input Radio';
-
-BasicInputRadio.args = {
-  label: 'Label',
-  inputId: uuidv4(),
-  isDisabled: false
-};

@@ -1,55 +1,41 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { InputRadio } from '../../../../components/ui/input-radio';
+import React from 'react';
 import { InputRadioGroup } from '../../../../components/ui/input-radio-group';
+import { RadioProvider } from '../../../../contexts/input-radio-group-context';
 
 export default {
   title: 'Components/Inputs Groups',
   component: InputRadioGroup
 } as ComponentMeta<typeof InputRadioGroup>;
 
-export const BasicInputRadioGroup: ComponentStory<typeof InputRadioGroup> = (args) => {
-  const [inputChecked, setInputChecked] = useState('');
-
-  const handleChangeRadioSelected = (inputId: string) => {
-    setInputChecked(inputId);
-  };
-
+export const BasicInputRadioGroup: ComponentStory<typeof InputRadioGroup> = () => {
   const data = [
     {
       label: 'Input Radio 1',
-      inputId: 'input-radio-1'
+      id: 'input-radio-1',
+      isDisabled: false
     },
     {
       label: 'Input Radio 2',
-      inputId: 'input-radio-2'
+      id: 'input-radio-2',
+      isDisabled: false
     },
     {
       label: 'Input Radio 3',
-      inputId: 'input-radio-3',
+      id: 'input-radio-3',
       isDisabled: true
     },
     {
       label: 'Input Radio 4',
-      inputId: 'input-radio-4'
+      id: 'input-radio-4',
+      isDisabled: false
     }
   ];
 
   return (
-    <InputRadioGroup radioCheckedId={inputChecked} ariaLabelledby="input-radio-group-label">
-      {data.map((values, index) => (
-        <InputRadio
-          key={uuidv4()}
-          inputId={values.inputId}
-          label={values.label}
-          isDisabled={values.isDisabled}
-          checkedRadio={inputChecked}
-          onClick={handleChangeRadioSelected}
-          tabIndex={index}
-        />
-      ))}
-    </InputRadioGroup>
+    <RadioProvider>
+      <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />
+    </RadioProvider>
   );
 };
 
