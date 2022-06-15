@@ -3,37 +3,12 @@
 .ama-input-radio-container {
   height: 44px;
 
-  .radio-icon {
-    width: 28px;
-    height: 28px;
-
-    fill: white;
-
-    pointer-events: none;
-
-    &:hover{
-      cursor: pointer;
-    }
-
-    &.disabled {
-      cursor: not-allowed;
-    }
+  &:hover{
+    cursor: pointer;
   }
 
-  .input-radio {
-    width: 28px;
-    height: 28px;
-
-    accent-color: index.$brand-green-main;
-
-    &:focus {
-      accent-color: index.$brand-green-fourth;
-    }
-  }
-
-  .input-radio:disabled + .input-label {
-    accent-color: index.$neutral-light-grey;
-    color: index.$neutral-light-grey;
+  &[aria-disabled="true"] {
+    cursor: not-allowed;
   }
 
   .input-label {

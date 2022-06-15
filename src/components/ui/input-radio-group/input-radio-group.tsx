@@ -31,6 +31,10 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
     addRadios(radiosData);
   }, []);
 
+  function handleKeyDown() {
+    console.log('test');
+  }
+
   return (
     <div
       className={inputRadioGroupClassName}
@@ -38,6 +42,7 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
       role="radiogroup"
       tabIndex={0}
       aria-labelledby={ariaLabelledby}
+      onKeyDown={handleKeyDown}
     >
       {inputRadioValues &&
         inputRadioValues.map((radio) => <InputRadio key={uuidv4()} inputId={radio.id} isDisabled={radio.isDisabled} label={radio.label} />)}

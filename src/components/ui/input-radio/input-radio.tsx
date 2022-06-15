@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useRadio } from '../../../contexts/input-radio-group-context';
 import { Icon } from '../icon';
 import './input-radio.scss';
@@ -35,6 +35,9 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false }: In
 
   const handleFocus = () => {
     setIsFocused(true);
+    if (!isDisabled) {
+      setRadioChecked(inputId);
+    }
   };
 
   const handleBlur = () => {
@@ -54,7 +57,7 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false }: In
     }
   };
 
-  const handleIcon = () => {
+  useMemo(() => {
     if (!isFocused && !isDisabled) {
       isChecked ? setIcon(radioIcons.selected) : setIcon(radioIcons.unselected);
     }
@@ -72,17 +75,13 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false }: In
         setIcon(radioIcons.disabled);
       }
     }
-  };
+  }, [, isChecked, isDisabled, isFocused]);
 
   useEffect(() => {
     if (inputRadioCheckedId === inputId) {
       setIsChecked(true);
     }
   }, [inputRadioCheckedId]);
-
-  useEffect(() => {
-    handleIcon();
-  }, [, isChecked, isDisabled]);
 
   const inputContainerClassName = classNames('ama-input-radio-container', 'd-flex align-items-center justify-content-start', className);
   const iconClassName = classNames('radio-icon', { disabled: isDisabled });
@@ -98,9 +97,10 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false }: In
       onBlur={handleBlur}
       onFocus={handleFocus}
       role="radio"
+      aria-disabled={isDisabled}
     >
       <Icon icon={icon} className={iconClassName} />
-      <label className="input-labe mx-8" htmlFor={inputId}>
+      <label className="input-label mx-8" htmlFor={inputId}>
         {label}
       </label>
     </div>
