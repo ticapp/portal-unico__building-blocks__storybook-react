@@ -1,10 +1,10 @@
 /* eslint-disable global-require */
-import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
 import { Image } from 'react-bootstrap';
-import { Footer, FooterProps } from '../../../../components/ui';
+import { BrowserRouter } from 'react-router-dom';
 import { Icon } from '../../../../components';
+import { Footer, FooterProps } from '../../../../components/ui';
 
 export default {
   title: 'Components/Footer',
@@ -16,20 +16,20 @@ export const BasicFooter: Story<FooterProps> = () => {
     headerTitle01: 'Contactos e sites Públicos',
     contentInfo01: [
       { label: 'Centro de Contacto Cidadão (dias úteis: 9h - 18h)', value: '300 003 990 ou 210 489 010' },
-      { label: 'Centro de Contacto Empresas (dias úteis: 9h - 18h)', value: '300 003 980 ou 210 489 010' }
+      { label: 'Centro de Contacto Empresas (dias úteis: 9h - 18h)', value: '300 003 980 ou 210 489 011' }
     ],
     headerTitle02: 'Links úteis',
     headerTitle03: 'Redes sociais',
-    classFooterCopyright: 'text-center fw-bold',
+    classFooterCopyright: 'text-center',
     classFooterCol01: 'bg-brand-yellow-terciary',
-    classFooterCol02: 'bg-brand-yellow-secondary border border-white border-1',
-    classFooterCol03: 'bg-brand-yellow-main border border-white border-1',
+    classFooterCol02: 'bg-brand-yellow-secondary border border-white border-bottom-0',
+    classFooterCol03: 'bg-brand-yellow-main border-white border-top',
     listDataCol01: [
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Contactos ePortugal
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <span className="col-11 text-medium-normal">Contactos ePortugal</span>
           </>
         ),
         hasExternalLink: true,
@@ -39,23 +39,12 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Sites e Apps públicos,
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <span className="col-11 text-medium-normal"> Linhas úteis </span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
-        title: 'internal link'
-      },
-      {
-        value: (
-          <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Linhas úteis
-          </>
-        ),
-        hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: 'https://eportugal.gov.pt/utils',
         title: 'internal link'
       }
     ],
@@ -63,8 +52,8 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            APP.GOV.PT
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <span className="col-11 text-medium-normal">APP.GOV.PT </span>
           </>
         ),
         hasExternalLink: true,
@@ -74,49 +63,49 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Acessibilidade
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <span className="col-11 text-medium-normal">Mapa do site </span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: '/react/ui/mapa',
         title: 'internal link'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Linhas úteis
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <span className="col-11 text-medium-normal">Termos e condições</span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: '/react/ui/terms',
         title: 'internal link'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" />
-            Termos e condições
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <span className="col-11 text-medium-normal">Sobre o portal </span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/logo',
+        link: '/react/ui/about',
         title: 'internal link'
       }
     ],
     listDataCol03: [
       {
-        value: <Icon ariaHidden="true" icon="ama-facebook" alt="AMA Facebook" />,
-        hasExternalLink: true,
-        link: 'https://facebook.com',
-        title: 'facebook'
-      },
-      {
         value: <Icon ariaHidden="true" icon="ama-twitter" alt="AMA Twitter" />,
         hasExternalLink: true,
         link: 'https://twitter.com',
         title: 'Twitter'
+      },
+      {
+        value: <Icon ariaHidden="true" icon="ama-facebook" alt="AMA Facebook" />,
+        hasExternalLink: true,
+        link: 'https://facebook.com',
+        title: 'facebook'
       },
       {
         value: <Icon ariaHidden="true" icon="ama-linkedin" alt="AMA Linkedin" />,
@@ -126,6 +115,12 @@ export const BasicFooter: Story<FooterProps> = () => {
       }
     ],
     listDataRowImagesLink: [
+      {
+        value: <Image src={require('../../../../assets/img/simplex.png')} alt="Simplex" />,
+        hasExternalLink: true,
+        link: 'https://www.portugal.gov.pt/',
+        title: 'Simplex'
+      },
       {
         value: <Image src={require('../../../../assets/img/rp.png')} alt="Portal do Governo" />,
         hasExternalLink: true,
@@ -139,22 +134,10 @@ export const BasicFooter: Story<FooterProps> = () => {
         title: 'Agência para a Modernização Administrativa'
       },
       {
-        value: <Image src={require('../../../../assets/img/simplex.png')} alt="Simplex" />,
+        value: <Image src={require('../../../../assets/img/ue.png')} alt="Fundos Europeus Estruturais e de Investimento" />,
         hasExternalLink: true,
         link: 'https://www.portugal.gov.pt/',
-        title: 'Simplex'
-      },
-      {
-        value: <Image src={require('../../../../assets/img/eugo.png')} alt="Rede EUGO" />,
-        hasExternalLink: true,
-        link: 'https://www.portugal.gov.pt/',
-        title: 'Rede EUGO'
-      },
-      {
-        value: <Image src={require('../../../../assets/img/net.png')} alt="Sistema de Informação do Mercado Interno (IMI)" />,
-        hasExternalLink: true,
-        link: 'https://www.portugal.gov.pt/',
-        title: 'Sistema de Informação do Mercado Interno (IMI)'
+        title: 'Fundos Europeus Estruturais e de Investimento'
       },
       {
         value: <Image src={require('../../../../assets/img/compete2020.png')} alt="Compete2020" />,
@@ -167,12 +150,6 @@ export const BasicFooter: Story<FooterProps> = () => {
         hasExternalLink: true,
         link: 'https://www.portugal.gov.pt/',
         title: 'Portugal2020'
-      },
-      {
-        value: <Image src={require('../../../../assets/img/ue.png')} alt="Fundos Europeus Estruturais e de Investimento" />,
-        hasExternalLink: true,
-        link: 'https://www.portugal.gov.pt/',
-        title: 'Fundos Europeus Estruturais e de Investimento'
       },
       {
         value: <Image src={require('../../../../assets/img/eu.png')} alt="A sua Europa" />,

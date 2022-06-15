@@ -1,5 +1,5 @@
 {
-  "name": "@ama/storybook-react",
+  "name": "@ama-react-design-system/storybook-react",
   "description": "AMA Design system",
   "version": "0.2.0",
   "main": "dist/cjs/index.js",
