@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link } from '../link';
 
 export interface ListProps extends HTMLAttributes<HTMLElement> {
+  /** Css class */
+  className?: string;
+
   /** Data to fill List options */
   listData?: Array<{ value: React.ReactNode; hasExternalLink?: boolean; link: string | UrlObject; title?: string; ariaLabel?: string }>;
 
@@ -30,9 +33,6 @@ export interface ListProps extends HTMLAttributes<HTMLElement> {
 
   /** Bullets position */
   listStylePosition?: 'inside' | 'outside';
-
-  /** Css class */
-  className?: string;
 }
 
 export function List({

@@ -5,35 +5,14 @@
     max-width: 1900px;
     margin: 0 auto;
     h2 {
-      font-size: 1.5em !important;
+      font-size: 1.5rem !important;
       line-height: 36px !important;
       font-weight: 700 !important;
-    }
-
-    .px-60 {
-      padding-left: 60px;
-      padding-right: 60px;
-    }
-
-    .py-30 {
-      padding-top: 30px;
-      padding-bottom: 30px;
-    }
-
-    .ps-15 {
-      padding-left: 15px;
-    }
-
-    .pe-15 {
-      padding-right: 15px;
-    }
-
-    .mb-24 {
       margin-bottom: 24px;
-    }
-
-    .mb-36 {
-      margin-bottom: 36px;
+      @media screen and (max-width: 991px) {
+        font-size: 1.25rem !important;
+        text-transform: uppercase;
+      }
     }
 
     &-section-info {
@@ -52,54 +31,84 @@
       }
       &-detail {
         p {
-          font-size: 0.875em !important;
+          font-size: 0.875rem !important;
           line-height: 36px !important;
-          font-weight: 500 !important;
+          font-weight: 400 !important;
           &.strong {
-            font-size: 1.375em !important;
+            font-size: 1.375rem !important;
             line-height: 36px !important;
             font-weight: 700 !important;
           }
         }
-        margin-bottom: 39px;
         &:last-of-type {
           margin-bottom: 0px;
         }
       }
     }
-    &-section-info-col-01,
-    &-section-info-col-02 {
-      .ama-list {
-        a {
-          font-size: 0.875em !important;
-          line-height: 36px !important;
-          font-weight: 500 !important;
-          svg {
-            margin-right: 10px;
+
+    &-section-info-col-01 {
+      .row {
+        padding: 0 15px !important;
+        > div {
+          &:nth-child(2) {
+            padding-right: 15px !important;
+            @media screen and (max-width: 991px) {
+              padding-right: 0px !important;
+            }
+          }
+          &:last-child {
+            padding-left: 15px !important;
+            @media screen and (max-width: 991px) {
+              padding-left: 0px !important;
+            }
           }
         }
       }
     }
+
+    &-section-info-col-01,
     &-section-info-col-02,
     &-section-info-col-03 {
-      padding-left: 30px;
+      padding: 30px 60px !important;
+      @media screen and (max-width: 991px) {
+        padding: 20px !important;
+      }
+      .ama-list {
+        a {
+          font-size: 0.875rem !important;
+          line-height: 36px !important;
+          font-weight: 400 !important;
+        }
+      }
     }
 
     &-copyright {
-      font-size: 0.875em !important;
-      line-height: 17px !important;
-      font-weight: 500 !important;
-      margin-bottom: 30px;
+      font-size: 1rem !important;
+      line-height: 23px !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.14px;
     }
 
     &-logos {
-      padding: 20px 0px;
+      padding: 30px 60px !important;
+      @media screen and (max-width: 991px) {
+        padding: 20px !important;
+      }
       ul {
         grid-template-columns: repeat(3, 1fr);
       }
       img {
         height: 35px;
         width: auto;
+      }
+      .ama-list {
+        li {
+          @media screen and (max-width: 991px) {
+            @include index.media-breakpoint-up(xs) {
+              @include index.make-col(4);
+            }
+          }
+        }
       }
     }
   }
