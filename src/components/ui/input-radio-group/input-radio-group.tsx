@@ -25,14 +25,66 @@ export interface InputRadioGroupProps {
 export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: InputRadioGroupProps) => {
   const inputRadioGroupClassName = classNames('ama-input-radio-group', className);
 
-  const { addRadios, inputRadioCheckedId, inputRadioValues } = useRadio();
+  const { addRadios, inputRadioCheckedId, inputRadioValues, setRadioChecked } = useRadio();
 
   useEffect(() => {
     addRadios(radiosData);
   }, []);
 
-  function handleKeyDown() {
-    console.log('test');
+  const getInputCheckedIndex = () => {
+    return inputRadioValues.findIndex((radio) => radio.id === inputRadioCheckedId);
+  };
+
+  function handleKeyDown(event) {
+    const existsNextInputRadio = inputRadioValues[getInputCheckedIndex() + 1];
+    const existsPreviousInputRadio = inputRadioValues[getInputCheckedIndex() - 1];
+
+    if (event.key === 'ArrowLeft') {
+      const getAtualValue = getInputCheckedIndex();
+
+      if (!existsPreviousInputRadio) {
+        setRadioChecked(inputRadioValues[inputRadioValues.length].id);
+      } else if (!existsPreviousInputRadio.isDisabled) {
+        setRadioChecked(inputRadioValues[getAtualValue - 1].id);
+      } else {
+        setRadioChecked(inputRadioValues[getAtualValue - 2].id);
+      }
+    }
+
+    if (event.key === 'ArrowRight') {
+      const getAtualValue = getInputCheckedIndex();
+
+      if (!existsNextInputRadio) {
+        setRadioChecked(inputRadioValues[0].id);
+      } else if (!existsNextInputRadio.isDisabled) {
+        setRadioChecked(inputRadioValues[getAtualValue + 1].id);
+      } else {
+        setRadioChecked(inputRadioValues[getAtualValue + 2].id);
+      }
+    }
+
+    if (event.key === 'ArrowUp') {
+      const getAtualValue = getInputCheckedIndex();
+
+      if (!existsPreviousInputRadio) {
+        setRadioChecked(inputRadioValues[inputRadioValues.length].id);
+      } else if (!existsPreviousInputRadio.isDisabled) {
+        setRadioChecked(inputRadioValues[getAtualValue - 1].id);
+      } else {
+        setRadioChecked(inputRadioValues[getAtualValue - 2].id);
+      }
+    }
+    if (event.key === 'ArrowDown') {
+      const getAtualValue = getInputCheckedIndex();
+
+      if (!existsNextInputRadio) {
+        setRadioChecked(inputRadioValues[0].id);
+      } else if (!existsNextInputRadio.isDisabled) {
+        setRadioChecked(inputRadioValues[getAtualValue + 1].id);
+      } else {
+        setRadioChecked(inputRadioValues[getAtualValue + 2].id);
+      }
+    }
   }
 
   return (
@@ -40,12 +92,17 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
       className={inputRadioGroupClassName}
       aria-activedescendant={inputRadioCheckedId}
       role="radiogroup"
+      onFocus={() => {
+        setRadioChecked(inputRadioValues[0].id);
+      }}
       tabIndex={0}
       aria-labelledby={ariaLabelledby}
       onKeyDown={handleKeyDown}
     >
       {inputRadioValues &&
-        inputRadioValues.map((radio) => <InputRadio key={uuidv4()} inputId={radio.id} isDisabled={radio.isDisabled} label={radio.label} />)}
+        inputRadioValues.map((radio, index) => (
+          <InputRadio key={uuidv4()} tabIndex={index} inputId={radio.id} isDisabled={radio.isDisabled} label={radio.label} />
+        ))}
     </div>
   );
 };

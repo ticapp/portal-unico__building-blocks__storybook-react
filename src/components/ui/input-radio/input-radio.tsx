@@ -14,12 +14,15 @@ export interface InputRadioProps {
   inputId: string;
   /** Set if is disable */
   isDisabled?: boolean;
+  //* * Set tabIndex */
+  tabIndex: number;
 }
 
-export const InputRadio = ({ className, label, inputId, isDisabled = false }: InputRadioProps) => {
+export const InputRadio = ({ className, label, inputId, isDisabled = false, tabIndex }: InputRadioProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  const newTabIndex = tabIndex + 1;
   const { inputRadioCheckedId, setRadioChecked } = useRadio();
 
   const radioIcons = {
@@ -35,7 +38,7 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false }: In
 
   const handleFocus = () => {
     setIsFocused(true);
-    if (!isDisabled) {
+    if (!isDisabled && !isChecked) {
       setRadioChecked(inputId);
     }
   };
@@ -93,7 +96,7 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false }: In
       onKeyDown={handleKeyDown}
       onClick={() => handleOnClick(inputId)}
       aria-checked={isChecked}
-      tabIndex={0}
+      tabIndex={isDisabled ? -1 : newTabIndex}
       onBlur={handleBlur}
       onFocus={handleFocus}
       role="radio"
