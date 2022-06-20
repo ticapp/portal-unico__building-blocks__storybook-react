@@ -2,20 +2,29 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Icon/Icon Docs" />
 
+<h1 className="mb-32">
+  <u>Icon</u>
+</h1>
+
 <h2>Description</h2>
 
-<p>Renders a named icon component</p>
+<p className="fs-16">Renders a named icon component.</p>
+<p className="fs-16">Check all props available in each example on Docs tab.</p>
 
 <h2>Component usage</h2>
 
-<p>Using an icon from the icon list</p>
+<p className="fs-16">Using an icon from the icon list</p>
 
-```jsx
-<Icon icon="ama-user" />
+```tsx
+import { Icon } from '@ama-react-design-system/icon';
+
+<Icon icon="ama-user" />;
 ```
 
 <p>Using a external icon</p>
 
-```jsx
-<Icon icon="https://picsum.photos/50" />
+```tsx
+import { Icon } from '@ama-react-design-system/icon';
+
+<Icon icon="https://picsum.photos/50" />;
 ```

@@ -2,14 +2,47 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Hooks/Use Pagination Data/Use Pagination Data Docs" />
 
+<h1 className="mb-32">
+  <u>Use Pagination Data</u>
+</h1>
+
 <h2>Description</h2>
 
-<p>Hook to struct data to pagination</p>
+<p className="fs-16">Hook used to return a data object needed to implement a nav pagination. This return: </p>
+<ul className="ms-32">
+  <li>
+    <b>contentPerPage</b> - number of contents, if table number of rows, to current page
+  </li>
+  <li>
+    <b>totalPageCount</b> - total number of pages after divided content per pages
+  </li>
+  <li>
+    <b>currentPage</b> - number of current page
+  </li>
+  <li>
+    <b>currentData</b> - data for the current page with number of content per page
+  </li>
+  <li>
+    <b>startIndex</b> - index number of content, correspond of first line shown on that page
+  </li>
+  <li>
+    <b>endIndex</b> - index number of content, correspond of last line shown on that page
+  </li>
+  <li>
+    <b>goToNextPage</b> - function that move pagination to next items
+  </li>
+  <li>
+    <b>gotToPreviousPage</b> - function that move pagination to previous items
+  </li>
+  <li>
+    <b>linesOptionChangeHandler</b> - function that manage the selection of options to change number o content per page
+  </li>
+</ul>
 
 <h2>Hook usage</h2>
 
 ```tsx
-import { usePaginationData } from '@ama/usePaginationData';
+import { usePaginationData } from '@ama-react-design-system/usePaginationData';
 
 const dummyComponent = () => {
   const data = [
@@ -48,13 +81,13 @@ const dummyComponent = () => {
 
   return (
     <>
-      <p>Conteúdo por página: {pageData?.contentPerPage}</p>
-      <p>Total de páginas: {pageData?.totalPageCount}</p>
-      <p>Página atual: {pageData?.currentPage}</p>
+      <p>Content per page: {pageData?.contentPerPage}</p>
+      <p>Total pages: {pageData?.totalPageCount}</p>
+      <p>Current page: {pageData?.currentPage}</p>
       <p>
-        Item {pageData?.startIndex} de {pageData?.endIndex}
+        Item {pageData?.startIndex} of {pageData?.endIndex}
       </p>
-      <p>Dados: {JSON.stringify(pageData?.currentData)}</p>
+      <p>Data: {JSON.stringify(pageData?.currentData)}</p>
       <button type="button" onClick={pageData?.gotToPreviousPage}>
         Previous
       </button>

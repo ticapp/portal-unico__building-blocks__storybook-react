@@ -2,14 +2,18 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Hooks/Use Window Size/Use Window Size Docs" />
 
+<h1 className="mb-32">
+  <u>Use Window Size</u>
+</h1>
+
 <h2>Description</h2>
 
-<p>Hook to get window size</p>
+<p className="fs-16">Hook to get window size, use this when check if component render on mobile, tablet or desktop for example.</p>
 
 <h2>Hook usage</h2>
 
 ```tsx
-import { useWindowSize } from '@ama/useWindowSize';
+import { useWindowSize } from '@ama-react-design-system/useWindowSize';
 
 const dummyComponent = () => {
   const { width, height } = useWindowSize();
