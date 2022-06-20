@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useRadio } from '../../../contexts/input-radio-group-context';
+import { useOutsideElementClick } from '../../hooks';
 import { Icon } from '../icon';
 import './input-radio.scss';
 
@@ -14,16 +15,23 @@ export interface InputRadioProps {
   inputId: string;
   /** Set if is disable */
   isDisabled?: boolean;
-  //* * Set tabIndex */
-  tabIndex: number;
+  /** Set component index */
+  index?: number;
 }
 
-export const InputRadio = ({ className, label, inputId, isDisabled = false, tabIndex }: InputRadioProps) => {
+export const InputRadio = ({ className, label, inputId, isDisabled = false, index }: InputRadioProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
-  const newTabIndex = tabIndex + 1;
   const { inputRadioCheckedId, setRadioChecked } = useRadio();
+
+  const inputRadioRef = useRef(null);
+
+  function handleOutsideClick() {
+    setIsFocused(false);
+  }
+
+  useOutsideElementClick(inputRadioRef, () => handleOutsideClick());
 
   const radioIcons = {
     disabled: 'ama-radio-disabled-unselected',
@@ -54,7 +62,6 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, tabI
   };
 
   const handleKeyDown = (event) => {
-    event.preventDefault();
     if (event.code === 'Space' && !isChecked && !isDisabled) {
       setRadioChecked(inputId);
     }
@@ -78,10 +85,11 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, tabI
         setIcon(radioIcons.disabled);
       }
     }
-  }, [, isChecked, isDisabled, isFocused]);
+  }, [isChecked, isDisabled, isFocused]);
 
   useEffect(() => {
     if (inputRadioCheckedId === inputId) {
+      setIsFocused(true);
       setIsChecked(true);
     }
   }, [inputRadioCheckedId]);
@@ -93,10 +101,11 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, tabI
     <div
       id={inputId}
       className={inputContainerClassName}
+      ref={inputRadioRef}
       onKeyDown={handleKeyDown}
       onClick={() => handleOnClick(inputId)}
       aria-checked={isChecked}
-      tabIndex={isDisabled ? -1 : newTabIndex}
+      tabIndex={isChecked || index === 0 ? 0 : -1}
       onBlur={handleBlur}
       onFocus={handleFocus}
       role="radio"

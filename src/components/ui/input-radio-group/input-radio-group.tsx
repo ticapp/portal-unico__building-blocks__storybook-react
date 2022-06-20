@@ -35,7 +35,7 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
     return inputRadioValues.findIndex((radio) => radio.id === inputRadioCheckedId);
   };
 
-  function handleKeyDown(event) {
+  const handleKeyDown = (event) => {
     const existsNextInputRadio = inputRadioValues[getInputCheckedIndex() + 1];
     const existsPreviousInputRadio = inputRadioValues[getInputCheckedIndex() - 1];
 
@@ -85,23 +85,20 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
         setRadioChecked(inputRadioValues[getAtualValue + 2].id);
       }
     }
-  }
+  };
 
   return (
     <div
       className={inputRadioGroupClassName}
       aria-activedescendant={inputRadioCheckedId}
       role="radiogroup"
-      onFocus={() => {
-        setRadioChecked(inputRadioValues[0].id);
-      }}
-      tabIndex={0}
+      tabIndex={-1}
       aria-labelledby={ariaLabelledby}
       onKeyDown={handleKeyDown}
     >
       {inputRadioValues &&
         inputRadioValues.map((radio, index) => (
-          <InputRadio key={uuidv4()} tabIndex={index} inputId={radio.id} isDisabled={radio.isDisabled} label={radio.label} />
+          <InputRadio index={index} key={uuidv4()} inputId={radio.id} isDisabled={radio.isDisabled} label={radio.label} />
         ))}
     </div>
   );
