@@ -49,15 +49,17 @@ export const Alert: FC<AlertProps> = (props: AlertProps) => {
   return show ? (
     <div className="ama-alert">
       <InnerAlert onClose={() => setShow(false)} bsPrefix="ama-alert" {...props}>
-        <InnerAlert.Heading className="d-flex align-items-center">
-          <Icon icon="ama-warning-triangle" className={`icon ${props.color ?? 'none'}`} alt="Ama Warning" />
-          {props.header}
-        </InnerAlert.Heading>
+        {props.header && (
+          <InnerAlert.Heading className="d-flex align-items-center">
+            <Icon icon="ama-warning-triangle" className={`icon ${props.color ?? 'none'}`} alt="Ama Warning" />
+            {props.header}
+          </InnerAlert.Heading>
+        )}
         {props.children && <div className="body-content">{props.children}</div>}
         {props.barText && (
           <Container className={`bar ${props.color ?? 'none'}`}>
             <Row>
-              <Col sm={9}>{props.barText}</Col>
+              <Col sm={props.link && props.barLink ? 9 : 12}>{props.barText}</Col>
               {props.link && props.barLink && (
                 <Col sm={3}>
                   <BrowserRouter>
