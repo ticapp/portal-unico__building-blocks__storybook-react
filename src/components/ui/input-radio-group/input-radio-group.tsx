@@ -70,6 +70,7 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
       role="radiogroup"
       tabIndex={-1}
       aria-labelledby={ariaLabelledby}
+      aria-label="input radio group"
     >
       {inputRadioValues &&
         inputRadioValues.map((radio, index) => (
