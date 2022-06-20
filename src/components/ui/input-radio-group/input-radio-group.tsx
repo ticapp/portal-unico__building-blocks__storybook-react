@@ -39,6 +39,8 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
     const existsNextInputRadio = inputRadioValues[getInputCheckedIndex() + 1];
     const existsPreviousInputRadio = inputRadioValues[getInputCheckedIndex() - 1];
 
+    console.log('test');
+
     if (event.key === 'ArrowLeft') {
       const getAtualValue = getInputCheckedIndex();
 

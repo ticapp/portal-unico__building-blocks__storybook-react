@@ -94,6 +94,17 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, inde
     }
   }, [inputRadioCheckedId]);
 
+  const verifyIndex = () => {
+    if (isChecked) {
+      return 0;
+    }
+    if (index === 0 && !inputRadioCheckedId) {
+      return 0;
+    }
+
+    return -1;
+  };
+
   const inputContainerClassName = classNames('ama-input-radio-container', 'd-flex align-items-center justify-content-start', className);
   const iconClassName = classNames('radio-icon', { disabled: isDisabled });
 
@@ -105,7 +116,7 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, inde
       onKeyDown={handleKeyDown}
       onClick={() => handleOnClick(inputId)}
       aria-checked={isChecked}
-      tabIndex={isChecked || index === 0 ? 0 : -1}
+      tabIndex={verifyIndex()}
       onBlur={handleBlur}
       onFocus={handleFocus}
       role="radio"
