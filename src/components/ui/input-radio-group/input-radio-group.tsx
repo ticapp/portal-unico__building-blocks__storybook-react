@@ -67,7 +67,7 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
       const getAtualValue = getInputCheckedIndex();
 
       if (!existsPreviousInputRadio) {
-        setRadioChecked(inputRadioValues[inputRadioValues.length].id);
+        setRadioChecked(inputRadioValues[inputRadioValues.length - 1].id);
       } else if (!existsPreviousInputRadio.isDisabled) {
         setRadioChecked(inputRadioValues[getAtualValue - 1].id);
       } else {
