@@ -3,11 +3,11 @@
 .ama-input-radio-container {
   height: 44px;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 
-  &[aria-disabled="true"] {
+  &[aria-disabled='true'] {
     cursor: not-allowed;
   }
 
