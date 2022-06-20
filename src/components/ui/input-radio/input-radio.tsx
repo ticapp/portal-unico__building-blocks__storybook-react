@@ -17,9 +17,21 @@ export interface InputRadioProps {
   isDisabled?: boolean;
   /** Set component index */
   index?: number;
+  //* *Set next input radio */
+  nextInputRadio: () => void;
+  //* *Set previous input radio */
+  previousInputRadio: () => void;
 }
 
-export const InputRadio = ({ className, label, inputId, isDisabled = false, index }: InputRadioProps) => {
+export const InputRadio = ({
+  className,
+  label,
+  inputId,
+  isDisabled = false,
+  index,
+  nextInputRadio,
+  previousInputRadio
+}: InputRadioProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -64,6 +76,20 @@ export const InputRadio = ({ className, label, inputId, isDisabled = false, inde
   const handleKeyDown = (event) => {
     if (event.code === 'Space' && !isChecked && !isDisabled) {
       setRadioChecked(inputId);
+    }
+    if (event.key === 'ArrowLeft') {
+      previousInputRadio();
+    }
+
+    if (event.key === 'ArrowRight') {
+      nextInputRadio();
+    }
+
+    if (event.key === 'ArrowUp') {
+      previousInputRadio();
+    }
+    if (event.key === 'ArrowDown') {
+      nextInputRadio();
     }
   };
 
