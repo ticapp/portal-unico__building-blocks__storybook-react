@@ -1,7 +1,7 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React, { useMemo, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Icon, PaginationProps, Table, TableContextType, TableProps, Link } from '../../../../components/ui';
+import { Icon, PaginationProps, Table, TableContextType, TableProps, Button, Link } from '../../../../components/ui';
 import { Context } from '../../../../components/ui/table/table';
 
 export default {
@@ -263,7 +263,6 @@ TotalTable.storyName = 'Total Table data';
 
 export const ClickableRowsTable: Story<TableProps & PaginationProps> = (args) => {
   const [value, setValue] = useState(null);
-
   return (
     <BrowserRouter>
       <Context.Provider value={useMemo(() => ({ value, setValue } as TableContextType), [value])}>
@@ -286,41 +285,93 @@ ClickableRowsTable.args = {
       entity: 'Instituto dos Registos e Notariado',
       dataType: 'Completos',
       lastAccess: '29/05/2002-14:36',
-      url: (
+      url: [
         <Link link="https://www.example.com" title="Abrir link" isExternal className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
-        </Link>
-      )
+        </Link>,
+        <>
+          <Button
+            className="shadow-none w-100"
+            variant="outline-brand-green-main"
+            iconName="ama-arrow-right"
+            iconDirection="right"
+            size="lg"
+            href="www.google.pt"
+          >
+            Ver detalhes
+          </Button>
+          <hr />
+        </>
+      ]
     },
     {
       entity: 'Segurança Social',
       dataType: 'Completos',
       lastAccess: '29/05/2002-14:36',
-      url: (
+      url: [
         <Link link="https://www.example.com" title="Abrir link" isExternal className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
-        </Link>
-      )
+        </Link>,
+        <>
+          <Button
+            className="shadow-none w-100"
+            variant="outline-brand-green-main"
+            iconName="ama-arrow-right"
+            iconDirection="right"
+            size="lg"
+            href="www.google.pt"
+          >
+            Ver detalhes
+          </Button>
+          <hr />
+        </>
+      ]
     },
     {
       entity: 'Banco de Portugal',
       dataType: 'Completos',
       lastAccess: '29/05/2002-14:36',
-      url: (
+      url: [
         <Link link="https://www.example.com" title="Abrir link" isExternal className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
-        </Link>
-      )
+        </Link>,
+        <>
+          <Button
+            className="shadow-none w-100"
+            variant="outline-brand-green-main"
+            iconName="ama-arrow-right"
+            iconDirection="right"
+            size="lg"
+            href="www.google.pt"
+          >
+            Ver detalhes
+          </Button>
+          <hr />
+        </>
+      ]
     },
     {
       entity: 'Instituto do Emprego e Formação Profissional',
       dataType: 'Completos',
       lastAccess: '29/05/2002-14:36',
-      url: (
+      url: [
         <Link link="https://www.example.com" title="Abrir link" isExternal className="stretched-link">
           <Icon icon="ama-arrow-right" ariaHidden="true" size="sm" />
-        </Link>
-      )
+        </Link>,
+        <>
+          <Button
+            className="shadow-none w-100"
+            variant="outline-brand-green-main"
+            iconName="ama-arrow-right"
+            iconDirection="right"
+            size="lg"
+            href="www.google.pt"
+          >
+            Ver detalhes
+          </Button>
+          <hr />
+        </>
+      ]
     }
   ],
 
@@ -350,7 +401,7 @@ ClickableRowsTable.args = {
   'labelSeeMore': ['Ver mais', ' items da lista'],
   'ariaLabelPaginationNav': 'Paginação da tabela',
   'titleMobileDL': 'Lista de entidades'
-} as unknown as TableProps & PaginationProps;
+} as TableProps & PaginationProps;
 
 ClickableRowsTable.argTypes = {};
 
