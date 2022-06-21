@@ -128,23 +128,25 @@ export const InputRadio = ({
   }, [isChecked, isDisabled, isFocused]);
 
   useMemo(() => {
-    if (isChecked) {
-      setAtualIndex(0);
+    if (!isDisabled) {
+      if (isChecked) {
+        setAtualIndex(0);
 
-      return;
+        return;
+      }
+
+      if (index === 0 && !inputRadioCheckedId) {
+        setAtualIndex(0);
+
+        return;
+      }
+
+      setAtualIndex(-1);
     }
-
-    if (index === 0 && !inputRadioCheckedId) {
-      setAtualIndex(0);
-
-      return;
-    }
-
-    setAtualIndex(-1);
   }, [isChecked]);
 
   useEffect(() => {
-    if (atualIndex === 0 && inputRadioCheckedId) {
+    if (atualIndex === 0 && inputRadioCheckedId && !isDisabled) {
       setIsFocused(true);
       inputRadioRef.current?.focus();
     }
