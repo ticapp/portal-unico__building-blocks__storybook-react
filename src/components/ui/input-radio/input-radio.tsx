@@ -134,6 +134,13 @@ export const InputRadio = ({
   }, [isChecked]);
 
   useEffect(() => {
+    if (atualIndex === 0) {
+      setIsFocused(true);
+      inputRadioRef.current?.focus();
+    }
+  }, [atualIndex, isChecked]);
+
+  useEffect(() => {
     if (inputRadioCheckedId === inputId) {
       setIsChecked(true);
     }
