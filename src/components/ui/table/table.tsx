@@ -136,7 +136,7 @@ const TableDesktop = ({
   const renderTd = (content: sortDataType) => {
     return Object.keys(content).map((k, i) => (
       <td className="text-medium-normal" key={uuidv4()}>
-        {Object.keys(content).length - 1 === i ? content[k]?.[0] : content[k]}
+        {React.isValidElement(content[k]?.[0]) ? content[k]?.[0] : content[k]}
       </td>
     ));
   };
@@ -226,7 +226,16 @@ const TableMobile = ({ ...props }: TableProps) => {
         </React.Fragment>
       );
     }
-    return null;
+    return (
+      <React.Fragment key={uuidv4()}>
+        <dt className="col-6 m-0 p-16" key={uuidv4()}>
+          {tableHeaders[key].value}
+        </dt>
+        <dd className="col-6 m-0 p-16 position-relative" key={uuidv4()}>
+          {element}
+        </dd>
+      </React.Fragment>
+    );
   };
 
   const dataListItem = tableData.map((item) => {
