@@ -16,7 +16,7 @@ export interface InputRadioProps {
   /** Set if is disable */
   isDisabled?: boolean;
   /** Set component index */
-  index?: number;
+  index: number;
   //* *Set next input radio */
   nextInputRadio: () => void;
   //* *Set previous input radio */
@@ -58,8 +58,14 @@ export const InputRadio = ({
   const [icon, setIcon] = useState(radioIcons.focus);
 
   const handleFocus = () => {
-    setIsFocused(true);
+    if (!isDisabled && !inputRadioCheckedId) {
+      setIsFocused(true);
+      inputRadioRef.current?.focus();
+      return;
+    }
+
     if (!isDisabled && !isChecked) {
+      setIsFocused(true);
       setRadioChecked(inputId);
     }
   };
@@ -75,6 +81,10 @@ export const InputRadio = ({
   };
 
   const handleKeyDown = (event) => {
+    if (event.code === 'Space' && !isChecked && !isDisabled) {
+      setRadioChecked(inputId);
+    }
+
     if (event.key === 'ArrowLeft') {
       previousInputRadio();
     }
@@ -134,11 +144,11 @@ export const InputRadio = ({
   }, [isChecked]);
 
   useEffect(() => {
-    if (atualIndex === 0) {
+    if (atualIndex === 0 && inputRadioCheckedId) {
       setIsFocused(true);
       inputRadioRef.current?.focus();
     }
-  }, [atualIndex, isChecked]);
+  }, [atualIndex]);
 
   useEffect(() => {
     if (inputRadioCheckedId === inputId) {
