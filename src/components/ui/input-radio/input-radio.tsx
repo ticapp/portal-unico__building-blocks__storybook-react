@@ -34,10 +34,11 @@ export const InputRadio = ({
 }: InputRadioProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [atualIndex, setAtualIndex] = useState(-1);
 
   const { inputRadioCheckedId, setRadioChecked } = useRadio();
 
-  const inputRadioRef = useRef(null);
+  const inputRadioRef = useRef<HTMLInputElement>(null);
 
   function handleOutsideClick() {
     setIsFocused(false);
@@ -74,9 +75,6 @@ export const InputRadio = ({
   };
 
   const handleKeyDown = (event) => {
-    if (event.code === 'Space' && !isChecked && !isDisabled) {
-      setRadioChecked(inputId);
-    }
     if (event.key === 'ArrowLeft') {
       previousInputRadio();
     }
@@ -94,17 +92,23 @@ export const InputRadio = ({
   };
 
   useMemo(() => {
-    if (!isFocused && !isDisabled) {
-      isChecked ? setIcon(radioIcons.selected) : setIcon(radioIcons.unselected);
-    }
-
-    if (isFocused && !isDisabled) {
-      isChecked ? setIcon(radioIcons.selectedFocus) : setIcon(radioIcons.focus);
+    if (!isDisabled) {
+      if (isChecked && !isFocused) {
+        setIcon(radioIcons.selected);
+      }
+      if (!isChecked && !isFocused) {
+        setIcon(radioIcons.unselected);
+      }
+      if (isChecked && isFocused) {
+        setIcon(radioIcons.selectedFocus);
+      }
+      if (!isChecked && isFocused) {
+        setIcon(radioIcons.focus);
+      }
     }
 
     if (isDisabled) {
       if (isChecked) {
-        setIsChecked(true);
         setIcon(radioIcons.disabledSelected);
       } else {
         setIsChecked(false);
@@ -113,24 +117,27 @@ export const InputRadio = ({
     }
   }, [isChecked, isDisabled, isFocused]);
 
-  useEffect(() => {
-    if (inputRadioCheckedId === inputId) {
-      setIsFocused(true);
-      setIsChecked(true);
-    }
-  }, [inputRadioCheckedId]);
-
-  const verifyIndex = useMemo(() => {
+  useMemo(() => {
     if (isChecked) {
-      return 0;
+      setAtualIndex(0);
+
+      return;
     }
 
     if (index === 0 && !inputRadioCheckedId) {
-      return 0;
+      setAtualIndex(0);
+
+      return;
     }
 
-    return -1;
-  }, [isChecked, inputRadioCheckedId]);
+    setAtualIndex(-1);
+  }, [isChecked]);
+
+  useEffect(() => {
+    if (inputRadioCheckedId === inputId) {
+      setIsChecked(true);
+    }
+  }, [inputRadioCheckedId]);
 
   const inputContainerClassName = classNames('ama-input-radio-container', 'd-flex align-items-center justify-content-start', className);
   const iconClassName = classNames('radio-icon', { disabled: isDisabled });
@@ -143,7 +150,7 @@ export const InputRadio = ({
       onKeyDown={handleKeyDown}
       onClick={() => handleOnClick(inputId)}
       aria-checked={isChecked}
-      tabIndex={verifyIndex}
+      tabIndex={atualIndex}
       onBlur={handleBlur}
       onFocus={handleFocus}
       aria-label="radio group"

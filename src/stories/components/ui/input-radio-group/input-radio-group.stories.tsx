@@ -23,7 +23,7 @@ export const BasicInputRadioGroup: ComponentStory<typeof InputRadioGroup> = () =
     {
       label: 'Input Radio 3',
       id: 'input-radio-3',
-      isDisabled: false
+      isDisabled: true
     },
     {
       label: 'Input Radio 4',

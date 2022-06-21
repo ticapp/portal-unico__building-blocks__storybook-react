@@ -36,9 +36,8 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
   };
 
   const nextInputRadio = () => {
-    const existsNextInputRadio = inputRadioValues[getInputCheckedIndex() + 1];
-
     const getAtualValue = getInputCheckedIndex();
+    const existsNextInputRadio = inputRadioValues[getAtualValue + 1];
 
     if (!existsNextInputRadio) {
       setRadioChecked(inputRadioValues[0].id);
@@ -50,9 +49,8 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
   };
 
   const previousInputRadio = () => {
-    const existsPreviousInputRadio = inputRadioValues[getInputCheckedIndex() - 1];
-
     const getAtualValue = getInputCheckedIndex();
+    const existsPreviousInputRadio = inputRadioValues[getAtualValue - 1];
 
     if (!existsPreviousInputRadio) {
       setRadioChecked(inputRadioValues[inputRadioValues.length - 1].id);
