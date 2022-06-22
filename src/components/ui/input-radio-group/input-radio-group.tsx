@@ -20,9 +20,11 @@ export interface InputRadioGroupProps {
   ariaLabelledby: string;
   //* * Set radios */
   radiosData: Array<InputRadioData>;
+  //* * Set if is disabled */
+  isDisabled?: boolean;
 }
 
-export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: InputRadioGroupProps) => {
+export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, isDisabled }: InputRadioGroupProps) => {
   const inputRadioGroupClassName = classNames('ama-input-radio-group', className);
 
   const { addRadios, inputRadioCheckedId, inputRadioValues, setRadioChecked } = useRadio();
@@ -78,7 +80,7 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby }: Input
             previousInputRadio={previousInputRadio}
             key={uuidv4()}
             inputId={radio.id}
-            isDisabled={radio.isDisabled}
+            isDisabled={isDisabled}
             label={radio.label}
           />
         ))}
