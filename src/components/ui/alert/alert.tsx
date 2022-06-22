@@ -20,14 +20,20 @@ export interface AlertProps extends InnerAlertProps {
   timeout?: number;
   /** Sets header text for the alert */
   header?: string;
-  /** Sets bar text for the alert */
-  barText?: string;
+  /** Sets the html bar for the alert */
+  htmlBar?: ReactNode;
   /** Sets bar text of the link for the alert */
   barLink?: string;
   /** Sets the link to redirect */
   link?: string;
   /** Sets the scheme of color for the alert */
   color?: 'success' | 'info' | 'warning';
+  /** Icon to be rendered in alert label */
+  icon?: string;
+  /** Alt text for icon image */
+  alt?: string;
+  /** Informs if the bar link is external */
+  isExternal?: boolean;
 }
 
 export const Alert: FC<AlertProps> = (props: AlertProps) => {
@@ -50,20 +56,20 @@ export const Alert: FC<AlertProps> = (props: AlertProps) => {
     <div className="ama-alert">
       <InnerAlert onClose={() => setShow(false)} bsPrefix="ama-alert" {...props}>
         {props.header && (
-          <InnerAlert.Heading className="d-flex align-items-center">
-            <Icon icon="ama-warning-triangle" className={`icon ${props.color ?? 'none'}`} alt="Ama Warning" />
+          <InnerAlert.Heading as="h2" className="header d-flex align-items-center">
+            {props.icon && <Icon icon={props.icon} className={`icon ${props.color ?? 'none'}`} alt={props.alt} />}
             {props.header}
           </InnerAlert.Heading>
         )}
         {props.children && <div className="body-content">{props.children}</div>}
-        {props.barText && (
+        {props.htmlBar && (
           <Container className={`bar ${props.color ?? 'none'}`}>
             <Row>
-              <Col sm={props.link && props.barLink ? 9 : 12}>{props.barText}</Col>
+              <Col sm={props.link && props.barLink ? 9 : 12}>{props.htmlBar}</Col>
               {props.link && props.barLink && (
                 <Col sm={3}>
                   <BrowserRouter>
-                    <Link className="link" link={props.link} isExternal>
+                    <Link className="link" link={props.link} isExternal={props.isExternal}>
                       {props.barLink}
                     </Link>
                   </BrowserRouter>
