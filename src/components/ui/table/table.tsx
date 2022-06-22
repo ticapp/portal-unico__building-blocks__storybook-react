@@ -134,7 +134,7 @@ const TableDesktop = ({
   };
 
   const renderTd = (content: sortDataType) => {
-    return Object.keys(content).map((k, i) => (
+    return Object.keys(content).map((k) => (
       <td className="text-medium-normal" key={uuidv4()}>
         {React.isValidElement(content[k]?.[0]) ? content[k]?.[0] : content[k]}
       </td>
