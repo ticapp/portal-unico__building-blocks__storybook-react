@@ -38,10 +38,7 @@ export interface AlertProps extends InnerAlertProps {
 
 export const Alert: FC<AlertProps> = ({
   children,
-  dismissible,
   show,
-  onClose,
-  closeLabel,
   timeout,
   header,
   htmlBar,
