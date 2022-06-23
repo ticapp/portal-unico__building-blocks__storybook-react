@@ -9,36 +9,28 @@ import { Meta } from '@storybook/addon-docs';
 <h2>Component usage</h2>
 
 ```js
-const [inputValue, setInputValue] = useState('');
-
-  const data = [{
+const data = [
+  {
     label: 'Input Radio 1',
-    inputId: uuidv4(),
+    id: 'input-radio-1'
   },
   {
     label: 'Input Radio 2',
-    inputId: uuidv4()
+    id: 'input-radio-2'
   },
   {
     label: 'Input Radio 3',
-    inputId: uuidv4(),
-    isDisabled: true
-  },
-  {
-    label: 'Input Radio 3',
-    inputId: uuidv4(),
+    id: 'input-radio-3'
   },
   {
     label: 'Input Radio 4',
-    inputId: uuidv4()
+    id: 'input-radio-4'
   }
-]
+];
 
-<InputRadioGroup
-    {...args}
-  >
-    {data.map((values, index) => (
-      <InputRadio {...values} checkedRadio={inputChecked} onClick={setInputChecked} tabIndex={index}/>
-    )) }
-</InputRadioGroup>;
+return (
+  <RadioProvider>
+    <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />
+  </RadioProvider>
+);
 ```

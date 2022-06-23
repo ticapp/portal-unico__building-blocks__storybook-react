@@ -13,8 +13,7 @@ export const BasicInputRadio: ComponentStory<typeof InputRadio> = () => {
   const data = [
     {
       label: 'Input Radio 4',
-      id: 'input-radio-4',
-      isDisabled: false
+      id: 'input-radio-4'
     }
   ];
 

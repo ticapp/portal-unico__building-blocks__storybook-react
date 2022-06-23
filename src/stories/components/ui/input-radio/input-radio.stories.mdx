@@ -9,7 +9,12 @@ import { Meta } from '@storybook/addon-docs';
 <h2>Component usage</h2>
 
 ```js
-const [inputValue, setInputValue] = useState('');
+const data = [
+  {
+    label: 'Input Radio 4',
+    id: 'input-radio-4'
+  }
+];
 
 const args = {
   label: 'Label',
@@ -19,5 +24,7 @@ const args = {
   isDisabled: false
 };
 
-<InputRadio value={inputValue} {...args} onChange={(e) => setInputValue(e.target.value)} />;
+<RadioProvider>
+  <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />
+</RadioProvider>;
 ```
