@@ -5,6 +5,7 @@ import { Icon } from '../icon';
 import { Link } from '../link';
 import './alert.scss';
 
+const DEFAULT_ICON = 'ama-warning-triangle';
 export interface AlertProps extends InnerAlertProps {
   /** Inner childs of the component to be rendered */
   children?: ReactNode;
@@ -51,8 +52,24 @@ export const Alert: FC<AlertProps> = ({
   ...props
 }: AlertProps) => {
   const [isShow, setShow] = useState(show ?? true);
+  const [validIcon, setValidIcon] = useState(icon || DEFAULT_ICON);
 
   const time = typeof timeout === 'number' ? Math.max(timeout, 2000) : 0;
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = validIcon;
+    if (img.complete) {
+      setValidIcon(img.src);
+    } else {
+      img.onload = () => {
+        setValidIcon(img.src);
+      };
+      img.onerror = () => {
+        setValidIcon(DEFAULT_ICON);
+      };
+    }
+  });
 
   useEffect(() => {
     const cb = () => {
@@ -70,7 +87,7 @@ export const Alert: FC<AlertProps> = ({
       <InnerAlert onClose={() => setShow(false)} bsPrefix="ama-alert" {...props}>
         {header && (
           <InnerAlert.Heading as="h2" className="header d-flex align-items-center">
-            {icon && <Icon icon={icon} className={`icon ${color ?? 'none'}`} alt={alt} onEmptied={undefined} />}
+            {icon && <Icon icon={validIcon} className={`icon ${color ?? 'none'}`} alt={alt} />}
             {header}
           </InnerAlert.Heading>
         )}
