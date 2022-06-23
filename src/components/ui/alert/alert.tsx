@@ -36,14 +36,30 @@ export interface AlertProps extends InnerAlertProps {
   isExternal?: boolean;
 }
 
-export const Alert: FC<AlertProps> = (props: AlertProps) => {
-  const [show, setShow] = useState(props.show ?? true);
+export const Alert: FC<AlertProps> = ({
+  children,
+  dismissible,
+  show,
+  onClose,
+  closeLabel,
+  timeout,
+  header,
+  htmlBar,
+  barLink,
+  link,
+  color,
+  icon,
+  alt,
+  isExternal,
+  ...props
+}: AlertProps) => {
+  const [isShow, setShow] = useState(show ?? true);
 
-  const timeout = typeof props.timeout === 'number' ? Math.max(props.timeout, 2000) : 0;
+  const time = typeof timeout === 'number' ? Math.max(timeout, 2000) : 0;
 
   useEffect(() => {
     const cb = () => {
-      if (timeout > 0) {
+      if (time > 0) {
         setShow(false);
       }
     };
@@ -52,25 +68,25 @@ export const Alert: FC<AlertProps> = (props: AlertProps) => {
     return () => clearTimeout(timer);
   }, [timeout]);
 
-  return show ? (
+  return isShow ? (
     <div className="ama-alert">
       <InnerAlert onClose={() => setShow(false)} bsPrefix="ama-alert" {...props}>
-        {props.header && (
+        {header && (
           <InnerAlert.Heading as="h2" className="header d-flex align-items-center">
-            {props.icon && <Icon icon={props.icon} className={`icon ${props.color ?? 'none'}`} alt={props.alt} />}
-            {props.header}
+            {icon && <Icon icon={icon} className={`icon ${color ?? 'none'}`} alt={alt} onEmptied={undefined} />}
+            {header}
           </InnerAlert.Heading>
         )}
-        {props.children && <div className="body-content">{props.children}</div>}
-        {props.htmlBar && (
-          <Container className={`bar ${props.color ?? 'none'}`}>
+        {children && <div className="body-content">{children}</div>}
+        {htmlBar && (
+          <Container className={`bar ${color ?? 'none'}`}>
             <Row>
-              <Col sm={props.link && props.barLink ? 9 : 12}>{props.htmlBar}</Col>
-              {props.link && props.barLink && (
+              <Col sm={link && barLink ? 9 : 12}>{htmlBar}</Col>
+              {link && barLink && (
                 <Col sm={3}>
                   <BrowserRouter>
-                    <Link className="link" link={props.link} isExternal={props.isExternal}>
-                      {props.barLink}
+                    <Link className="link" link={link} isExternal={isExternal}>
+                      {barLink}
                     </Link>
                   </BrowserRouter>
                 </Col>
