@@ -101,29 +101,37 @@ export const InputRadio = ({
     }
   };
 
+  const disabledIcons = () => {
+    if (isChecked && !isFocused) {
+      setIcon(radioIcons.selected);
+    }
+    if (!isChecked && !isFocused) {
+      setIcon(radioIcons.unselected);
+    }
+    if (isChecked && isFocused) {
+      setIcon(radioIcons.selectedFocus);
+    }
+    if (!isChecked && isFocused) {
+      setIcon(radioIcons.focus);
+    }
+  };
+
+  const activatedIcons = () => {
+    if (isChecked) {
+      setIcon(radioIcons.disabledSelected);
+    } else {
+      setIsChecked(false);
+      setIcon(radioIcons.disabled);
+    }
+  };
+
   useMemo(() => {
     if (!isDisabled) {
-      if (isChecked && !isFocused) {
-        setIcon(radioIcons.selected);
-      }
-      if (!isChecked && !isFocused) {
-        setIcon(radioIcons.unselected);
-      }
-      if (isChecked && isFocused) {
-        setIcon(radioIcons.selectedFocus);
-      }
-      if (!isChecked && isFocused) {
-        setIcon(radioIcons.focus);
-      }
+      disabledIcons();
     }
 
     if (isDisabled) {
-      if (isChecked) {
-        setIcon(radioIcons.disabledSelected);
-      } else {
-        setIsChecked(false);
-        setIcon(radioIcons.disabled);
-      }
+      activatedIcons();
     }
   }, [isChecked, isDisabled, isFocused]);
 

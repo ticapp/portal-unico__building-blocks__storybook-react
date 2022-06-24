@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useRadio } from '../../../contexts/input-radio-group-context';
 import { InputRadio } from '../input-radio/input-radio';
-import './input-radio-group.scss';
 
 export interface InputRadioData {
   id: string;
