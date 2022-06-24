@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Inputs/Input Radio Docs" />
+
+<h2>Description</h2>
+
+<p>Render the input radio</p>
+
+<h2>Component usage</h2>
+
+```js
+const data = [
+  {
+    label: 'Input Radio 4',
+    id: 'input-radio-4'
+  }
+];
+
+const args = {
+  label: 'Label',
+  name: 'input-text1',
+  value: '',
+  inputId: uuidv4(),
+  isDisabled: false
+};
+
+<RadioProvider>
+  <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />
+</RadioProvider>;
+```
