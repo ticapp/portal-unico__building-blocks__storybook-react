@@ -59,7 +59,5 @@ export function RadioProvider({ children }: RadioGroupProviderProps): JSX.Elemen
 }
 
 export function useRadio(): RadioGroupData {
-  const context = useContext(RadioGroupContext);
-
-  return context;
+  return useContext(RadioGroupContext);
 }
