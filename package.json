@@ -1,9 +1,9 @@
 {
-  "name": "@ama-react-design-system/storybook-react",
+  "name": "ama-react-design-system",
   "description": "AMA Design system",
   "version": "0.2.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/cjs/components/index.js",
+  "module": "dist/esm/components/index.js",
   "files": [
     "dist"
   ],

@@ -50,7 +50,8 @@ gulp.task('scss-min', () => {
 gulp.task('assets', () => {
   return gulp
     .src(['src/assets/**'])
-    .pipe(gulp.dest('dist/assets'))
+    .pipe(gulp.dest('dist/cjs/assets'))
+    .pipe(gulp.dest('dist/esm/assets'))
     .pipe(touch());
 });
 
@@ -63,4 +64,17 @@ gulp.task('clean', function () {
   return del('dist/**', { force: true });
 });
 
-gulp.task('build', gulp.series('scss-min', 'assets', 'fonts'));
+// Components style
+gulp.task('components', () => {
+  return gulp.src(['src/components/**/*.scss']).pipe(gulp.dest('dist/cjs/components')).pipe(gulp.dest('dist/esm/components')).pipe(touch());
+});
+
+gulp.task('scss', () => {
+  return gulp.src(['src/scss/**']).pipe(gulp.dest('dist/cjs/scss')).pipe(gulp.dest('dist/esm/scss')).pipe(touch());
+});
+
+
+
+
+gulp.task('build', gulp.series('scss-min', 'assets', 'fonts','components','scss'));
+
