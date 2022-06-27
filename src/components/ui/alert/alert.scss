@@ -79,53 +79,5 @@
 
       margin: 1rem 0 0 0;
     }
-
-    &.ama-alert-primary {
-      &:before {
-        background-color: blue;
-      }
-    }
-
-    &.ama-alert-secondary {
-      &:before {
-        background-color: lightblue;
-      }
-    }
-
-    &.ama-alert-success {
-      &:before {
-        background-color: green;
-      }
-    }
-
-    &.ama-alert-danger {
-      &:before {
-        background-color: red;
-      }
-    }
-
-    &.ama-alert-warning {
-      &:before {
-        background-color: yellow;
-      }
-    }
-
-    &.ama-alert-info {
-      &:before {
-        background-color: cyan;
-      }
-    }
-
-    &.ama-alert-dark {
-      &:before {
-        background-color: darkslategray;
-      }
-    }
-
-    &.ama-alert-light {
-      &:before {
-        background-color: lightgrey;
-      }
-    }
   }
 }
