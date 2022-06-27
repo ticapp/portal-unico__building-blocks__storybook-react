@@ -10,7 +10,7 @@ cache:
   key: '$CI_BUILD_REF_NAME'
 
 variables:
-  NEXUS_PATH: '$NEXUS_GENERAL_REPOSITORY_URL/npm-private/'
+  NEXUS_PATH: '$NEXUS_GENERAL_REPOSITORY_URL/npm-general/'
   METADATA_PATH: '${CI_PROJECT_DIR}/tmp'
   STORYBOOK_OUTPUT_PATH: '${CI_PROJECT_DIR}/storybook-static'
 
@@ -83,7 +83,7 @@ publish-design-system-library:
   script:
     - npm install
     - npm run build
-    - echo "@ama:registry=${NEXUS_PATH}" >> .npmrc
+    - echo "@ama-react-design-system:registry=${NEXUS_PATH}" >> .npmrc
     - echo "_auth=${NEXUS_REGISTRY_CREDENTIALS_BASE_64}" >> .npmrc
     - npm publish
   rules:

@@ -1,0 +1,37 @@
+@use '../../../scss/index' as index;
+
+.ama-checkbox {
+  $p: &;
+
+  .icons {
+    fill: index.$brand-green-main;
+
+    > * {
+      margin: 2px;
+      padding: 2px;
+      user-select: none;
+      overflow: hidden;
+    }
+  }
+
+  input {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+
+    &:disabled {
+      ~ label {
+        color: index.$neutral-dark-grey;
+      }
+    }
+  }
+
+  .ordered-items {
+    &.before {
+      flex-direction: row-reverse;
+    }
+    &.after {
+      flex-direction: row;
+    }
+  }
+}

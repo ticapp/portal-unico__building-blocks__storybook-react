@@ -2,8 +2,89 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Table/Table Docs" />
 
+<h1 className="mb-32">
+  <u>Table</u>
+</h1>
+
 <h2>Description </h2>
-<p>A component that renders table with sorting, pagination and responsive.</p>
+<p className="fs-16">A component that renders table with sorting, pagination and responsive.</p>
+<p className="fs-16">Check all props available in each example on Docs tab.</p>
 
 <h2>Component usage</h2>
-<p>Consult properties of component for more info</p>
+
+```tsx
+import { Table } from '@ama-react-design-system/table';
+
+const args = {
+  'aria-label': 'Tabela com as minhas infrações, cabeçalhos com botões para ordenação',
+  'tableHeaders': [
+    { value: 'Infração', sorting: false },
+    { value: 'N.º processo', sorting: true },
+    { value: 'Data', sorting: true },
+    { value: 'Veículo', sorting: true },
+    { value: 'Local da infração', sorting: true },
+    { value: 'Estado', sorting: false },
+    { value: 'Coima', sorting: true },
+    { value: 'Sanção acessória', sorting: true }
+  ],
+  'tableData': [
+    {
+      col01: (
+        <span className="text-medium-normal">
+          <Icon icon="ama-circle-solid" className="me-8 d-none d-xl-inline" size="xxs" ariaHidden="true" />
+          Muito grave
+        </span>
+      ),
+      col02: 104779934,
+      col03: 2018 - 10 - 17,
+      col04: '45 QG 56',
+      col05: 'Rua das Beatas, em frente ao número 36, Lisboa',
+      col06: 'Concluído',
+      col07: 'Pago',
+      col08: 'Não aplicável'
+    },
+    {
+      col01: 10,
+      col02: 20,
+      col03: 30,
+      col04: 40,
+      col05: 50,
+      col06: 60,
+      col07: 70,
+      col08: 80
+    }
+  ],
+  'linesOptions': [
+    {
+      value: 2,
+      label: '2'
+    },
+    {
+      value: 5,
+      label: '5'
+    },
+    {
+      value: 10,
+      label: '10'
+    }
+  ],
+  'pagination': true,
+  'itemsCounter': true,
+  'pagesCounter': true,
+  'nextAriaLabel': 'Próxima página da tabela',
+  'previousAriaLabel': 'Página anterior da tabela',
+  'lineOptionsLabel': 'Linhas por página:',
+  'itemsCounterLabel': ['-', 'de', 'items'],
+  'pagesCounterLabel': ['de', 'páginas'],
+  'borderless': true,
+  'striped': true,
+  'hover': true,
+  'mobileLegendRow': <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
+  'labelSeeLess': ['Ver menos', ' items da lista'],
+  'labelSeeMore': ['Ver mais', ' items da lista'],
+  'ariaLabelPaginationNav': 'Paginação da tabela',
+  'titleMobileDL': 'Lista de infrações'
+};
+
+<Table {...args} />;
+```

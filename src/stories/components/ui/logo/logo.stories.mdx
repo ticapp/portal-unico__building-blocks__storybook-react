@@ -2,20 +2,31 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Logo/Logo Docs" />
 
+<h1 className="mb-32">
+  <u>Logo</u>
+</h1>
+
 <h2>Description</h2>
 
-<p>Renders the application logo</p>
+<p className="fs-16">
+  Renders the application logo, that has two forms. If in a homepage, logo does not have link to redirect else redirects always to homepage.
+</p>
+<p className="fs-16">Check all props available in each example on Docs tab.</p>
 
 <h2>Component usage</h2>
 
-<p>With redirect to homepage</p>
+<label>With redirect to homepage</label>
 
-```jsx
-<Logo />
+```tsx
+import { Logo } from '@ama-react-design-system/logo';
+
+<Logo />;
 ```
 
-<p>Without redirect to homepage</p>
+<label>Without redirect to homepage</label>
 
-```jsx
-<Logo isHomepage={true} />
+```tsx
+import { Logo } from '@ama-react-design-system/logo';
+
+<Logo isHomepage={true} />;
 ```

@@ -2,15 +2,26 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Hooks/Use Sort Table Data/Use Sort Table Data Docs" />
 
+<h1 className="mb-32">
+  <u>Use Sort Table Data</u>
+</h1>
+
 <h2>Description</h2>
 
-<p>Hook to sort table data</p>
+<p className="fs-16">
+  Hook to sort table data with help of other hook, usePaginationData, to update correctly on the same page has requested the sort.
+</p>
+<p className="fs-16">
+  For this hook we need an array of data organized by usePaginationData, that give us startindex and endindex to help return the values on
+  that position after sorted. The useSortTableData return the sortable items, a requestSort that toggle the direction of sorting, and
+  sortConfig to know wich table header and direction clicked before.
+</p>
 
 <h2>Hook usage</h2>
 
 ```tsx
-import { usePaginationData } from '@ama/usePaginationData';
-import { useSortTableData } from '@ama/useSortTableData';
+import { usePaginationData } from '@ama-react-design-system/usePaginationData';
+import { useSortTableData } from '@ama-react-design-system/useSortTableData';
 
 const dummyComponent = () => {
   const data = [
@@ -40,16 +51,16 @@ const dummyComponent = () => {
 
   return (
     <>
-      <p>Items para ordenar: {JSON.stringify(items)}</p>
+      <p>Items/Sorted items: {JSON.stringify(items)}</p>
       <button
         type="button"
         onClick={() => {
           requestSort('entity');
         }}
       >
-        Ordenar por entidade
+        Sort by entity
       </button>
-      <p>Direção: {sortConfig?.direction}</p>
+      <p>Direction: {sortConfig?.direction}</p>
     </>
   );
 };

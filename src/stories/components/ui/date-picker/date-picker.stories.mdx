@@ -2,18 +2,27 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Date Picker/Date Picker Docs" />
 
+<h1 className="mb-32">
+  <u>Date Picker</u>
+</h1>
+
 <h2>Description </h2>
-<p>A component that renders a date picker.</p>
+<p className="fs-16">A component that renders a date picker.</p>
+<p className="fs-16">Check all props available in each example on Docs tab.</p>
 
 <h2>Component usage</h2>
 
-```jsx
-<DatePicker />
+```tsx
+import { DatePicker } from '@ama-react-design-system/datepicker';
+
+<DatePicker />;
 ```
 
 <h2>Custom component usage</h2>
 
-```jsx
+```tsx
+import { DatePicker } from '@ama-react-design-system/datepicker';
+
 const date = new Date("1987-06-25T00:00:00.000Z");
 
 const days = {

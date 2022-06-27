@@ -2,12 +2,19 @@ import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Components/Infractions Chart/Infractions Chart Docs" />
 
+<h1 className="mb-32">
+  <u>Infractions Chart</u>
+</h1>
+
 <h2>Description</h2>
-<p>A component that renders a donut chart with provided infractions data.</p>
+<p className="fs-16">A component that renders a donut chart with provided infractions data.</p>
+<p className="fs-16">Check all props available in each example on Docs tab.</p>
 
 <h2>Component usage</h2>
 
-```jsx
+```tsx
+import { InfractionsChart } from '@ama-react-design-system/infraction-chart';
+
 const counters = [
   {
     label: 'Muito Grave',
@@ -26,5 +33,5 @@ const counters = [
   }
 ] as InfractionCounter[];
 
-<InfractionsChart counters={counters} />
+<InfractionsChart counters={counters} />;
 ```

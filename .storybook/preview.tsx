@@ -1,3 +1,5 @@
+import dsTheme from './DsTheme';
+
 export const parameters = {
   layout: 'fullscreen',
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -7,5 +9,8 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/
     }
+  },
+  docs: {
+    theme: dsTheme
   }
 };

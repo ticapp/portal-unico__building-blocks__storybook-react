@@ -17,7 +17,7 @@ export interface TableProps extends BsTableProps {
   tableHeaders: Array<{ value: string | ReactNode; sorting: boolean }>;
 
   /** Array of data table */
-  tableData: Array<{ [key: string]: string | number | boolean | ReactNode }>;
+  tableData: Array<{ [key: string]: string | number | boolean | ReactNode | Array<ReactNode> }>;
 
   /** Table with/without pagination */
   pagination?: boolean;
@@ -136,7 +136,7 @@ const TableDesktop = ({
   const renderTd = (content: sortDataType) => {
     return Object.keys(content).map((k) => (
       <td className="text-medium-normal" key={uuidv4()}>
-        {content[k]}
+        {React.isValidElement(content[k]?.[0]) ? content[k]?.[0] : content[k]}
       </td>
     ));
   };
@@ -213,6 +213,31 @@ const TableMobile = ({ ...props }: TableProps) => {
   const [itemsShown, setItemsShown] = useState<number>(totalTable ? totalItems : 2);
   const [seeMoreItems, setSeeMoreItems] = useState<number>(totalItems);
 
+  const checkLinkButton = (element, key) => {
+    if (React.isValidElement(element[1])) {
+      return (
+        <React.Fragment key={uuidv4()}>
+          <dt key={uuidv4()} className="d-none">
+            {tableHeaders[key].value}
+          </dt>
+          <dd className="col-12 m-0 p-16 position-relative" key={uuidv4()}>
+            {element[1]}
+          </dd>
+        </React.Fragment>
+      );
+    }
+    return (
+      <React.Fragment key={uuidv4()}>
+        <dt className="col-6 m-0 p-16" key={uuidv4()}>
+          {tableHeaders[key].value}
+        </dt>
+        <dd className="col-6 m-0 p-16 position-relative" key={uuidv4()}>
+          {element}
+        </dd>
+      </React.Fragment>
+    );
+  };
+
   const dataListItem = tableData.map((item) => {
     return (
       <React.Fragment key={uuidv4()}>
@@ -222,6 +247,9 @@ const TableMobile = ({ ...props }: TableProps) => {
           </dt>
         )}
         {Object.entries(item).map((value, key) => {
+          if (key === Object.entries(item).length - 1) {
+            return checkLinkButton(value[1], key);
+          }
           return (
             <React.Fragment key={uuidv4()}>
               <dt className="col-6 m-0 p-16" key={uuidv4()}>
