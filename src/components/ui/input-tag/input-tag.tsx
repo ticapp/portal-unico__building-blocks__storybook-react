@@ -1,6 +1,10 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { FocusEvent, KeyboardEvent, MouseEvent, useRef, useState } from 'react';
+import React, { KeyboardEvent, MouseEvent, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useOutsideElementClick } from '../../hooks';
+import { Icon } from '../icon';
 import './input-tag.scss';
 
 export interface InputTagProps {
@@ -44,6 +48,10 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
   };
 
   const focusNextOption = () => {
+    if (!availableOptions.length) {
+      return;
+    }
+
     setActiveOptionIndex((last) => {
       if (last === -1) {
         openListBox();
@@ -66,6 +74,10 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
   };
 
   const focusPreviousOption = () => {
+    if (!availableOptions.length) {
+      return;
+    }
+
     setActiveOptionIndex((last) => {
       const newIndex = Math.max(last - 1, -1);
 
@@ -125,6 +137,10 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
       return;
     }
 
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+
     setTags((lastTags: string[]) => {
       return [...lastTags, value];
     });
@@ -135,16 +151,22 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
       onChange?.(last);
       return last;
     });
+
+    closeListBox();
   };
 
   const removeTag = (tag: string) => {
     setTags((last) => {
-      updateAvailableOptions();
       return last.filter((t) => t !== tag);
     });
 
     setTags((last) => {
       updateAvailableOptions();
+
+      if (last.length === 0 && inputRef.current) {
+        inputRef.current.focus();
+      }
+
       return last;
     });
   };
@@ -154,21 +176,21 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
     switch (key) {
       case 'Enter':
-        if (inputRef.current?.value) {
-          tryAddTag();
-        }
+        if (activeOptionIndex >= 0) {
+          tryAddTag(availableOptions[activeOptionIndex]);
+        } else {
+          if (inputRef.current?.value) {
+            tryAddTag();
+          }
 
-        if (availableOptions.length === 1) {
-          tryAddTag(availableOptions[0]);
+          if (availableOptions.length === 1) {
+            tryAddTag(availableOptions[0]);
+          }
         }
 
         break;
       case 'Escape':
         closeListBox();
-
-        if (inputRef.current) {
-          inputRef.current.value = '';
-        }
         break;
 
       case 'ArrowUp':
@@ -182,6 +204,13 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
         focusNextOption();
         break;
 
+      case 'Backspace':
+        if (inputRef.current && inputRef.current.value === '' && tags.length > 0) {
+          const lastTag = tags[tags.length - 1];
+          removeTag(lastTag);
+        }
+
+        break;
       default:
         openListBox();
         break;
@@ -214,11 +243,6 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
     tryAddTag(tag);
   };
 
-  const onOptionTagKeyDown = (evt: KeyboardEvent<HTMLLIElement>, tag: string) => {
-    setActiveOptionId((evt.target as HTMLLIElement).id);
-    tryAddTag(tag);
-  };
-
   const focusLiElement = (element: HTMLLIElement) => {
     if (listBoxRef.current) {
       const liOpttions = listBoxRef.current.querySelectorAll('li[role="option"]');
@@ -232,76 +256,76 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
     focusLiElement(target as HTMLLIElement);
   };
 
-  const onOptionFocus = (evt: FocusEvent<HTMLLIElement>) => {
-    const { target } = evt;
-    focusLiElement(target as HTMLLIElement);
-  };
+  useOutsideElementClick(containerRef, () => closeListBox());
 
   const customInputId = uuidv4();
   const listBoxId = uuidv4();
+  const listboxClassname = classNames({ 'd-block': isOpen }, { 'd-none': !isOpen }, 'position-absolute top-0 left-0 w-100 py-16 px-0');
 
   return (
     <div ref={containerRef} className={classes}>
-      {tags.map((t) => {
-        return (
-          <span
-            className="tag"
-            key={uuidv4()}
-            role="button"
-            onClick={(evt: MouseEvent<HTMLSpanElement>) => onTagClick(evt, t)}
-            tabIndex={0}
-            onKeyDown={(evt: KeyboardEvent<HTMLSpanElement>) => onTagKeyDown(evt, t)}
-          >
-            <span>{t}</span>
-            <span>|X|</span>
-          </span>
-        );
-      })}
-
-      <input
-        id={customInputId}
-        ref={inputRef}
-        placeholder={placeholder}
-        aria-labelledby={labeledBy}
-        onKeyDown={onKeyDownHandler}
-        onChange={updateAvailableOptions}
-        onClick={onClickHandler}
-        aria-expanded={isOpen}
-        aria-activedescendant={activeOptionId}
-        role="combobox"
-        aria-autocomplete="list"
-        aria-controls={listBoxId}
-      />
-
-      <ul id={listBoxId} ref={listBoxRef} role="listbox" aria-label={optionsAriaLabel} className={isOpen ? 'd-block' : 'd-none'}>
-        {availableOptions.map((o, i) => {
-          const id = uuidv4();
+      <div className="input-container px-16 py-12 d-flex">
+        {tags.map((t) => {
           return (
-            <li
-              id={id}
-              key={id}
-              role="option"
-              className={activeOptionIndex === i ? 'focus' : ''}
-              aria-selected={activeOptionIndex === i}
-              tabIndex={-1}
-              onClick={(evt: MouseEvent<HTMLLIElement>) => {
-                onOptionTagClick(evt, o);
-              }}
-              onKeyDown={(evt: KeyboardEvent<HTMLLIElement>) => {
-                onOptionTagKeyDown(evt, o);
-              }}
-              onFocus={(evt: FocusEvent<HTMLLIElement>) => {
-                onOptionFocus(evt);
-              }}
-              onMouseOver={(evt: MouseEvent<HTMLLIElement>) => {
-                onOptionMouseOver(evt);
-              }}
+            <span
+              className="tag me-10 d-flex align-items-center px-16 py-4"
+              key={uuidv4()}
+              role="button"
+              onClick={(evt: MouseEvent<HTMLSpanElement>) => onTagClick(evt, t)}
+              tabIndex={0}
+              onKeyDown={(evt: KeyboardEvent<HTMLSpanElement>) => onTagKeyDown(evt, t)}
             >
-              {o}
-            </li>
+              <span className="tag-name me-4">{t}</span>
+              <Icon icon="ama-close-circle" size="sm" />
+            </span>
           );
         })}
-      </ul>
+
+        <input
+          id={customInputId}
+          ref={inputRef}
+          placeholder={placeholder}
+          aria-labelledby={labeledBy}
+          onKeyDown={onKeyDownHandler}
+          onChange={updateAvailableOptions}
+          onClick={onClickHandler}
+          onFocus={openListBox}
+          aria-expanded={isOpen}
+          aria-activedescendant={activeOptionId}
+          role="combobox"
+          aria-autocomplete="list"
+          aria-controls={listBoxId}
+          className="flex-grow-1 w-100 m-0 p-0 "
+        />
+      </div>
+
+      <div className="autocomplete-container">
+        <ul id={listBoxId} ref={listBoxRef} role="listbox" aria-label={optionsAriaLabel} className={listboxClassname}>
+          {availableOptions.map((o, i) => {
+            const id = uuidv4();
+            const liClassNames = classNames({ focus: activeOptionIndex === i }, 'd-flex align-items-center py-8 px-16');
+
+            return (
+              <li
+                id={id}
+                key={id}
+                role="option"
+                className={liClassNames}
+                aria-selected={activeOptionIndex === i}
+                tabIndex={-1}
+                onClick={(evt: MouseEvent<HTMLLIElement>) => {
+                  onOptionTagClick(evt, o);
+                }}
+                onMouseOver={(evt: MouseEvent<HTMLLIElement>) => {
+                  onOptionMouseOver(evt);
+                }}
+              >
+                {o}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };

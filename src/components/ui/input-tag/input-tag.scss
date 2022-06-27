@@ -1,45 +1,64 @@
-// @use '../../../scss/index' as index;
+@use '../../../scss/index' as index;
 
 .ama-input-tag {
-  padding: 16px;
-  border: 1px solid black;
-  position: relative;
+  .input-container {
+    border: 1px solid black;
 
-  .tag {
-    background-color: green;
-    margin: 10px;
-  }
+    .tag {
+      white-space: pre;
+      min-height: 44px;
+      border-radius: 22px;
 
-  input {
-    // @include index.text-medium-normal;
-    // color: index.$neutral-black;
-    // background-color: index.$neutral-white;
-    // &::placeholder {
-    //   color: index.$neutral-dark-grey;
-    // }
+      border: 1px solid index.$neutral-light-grey;
+      background-color: index.$neutral-light;
 
-    padding: 0;
-    margin: 0;
-    border: none;
+      .tag-name {
+        @include index.text-medium-normal;
+        color: index.$neutral-black;
+      }
+    }
 
-    &:focus {
+    input {
+      @include index.text-medium-normal;
+      color: index.$neutral-black;
+      background-color: index.$neutral-white;
+      &::placeholder {
+        color: index.$neutral-dark-grey;
+      }
       border: none;
-      outline: none;
-      border-radius: 0;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 
-  ul {
-    position: absolute;
-    left: 0;
-    bottom: 200;
-    width: 100%;
+  .autocomplete-container {
+    position: relative;
+    ul {
+      @include index.shadow;
+      @include index.scrollbars;
+      list-style: none;
 
-    list-style: none;
+      background-color: index.$neutral-white;
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: 272px;
 
-    li {
-      &.focus {
-        background-color: red;
+      li {
+        @include index.text-medium-normal;
+        color: index.$neutral-black;
+
+        min-height: 40px;
+
+        margin-bottom: 10px;
+        &:last-of-type {
+          margin-bottom: 0px;
+        }
+
+        &.focus {
+          background-color: index.$neutral-light;
+        }
       }
     }
   }
