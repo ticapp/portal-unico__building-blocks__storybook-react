@@ -12,7 +12,7 @@ export const PrimaryAlert: Story<AlertProps> = () => {
   return (
     <Alert
       header="Alert without color"
-      icon="ama-warning-triangle"
+      icon="ama-warning"
       htmlBar={<div>Bar Text!!!</div>}
       barLink="isto é um link"
       link="https://www.ama.pt"

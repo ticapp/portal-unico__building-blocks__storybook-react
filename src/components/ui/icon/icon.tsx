@@ -52,13 +52,24 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
   padding?: boolean;
   /** Callback when image is loaded */
   onIconLoad?: () => void;
+  /** Callback when image isn't loaded */
+  onIconLoadError?: () => void;
   /** Alt name for icon */
   alt?: string;
   /** Aria-hidden for icon decorative */
   ariaHidden?: boolean | 'true' | 'false';
 }
 
-export const Icon: FC<IconProps> = ({ size = 'md', icon = '', alt = '', className, padding, onIconLoad, ariaHidden = 'false' }) => {
+export const Icon: FC<IconProps> = ({
+  size = 'md',
+  icon = '',
+  alt = '',
+  className,
+  padding,
+  onIconLoad,
+  onIconLoadError,
+  ariaHidden = 'false'
+}) => {
   const [IconComponent, setCurrentIcon] = useState<FC<SVGProps<SVGSVGElement>>>(iconsCache[icon]);
 
   const classes = classNames('icon', className, {
@@ -69,22 +80,28 @@ export const Icon: FC<IconProps> = ({ size = 'md', icon = '', alt = '', classNam
   useEffect(() => {
     let isMounted = true;
     if (isBundledIcon(icon) && !iconsCache[icon]) {
-      loadIcon(icon).then(({ component }) => {
-        if (isMounted) {
-          iconsCache[icon] = (() => component) as unknown as FC<SVGProps<SVGSVGElement>>;
-          setCurrentIcon(iconsCache[icon]);
-          onIconLoad?.();
-        }
-      });
-    } else if (isMounted) {
+      loadIcon(icon)
+        .then(({ component }) => {
+          if (isMounted) {
+            iconsCache[icon] = (() => component) as unknown as FC<SVGProps<SVGSVGElement>>;
+            setCurrentIcon(iconsCache[icon]);
+            onIconLoad?.();
+          }
+        })
+        .catch(() => {
+          onIconLoadError?.();
+        });
+    } else if (isMounted && iconsCache[icon]) {
       setCurrentIcon(iconsCache[icon]);
       onIconLoad?.();
+    } else {
+      onIconLoadError?.();
     }
 
     return () => {
       isMounted = false;
     };
-  }, [icon, onIconLoad]);
+  }, [icon, onIconLoad, onIconLoadError]);
 
   if (!isBundledIcon(icon)) {
     // Assume that it is a base64 image and let the browser do his work
