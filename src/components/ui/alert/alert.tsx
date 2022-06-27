@@ -39,7 +39,7 @@ export interface AlertProps extends InnerAlertProps {
 
 export const Alert: FC<AlertProps> = ({
   children,
-  show,
+  show = true,
   timeout,
   header,
   htmlBar,
@@ -51,25 +51,14 @@ export const Alert: FC<AlertProps> = ({
   isExternal,
   ...props
 }: AlertProps) => {
-  const [isShow, setShow] = useState(show ?? true);
-  const [validIcon, setValidIcon] = useState(icon || DEFAULT_ICON);
+  const [isShow, setShow] = useState(show);
+  const [validIcon, setValidIcon] = useState(icon);
 
   const time = typeof timeout === 'number' ? Math.max(timeout, 2000) : 0;
 
-  useEffect(() => {
-    const img = new Image();
-    img.src = validIcon;
-    if (img.complete) {
-      setValidIcon(img.src);
-    } else {
-      img.onload = () => {
-        setValidIcon(img.src);
-      };
-      img.onerror = () => {
-        setValidIcon(DEFAULT_ICON);
-      };
-    }
-  });
+  const onIconLoadError = () => {
+    setValidIcon(DEFAULT_ICON);
+  };
 
   useEffect(() => {
     const cb = () => {
@@ -87,7 +76,7 @@ export const Alert: FC<AlertProps> = ({
       <InnerAlert onClose={() => setShow(false)} bsPrefix="ama-alert" {...props}>
         {header && (
           <InnerAlert.Heading as="h2" className="header d-flex align-items-center">
-            {icon && <Icon icon={validIcon} className={`icon ${color ?? 'none'}`} alt={alt} />}
+            {validIcon && <Icon icon={validIcon} onIconLoadError={onIconLoadError} className={`icon ${color}`} alt={alt} />}
             {header}
           </InnerAlert.Heading>
         )}

@@ -160,6 +160,6 @@ export const loadIcon = (name: IconName) => {
   if (isBundledIcon(name)) {
     return import(`${iconList[name]}`);
   }
-
+  console.log('CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATCH');
   throw Error(`Icon name not bundled. Requested icon: "${name}"`);
 };
