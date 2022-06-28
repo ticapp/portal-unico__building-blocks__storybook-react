@@ -7,6 +7,11 @@ import { useOutsideElementClick } from '../../hooks';
 import { Icon } from '../icon';
 import './input-tag.scss';
 
+export interface InputTagOption {
+  label: string;
+  id: string;
+}
+
 export interface InputTagProps {
   /** Add classes to the input tag component */
   className?: string;
@@ -15,7 +20,7 @@ export interface InputTagProps {
   /** Set the placeholder of input */
   placeholder?: string;
   /** Set autocomplete options */
-  options: string[];
+  options: InputTagOption[];
   /** On change event */
   onChange?: (val: string[]) => void;
   /** Aria label to show in list box */
@@ -105,14 +110,14 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
     setTags((lastTags) => {
       const newAvailableOptions = options.filter((o) => {
-        return lastTags.indexOf(o) < 0;
+        return lastTags.indexOf(o.label) < 0;
       });
 
       if (!val) {
         setAvailableOptions(newAvailableOptions);
       } else {
         const filteredOptions = newAvailableOptions.filter((l) => {
-          return l.toLowerCase().indexOf(val.toLowerCase()) >= 0;
+          return l.label.toLowerCase().indexOf(val.toLowerCase()) >= 0;
         });
 
         setAvailableOptions(filteredOptions);
@@ -130,7 +135,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
     }
 
     const option = availableOptions.find((o) => {
-      return o.toLowerCase() === value.toLowerCase();
+      return o.label.toLowerCase() === value.toLowerCase();
     });
 
     if (!option) {
@@ -177,14 +182,14 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
     switch (key) {
       case 'Enter':
         if (activeOptionIndex >= 0) {
-          tryAddTag(availableOptions[activeOptionIndex]);
+          tryAddTag(availableOptions[activeOptionIndex].label);
         } else {
           if (inputRef.current?.value) {
             tryAddTag();
           }
 
           if (availableOptions.length === 1) {
-            tryAddTag(availableOptions[0]);
+            tryAddTag(availableOptions[0].label);
           }
         }
 
@@ -221,20 +226,15 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
     openListBox();
   };
 
-  const onTagClick = (evt: MouseEvent<HTMLSpanElement>, tag: string) => {
+  const onTagClick = (_evt: MouseEvent<HTMLSpanElement>, tag: string) => {
     removeTag(tag);
   };
 
   const onTagKeyDown = (evt: KeyboardEvent<HTMLSpanElement>, tag: string) => {
     const { key } = evt;
 
-    switch (key) {
-      case 'Enter':
-        removeTag(tag);
-        break;
-
-      default:
-        break;
+    if (key === 'Enter' || key === 'Space') {
+      removeTag(tag);
     }
   };
 
@@ -248,6 +248,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
       const liOpttions = listBoxRef.current.querySelectorAll('li[role="option"]');
       liOpttions.forEach((e) => e.classList.remove('focus'));
       element.classList.add('focus');
+      setActiveOptionId(element.id);
     }
   };
 
@@ -260,7 +261,11 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
   const customInputId = uuidv4();
   const listBoxId = uuidv4();
-  const listboxClassname = classNames({ 'd-block': isOpen }, { 'd-none': !isOpen }, 'position-absolute top-0 left-0 w-100 py-16 px-0');
+  const listboxClassname = classNames(
+    { 'd-block': isOpen },
+    { 'd-none': !isOpen },
+    'w-100 position-absolute top-0 left-0 w-100 py-16 px-0'
+  );
 
   return (
     <div ref={containerRef} className={classes}>
@@ -274,9 +279,10 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
               onClick={(evt: MouseEvent<HTMLSpanElement>) => onTagClick(evt, t)}
               tabIndex={0}
               onKeyDown={(evt: KeyboardEvent<HTMLSpanElement>) => onTagKeyDown(evt, t)}
+              aria-label={t}
             >
               <span className="tag-name me-4">{t}</span>
-              <Icon icon="ama-close-circle" size="sm" />
+              <Icon icon="ama-close-circle" size="sm" aria-hidden="true" />
             </span>
           );
         })}
@@ -285,42 +291,44 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
           id={customInputId}
           ref={inputRef}
           placeholder={placeholder}
-          aria-labelledby={labeledBy}
           onKeyDown={onKeyDownHandler}
           onChange={updateAvailableOptions}
           onClick={onClickHandler}
           onFocus={openListBox}
+          className="flex-grow-1 w-100 m-0 p-0 "
+          aria-controls={listBoxId}
           aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          aria-labelledby={labeledBy}
           aria-activedescendant={activeOptionId}
           role="combobox"
           aria-autocomplete="list"
-          aria-controls={listBoxId}
-          className="flex-grow-1 w-100 m-0 p-0 "
         />
       </div>
 
       <div className="autocomplete-container">
         <ul id={listBoxId} ref={listBoxRef} role="listbox" aria-label={optionsAriaLabel} className={listboxClassname}>
           {availableOptions.map((o, i) => {
-            const id = uuidv4();
-            const liClassNames = classNames({ focus: activeOptionIndex === i }, 'd-flex align-items-center py-8 px-16');
-
+            const liClassNames = classNames({ focus: activeOptionIndex === i }, 'w-100 d-flex align-items-center py-8 px-16');
             return (
               <li
-                id={id}
-                key={id}
+                id={o.id}
+                key={o.id}
                 role="option"
                 className={liClassNames}
                 aria-selected={activeOptionIndex === i}
                 tabIndex={-1}
                 onClick={(evt: MouseEvent<HTMLLIElement>) => {
-                  onOptionTagClick(evt, o);
+                  onOptionTagClick(evt, o.label);
                 }}
                 onMouseOver={(evt: MouseEvent<HTMLLIElement>) => {
                   onOptionMouseOver(evt);
                 }}
+                aria-label={o.label}
               >
-                {o}
+                <span className="w-100" aria-label={o.label}>
+                  {o.label}
+                </span>
               </li>
             );
           })}

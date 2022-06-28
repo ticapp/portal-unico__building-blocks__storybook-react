@@ -59,6 +59,10 @@
         &.focus {
           background-color: index.$neutral-light;
         }
+
+        &:hover {
+          background-color: index.$neutral-light;
+        }
       }
     }
   }
