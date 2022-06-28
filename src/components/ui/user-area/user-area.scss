@@ -1,4 +1,4 @@
-@use '../../../scss/index' as index;
+@use '../../../scss/index.scss' as index;
 
 .ama {
   &-user-area {
@@ -44,7 +44,7 @@
                   a {
                     display: flex;
                     width: 100%;
-                    justify-content: start;
+                    justify-content: flex-start;
                     color: index.$brand-green-main;
 
                     text-decoration: none;

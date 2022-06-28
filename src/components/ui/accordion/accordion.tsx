@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
-import './accordion.scss';
 import classNames from 'classnames';
+import React, { ReactNode } from 'react';
 import { Accordion as BsAccordion, AccordionProps as BsAccordionProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
+import './accordion.scss';
 
 export interface AccordionProps extends BsAccordionProps {
   /** Add classes to the Accordion component */
