@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { InputTag, InputTagProps } from '../../../../components';
 
 export default {
-  title: 'Components/Input Tag',
+  title: 'Components/Inputs',
   component: InputTag
 } as ComponentMeta<typeof InputTag>;
 
@@ -12,14 +13,22 @@ export const SimpleTagInput: Story<InputTagProps> = (args) => {
   return (
     <>
       <label id="my-label">My Options</label>
-      <InputTag options={args.options} />
+      <InputTag labeledBy="my-label" options={args.options} />
     </>
   );
 };
 SimpleTagInput.storyName = 'Simple Tag Input';
 SimpleTagInput.args = {
   placeholder: 'Choose an option...',
-  options: ['John Doe', 'Anna Doe', 'Mark Doe', 'Billy Doe', 'Martha Doe', 'Daisy Doe', 'Jane Doe']
+  options: [
+    { label: 'John Doe', id: uuidv4() },
+    { label: 'Anna Doe', id: uuidv4() },
+    { label: 'Mark Doe', id: uuidv4() },
+    { label: 'Billy Doe', id: uuidv4() },
+    { label: 'Martha Doe', id: uuidv4() },
+    { label: 'Daisy Doe', id: uuidv4() },
+    { label: 'Jane Doe', id: uuidv4() }
+  ]
 };
 SimpleTagInput.argTypes = {
   options: {
