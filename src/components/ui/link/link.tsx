@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 import { UrlObject } from 'url';
+import { usePlatform } from '../../hooks';
 import './link.scss';
 import { NextJSAnchor, NextJSAnchorProps } from './nextjs-anchor';
 import { ReactDomAnchor, ReactDomAnchorType } from './react-dom-anchor';
@@ -44,7 +45,7 @@ export function Link({
 }: LinkProps) {
   const classes = classNames('ama-link', className);
 
-  const isNextJS = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  const { isNextJs } = usePlatform();
 
   const renderNextJSAnchor = (props) => {
     return <NextJSAnchor {...props}>{children}</NextJSAnchor>;
@@ -54,7 +55,7 @@ export function Link({
     return <ReactDomAnchor {...props}>{children}</ReactDomAnchor>;
   };
 
-  if (isNextJS) {
+  if (isNextJs) {
     const nextJsLinkProps = {
       href: link,
       children,
