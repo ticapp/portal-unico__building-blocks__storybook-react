@@ -71,6 +71,7 @@ export const Alert: FC<AlertProps> = ({
     return () => clearTimeout(timer);
   }, [timeout]);
 
+  const barSize = link && barLink ? 9 : 12;
   return isShow ? (
     <div className="ama-alert">
       <InnerAlert onClose={() => setShow(false)} bsPrefix="ama-alert" {...props}>
@@ -84,7 +85,7 @@ export const Alert: FC<AlertProps> = ({
         {htmlBar && (
           <Container className={`bar ${color ?? 'none'}`}>
             <Row>
-              <Col sm={link && barLink ? 9 : 12}>{htmlBar}</Col>
+              <Col sm={barSize}>{htmlBar}</Col>
               {link && barLink && (
                 <Col sm={3}>
                   <BrowserRouter>
