@@ -5,7 +5,7 @@ import accessibility from 'highcharts/modules/accessibility';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from '../..';
+import { Link } from '../link';
 import './infractions-chart.scss';
 
 if (typeof Highcharts === 'object') {

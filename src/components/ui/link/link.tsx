@@ -44,7 +44,7 @@ export function Link({
 }: LinkProps) {
   const classes = classNames('ama-link', className);
 
-  const isNextJS = typeof window === 'undefined';
+  const isNextJS = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
   const renderNextJSAnchor = (props) => {
     return <NextJSAnchor {...props}>{children}</NextJSAnchor>;
