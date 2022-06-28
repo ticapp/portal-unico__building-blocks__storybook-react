@@ -1,0 +1,18 @@
+@use '../../../scss/index' as index;
+
+.ama-input-radio-container {
+  height: 44px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &[aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+
+  .input-label {
+    @include index.text-big-normal;
+    color: index.$neutral-black;
+  }
+}

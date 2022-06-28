@@ -1,70 +1,83 @@
+@use '../../../scss/index' as index;
+
 .ama {
   &-alert {
-    border: 1px solid #ccc;
-    padding: 1rem 1rem 1rem 2rem;
-    position: relative;
+    margin: 1rem;
+
+    .header {
+      vertical-align: center;
+      margin: 0;
+      line-height: 33px;
+      font-size: 22px;
+      font-weight: 400;
+      color: index.$neutral-black;
+    }
 
     .btn-close {
       position: absolute;
       top: 1rem;
-      right: 1rem;
+      right: 0.5rem;
     }
 
-    &:before {
-      content: '';
-      position: absolute;
-      width: 1rem;
-      height: 100%;
-      top: 0;
-      left: 0;
-    }
+    .icon {
+      &.warning {
+        fill: index.$semantic-alerts;
+      }
 
-    &.ama-alert-primary {
-      &:before {
-        background-color: blue;
+      &.info {
+        fill: index.$semantic-info;
+      }
+
+      &.success {
+        fill: index.$brand-green-main;
       }
     }
 
-    &.ama-alert-secondary {
-      &:before {
-        background-color: lightblue;
-      }
+    .body-content {
+      background-color: index.$neutral-light;
+      margin: 1rem 0 0 0;
+      padding: 0 1rem 0 1rem;
     }
 
-    &.ama-alert-success {
-      &:before {
-        background-color: green;
-      }
+    > * a {
+      color: index.$brand-green-main;
     }
 
-    &.ama-alert-danger {
-      &:before {
-        background-color: red;
-      }
-    }
+    .bar {
+      .row {
+        align-items: center;
+        text-align: center;
 
-    &.ama-alert-warning {
-      &:before {
-        background-color: yellow;
+        .link {
+          color: index.$neutral-white;
+        }
       }
-    }
 
-    &.ama-alert-info {
-      &:before {
-        background-color: cyan;
+      &.warning {
+        background-color: index.$semantic-alerts;
+        color: index.$neutral-white;
       }
-    }
 
-    &.ama-alert-dark {
-      &:before {
-        background-color: darkslategray;
-      }
-    }
+      &.info {
+        background-color: index.$semantic-info;
+        color: index.$neutral-black;
 
-    &.ama-alert-light {
-      &:before {
-        background-color: lightgrey;
+        .link {
+          color: index.$neutral-black;
+        }
       }
+
+      &.success {
+        background-color: index.$brand-green-main;
+        color: index.$neutral-white;
+      }
+
+      &.none {
+        background-color: index.$neutral-dark-grey;
+        color: index.$neutral-white;
+      }
+
+      margin: 1rem 0 0 0;
     }
   }
 }

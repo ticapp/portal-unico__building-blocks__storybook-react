@@ -1,0 +1,69 @@
+@use '../../../scss/index' as index;
+
+.ama-input-tag {
+  .input-container {
+    border: 1px solid black;
+
+    .tag {
+      white-space: pre;
+      min-height: 44px;
+      border-radius: 22px;
+
+      border: 1px solid index.$neutral-light-grey;
+      background-color: index.$neutral-light;
+
+      .tag-name {
+        @include index.text-medium-normal;
+        color: index.$neutral-black;
+      }
+    }
+
+    input {
+      @include index.text-medium-normal;
+      color: index.$neutral-black;
+      background-color: index.$neutral-white;
+      &::placeholder {
+        color: index.$neutral-dark-grey;
+      }
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .autocomplete-container {
+    position: relative;
+    ul {
+      @include index.shadow;
+      @include index.scrollbars;
+      list-style: none;
+
+      background-color: index.$neutral-white;
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: 272px;
+
+      li {
+        @include index.text-medium-normal;
+        color: index.$neutral-black;
+
+        min-height: 40px;
+
+        margin-bottom: 10px;
+        &:last-of-type {
+          margin-bottom: 0px;
+        }
+
+        &.focus {
+          background-color: index.$neutral-light;
+        }
+
+        &:hover {
+          background-color: index.$neutral-light;
+        }
+      }
+    }
+  }
+}

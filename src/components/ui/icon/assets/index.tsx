@@ -131,14 +131,21 @@ const iconList: Record<string, string> = {
   'ama-user': './AmaUser',
   'ama-video': './AmaVideo',
   'ama-wallet': './AmaWallet',
-  'ama-warning-circle': './AmaWarningCircle',
   'ama-warning': './AmaWarning',
+  'ama-warning-circle': './AmaWarningCircle',
+  'ama-warning-triangle': './AmaWarningTriangle',
   'ama-whatsapp-square': './AmaWhatsappSquare',
   'ama-whatsapp': './AmaWhatsapp',
   'ama-wifi': './AmaWifi',
   'ama-youtube': './AmaYoutube',
   'ama-zoom-in': './AmaZoomIn',
-  'ama-zoom-out': './AmaZoomOut'
+  'ama-zoom-out': './AmaZoomOut',
+  'ama-radio-unselected': './AmaRadioUnselected',
+  'ama-radio-selected': './AmaRadioSelected',
+  'ama-radio-selected-focus': './AmaRadioSelectedFocus',
+  'ama-radio-focus': './AmaRadioFocus',
+  'ama-radio-disabled-unselected': './AmaRadioDisabledUnselected',
+  'ama-radio-disabled-selected': './AmaRadioDisabledSelected'
 };
 
 export type IconName = keyof typeof iconList;
@@ -153,6 +160,5 @@ export const loadIcon = (name: IconName) => {
   if (isBundledIcon(name)) {
     return import(`${iconList[name]}`);
   }
-
   throw Error(`Icon name not bundled. Requested icon: "${name}"`);
 };

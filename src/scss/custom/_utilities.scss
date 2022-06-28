@@ -170,6 +170,12 @@ $utilities: map-merge(
       property: z-index,
       class: z,
       values: $zindexes
+    ),
+    'gap': (
+      responsive: true,
+      property: gap,
+      class: gap,
+      values: $spacers
     )
   )
 );
