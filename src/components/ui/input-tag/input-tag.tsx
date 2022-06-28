@@ -269,11 +269,11 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
   return (
     <div ref={containerRef} className={classes}>
-      <div className="input-container px-16 py-12 d-flex">
+      <div className="input-container px-16 py-12 d-flex flex-wrap gap-10">
         {tags.map((t) => {
           return (
             <span
-              className="tag me-10 d-flex align-items-center px-16 py-4"
+              className="tag d-flex align-items-center px-16 py-4"
               key={uuidv4()}
               role="button"
               onClick={(evt: MouseEvent<HTMLSpanElement>) => onTagClick(evt, t)}
@@ -295,7 +295,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
           onChange={updateAvailableOptions}
           onClick={onClickHandler}
           onFocus={openListBox}
-          className="flex-grow-1 w-100 m-0 p-0 "
+          className="flex-fill d-inline-block m-0 p-0"
           aria-controls={listBoxId}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
