@@ -1,27 +1,32 @@
 import classNames from 'classnames';
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, Ref } from 'react';
 import './input-text.scss';
 
 export interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
   /** Add classes to the InputText component */
   className?: string;
   /** Set the placeholder of input */
-  placeholder: string;
+  placeholder?: string;
   /** Set the value of input */
-  value: string;
+  value?: string;
   /** Set input label */
   label?: string;
+  /** Set input label id */
+  labeledBy?: string;
   /** Set if is disable */
   isDisabled?: boolean;
   /** Set input name */
-  name: string;
+  name?: string;
   /** Set input id */
-  inputId: string;
+  inputId?: string;
   //* * Set input type */
   type?: string;
 }
 
-export const InputText = ({ className, placeholder, label, inputId, name, type = 'text', isDisabled = false, ...rest }: InputTextProps) => {
+const InnerInputText = (
+  { className, placeholder, label, inputId, name, type = 'text', isDisabled = false, labeledBy, ...rest }: InputTextProps,
+  ref: Ref<HTMLInputElement>
+) => {
   const containerDisabledClassNames = classNames(
     'ama-input-container',
     'd-flex align-items-start justify-content-center flex-column',
@@ -39,10 +44,12 @@ export const InputText = ({ className, placeholder, label, inputId, name, type =
         </label>
       )}
       <input
+        ref={ref}
         disabled={isDisabled}
         name={name}
         className={inputTextDisabledClassNames}
         placeholder={placeholder}
+        aria-labelledby={labeledBy}
         id={inputId}
         type={type}
         {...rest}
@@ -50,3 +57,5 @@ export const InputText = ({ className, placeholder, label, inputId, name, type =
     </div>
   );
 };
+
+export const InputText = React.forwardRef(InnerInputText);

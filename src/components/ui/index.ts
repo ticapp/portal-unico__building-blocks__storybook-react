@@ -28,3 +28,6 @@ export * from './table';
 export * from './tabs';
 export * from './user-area';
 export * from './vertical-menu';
+export * from './date-picker';
+export * from './infractions-chart';
+export * from './input-tag';

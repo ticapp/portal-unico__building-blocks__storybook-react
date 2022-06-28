@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { HTMLAttributes, useState, useRef } from 'react';
+import React, { HTMLAttributes, MouseEvent, useRef, useState } from 'react';
 import { Stack } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { Icon } from '../icon';
@@ -27,12 +27,12 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
   const labelId = uuidv4();
   const checkboxId = uuidv4();
 
-  const focusRef: any = useRef(null);
+  const focusRef = useRef<HTMLInputElement>(null);
 
-  const focus = (e: any) => {
+  const focus = (e: MouseEvent) => {
     if (!disabled) {
       setChecked(!checked);
-      focusRef.current.focus();
+      focusRef.current?.focus();
       e.preventDefault();
     }
   };
