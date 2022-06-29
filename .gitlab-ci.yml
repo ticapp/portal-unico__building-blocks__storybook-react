@@ -79,13 +79,14 @@ publish-storybook-image-docker-hub:
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
 
-publish-design-system-library:
+publish-library-npm-nexus:
   stage: publish
   image: node:14.16.1-alpine3.13
   script:
     - npm install
     - npm run build
     - echo "@ama:registry=${NEXUS_PATH}" >> .npmrc
+    - cat .npmrc
     - echo "_auth=${NEXUS_REGISTRY_CREDENTIALS_BASE_64}" >> .npmrc
     - npm publish
   rules:
