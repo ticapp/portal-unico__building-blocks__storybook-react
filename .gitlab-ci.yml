@@ -86,7 +86,6 @@ publish-library-npm-nexus:
     - npm install
     - npm run build
     - echo "@ama:registry=${NEXUS_PATH}" >> .npmrc
-    - cat .npmrc
     - echo "_auth=${NEXUS_REGISTRY_CREDENTIALS_BASE_64}" >> .npmrc
     - npm publish
   rules:
