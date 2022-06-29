@@ -83,7 +83,7 @@ publish-design-system-library:
   script:
     - npm install
     - npm run build
-    - echo "ama-react-design-system:registry=${NEXUS_PATH}" >> .npmrc
+    - echo "@ama:registry=${NEXUS_PATH}" >> .npmrc
     - echo "_auth=${NEXUS_REGISTRY_CREDENTIALS_BASE_64}" >> .npmrc
     - npm publish
   rules:
