@@ -6,7 +6,7 @@ export function NavLink(props) {
   const newProps = { ...props };
   delete newProps.ref;
 
-  if (!window) {
+  if (typeof window === 'undefined') {
     return <NextJsNavLink {...newProps} />;
   }
 
