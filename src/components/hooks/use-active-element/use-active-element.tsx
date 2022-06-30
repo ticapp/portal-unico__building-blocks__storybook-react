@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useActiveElement = () => {
-  if (typeof window === 'undefined') {
-    return {
-      activeElement: null
-    };
-  }
-
-  const [activeElement, setActiveElement] = useState(document.activeElement);
+  const [activeElement, setActiveElement] = useState(null);
 
   const onFocus = (evt) => {
     setActiveElement(evt.target.window ? null : evt.target);
@@ -16,9 +10,6 @@ export const useActiveElement = () => {
   const onBlur = () => {
     setActiveElement(null);
   };
-
-  window.removeEventListener('focus', onFocus);
-  window.removeEventListener('blur', onBlur);
 
   useEffect(() => {
     window.addEventListener('focus', onFocus, true);
