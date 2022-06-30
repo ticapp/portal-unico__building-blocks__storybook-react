@@ -1,24 +1,24 @@
-import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import React, { createContext, ReactNode, useMemo, useState } from 'react';
 
-interface RadioGroupProviderProps {
+export interface RadioGroupProviderProps {
   children: ReactNode;
 }
 
-interface RadioGroupValue {
+export interface RadioGroupValue {
   id: string;
   isChecked?: boolean;
   label: string;
   isDisabled?: boolean;
 }
 
-interface RadioGroupData {
+export interface RadioGroupData {
   inputRadioCheckedId: string;
   inputRadioValues: Array<RadioGroupValue>;
   setRadioChecked: (radioId: string) => void;
   addRadios: (radiosData: Array<RadioGroupValue>) => void;
 }
 
-const RadioGroupContext = createContext<RadioGroupData>({} as RadioGroupData);
+export const RadioGroupContext = createContext<RadioGroupData>({} as RadioGroupData);
 
 export function RadioProvider({ children }: RadioGroupProviderProps): JSX.Element {
   const [inputRadioValues, setInputRadioValues] = useState<Array<RadioGroupValue>>([]);
@@ -56,8 +56,4 @@ export function RadioProvider({ children }: RadioGroupProviderProps): JSX.Elemen
   );
 
   return <RadioGroupContext.Provider value={radioProviderValues}>{children}</RadioGroupContext.Provider>;
-}
-
-export function useRadio(): RadioGroupData {
-  return useContext(RadioGroupContext);
 }

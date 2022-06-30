@@ -39,7 +39,7 @@ $threshold: 55%;
       background: contrast-color($value, transparent, $value);
       color: contrast-color($value, $value, index.$neutral-white);
       border-color: findColor($color, 'fourth');
-      border-width: 2px;
+      border-width: 1px;
       svg {
         fill: contrast-color($value, $value, index.$neutral-white);
       }
@@ -66,7 +66,7 @@ $threshold: 55%;
       background: contrast-color($value, $value, transparent);
       color: contrast-color($value, index.$neutral-white, $value);
       border-color: findColor($color, 'fourth');
-      border-width: 2px;
+      border-width: 1px;
       svg {
         fill: contrast-color($value, index.$neutral-white, $value);
       }

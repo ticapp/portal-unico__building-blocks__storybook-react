@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import React, { ReactNode, useContext, useLayoutEffect } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import { Pagination as BsPagination, PaginationProps as BsPaginationProps } from 'react-bootstrap';
-import { usePaginationData } from '../../hooks';
+import { useIsomorphicLayoutEffect, usePaginationData } from '../../hooks';
+
 import { Icon } from '../icon';
 import { Select, SelectOption } from '../select';
 import { TableContextType } from '../table';
@@ -63,7 +64,7 @@ export const Pagination = ({
   const pageData = usePaginationData(linesOptions[0]?.value || (data.length as string | number), data);
   const context = useContext<TableContextType>(Context);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (context) {
       context.setValue(pageData);
     }

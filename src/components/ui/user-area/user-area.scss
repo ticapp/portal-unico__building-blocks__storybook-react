@@ -68,7 +68,7 @@
                       bottom: -2px;
                       left: 0;
                       width: 100%;
-                      border-bottom: 2px solid index.$brand-green-main;
+                      border-bottom: 1px solid index.$brand-green-main;
                     }
                   }
                 }
@@ -82,7 +82,7 @@
 
                     .option-label {
                       &::after {
-                        border-bottom: 2px solid index.$neutral-black;
+                        border-bottom: 1px solid index.$neutral-black;
                       }
                     }
                   }

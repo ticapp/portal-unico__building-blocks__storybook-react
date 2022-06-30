@@ -1,8 +1,9 @@
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useLayoutEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { paginationDataType, sortDataType, usePaginationDataType, useSortTableData } from '../../hooks';
+import { paginationDataType, sortDataType, useIsomorphicLayoutEffect, usePaginationDataType, useSortTableData } from '../../hooks';
+
 import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
 import { Button } from '../buttons';
 import { Icon } from '../icon';
@@ -280,7 +281,7 @@ const TableMobile = ({ ...props }: TableProps) => {
     getItems();
   };
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (seeMore) {
       setSeeMoreItems(seeMoreItems - 2);
       setItemsShown(itemsShown + 2);

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { KeyboardEvent } from 'react';
 import { Icon } from '../icon';
+
 import './scroll-top.scss';
 
 export type ScrollTopProps = {

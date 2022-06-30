@@ -2,7 +2,8 @@
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useRadio } from '../../../contexts/input-radio-group-context';
+import { useRadio } from '../../hooks';
+
 import { InputRadio } from '../input-radio/input-radio';
 
 export interface InputRadioData {

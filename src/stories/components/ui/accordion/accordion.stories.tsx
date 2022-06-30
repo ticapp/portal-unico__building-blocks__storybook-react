@@ -1,6 +1,6 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
-import { Accordion, AccordionProps } from '../../../../components/ui';
+import { Accordion, AccordionInfo, AccordionProps } from '../../../../components/ui';
 
 export default {
   title: 'Components/Accordion',
@@ -31,7 +31,7 @@ export const BasicAccordion: Story<AccordionProps> = () => {
           </div>
         )
       }
-    ]
+    ] as AccordionInfo[]
   } as AccordionProps;
 
   return <Accordion {...args} />;

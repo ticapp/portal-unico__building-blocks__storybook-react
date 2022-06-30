@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { InputRadioGroup } from '../../../../components/ui/input-radio-group';
-import { RadioProvider } from '../../../../contexts/input-radio-group-context';
+import { InputRadioGroup, RadioProvider } from '../../../../components';
 
 export default {
   title: 'Components/Inputs Groups',

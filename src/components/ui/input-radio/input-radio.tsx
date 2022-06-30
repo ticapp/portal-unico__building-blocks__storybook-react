@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useRadio } from '../../../contexts/input-radio-group-context';
-import { useOutsideElementClick } from '../../hooks';
+import { useOutsideElementClick, useRadio } from '../../hooks';
 import { Icon } from '../icon';
 import './input-radio.scss';
 

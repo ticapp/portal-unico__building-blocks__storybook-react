@@ -5,7 +5,7 @@
   border: 1px solid index.$neutral-light-grey;
   li {
     &:not(:first-of-type) {
-      border-left: 2px solid index.$neutral-light-grey;
+      border-left: 1px solid index.$neutral-light-grey;
     }
     .lines-selector {
       .combo-input {
