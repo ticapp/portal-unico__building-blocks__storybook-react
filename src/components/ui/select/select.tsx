@@ -183,6 +183,10 @@ const Select = ({
 
   // check if element is visible in browser view port
   function isElementInView(element) {
+    if (typeof window === 'undefined') {
+      return true;
+    }
+
     const bounding = element.getBoundingClientRect();
 
     return (

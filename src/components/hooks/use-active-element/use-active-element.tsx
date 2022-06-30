@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 
 export const useActiveElement = () => {
+  if (typeof window === 'undefined') {
+    return {
+      activeElement: null
+    };
+  }
+
   const [activeElement, setActiveElement] = useState(document.activeElement);
 
   const onFocus = (evt) => {

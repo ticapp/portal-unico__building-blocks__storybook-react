@@ -12,7 +12,7 @@ export function ScrollTop({ className }: ScrollTopProps) {
   const classes = classNames('ama-scroll-top', className, 'd-flex', 'justify-content-center', 'align-items-center', 'rounded-circle');
 
   const scrollTop = () => {
-    if (window) {
+    if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
     }
   };

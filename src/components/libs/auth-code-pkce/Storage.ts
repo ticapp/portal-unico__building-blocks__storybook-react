@@ -4,7 +4,7 @@ export class Storage {
   private storage;
 
   constructor() {
-    this.storage = window ? window.localStorage : new MemoryStorage();
+    this.storage = typeof window !== 'undefined' ? window.localStorage : new MemoryStorage();
   }
 
   getItem = (key: string): string | null => {
