@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
@@ -70,6 +71,7 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
     <BrowserRouter>
       <Header
         isHomepage
+        logoSrc={require('../../../../assets/img/logo.png')}
         isAuthenticated={props.isAuthenticated}
         username="Area reservada"
         homepageLink="/"

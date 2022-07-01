@@ -23,7 +23,7 @@ export interface HeaderProps {
   className?: string;
 
   /** Path for logo image */
-  logoSrc?: string;
+  logoSrc: string;
   /** Alt text for logo image */
   logoAlt?: string;
   /** Title for homepage link */

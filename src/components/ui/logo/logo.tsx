@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { FC } from 'react';
+import { Image } from 'react-bootstrap';
 import { UrlObject } from 'url';
 import { Link } from '../link';
 
@@ -7,7 +8,7 @@ declare type Url = string | UrlObject;
 
 export interface LogoProps {
   /** Image source path */
-  src?: string;
+  src: string;
   /** Image alt text */
   alt?: string;
   /** Image width in pixels */
@@ -23,9 +24,6 @@ export interface LogoProps {
   homepageLink?: Url;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const logo = require('../../../assets/img/logo.png');
-
 const Logo: FC<LogoProps> = ({
   src,
   alt = 'Página inicial',
@@ -40,13 +38,13 @@ const Logo: FC<LogoProps> = ({
     <>
       {isHomepage && (
         <h1 className={classes}>
-          <img src={src || logo} alt={alt} width={width} height={height} />
+          <Image src={src} alt={alt} width={width} height={height} />
         </h1>
       )}
       {!isHomepage && (
         <div className={classes}>
           <Link link={homepageLink} title={title}>
-            <img src={src || logo} alt={alt} width={width} height={height} />
+            <Image src={src} alt={alt} width={width} height={height} />
           </Link>
         </div>
       )}
