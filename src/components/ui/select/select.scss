@@ -2,6 +2,7 @@
 
 .combo {
   @include index.text-medium-normal;
+  color: index.$neutral-black;
 
   cursor: default;
   position: relative;
@@ -39,6 +40,9 @@
     z-index: index.$zindex-dropdown;
 
     .combo-option {
+      @include index.text-medium-normal;
+      color: index.$neutral-black;
+
       display: flex;
       align-items: center;
       min-height: 40px;
@@ -52,11 +56,26 @@
       &.selected {
         background-color: index.$neutral-light;
       }
+
+      &:hover {
+        background-color: index.$neutral-light;
+      }
+
+      &.disabled {
+        color: index.$neutral-dark-grey;
+        &.checked,
+        &.selected {
+          background-color: none;
+        }
+
+        &:hover {
+          background-color: none;
+        }
+      }
     }
   }
 
   &.disabled {
-    pointer-events: none;
     color: index.$neutral-dark-grey;
     .combo-input {
       border: 1px solid index.$neutral-light-grey;

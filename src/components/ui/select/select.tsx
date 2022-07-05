@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { v4 } from 'uuid';
 import { useActiveElement, useOutsideElementClick } from '../../hooks';
 import { Icon } from '../icon';
@@ -63,8 +63,8 @@ const Select = ({
   size,
   allwaysOpen
 }: SelectProps) => {
-  const singleSelectId = id || `ama-select-id-${v4()}`;
-  const selectControlsId = `ama-select-controls-id-${v4()}`;
+  const singleSelectId = useMemo(() => id || `ama-select-id-${v4()}`, [id]);
+  const selectControlsId = useMemo(() => `ama-select-controls-id-${singleSelectId}`, []);
 
   const comboRef = useRef<HTMLDivElement | null>(null);
   const listboxRef = useRef<HTMLDivElement | null>(null);
@@ -232,8 +232,11 @@ const Select = ({
       setIsComboExpanded(newOpenValue);
 
       if (newOpenValue) {
-        // move focus back to the combobox, if needed
-        comboRef.current?.focus();
+        if (multiSelection) {
+          setSelectedIndex(checkedIndexes[checkedIndexes.length - 1]);
+        } else {
+          setSelectedIndex(checkedIndex);
+        }
 
         // scroll combo into view
         if (comboRef.current && !isElementInView(comboRef.current)) {
@@ -242,6 +245,8 @@ const Select = ({
             block: 'nearest'
           });
         }
+      } else {
+        setSelectedIndex(-1);
       }
 
       return newOpenValue;
@@ -304,13 +309,13 @@ const Select = ({
     }
   };
 
-  const onComboClick = () => {
+  const onComboMouseDown = () => {
     if (!disabled) {
       updateMenuState(!isOpen);
     }
   };
 
-  const onOptionClick = (index) => {
+  const onOptionMouseDown = (index) => {
     if (options[index].disabled) {
       return;
     }
@@ -320,18 +325,6 @@ const Select = ({
     if (!multiSelection) {
       updateMenuState(false);
     }
-  };
-
-  const onOptionMouseOver = (evt: MouseEvent<HTMLDivElement>) => {
-    if (!(evt.target as HTMLDivElement).classList.contains('combo-option')) {
-      return;
-    }
-
-    const optionsElems = listboxRef.current?.querySelectorAll('[role=option]');
-    if (optionsElems) {
-      optionsElems.forEach((e) => e.classList.remove('selected'));
-    }
-    (evt.target as HTMLDivElement).classList.add('selected');
   };
 
   const onComboType = (letter) => {
@@ -360,6 +353,7 @@ const Select = ({
       searchString = '';
     }
   };
+
   const onComboKeyDown = (event) => {
     if (disabled) {
       return;
@@ -375,14 +369,14 @@ const Select = ({
       case SelectActions.Last:
       case SelectActions.First:
         updateMenuState(true);
-        selectOption(getUpdatedIndex(selectedIndex, max, action));
+        selectOption(selectedIndex >= 0 ? getUpdatedIndex(selectedIndex, max, action) : 0);
         return;
 
       case SelectActions.Next:
       case SelectActions.Previous:
       case SelectActions.PageUp:
       case SelectActions.PageDown:
-        selectOption(getUpdatedIndex(selectedIndex, max, action));
+        selectOption(selectedIndex >= 0 ? getUpdatedIndex(selectedIndex, max, action) : 0);
         return;
 
       case SelectActions.Close:
@@ -427,6 +421,8 @@ const Select = ({
   };
 
   const onMenuKeyDown = (event) => {
+    event.preventDefault();
+
     // move focus back to the combobox, if needed
     comboRef.current?.focus();
 
@@ -497,7 +493,7 @@ const Select = ({
         id={singleSelectId}
         role="combobox"
         tabIndex={0}
-        onClick={onComboClick}
+        onMouseDown={onComboMouseDown}
         onKeyDown={onComboKeyDown}
       >
         <div className="tags me-10 d-flex flex-wrap">
@@ -510,7 +506,7 @@ const Select = ({
                   .filter((_o, i) => checkedIndexes.includes(i))
                   .map((o) => {
                     return (
-                      <div className="tag bg-neutral-dark d-flex align-items-center m-4 py-8 px-16" key={`${v4()}`}>
+                      <div className="tag bg-neutral-dark d-flex align-items-center m-4 py-8 px-16" key={v4()}>
                         <span>{o.label}</span>
                       </div>
                     );
@@ -533,20 +529,27 @@ const Select = ({
         tabIndex={-1}
       >
         {options.map((o, i) => {
+          const optionId = `${singleSelectId}-option-${i}`;
+
           const isChecked = multiSelection ? checkedIndexes.indexOf(i) >= 0 : checkedIndex === i;
 
-          const isSelected = selectedIndex === i;
+          const optionClassnames = classNames(
+            'combo-option w-100 d-flex align-items-center py-8 px-16',
+            { checked: isChecked },
+            { selected: selectedIndex === i },
+            { disabled: o.disabled }
+          );
+
+          const optionAriaLabel = isChecked ? `${o.label} selected` : o.label;
 
           return (
             <div
+              tabIndex={-1}
               role="option"
-              key={v4()}
-              id={`${singleSelectId}-option-${i}`}
-              className={`combo-option w-100 d-flex align-items-center py-8 px-16 ${isChecked ? 'checked' : ''}
-              ${isSelected ? 'selected' : ''}
-              `}
-              onClick={() => onOptionClick(i)}
-              onMouseOver={onOptionMouseOver}
+              key={optionId}
+              id={optionId}
+              className={optionClassnames}
+              onMouseDown={() => onOptionMouseDown(i)}
               aria-selected={isChecked}
             >
               {multiSelection && isChecked && (
@@ -561,7 +564,7 @@ const Select = ({
                 </span>
               )}
 
-              <span className="combo-option-content w-100" aria-label={isChecked ? `${o.label} selected` : o.label}>
+              <span className="combo-option-content w-100" aria-label={optionAriaLabel}>
                 {o.labelElement || o.label}
               </span>
             </div>

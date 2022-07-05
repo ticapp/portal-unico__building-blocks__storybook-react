@@ -21,10 +21,10 @@ SingleSelect.storyName = 'Single selection Select';
 SingleSelect.args = {
   placeholder: 'Choose an option...',
   options: [
-    { value: 1, label: 'John Doe' },
-    { value: 2, label: 'Anna Doe' },
-    { value: 3, label: 'Mark Doe' },
-    { value: 4, label: 'Billy Doe' },
+    { value: 1, label: 'John Doe', disabled: true },
+    { value: 2, label: 'Anna Doe', disabled: true },
+    { value: 3, label: 'Mark Doe', disabled: true },
+    { value: 4, label: 'Billy Doe', disabled: true },
     { value: 5, label: 'Martha Doe' },
     { value: 6, label: 'Daisy Doe' },
     { value: 7, label: 'Jane Doe' }
@@ -77,10 +77,10 @@ MultiSelect.storyName = 'Multi selection Select';
 MultiSelect.args = {
   placeholder: 'Choose an option...',
   options: [
-    { value: 1, label: 'John Doe' },
-    { value: 2, label: 'Anna Doe' },
-    { value: 3, label: 'Mark Doe' },
-    { value: 4, label: 'Billy Doe' },
+    { value: 1, label: 'John Doe', disabled: true },
+    { value: 2, label: 'Anna Doe', disabled: true },
+    { value: 3, label: 'Mark Doe', disabled: true },
+    { value: 4, label: 'Billy Doe', disabled: true },
     { value: 5, label: 'Martha Doe' },
     { value: 6, label: 'Daisy Doe' },
     { value: 7, label: 'Jane Doe' }
