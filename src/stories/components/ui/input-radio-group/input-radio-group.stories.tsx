@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { InputRadioGroup, RadioProvider } from '../../../../components';
+import { InputRadioGroup } from '../../../../components';
 
 export default {
   title: 'Components/Inputs Groups',
@@ -27,11 +27,7 @@ export const BasicInputRadioGroup: ComponentStory<typeof InputRadioGroup> = () =
     }
   ];
 
-  return (
-    <RadioProvider>
-      <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />
-    </RadioProvider>
-  );
+  return <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />;
 };
 
 BasicInputRadioGroup.storyName = 'Basic Input Group';

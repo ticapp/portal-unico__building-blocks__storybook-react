@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { v4 as uuidv4 } from 'uuid';
-import { useRadio } from '../../hooks';
 import { InputRadio } from './input-radio';
 
 export interface InputRadioData {
@@ -24,13 +24,35 @@ export interface InputRadioGroupProps {
 }
 
 export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, isDisabled }: InputRadioGroupProps) => {
+  const [inputRadioValues, setInputRadioValues] = useState<Array<InputRadioData>>([]);
+  const [inputRadioCheckedId, setInputRadioCheckedId] = useState<string>('');
   const inputRadioGroupClassName = classNames('ama-input-radio-group', className);
 
-  const { addRadios, inputRadioCheckedId, inputRadioValues, setRadioChecked } = useRadio();
-
   useEffect(() => {
-    addRadios(radiosData);
+    const setInitialCheckedValue = radiosData.map((data) => {
+      return {
+        ...data,
+        isChecked: false
+      };
+    });
+
+    setInputRadioValues([...setInitialCheckedValue]);
   }, []);
+
+  const setRadioChecked = (radioId: string) => {
+    const radioToCheckedIndex = inputRadioValues.findIndex((radio) => radio.id === radioId && !radio.isChecked);
+    const oldRadioCheckedIndex = inputRadioValues.findIndex((radio) => radio.id !== radioId && radio.isChecked);
+
+    if (inputRadioValues[radioToCheckedIndex]) {
+      inputRadioValues[radioToCheckedIndex].isChecked = true;
+      setInputRadioCheckedId(radioId);
+    }
+    if (inputRadioValues[oldRadioCheckedIndex]) {
+      inputRadioValues[oldRadioCheckedIndex].isChecked = false;
+    }
+
+    setInputRadioValues([...inputRadioValues]);
+  };
 
   const getInputCheckedIndex = () => {
     return inputRadioValues.findIndex((radio) => radio.id === inputRadioCheckedId);
@@ -78,6 +100,8 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, isDisab
             nextInputRadio={nextInputRadio}
             previousInputRadio={previousInputRadio}
             key={uuidv4()}
+            setRadioChecked={setRadioChecked}
+            inputRadioCheckedId={inputRadioCheckedId}
             inputId={radio.id}
             isDisabled={isDisabled}
             label={radio.label}
