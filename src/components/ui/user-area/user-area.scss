@@ -5,17 +5,39 @@
     min-height: 44px;
     min-width: 250px;
 
-    svg {
-      fill: index.$neutral-black;
-    }
+    .drop-down-header {
+      svg {
+        fill: index.$neutral-black;
+      }
 
-    .spacing {
-      width: 34px;
+      .spacing {
+        width: 34px;
+      }
     }
 
     .drop-down-container {
-      z-index: 900;
+      z-index: index.$zindex-dropdown;
+
       .combo {
+        .option-icon {
+          margin-right: map-get(index.$spacers, 10);
+        }
+
+        .option-label {
+          @include index.text-big-bold;
+          color: index.$brand-green-main;
+
+          position: relative;
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            border-bottom: 2px solid index.$brand-green-main;
+          }
+        }
+
         &.user-area-options {
           height: 100%;
           .tags {
@@ -31,60 +53,28 @@
               border: 1px solid transparent;
             }
           }
-        }
 
-        &.open {
-          &.user-area-options {
-            .combo-menu {
-              border: 1px solid index.$brand-green-main;
+          .combo-menu {
+            border: 1px solid index.$brand-green-main;
 
-              .combo-option {
-                .combo-option-content {
-                  display: flex;
-                  a {
-                    display: flex;
-                    width: 100%;
-                    justify-content: flex-start;
-                    color: index.$brand-green-main;
-
-                    text-decoration: none;
-                    a:link,
-                    a:hover {
-                      text-decoration: none;
-                    }
-                  }
-
-                  .option-icon {
-                    margin-right: map-get(index.$spacers, 10);
-                  }
-
-                  .option-label {
-                    @include index.text-big-bold;
-
-                    position: relative;
-                    &::after {
-                      content: '';
-                      position: absolute;
-                      bottom: -2px;
-                      left: 0;
-                      width: 100%;
-                      border-bottom: 1px solid index.$brand-green-main;
-                    }
+            .combo-option {
+              &:hover {
+                background-color: rgba(0, 103, 47, 0.5);
+                .option-label {
+                  color: index.$neutral-black;
+                  &::after {
+                    border-bottom: 2px solid index.$neutral-black;
                   }
                 }
-                &.checked,
-                &.selected {
-                  background-color: rgba(0, 103, 47, 0.5);
-                  .combo-option-content {
-                    a {
-                      color: index.$neutral-black;
-                    }
+              }
 
-                    .option-label {
-                      &::after {
-                        border-bottom: 1px solid index.$neutral-black;
-                      }
-                    }
+              &.checked,
+              &.selected {
+                background-color: rgba(0, 103, 47, 0.5);
+                .option-label {
+                  color: index.$neutral-black;
+                  &::after {
+                    border-bottom: 2px solid index.$neutral-black;
                   }
                 }
               }
