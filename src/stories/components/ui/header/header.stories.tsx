@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable global-require */
 import { ComponentMeta, Story } from '@storybook/react';
@@ -162,6 +163,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
     classFooterCol01: 'bg-brand-yellow-terciary',
     classFooterCol02: 'bg-brand-yellow-secondary border border-white border-bottom-0',
     classFooterCol03: 'bg-brand-yellow-main border-white border-top',
+    styleBackgroundFooterColor: { background: 'linear-gradient(to left, #fbcf5f 25%, #f5c037 25%, #efb82e 50%)' },
     listDataCol01: [
       {
         value: (

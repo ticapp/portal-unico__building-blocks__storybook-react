@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
 import React, { FC, HTMLAttributes } from 'react';
+import { useNavigateTo } from '../..';
 import { Icon } from '../icon';
-import { Link } from '../link';
 import { Select, SelectOption } from '../select';
 import './user-area.scss';
 
@@ -37,15 +37,17 @@ const UserArea: FC<UserAreaProps> = ({ username = 'Area reservada', icon = 'ama-
     'd-flex align-items-center justify-content-center position-relative'
   );
 
+  const { navigateTo } = useNavigateTo();
+
   const buildOption = (o: UserAreaOption) => {
     return {
       label: o.label,
       value: o.label,
       labelElement: o.link && (
-        <Link link={o.link} isExternal target="_self" tabIndex={-1}>
+        <span className="user-area-option">
           {o.icon && <Icon className="option-icon" icon={o.icon} />}
           <span className="option-label">{o.label}</span>
-        </Link>
+        </span>
       )
     } as SelectOption;
   };
@@ -53,9 +55,18 @@ const UserArea: FC<UserAreaProps> = ({ username = 'Area reservada', icon = 'ama-
   const authenticatedOptions = options.filter((o) => o.authenticatedOption).map(buildOption);
   const anonymousOptions = options.filter((o) => !o.authenticatedOption).map(buildOption);
 
+  const handleSelection = (val: SelectOption | SelectOption[]) => {
+    if (!Array.isArray(val)) {
+      const selectedOption = options.find((o) => o.label === val.value);
+      if (selectedOption) {
+        navigateTo(selectedOption.link);
+      }
+    }
+  };
+
   return (
     <div className={classes}>
-      <div className="w-100 d-flex align-items-center justify-content-between">
+      <div className="drop-down-header w-100 d-flex align-items-center justify-content-between">
         <Icon size="md" icon={icon} alt={username} ariaHidden />
         <span className="h5-bold">{username}</span>
         <span aria-hidden="true" className="spacing h-100">
@@ -71,6 +82,7 @@ const UserArea: FC<UserAreaProps> = ({ username = 'Area reservada', icon = 'ama-
           size="sm"
           className="user-area-options h5-bold"
           options={isAuthenticated ? authenticatedOptions : anonymousOptions}
+          onChange={handleSelection}
         />
       </div>
     </div>
