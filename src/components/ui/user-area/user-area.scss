@@ -16,7 +16,9 @@
     }
 
     .drop-down-container {
-      z-index: index.$zindex-dropdown;
+      // To ensure that header language dropdown have a greater z-index than this one.
+      // Otherwise the chevron-down of the user area will apear when language dropdown is open.
+      z-index: calc(index.$zindex-dropdown - 1);
 
       .combo {
         .option-icon {
