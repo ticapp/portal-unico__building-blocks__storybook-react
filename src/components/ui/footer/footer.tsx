@@ -156,9 +156,9 @@ export const Footer = ({
   return (
     <footer className={cssFooter}>
       <Container fluid className="p-0">
-        <Row className={cssFooterSectionInfo}>
+        <div className={cssFooterSectionInfo}>
           <div style={styleBackgroundFooterColor}>
-            <Container className="p-0">
+            <Container className="px-16">
               <Row>
                 <Col xs={12} lg={6} xl={6} className={cssFooterCol01}>
                   <Row>
@@ -190,8 +190,8 @@ export const Footer = ({
               </Row>
             </Container>
           </div>
-        </Row>
-        <Container className="p-0">
+        </div>
+        <Container className="px-16">
           <Row>
             <Col className={cssLogos}>
               <List
