@@ -45,6 +45,7 @@
     }
 
     &-section-info-col-01 {
+      padding-left: 0 !important;
       .row {
         padding: 0 15px !important;
         > div {
@@ -78,10 +79,6 @@
           font-weight: 400 !important;
         }
       }
-    }
-
-    &-section-info-col-01 {
-      padding-left: 0 !important;
     }
 
     &-section-info-col-03 {
