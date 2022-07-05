@@ -37,7 +37,7 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, isDisab
     });
 
     setInputRadioValues([...setInitialCheckedValue]);
-  }, []);
+  }, [radiosData]);
 
   const setRadioChecked = (radioId: string) => {
     const radioToCheckedIndex = inputRadioValues.findIndex((radio) => radio.id === radioId && !radio.isChecked);
