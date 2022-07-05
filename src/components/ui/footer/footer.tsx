@@ -109,6 +109,9 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
     | 'georgian'
     | 'lower-alpha'
     | 'none';
+
+  /** Footer background colors extra max-width */
+  styleBackgroundFooterColor?: React.CSSProperties;
 }
 
 export const Footer = ({
@@ -128,7 +131,8 @@ export const Footer = ({
   listDataCol03,
   listDataRowImagesLink,
   listDataCol01Type,
-  listDataCol02Type
+  listDataCol02Type,
+  styleBackgroundFooterColor
 }: FooterProps) => {
   const cssFooter = classNames('ama-footer', className);
   const cssFooterSectionInfo = classNames('ama-footer-section-info', classFooterSectionInfo);
@@ -151,48 +155,57 @@ export const Footer = ({
 
   return (
     <footer className={cssFooter}>
-      <Container className="p-0">
+      <Container fluid className="p-0">
         <Row className={cssFooterSectionInfo}>
-          <Col xs={12} lg={6} xl={6} className={cssFooterCol01}>
-            <Row>
-              <h2>{headerTitle01}</h2>
-              <Col xs={12} lg={8} xl={8}>
-                {renderContentInfo01()}
-              </Col>
-              <Col xs={12} lg={4} xl={4}>
-                <List listData={listDataCol01} listStyleType={listDataCol01Type} className="mt-16 mb-24" />
-              </Col>
-            </Row>
-          </Col>
-          <Col xs={12} lg={3} xl={3} className={cssFooterCol02}>
-            <Row>
-              <h2>{headerTitle02}</h2>
-              <Col>
-                <List listData={listDataCol02} listStyleType={listDataCol02Type} className="mb-24" />
-              </Col>
-            </Row>
-          </Col>
-          <Col xs={12} lg={3} xl={3} className={cssFooterCol03}>
-            <Row>
-              <h2>{headerTitle03}</h2>
-              <Col xs={9} lg={6} xl={6}>
-                <List listData={listDataCol03} listStyleType="none" className="mb-24 px-0 d-flex align-items-start" />
-              </Col>
-            </Row>
-          </Col>
+          <div style={styleBackgroundFooterColor}>
+            <Container className="p-0">
+              <Row>
+                <Col xs={12} lg={6} xl={6} className={cssFooterCol01}>
+                  <Row>
+                    <h2>{headerTitle01}</h2>
+                    <Col xs={12} lg={8} xl={8}>
+                      {renderContentInfo01()}
+                    </Col>
+                    <Col xs={12} lg={4} xl={4}>
+                      <List listData={listDataCol01} listStyleType={listDataCol01Type} className="mt-16 mb-24" />
+                    </Col>
+                  </Row>
+                </Col>
+                <Col xs={12} lg={3} xl={3} className={cssFooterCol02}>
+                  <Row>
+                    <h2>{headerTitle02}</h2>
+                    <Col>
+                      <List listData={listDataCol02} listStyleType={listDataCol02Type} className="mb-24" />
+                    </Col>
+                  </Row>
+                </Col>
+                <Col xs={12} lg={3} xl={3} className={cssFooterCol03}>
+                  <Row>
+                    <h2>{headerTitle03}</h2>
+                    <Col xs={9} lg={6} xl={6}>
+                      <List listData={listDataCol03} listStyleType="none" className="mb-24 px-0 d-flex align-items-start" />
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </Container>
+          </div>
         </Row>
-        <Row>
-          <Col className={cssLogos}>
-            <List
-              listData={listDataRowImagesLink}
-              listStyleType="none"
-              className="mt-16 mb-24 px-0 d-grid d-md-flex flex-md-wrap justify-content-between mb-0"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col className={cssFooterCopyright}>{copyrightContent}</Col>
-        </Row>
+        <Container className="p-0">
+          <Row>
+            <Col className={cssLogos}>
+              <List
+                listData={listDataRowImagesLink}
+                listStyleType="none"
+                className="mt-16 mb-24 px-0 d-grid d-md-flex flex-md-wrap justify-content-between mb-0"
+              />
+            </Col>
+          </Row>
+
+          <Row>
+            <Col className={cssFooterCopyright}>{copyrightContent}</Col>
+          </Row>
+        </Container>
       </Container>
     </footer>
   );
