@@ -44,6 +44,22 @@
       }
     }
 
+    &-section-info-col-01,
+    &-section-info-col-02,
+    &-section-info-col-03 {
+      padding: 30px 60px !important;
+      @media screen and (max-width: 991px) {
+        padding: 20px !important;
+      }
+      .ama-list {
+        a {
+          font-size: 0.875rem !important;
+          line-height: 36px !important;
+          font-weight: 400 !important;
+        }
+      }
+    }
+
     &-section-info-col-01 {
       padding-left: 0 !important;
       .row {
@@ -61,22 +77,6 @@
               padding-left: 0px !important;
             }
           }
-        }
-      }
-    }
-
-    &-section-info-col-01,
-    &-section-info-col-02,
-    &-section-info-col-03 {
-      padding: 30px 60px !important;
-      @media screen and (max-width: 991px) {
-        padding: 20px !important;
-      }
-      .ama-list {
-        a {
-          font-size: 0.875rem !important;
-          line-height: 36px !important;
-          font-weight: 400 !important;
         }
       }
     }
