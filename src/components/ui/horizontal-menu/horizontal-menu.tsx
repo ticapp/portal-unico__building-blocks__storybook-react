@@ -38,7 +38,7 @@ const HorizontalMenu: FC<HorizontalMenuProps> = ({
   const { width } = useWindowSize();
 
   return (
-    <div className={classes}>
+    <div className={classes} id="ama-menu">
       <nav aria-label={ariaLabel}>
         <ul role="menubar" aria-label={ariaLabel} className="h-100 d-flex justify-content-start align-items-center m-0">
           <li role="none">
