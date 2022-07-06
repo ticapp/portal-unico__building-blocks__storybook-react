@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof Checkbox>;
 
 export const Checkboxes: Story<{
-  isChecked: boolean;
+  checked: boolean;
   disabled: boolean;
   label: string;
 }> = (args) => {
