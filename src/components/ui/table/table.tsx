@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { paginationDataType, sortDataType, useIsomorphicLayoutEffect, usePaginationDataType, useSortTableData } from '../../hooks';
@@ -218,23 +218,15 @@ const TableMobile = ({ ...props }: TableProps) => {
     if (React.isValidElement(element[1])) {
       return (
         <React.Fragment key={uuidv4()}>
-          <dt key={uuidv4()} className="d-none">
-            {tableHeaders[key].value}
-          </dt>
-          <dd className="col-12 m-0 p-16 position-relative" key={uuidv4()}>
-            {element[1]}
-          </dd>
+          <dt className="d-none">{tableHeaders[key].value}</dt>
+          <dd className="col-12 m-0 p-16 position-relative">{element[1]}</dd>
         </React.Fragment>
       );
     }
     return (
       <React.Fragment key={uuidv4()}>
-        <dt className="col-6 m-0 p-16" key={uuidv4()}>
-          {tableHeaders[key].value}
-        </dt>
-        <dd className="col-6 m-0 p-16 position-relative" key={uuidv4()}>
-          {element}
-        </dd>
+        <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
+        <dd className="col-6 m-0 p-16 position-relative">{element}</dd>
       </React.Fragment>
     );
   };
@@ -253,12 +245,8 @@ const TableMobile = ({ ...props }: TableProps) => {
           }
           return (
             <React.Fragment key={uuidv4()}>
-              <dt className="col-6 m-0 p-16" key={uuidv4()}>
-                {tableHeaders[key].value}
-              </dt>
-              <dd className="col-6 m-0 p-16 position-relative" key={uuidv4()}>
-                {value[1]}
-              </dd>
+              <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
+              <dd className="col-6 m-0 p-16 position-relative">{value[1]}</dd>
             </React.Fragment>
           );
         })}
@@ -295,22 +283,16 @@ const TableMobile = ({ ...props }: TableProps) => {
   }, [dataShown]);
 
   return (
-    <div key={uuidv4()} className={cssTableMobile}>
-      <dl key={uuidv4()} className="row" title={titleMobileDL}>
+    <div className={cssTableMobile}>
+      <dl className="row" title={titleMobileDL}>
         {dataShown.length > 0 && dataShown}
         {dataShown.length === 0 &&
-          tableHeaders.map((item, index) => {
-            return (
-              <React.Fragment key={uuidv4()}>
-                <dt className="col-6 m-0 p-16" key={uuidv4()}>
-                  {item.value}
-                </dt>
-                <dd className="col-6 m-0 p-16 position-relative" key={uuidv4()}>
-                  {index > 0 ? '-' : noDataLabel}
-                </dd>
-              </React.Fragment>
-            );
-          })}
+          tableHeaders.map((item, index) => (
+            <React.Fragment key={uuidv4()}>
+              <dt className="col-6 m-0 p-16">{item.value}</dt>
+              <dd className="col-6 m-0 p-16 position-relative">{index > 0 ? '-' : noDataLabel}</dd>
+            </React.Fragment>
+          ))}
       </dl>
 
       {dataShown.length > 0 && !totalTable && (
@@ -323,13 +305,15 @@ const TableMobile = ({ ...props }: TableProps) => {
   );
 };
 
-export const Table = ({ ...props }: TableProps & PaginationProps) => {
+export const Table = ({ id, ...props }: TableProps & PaginationProps) => {
   const { width } = useWindowSize();
+
+  const tableId = useMemo(() => id || uuidv4(), [id]);
 
   return (
     <>
-      {width >= 1280 && <TableDesktop {...props} />}
-      {width < 1280 && <TableMobile {...props} />}
+      {width >= 1280 && <TableDesktop id={tableId} {...props} />}
+      {width < 1280 && <TableMobile id={tableId} {...props} />}
     </>
   );
 };
