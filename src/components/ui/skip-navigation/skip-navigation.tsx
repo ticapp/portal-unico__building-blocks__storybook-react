@@ -1,16 +1,10 @@
-import React, { DOMAttributes } from 'react';
 import classNames from 'classnames';
+import React, { DOMAttributes } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { Link } from '../link';
-import { Icon } from '../icon';
 import './skip-navigation.scss';
 
-export interface SkipNavigationProps extends DOMAttributes<Element> {
-  /** Additonal classes to component */
-  className?: string;
-
-  /** aria-label to component */
-  ariaLabel: string;
-
+export interface SkipNavigationOptions {
   /** id of target to scroll, normally 'main' */
   idLink: string;
 
@@ -18,13 +12,35 @@ export interface SkipNavigationProps extends DOMAttributes<Element> {
   content: string | React.ReactNode;
 }
 
-export function SkipNavigation({ className, ariaLabel, idLink, content }: SkipNavigationProps) {
+export interface SkipNavigationProps extends DOMAttributes<Element> {
+  /** Additional classes to component */
+  className?: string;
+
+  /** Quick options on skipNavigation */
+  options: SkipNavigationOptions[];
+
+  /** aria-label to component */
+  ariaLabel: string;
+}
+
+export function SkipNavigation({ className, ariaLabel, options }: SkipNavigationProps) {
   const cssSkipNavigation = classNames('ama-skipNavigation', className);
+
+  const renderSkipNavLinks = (item: SkipNavigationOptions[]) => {
+    return item?.map((nav) => {
+      return (
+        <li key={uuidv4()}>
+          <Link link={`#${nav.idLink}`} isExternal target="_self">
+            {nav.content}
+          </Link>
+        </li>
+      );
+    });
+  };
+
   return (
-    <div aria-label={ariaLabel} className={cssSkipNavigation}>
-      <Link link={`#${idLink}`} isExternal target="_self">
-        <Icon icon="ama-download" /> {content}
-      </Link>
-    </div>
+    <ul aria-label={ariaLabel} className={cssSkipNavigation}>
+      {renderSkipNavLinks(options)}
+    </ul>
   );
 }
