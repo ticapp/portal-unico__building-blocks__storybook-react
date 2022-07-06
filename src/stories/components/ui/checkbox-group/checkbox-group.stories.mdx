@@ -1,0 +1,16 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Checkbox Groups/Checkbox Docs" />
+
+<h2>Description</h2>
+
+<p>Render the checkbox group</p>
+
+<h2>Component usage</h2>
+
+```jsx
+  const checkboxListData = [{ checked: true, label: 'dummy' }, { label: 'label' }];
+  const [checkboxListState, setCheckboxListState] = useState(checkboxListData);
+
+  return <CheckboxGroup data={checkboxListState} onCheckboxGroupChanged={setCheckboxListState} />;
+```
