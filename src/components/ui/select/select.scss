@@ -2,6 +2,7 @@
 
 .combo {
   @include index.text-medium-normal;
+  color: index.$neutral-black;
 
   cursor: default;
   position: relative;
@@ -15,9 +16,19 @@
 
     .tags {
       .tag {
-        border-radius: 6px;
-        color: index.$neutral-white;
-        word-break: break-word;
+        @include index.text-medium-normal;
+        color: index.$neutral-black;
+        white-space: pre;
+        min-height: 44px;
+        border-radius: 22px;
+
+        border: 1px solid index.$neutral-light-grey;
+        background-color: index.$neutral-light;
+
+        margin-right: map-get(index.$spacers, 4);
+        &:last-of-type {
+          margin-right: 0;
+        }
       }
     }
   }
@@ -39,6 +50,9 @@
     z-index: index.$zindex-dropdown;
 
     .combo-option {
+      @include index.text-medium-normal;
+      color: index.$neutral-black;
+
       display: flex;
       align-items: center;
       min-height: 40px;
@@ -52,11 +66,26 @@
       &.selected {
         background-color: index.$neutral-light;
       }
+
+      &:hover {
+        background-color: index.$neutral-light;
+      }
+
+      &.disabled {
+        color: index.$neutral-light-grey;
+        &.checked,
+        &.selected {
+          background-color: none;
+        }
+
+        &:hover {
+          background-color: none;
+        }
+      }
     }
   }
 
   &.disabled {
-    pointer-events: none;
     color: index.$neutral-dark-grey;
     .combo-input {
       border: 1px solid index.$neutral-light-grey;
@@ -85,6 +114,15 @@
           }
           &:not(.checked) {
             background-color: index.$neutral-light;
+          }
+        }
+
+        &.disabled {
+          .icon {
+            svg * {
+              stroke: index.$neutral-light-grey;
+              fill: index.$neutral-white;
+            }
           }
         }
       }

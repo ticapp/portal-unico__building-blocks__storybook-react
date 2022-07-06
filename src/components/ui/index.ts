@@ -32,5 +32,4 @@ export * from './vertical-menu';
 export * from './date-picker';
 export * from './infractions-chart';
 export * from './input-tag';
-export * from './input-radio';
 export * from './input-radio-group';

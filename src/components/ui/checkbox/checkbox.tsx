@@ -81,6 +81,8 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
     <div className={cssCheckbox}>
       <Stack direction="horizontal">
         <input
+          id={checkboxId}
+          onClick={focus}
           type="checkbox"
           checked={checked}
           ref={focusRef}

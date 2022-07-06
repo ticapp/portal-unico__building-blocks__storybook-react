@@ -172,7 +172,7 @@ const Header = ({
           {width >= 768 && (
             <>
               <Col className="d-flex justify-content-start p-0 m-0">
-                <div className="ms-16">
+                <div className="ms-16 d-flex align-items-center">
                   <Logo
                     src={logoSrc}
                     alt={logoAlt}

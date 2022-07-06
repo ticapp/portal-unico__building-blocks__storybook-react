@@ -1,17 +1,18 @@
 import classNames from 'classnames';
-import React, { KeyboardEvent } from 'react';
+import React, { KeyboardEvent, useEffect, useState } from 'react';
 import { Icon } from '../icon';
 
 import './scroll-top.scss';
 
-export type ScrollTopProps = {
+export interface ScrollTopProps {
   /** Additional class names */
   className?: string;
-};
 
-export function ScrollTop({ className }: ScrollTopProps) {
-  const classes = classNames('ama-scroll-top', className, 'd-flex', 'justify-content-center', 'align-items-center', 'rounded-circle');
+  /** Threshold to start showing the button (pixels) */
+  threshold?: number;
+}
 
+export function ScrollTop({ className, threshold = 512 }: ScrollTopProps) {
   const scrollTop = () => {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
@@ -29,6 +30,23 @@ export function ScrollTop({ className }: ScrollTopProps) {
       scrollTop();
     }
   };
+
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setOffset(window.pageYOffset);
+
+    window.removeEventListener('scroll', onScroll);
+
+    //  https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const classes = classNames('ama-scroll-top d-flex justify-content-center align-items-center rounded-circle', className, {
+    'd-none': offset < threshold
+  });
 
   return (
     <div tabIndex={0} role="button" className={classes} onClick={onClickHandler} onKeyDown={onkeydownHandler}>
