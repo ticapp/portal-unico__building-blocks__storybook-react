@@ -504,9 +504,10 @@ const Select = ({
               ? placeholder
               : options
                   .filter((_o, i) => checkedIndexes.includes(i))
-                  .map((o) => {
+                  .map((o, i) => {
+                    const tagId = `${singleSelectId}-tag-${i}`;
                     return (
-                      <div className="tag d-flex align-items-center px-16 py-4" key={v4()}>
+                      <div id={tagId} className="tag d-flex align-items-center px-16 py-4" key={tagId}>
                         <span>{o.label}</span>
                       </div>
                     );

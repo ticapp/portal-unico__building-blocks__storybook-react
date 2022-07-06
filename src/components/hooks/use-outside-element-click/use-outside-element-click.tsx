@@ -1,22 +1,20 @@
 import { useEffect } from 'react';
 
-/**
- * Hook that alerts clicks outside of the passed ref
- */
+//  Hook that alerts clicks outside of the passed ref
 export const useOutsideElementClick = (ref, callback) => {
   useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
+    let isMounted = true;
+
     function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (isMounted && ref.current && !ref.current.contains(event.target)) {
         callback?.();
       }
     }
-    // Bind the event listener
+
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
-      // Unbind the event listener on clean up
+      isMounted = false;
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref]);
