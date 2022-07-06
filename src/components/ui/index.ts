@@ -4,6 +4,7 @@ export * from './breadcrumb';
 export * from './buttons';
 export * from './card';
 export * from './checkbox';
+export * from './checkbox-group';
 export * from './datalist';
 export * from './date-picker';
 export * from './footer';
