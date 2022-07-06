@@ -94,7 +94,15 @@ const Template: ComponentStory<typeof SkipNavigation> = (args) => (
 
 export const BasicSkipNavigation = Template.bind({});
 BasicSkipNavigation.args = {
-  ariaLabel: 'Saltar para conteúdo',
-  content: 'Saltar para conteúdo principal da página',
-  idLink: 'main'
+  ariaLabel: 'Menu de navegação rápida',
+  options: [
+    {
+      content: 'Ir para Conteúdo principal',
+      idLink: 'main'
+    },
+    {
+      content: 'Menu de navegação',
+      idLink: 'menu'
+    }
+  ]
 };
