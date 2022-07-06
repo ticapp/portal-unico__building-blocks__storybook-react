@@ -506,7 +506,7 @@ const Select = ({
                   .filter((_o, i) => checkedIndexes.includes(i))
                   .map((o) => {
                     return (
-                      <div className="tag bg-neutral-dark d-flex align-items-center m-4 py-8 px-16" key={v4()}>
+                      <div className="tag d-flex align-items-center px-16 py-4" key={v4()}>
                         <span>{o.label}</span>
                       </div>
                     );
@@ -552,15 +552,9 @@ const Select = ({
               onMouseDown={() => onOptionMouseDown(i)}
               aria-selected={isChecked}
             >
-              {multiSelection && isChecked && (
+              {multiSelection && (
                 <span className="icon me-16">
-                  <Icon icon="ama-checkbox-checked" />
-                </span>
-              )}
-
-              {multiSelection && !isChecked && (
-                <span className="icon me-16">
-                  <Icon icon="ama-checkbox" />
+                  <Icon icon={isChecked ? 'ama-checkbox-checked' : 'ama-checkbox'} />
                 </span>
               )}
 
