@@ -1,12 +1,11 @@
 import classNames from 'classnames';
-import React, { HTMLAttributes, MouseEvent, useRef, useState } from 'react';
+import React, { HTMLAttributes, MouseEvent, useRef, useState, KeyboardEvent, useEffect } from 'react';
 import { Stack } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { Icon } from '../icon';
 import './checkbox.scss';
 
 export interface CheckboxProps extends HTMLAttributes<HTMLElement> {
-  /** Adds a class to the Checkbox component */
   className?: string;
   /** If true the checkbox will appeared checked */
   checked?: boolean;
@@ -14,6 +13,8 @@ export interface CheckboxProps extends HTMLAttributes<HTMLElement> {
   disabled?: boolean;
   /** Text that will appear in front or behind the Checkbox */
   label: string;
+  /** Callback function that is called when there is a state change */
+  onCheckedChanged?: (state: boolean) => void;
   /** Label position in relation to checkbox */
   labelPosition?: 'before' | 'after';
   /** Chevron checkbox size */
@@ -29,11 +30,22 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
 
   const focusRef = useRef<HTMLInputElement>(null);
 
-  const focus = (e: MouseEvent) => {
+  const focus = (e: MouseEvent | KeyboardEvent) => {
     if (!disabled) {
       setChecked(!checked);
       focusRef.current?.focus();
       e.preventDefault();
+    }
+  };
+
+  useEffect(() => {
+    props.onCheckedChanged?.(checked);
+  }, [checked]);
+
+  const handleSpace = (e: KeyboardEvent) => {
+    const { key } = e;
+    if (key === ' ') {
+      focus(e);
     }
   };
 
@@ -76,6 +88,7 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
           onBlur={() => onFocusHandler(false)}
           disabled={disabled}
           aria-label="checkbox"
+          onKeyDown={handleSpace}
         />
         <div className={`ordered-items ${labelPosition} d-flex align-items-center`}>
           <div className="icons" id={checkboxId} onMouseDown={focus} role="none">
