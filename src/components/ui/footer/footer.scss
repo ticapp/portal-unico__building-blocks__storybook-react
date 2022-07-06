@@ -50,6 +50,9 @@
       padding: 30px 60px !important;
       @media screen and (max-width: 991px) {
         padding: 20px !important;
+        .row {
+          padding: 0px !important;
+        }
       }
       .ama-list {
         a {
@@ -62,8 +65,14 @@
 
     &-section-info-col-01 {
       padding-left: 0 !important;
+      @media screen and (max-width: 991px) {
+        padding: 20px !important;
+      }
       .row {
         padding: 0 15px !important;
+        @media screen and (max-width: 991px) {
+          padding: 0px !important;
+        }
         > div {
           &:nth-child(2) {
             padding-right: 15px !important;
@@ -83,6 +92,9 @@
 
     &-section-info-col-03 {
       padding-right: 0 !important;
+      @media screen and (max-width: 991px) {
+        padding: 20px !important;
+      }
     }
 
     &-copyright {
@@ -95,7 +107,7 @@
     &-logos {
       padding: 30px 60px !important;
       @media screen and (max-width: 991px) {
-        padding: 20px !important;
+        padding: 20px 0px !important;
       }
       ul {
         grid-template-columns: repeat(3, 1fr);
