@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useOutsideElementClick, useRadio } from '../../hooks';
+import { useOutsideElementClick } from '../../hooks';
 import { Icon } from '../icon';
 import './input-radio.scss';
 
@@ -20,6 +20,10 @@ export interface InputRadioProps {
   nextInputRadio: () => void;
   //* *Set previous input radio */
   previousInputRadio: () => void;
+  //* * Set radio checked */
+  setRadioChecked: (radioId: string) => void;
+  //* * Set input checked id */
+  inputRadioCheckedId: string;
 }
 
 export const InputRadio = ({
@@ -28,14 +32,14 @@ export const InputRadio = ({
   inputId,
   isDisabled = false,
   index,
+  inputRadioCheckedId,
   nextInputRadio,
+  setRadioChecked,
   previousInputRadio
 }: InputRadioProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [atualIndex, setAtualIndex] = useState(-1);
-
-  const { inputRadioCheckedId, setRadioChecked } = useRadio();
 
   const inputRadioRef = useRef<HTMLInputElement>(null);
 
