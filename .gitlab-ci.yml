@@ -48,7 +48,7 @@ sonarqube-check:
 
 build-storybook:
   stage: build
-  image: node:14.16.1-alpine3.13
+  image: node:16.15.1-alpine3.15
   artifacts:
     paths:
       - $METADATA_PATH
@@ -81,7 +81,7 @@ publish-storybook-image-docker-hub:
 
 publish-library-npm-nexus:
   stage: publish
-  image: node:14.16.1-alpine3.13
+  image: node:16.15.1-alpine3.15
   script:
     - npm install
     - npm run build
