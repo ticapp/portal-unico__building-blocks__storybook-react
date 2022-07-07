@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import React, { HTMLAttributes, MouseEvent, useRef, useState } from 'react';
+import React, { HTMLAttributes, MouseEvent, useId, useRef, useState } from 'react';
 import { Stack } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
 import { Icon } from '../icon';
 import './checkbox.scss';
 
@@ -24,8 +23,8 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
   const [checked, setChecked] = useState(props.checked ?? false);
   const [focused, setFocused] = useState(false);
   const cssCheckbox = classNames('ama-checkbox', className);
-  const labelId = uuidv4();
-  const checkboxId = uuidv4();
+  const labelId = useId();
+  const checkboxId = useId();
 
   const focusRef = useRef<HTMLInputElement>(null);
 
