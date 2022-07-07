@@ -87,21 +87,9 @@ export function Link({
     return renderReactDomAnchor(internalReactDomLinkProps as ReactDomAnchorType);
   }
 
-  const externalReactDomLinkProps = {
-    to: '',
-    component: () => {
-      return (
-        <a href={link.toString()} target={target} title={title} className={className} tabIndex={tabIndex}>
-          {children}
-        </a>
-      );
-    },
-    target,
-    title,
-    className: classes,
-    replace,
-    scroll
-  };
-
-  return renderReactDomAnchor(externalReactDomLinkProps as ReactDomAnchorType);
+  return (
+    <a href={link.toString()} target={target} title={title} className={classes} tabIndex={tabIndex}>
+      {children}
+    </a>
+  );
 }
