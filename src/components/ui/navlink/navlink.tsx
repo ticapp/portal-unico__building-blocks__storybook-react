@@ -13,9 +13,16 @@ export function NavLink(props) {
     return <NextJsNavLink {...newProps} />;
   }
 
+  const { activeClassName } = newProps;
+  delete newProps.exact;
+  delete newProps.activeClassName;
+
   const reactProps = {
     ...newProps,
-    to: props.href
+    to: props.href,
+    className: ({ isActive }) => {
+      return isActive ? `${newProps.className} ${activeClassName}` : newProps.className;
+    }
   };
 
   return <ReactNavLink {...reactProps} />;

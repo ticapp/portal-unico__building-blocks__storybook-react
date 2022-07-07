@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { usePlatform } from '../use-platform';
 
 export const useNavigateTo = () => {
   const nextJsRouter = useRouter();
-  const reactHistory = useHistory();
+  const reactHistory = useNavigate();
 
   const { isNextJs } = usePlatform();
 
@@ -13,7 +13,7 @@ export const useNavigateTo = () => {
       return nextJsRouter.push(path);
     }
 
-    return reactHistory.push(path);
+    return reactHistory(path);
   };
 
   return { navigateTo };
