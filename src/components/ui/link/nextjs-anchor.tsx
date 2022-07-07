@@ -4,12 +4,15 @@ import React, { ReactNode } from 'react';
 export interface NextJSAnchorProps extends LinkProps {
   role?: string;
   children?: ReactNode;
+  className?: string;
 }
 
-export function NextJSAnchor({ children, href = '/', role, ...props }: NextJSAnchorProps) {
+export function NextJSAnchor({ children, href = '/', role, className, ...props }: NextJSAnchorProps) {
   return (
     <Link href={href} {...props}>
-      <a role={role}>{children}</a>
+      <a role={role} className={className}>
+        {children}
+      </a>
     </Link>
   );
 }
