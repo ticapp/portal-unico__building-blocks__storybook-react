@@ -27,7 +27,6 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
   const cssCheckbox = classNames('ama-checkbox', className);
   const labelId = uuidv4();
   const checkboxId = uuidv4();
-
   const focusRef = useRef<HTMLInputElement>(null);
 
   const focus = (e: MouseEvent | KeyboardEvent) => {
@@ -39,7 +38,9 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
   };
 
   useEffect(() => {
-    props.onCheckedChanged?.(checked);
+    if (checked !== (props.checked ?? false)) {
+      props.onCheckedChanged?.(checked);
+    }
   }, [checked]);
 
   const handleSpace = (e: KeyboardEvent) => {
@@ -91,6 +92,7 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
           disabled={disabled}
           aria-label="checkbox"
           onKeyDown={handleSpace}
+          onChange={() => null}
         />
         <div className={`ordered-items ${labelPosition} d-flex align-items-center`}>
           <div className="icons" id={checkboxId} onMouseDown={focus} role="none">
