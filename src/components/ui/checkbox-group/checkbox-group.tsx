@@ -4,25 +4,24 @@ import { Checkbox, CheckboxProps } from '../checkbox/checkbox';
 export interface CheckboxGroupProps extends HTMLAttributes<HTMLElement> {
   /** Set aria-labelledby */
   ariaLabelledby?: string;
-  /**  Set aria-activedescendant */
+  /** Set aria-activedescendant */
   ariaActiveDescendant?: string;
+  /** Set aria-label */
+  ariaLabel?: string;
   /** Data list of a checkbox in the group */
   data: CheckboxProps[];
   /** Callback function that is called when there is a state change */
   onCheckboxGroupChanged?: (checkboxList: CheckboxProps[]) => void;
 }
 
-export const CheckboxGroup = ({ ariaLabelledby, ariaActiveDescendant, data, onCheckboxGroupChanged }: CheckboxGroupProps) => {
-  const [checkboxList, setcheckboxList] = useState(data);
+export const CheckboxGroup = ({ ariaLabelledby, ariaActiveDescendant, ariaLabel, data, onCheckboxGroupChanged }: CheckboxGroupProps) => {
+  const [checkboxList, setCheckboxList] = useState(data);
 
   const updateCheckList = (index: number, state: boolean) => {
-    setcheckboxList(() => {
-      return checkboxList.map((item: CheckboxProps, i: number) => {
-        if (index === i) {
-          return { ...item, checked: state };
-        }
-        return item;
-      });
+    setCheckboxList((list: CheckboxProps[]) => {
+      const newList = list;
+      newList[index].checked = state;
+      return newList;
     });
   };
 
@@ -31,21 +30,20 @@ export const CheckboxGroup = ({ ariaLabelledby, ariaActiveDescendant, data, onCh
   }, [checkboxList]);
 
   useEffect(() => {
-    setcheckboxList(() => {
-      return data.map((item: CheckboxProps) => {
-        if (item.checked === undefined) {
-          return { checked: false, ...item };
-        }
-        return item;
+    if (data !== checkboxList) {
+      setCheckboxList(() => {
+        return data.map((item: CheckboxProps) => {
+          if (item.checked === undefined) {
+            return { ...item, checked: false };
+          }
+          return item;
+        });
       });
-    });
-    return () => {
-      setcheckboxList([]);
-    };
-  }, []);
+    }
+  }, [data]);
 
   return (
-    <div tabIndex={-1} aria-labelledby={ariaLabelledby} aria-label="checkbox group" aria-activedescendant={ariaActiveDescendant}>
+    <div tabIndex={-1} aria-labelledby={ariaLabelledby} aria-label={ariaLabel} aria-activedescendant={ariaActiveDescendant}>
       {data.map((val, index) => {
         return (
           <Checkbox
