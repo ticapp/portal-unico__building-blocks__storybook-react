@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { KeyboardEvent, MouseEvent, useMemo, useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { KeyboardEvent, MouseEvent, useId, useMemo, useRef, useState } from 'react';
 import { useOutsideElementClick } from '../../hooks';
 import { Icon } from '../icon';
 import './input-tag.scss';
@@ -15,6 +14,10 @@ export interface InputTagOption {
 export interface InputTagProps {
   /** Add classes to the input tag component */
   className?: string;
+
+  /** Id to set in input */
+  inputId?: string;
+
   /** Set input label id */
   labeledBy?: string;
   /** Set the placeholder of input */
@@ -27,7 +30,7 @@ export interface InputTagProps {
   optionsAriaLabel?: string;
 }
 
-export const InputTag = ({ className, labeledBy, placeholder, options, optionsAriaLabel = 'Opções', onChange }: InputTagProps) => {
+export const InputTag = ({ className, inputId, labeledBy, placeholder, options, optionsAriaLabel = 'Opções', onChange }: InputTagProps) => {
   const classes = classNames('ama-input-tag', className);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -331,8 +334,9 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
   useOutsideElementClick(containerRef, () => closeListBox());
 
-  const customInputId = useMemo(() => uuidv4(), []);
-  const listBoxId = useMemo(() => `${customInputId}-listbox`, []);
+  const uid = useId();
+  const memoInputId = useMemo(() => inputId || uid, [inputId]);
+  const listBoxId = useMemo(() => `${memoInputId}-listbox`, [memoInputId]);
 
   const listboxClassname = classNames(
     { 'd-block': isOpen },
@@ -341,7 +345,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
   );
 
   return (
-    <div ref={containerRef} className={classes}>
+    <div id={memoInputId} ref={containerRef} className={classes}>
       <div className="input-container px-16 py-12 d-flex flex-wrap gap-10">
         {tags.map((t) => {
           return (
@@ -361,7 +365,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
         })}
 
         <input
-          id={customInputId}
+          id={memoInputId}
           ref={inputRef}
           placeholder={placeholder}
           onKeyDown={onKeyDownHandler}

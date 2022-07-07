@@ -251,7 +251,7 @@ const Header = ({
               {links &&
                 links.map((l) => {
                   return (
-                    <li key={`offcanvas-link-${uuidv4()}`} role="menuitem">
+                    <li key={uuidv4()} role="menuitem">
                       <NavLink activeClassName="active" className="nav-link" exact href={l.link}>
                         <span className="nav-link-label">{l.label}</span>
                       </NavLink>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useId } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigateTo, usePathname, useWindowSize } from '../../hooks';
 import { NavLink } from '../navlink';
@@ -85,6 +85,8 @@ const VerticalMenuMobile: FC<VerticalMenuProps> = ({ ariaLabel, links }: Vertica
 };
 
 const VerticalMenuDesktop: FC<VerticalMenuProps> = ({ ariaLabel, links }: VerticalMenuProps) => {
+  const uid = useId();
+
   const pathname = usePathname();
 
   const classes = classNames('ama-vertical-menu-desktop');
@@ -97,11 +99,11 @@ const VerticalMenuDesktop: FC<VerticalMenuProps> = ({ ariaLabel, links }: Vertic
     return parent.children.some((s) => hasActiveDescendant(s));
   };
 
-  const buildMenuItem = (item: VerticalMenuLink, lvl: number) => {
+  const buildMenuItem = (item: VerticalMenuLink, lvl: number, idx: number) => {
     const liClasses = classNames(`${hasActiveDescendant(item) ? 'parent-active' : ''}`, `${item.children ? 'with-children' : ''}`, 'mb-16');
 
-    const liId = uuidv4();
-    const subMenuId = uuidv4();
+    const liId = `${uid}-li-lvl-${lvl}-${idx}`;
+    const subMenuId = `${uid}-sub-lvl-${lvl}-${idx}`;
 
     return (
       <li key={liId} className={liClasses} role="none">
@@ -132,7 +134,7 @@ const VerticalMenuDesktop: FC<VerticalMenuProps> = ({ ariaLabel, links }: Vertic
 
           {item.children && (
             <ul className="ms-24" aria-label={item.label} id={subMenuId} role="group">
-              {item.children.map((itemChildren) => buildMenuItem(itemChildren, lvl + 1))}
+              {item.children.map((itemChildren, i) => buildMenuItem(itemChildren, lvl + 1, i))}
             </ul>
           )}
         </div>
@@ -143,7 +145,7 @@ const VerticalMenuDesktop: FC<VerticalMenuProps> = ({ ariaLabel, links }: Vertic
   return (
     <nav aria-label={ariaLabel} className={classes}>
       <ul aria-label={ariaLabel} role="tree" className="root">
-        {links.map((verticalMenuItem) => buildMenuItem(verticalMenuItem, 0))}
+        {links.map((verticalMenuItem, i) => buildMenuItem(verticalMenuItem, 0, i))}
       </ul>
     </nav>
   );

@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-
 import classNames from 'classnames';
-import React, { KeyboardEvent, useEffect, useMemo, useRef, useState } from 'react';
+import React, { KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useOutsideElementClick } from '../../hooks';
@@ -79,7 +78,8 @@ export const DatePicker = ({
   date,
   onChange
 }: DatePickerProps) => {
-  const memoInputId = useMemo(() => inputId || uuidv4(), [inputId]);
+  const uid = useId();
+  const memoInputId = useMemo(() => inputId || uid, [inputId]);
   const gridAriaLabelId = useMemo(() => `${memoInputId}-grid-aria-label`, [memoInputId]);
   const modalAriaLabelId = useMemo(() => `${memoInputId}-modal-aria-label`, [memoInputId]);
   const modalAriaDescribeId = useMemo(() => `${memoInputId}-modal-aria-describe-id`, [memoInputId]);
