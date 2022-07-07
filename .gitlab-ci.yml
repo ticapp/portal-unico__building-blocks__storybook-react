@@ -81,7 +81,7 @@ publish-storybook-image-docker-hub:
 
 publish-library-npm-nexus:
   stage: publish
-  image: node:16.15.1-alpine3.15
+  image: node:14.16.1-alpine3.13
   script:
     - npm install
     - npm run build
