@@ -4,7 +4,7 @@
 import classNames from 'classnames';
 import React, { KeyboardEvent, ReactNode, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { useActiveElement, useOutsideElementClick } from '../../hooks';
+import { useOutsideElementClick } from '../../hooks';
 import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
 import './select.scss';
@@ -94,7 +94,8 @@ const Select = ({
     Previous: 7,
     Select: 8,
     Type: 9,
-    SelectClose: 10
+    SelectClose: 10,
+    Tab: 11
   };
 
   // Get action when menu open
@@ -134,14 +135,20 @@ const Select = ({
   function getActionFromKey(event, menuOpen): number {
     const { key, altKey, ctrlKey, metaKey } = event;
 
+    if (key === 'Tab') {
+      return SelectActions.Tab;
+    }
+
     // home move the selected option when open or closed
     if (key === 'Home') {
       return SelectActions.First;
     }
+
     // end move the selected option when open or closed
     if (key === 'End') {
       return SelectActions.Last;
     }
+
     // handle typing characters when open or closed
     if (key === 'Backspace' || key === 'Clear' || (key.length === 1 && key !== ' ' && !altKey && !ctrlKey && !metaKey)) {
       return SelectActions.Type;
@@ -416,6 +423,10 @@ const Select = ({
         }
         break;
 
+      case SelectActions.Tab:
+        updateMenuState(false);
+        break;
+
       case -1:
         break;
 
@@ -433,23 +444,6 @@ const Select = ({
   };
 
   useOutsideElementClick(comboWrapperRef, () => updateMenuState(false));
-
-  const { activeElement } = useActiveElement();
-
-  // Dismiss if active element is not contained in combo ref
-  useEffect(() => {
-    if (!activeElement) {
-      return;
-    }
-
-    if (!isOpen || !comboWrapperRef.current) {
-      return;
-    }
-
-    if (!(comboWrapperRef.current as HTMLElement).contains(activeElement as HTMLElement)) {
-      updateMenuState(false);
-    }
-  }, [activeElement]);
 
   useEffect(() => {
     setIsInitialized(true);
