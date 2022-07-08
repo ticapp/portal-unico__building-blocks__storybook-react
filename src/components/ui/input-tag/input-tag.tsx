@@ -365,7 +365,7 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
   );
 
   return (
-    <div id={memoInputId} ref={containerRef} className={classes}>
+    <div ref={containerRef} className={classes}>
       <div className="input-container px-16 py-12 d-flex flex-wrap gap-10">
         {tags.map((t) => {
           return (
