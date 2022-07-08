@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import { InputRadioGroup } from '../../../../components';
@@ -27,7 +28,72 @@ export const BasicInputRadioGroup: ComponentStory<typeof InputRadioGroup> = () =
     }
   ];
 
-  return <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />;
+  return (
+    <>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <label id="input-radio-group-label">Radio group label</label>
+      <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+      <p>Test scrolling...</p>
+    </>
+  );
 };
 
 BasicInputRadioGroup.storyName = 'Basic Input Group';

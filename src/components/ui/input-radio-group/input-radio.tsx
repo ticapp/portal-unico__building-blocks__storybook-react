@@ -2,6 +2,7 @@
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useOutsideElementClick } from '../../hooks';
+import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
 import './input-radio.scss';
 
@@ -84,6 +85,8 @@ export const InputRadio = ({
   };
 
   const handleKeyDown = (event) => {
+    preventScrolling(event);
+
     if (event.code === 'Space' && !isChecked && !isDisabled) {
       setRadioChecked(inputId);
     }
