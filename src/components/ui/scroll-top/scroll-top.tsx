@@ -38,7 +38,7 @@ export function ScrollTop({ className, threshold = 512 }: ScrollTopProps) {
 
     const onScroll = () => {
       if (isMounted) {
-        setOffset(window.pageYOffset);
+        setOffset(window.scrollY);
       }
     };
 

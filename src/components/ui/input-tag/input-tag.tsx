@@ -260,6 +260,7 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
 
         break;
       case 'Escape':
+      case 'Tab':
         if (isOpen) {
           closeListBox();
         }
@@ -304,11 +305,6 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
 
         break;
 
-      case 'Tab':
-        if (isOpen) {
-          closeListBox();
-        }
-        break;
       default:
         if (!isOpen) {
           openListBox();
