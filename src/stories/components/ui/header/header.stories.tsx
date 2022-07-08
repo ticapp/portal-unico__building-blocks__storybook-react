@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-console */
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable global-require */
@@ -5,7 +6,18 @@ import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { Image } from 'react-bootstrap';
 import { BrowserRouter } from 'react-router-dom';
-import { Footer, FooterProps, Header, HeaderProps, HorizontalMenuLink, Icon, SelectOption, UserAreaOption } from '../../../../components';
+import { v4 as uuidv4 } from 'uuid';
+import {
+  Footer,
+  FooterProps,
+  Header,
+  HeaderProps,
+  HorizontalMenuLink,
+  Icon,
+  InputTag,
+  SelectOption,
+  UserAreaOption
+} from '../../../../components';
 
 export default {
   title: 'Components/Header',
@@ -305,6 +317,16 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
     listDataCol02Type: 'none'
   } as FooterProps;
 
+  const inputTagOptions = [
+    { label: 'John Doe', id: uuidv4() },
+    { label: 'Anna Doe', id: uuidv4() },
+    { label: 'Mark Doe', id: uuidv4() },
+    { label: 'Billy Doe', id: uuidv4() },
+    { label: 'Martha Doe', id: uuidv4() },
+    { label: 'Daisy Doe', id: uuidv4() },
+    { label: 'Jane Doe', id: uuidv4() }
+  ];
+
   return (
     <BrowserRouter>
       <Header
@@ -318,6 +340,10 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
         options={options}
         links={links}
       />
+
+      <label id="my-label">My Options</label>
+      <InputTag labeledBy="my-label" options={inputTagOptions} />
+
       <Footer {...args} />
     </BrowserRouter>
   );
