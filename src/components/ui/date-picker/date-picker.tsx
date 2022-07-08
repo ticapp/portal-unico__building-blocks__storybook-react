@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import classNames from 'classnames';
 import React, { KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
@@ -5,6 +6,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useOutsideElementClick } from '../../hooks';
 import { Icon } from '../../index';
+import { preventScrolling } from '../../libs';
 import './date-picker.scss';
 
 export interface DaysLabels {
@@ -285,13 +287,6 @@ export const DatePicker = ({
     });
   };
 
-  const hideDialog = () => {
-    setIsDialogVisible(false);
-    if (inputRef.current) {
-      (inputRef.current as HTMLInputElement).focus();
-    }
-  };
-
   const setDateValues = (d: Date) => {
     setCurrentDate(d);
     if (inputRef.current) {
@@ -304,37 +299,56 @@ export const DatePicker = ({
 
     setDateValues(d);
 
-    hideDialog();
+    setIsDialogVisible(false);
+
+    if (inputRef?.current) {
+      (inputRef.current as HTMLInputElement).focus();
+    }
 
     onChange?.(d);
   };
 
   const onInputKeyDown = (evt: KeyboardEvent): void => {
     const { key } = evt;
+    const { shiftKey } = evt;
+    const { target } = evt;
 
-    if (inputRef.current) {
-      const el = inputRef.current as HTMLInputElement;
+    preventScrolling(evt);
 
-      if (key === 'Escape') {
-        hideDialog();
+    if (key === 'Escape') {
+      setIsDialogVisible(false);
+    }
+
+    if (key === 'Tab' && shiftKey) {
+      setIsDialogVisible(false);
+    }
+
+    if (key === 'Enter' || key === 'ArrowDown') {
+      setIsDialogVisible(true);
+
+      const d = parseInputDate((target as HTMLInputElement).value);
+
+      if (d) {
+        setCurrentDate(d);
       }
 
-      if (key === 'Enter') {
-        setIsDialogVisible(true);
+      setTimeout(() => {
+        setIsDialogVisible((isVisible) => {
+          if (isVisible) {
+            focusCurrentDate();
+          }
 
-        const d = parseInputDate(el.value);
-        if (d) {
-          setCurrentDate(d);
-        }
-
-        focusCurrentDate();
-      }
+          return isVisible;
+        });
+      }, 0);
     }
   };
 
   const onDayKeydown = (evt: KeyboardEvent, dateString: string): void => {
     const { key } = evt;
     const { shiftKey } = evt;
+
+    preventScrolling(evt);
 
     setForceFocusOnCalendarDay(true);
 
@@ -382,7 +396,12 @@ export const DatePicker = ({
         break;
 
       case 'Escape':
-        hideDialog();
+        setIsDialogVisible(false);
+        break;
+      case 'Tab':
+        if (!shiftKey) {
+          setIsDialogVisible(false);
+        }
         break;
 
       default:
@@ -391,35 +410,20 @@ export const DatePicker = ({
   };
 
   const onHeaderKeyDown = (evt: KeyboardEvent): void => {
-    const { target } = evt;
     const { key } = evt;
+    const { shiftKey } = evt;
+    const { target } = evt;
+
+    preventScrolling(evt);
 
     setForceFocusOnCalendarDay(false);
 
-    if (key === 'Enter') {
-      if ((target as HTMLElement).classList.contains('previous-year')) {
-        moveToPreviousYear();
-        return;
-      }
-
-      if ((target as HTMLElement).classList.contains('previous-month')) {
-        moveToPreviousMonth();
-        return;
-      }
-
-      if ((target as HTMLElement).classList.contains('next-month')) {
-        moveToNextMonth();
-        return;
-      }
-
-      if ((target as HTMLElement).classList.contains('next-year')) {
-        moveToNextYear();
-        return;
-      }
+    if (key === 'Escape') {
+      setIsDialogVisible(false);
     }
 
-    if (key === 'Escape') {
-      hideDialog();
+    if (key === 'Tab' && shiftKey && (target as HTMLButtonElement).classList.contains('first-header-button')) {
+      setIsDialogVisible(false);
     }
   };
 
@@ -433,7 +437,7 @@ export const DatePicker = ({
         <Col xs={1} className="header-action previous-year d-flex align-items-center justify-content-center">
           <button
             type="button"
-            className="d-flex align-items-center justify-content-center"
+            className="d-flex align-items-center justify-content-center first-header-button"
             aria-label={modalActionsAriaLabels.previousYear}
             tabIndex={0}
             onClick={moveToPreviousYear}
@@ -472,7 +476,7 @@ export const DatePicker = ({
         <Col xs={1} className="header-action next-year d-flex align-items-center justify-content-center">
           <button
             type="button"
-            className="d-flex align-items-center justify-content-center"
+            className="d-flex align-items-center justify-content-center last-header-button"
             aria-label={modalActionsAriaLabels.nextYear}
             tabIndex={0}
             onClick={moveToNextYear}
@@ -563,7 +567,7 @@ export const DatePicker = ({
     });
   }, [currentDate]);
 
-  useOutsideElementClick(mainContainer, hideDialog);
+  useOutsideElementClick(mainContainer, () => setIsDialogVisible(false));
 
   useEffect(() => {
     setIsInitialized(true);
@@ -598,10 +602,9 @@ export const DatePicker = ({
         <Col>
           <div
             role="button"
-            tabIndex={0}
+            tabIndex={-1}
             className="input-container d-flex align-items-center p-16"
             onClick={() => setIsDialogVisible(true)}
-            onKeyDown={onInputKeyDown}
           >
             <input
               id={memoInputId}
@@ -610,6 +613,7 @@ export const DatePicker = ({
               className="w-100 border-0"
               placeholder={placeholder}
               aria-labelledby={labeledBy}
+              onKeyDown={onInputKeyDown}
             />
 
             <Icon size="xs" icon="ama-calendar" ariaHidden />
