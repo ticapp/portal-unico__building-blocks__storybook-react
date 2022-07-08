@@ -2,9 +2,10 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-import { v4 } from 'uuid';
+import React, { KeyboardEvent, ReactNode, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useActiveElement, useOutsideElementClick } from '../../hooks';
+import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
 import './select.scss';
 
@@ -63,8 +64,9 @@ const Select = ({
   size,
   allwaysOpen
 }: SelectProps) => {
-  const singleSelectId = useMemo(() => id || `ama-select-id-${v4()}`, [id]);
-  const selectControlsId = useMemo(() => `ama-select-controls-id-${singleSelectId}`, []);
+  const uid = useId();
+  const memoId = useMemo(() => id || uid, [id]);
+  const selectControlsId = useMemo(() => `ama-select-controls-id-${memoId}`, [memoId]);
 
   const comboRef = useRef<HTMLDivElement | null>(null);
   const listboxRef = useRef<HTMLDivElement | null>(null);
@@ -354,16 +356,18 @@ const Select = ({
     }
   };
 
-  const onComboKeyDown = (event) => {
+  const onComboKeyDown = (evt: KeyboardEvent) => {
     if (disabled) {
       return;
     }
 
     const max = options.length - 1;
 
-    const action = getActionFromKey(event, isOpen);
+    const action = getActionFromKey(evt, isOpen);
 
-    const { key } = event;
+    const { key } = evt;
+
+    preventScrolling(evt);
 
     switch (action) {
       case SelectActions.Last:
@@ -420,14 +424,12 @@ const Select = ({
     }
   };
 
-  const onMenuKeyDown = (event) => {
-    event.preventDefault();
-
+  const onMenuKeyDown = (evt: KeyboardEvent) => {
     // move focus back to the combobox, if needed
     comboRef.current?.focus();
 
     // business as usual
-    onComboKeyDown(event);
+    onComboKeyDown(evt);
   };
 
   useOutsideElementClick(comboWrapperRef, () => updateMenuState(false));
@@ -481,7 +483,7 @@ const Select = ({
   const wrapperClassNames = classNames(className, 'combo', { open: isOpen }, { disabled }, { multiselection: multiSelection });
 
   return (
-    <div ref={comboWrapperRef} className={wrapperClassNames} aria-disabled={disabled}>
+    <div id={memoId} ref={comboWrapperRef} className={wrapperClassNames} aria-disabled={disabled}>
       <div
         className="combo-input p-16 w-100 d-flex align-items-center justify-content-between"
         ref={comboRef}
@@ -489,8 +491,7 @@ const Select = ({
         aria-expanded={isComboExpanded}
         aria-haspopup="listbox"
         aria-labelledby={labelledby}
-        aria-activedescendant={selectedIndex >= 0 ? `${singleSelectId}-option-${selectedIndex}` : ''}
-        id={singleSelectId}
+        aria-activedescendant={selectedIndex >= 0 ? `${memoId}-listbox-option-${selectedIndex}` : ''}
         role="combobox"
         tabIndex={0}
         onMouseDown={onComboMouseDown}
@@ -504,14 +505,11 @@ const Select = ({
               ? placeholder
               : options
                   .filter((_o, i) => checkedIndexes.includes(i))
-                  .map((o, i) => {
-                    const tagId = `${singleSelectId}-tag-${i}`;
-                    return (
-                      <div id={tagId} className="tag d-flex align-items-center px-16 py-4" key={tagId}>
-                        <span>{o.label}</span>
-                      </div>
-                    );
-                  }))}
+                  .map((o) => (
+                    <div className="tag d-flex align-items-center px-16 py-4" key={uuidv4()}>
+                      <span>{o.label}</span>
+                    </div>
+                  )))}
         </div>
 
         <div className="ms-auto">
@@ -530,8 +528,6 @@ const Select = ({
         tabIndex={-1}
       >
         {options.map((o, i) => {
-          const optionId = `${singleSelectId}-option-${i}`;
-
           const isChecked = multiSelection ? checkedIndexes.indexOf(i) >= 0 : checkedIndex === i;
 
           const optionClassnames = classNames(
@@ -542,13 +538,13 @@ const Select = ({
           );
 
           const optionAriaLabel = isChecked ? `${o.label} selected` : o.label;
-
+          const optionId = `${memoId}-listbox-option-${i}`;
           return (
             <div
-              tabIndex={-1}
-              role="option"
               key={optionId}
               id={optionId}
+              tabIndex={-1}
+              role="option"
               className={optionClassnames}
               onMouseDown={() => onOptionMouseDown(i)}
               aria-selected={isChecked}

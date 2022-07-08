@@ -9,7 +9,10 @@ import { Footer, FooterProps, Header, HeaderProps, HorizontalMenuLink, Icon, Sel
 
 export default {
   title: 'Components/Header',
-  component: Header
+  component: Header,
+  argTypes: {
+    isHomepage: { control: 'boolean' }
+  }
 } as ComponentMeta<typeof Header>;
 
 export const HeaderExample: Story<HeaderProps> = (props) => {
@@ -77,7 +80,7 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
   return (
     <BrowserRouter>
       <Header
-        isHomepage
+        isHomepage={props.isHomepage}
         logoSrc={require('../../../../assets/img/logo.png')}
         isAuthenticated={props.isAuthenticated}
         username="Area reservada"
@@ -183,7 +186,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
             <span className="col-11 text-medium-normal"> Linhas úteis </span>
           </>
         ),
-        hasExternalLink: false,
+        hasExternalLink: true,
         link: 'https://eportugal.gov.pt/utils',
         title: 'internal link'
       }
@@ -305,7 +308,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
   return (
     <BrowserRouter>
       <Header
-        isHomepage
+        isHomepage={props.isHomepage}
         logoSrc={require('../../../../assets/img/logo.png')}
         isAuthenticated={props.isAuthenticated}
         username="Area reservada"

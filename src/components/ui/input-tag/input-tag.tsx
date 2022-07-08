@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { KeyboardEvent, MouseEvent, useMemo, useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { KeyboardEvent, MouseEvent, useId, useMemo, useRef, useState } from 'react';
 import { useOutsideElementClick } from '../../hooks';
+import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
 import './input-tag.scss';
 
@@ -15,6 +15,8 @@ export interface InputTagOption {
 export interface InputTagProps {
   /** Add classes to the input tag component */
   className?: string;
+  /** Id to set in input */
+  inputId?: string;
   /** Set input label id */
   labeledBy?: string;
   /** Set the placeholder of input */
@@ -27,7 +29,7 @@ export interface InputTagProps {
   optionsAriaLabel?: string;
 }
 
-export const InputTag = ({ className, labeledBy, placeholder, options, optionsAriaLabel = 'Opções', onChange }: InputTagProps) => {
+export const InputTag = ({ className, inputId, labeledBy, placeholder, options, optionsAriaLabel = 'Opções', onChange }: InputTagProps) => {
   const classes = classNames('ama-input-tag', className);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -240,6 +242,8 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
   const onKeyDownHandler = (evt: KeyboardEvent<HTMLInputElement>) => {
     const { key } = evt;
 
+    preventScrolling(evt);
+
     switch (key) {
       case 'Enter':
         if (activeOptionIndex >= 0) {
@@ -256,26 +260,40 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
         break;
       case 'Escape':
-        closeListBox();
+      case 'Tab':
+        if (isOpen) {
+          closeListBox();
+        }
         break;
 
       case 'ArrowUp':
-        evt.preventDefault();
-        if (isOpen) {
+        if (!isOpen) {
+          openListBox();
+        } else {
           focusPreviousOption();
         }
         break;
       case 'ArrowDown':
-        evt.preventDefault();
+        if (!isOpen) {
+          openListBox();
+        }
+
         focusNextOption();
         break;
 
       case 'PageUp':
-        evt.preventDefault();
+        if (!isOpen) {
+          openListBox();
+        }
+
         focusFirst();
+
         break;
       case 'PageDown':
-        evt.preventDefault();
+        if (!isOpen) {
+          openListBox();
+        }
+
         focusLast();
         break;
 
@@ -286,8 +304,11 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
         }
 
         break;
+
       default:
-        openListBox();
+        if (!isOpen) {
+          openListBox();
+        }
         break;
     }
   };
@@ -302,6 +323,8 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
   const onTagKeyDown = (evt: KeyboardEvent<HTMLSpanElement>, tag: string) => {
     const { key } = evt;
+
+    preventScrolling(evt);
 
     if (key === 'Enter' || key === 'Space') {
       removeTag(tag);
@@ -331,8 +354,9 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
   useOutsideElementClick(containerRef, () => closeListBox());
 
-  const customInputId = useMemo(() => uuidv4(), []);
-  const listBoxId = useMemo(() => `${customInputId}-listbox`, []);
+  const uid = useId();
+  const memoInputId = useMemo(() => inputId || uid, [inputId]);
+  const listBoxId = useMemo(() => `${memoInputId}-listbox`, [memoInputId]);
 
   const listboxClassname = classNames(
     { 'd-block': isOpen },
@@ -341,7 +365,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
   );
 
   return (
-    <div ref={containerRef} className={classes}>
+    <div id={memoInputId} ref={containerRef} className={classes}>
       <div className="input-container px-16 py-12 d-flex flex-wrap gap-10">
         {tags.map((t) => {
           return (
@@ -361,13 +385,12 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
         })}
 
         <input
-          id={customInputId}
+          id={memoInputId}
           ref={inputRef}
           placeholder={placeholder}
           onKeyDown={onKeyDownHandler}
           onChange={updateAvailableOptions}
           onClick={onClickHandler}
-          onFocus={openListBox}
           className="flex-fill d-inline-block m-0 p-0"
           aria-controls={listBoxId}
           aria-expanded={isOpen}

@@ -26,7 +26,7 @@ build-metadata:
 
 lint:
   stage: code-quality
-  image: node:14.16.1-alpine3.13
+  image: node:16.15.1-alpine3.15
   script:
     - npm install
     - npm run lint
@@ -48,7 +48,7 @@ sonarqube-check:
 
 build-storybook:
   stage: build
-  image: node:14.16.1-alpine3.13
+  image: node:16.15.1-alpine3.15
   artifacts:
     paths:
       - $METADATA_PATH

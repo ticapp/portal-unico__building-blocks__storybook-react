@@ -26,7 +26,7 @@ export const BasicBreadCrumb: Story<BreadCrumbProps> = () => {
       },
       {
         name: 'Histórico de infrações',
-        url: '/iframe.html'
+        url: '/historico-infracoes'
       }
     ]
   } as BreadCrumbProps;

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { paginationDataType, sortDataType, useIsomorphicLayoutEffect, usePaginationDataType, useSortTableData } from '../../hooks';
@@ -305,15 +305,13 @@ const TableMobile = ({ ...props }: TableProps) => {
   );
 };
 
-export const Table = ({ id, ...props }: TableProps & PaginationProps) => {
+export const Table = (props: TableProps & PaginationProps) => {
   const { width } = useWindowSize();
-
-  const tableId = useMemo(() => id || uuidv4(), [id]);
 
   return (
     <>
-      {width >= 1280 && <TableDesktop id={tableId} {...props} />}
-      {width < 1280 && <TableMobile id={tableId} {...props} />}
+      {width >= 1280 && <TableDesktop {...props} />}
+      {width < 1280 && <TableMobile {...props} />}
     </>
   );
 };

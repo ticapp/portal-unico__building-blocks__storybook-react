@@ -12,8 +12,73 @@ export default {
 export const SingleSelect: Story<SelectProps> = (args) => {
   return (
     <>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
       <label id="select-label">My Options</label>
       <Select {...args} labelledby="select-label" />
+      <input />
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
+      <p>TEST PREVENT SCROLL</p>
     </>
   );
 };
