@@ -5,7 +5,10 @@ import { Icon } from '../icon';
 import './checkbox.scss';
 
 export interface CheckboxProps extends HTMLAttributes<HTMLElement> {
+  /** Add classes to the Checkbox component */
   className?: string;
+  /** Set aria-label */
+  ariaLabel?: string;
   /** If true the checkbox will appeared checked */
   checked?: boolean;
   /** Disables the checkbox */
@@ -20,7 +23,15 @@ export interface CheckboxProps extends HTMLAttributes<HTMLElement> {
   size?: 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 }
 
-export const Checkbox = ({ className, disabled = false, label, labelPosition = 'after', size = 'md', ...props }: CheckboxProps) => {
+export const Checkbox = ({
+  className,
+  ariaLabel,
+  disabled = false,
+  label,
+  labelPosition = 'after',
+  size = 'md',
+  ...props
+}: CheckboxProps) => {
   const [checked, setChecked] = useState(props.checked ?? false);
   const [focused, setFocused] = useState(false);
   const cssCheckbox = classNames('ama-checkbox', className);
@@ -90,7 +101,7 @@ export const Checkbox = ({ className, disabled = false, label, labelPosition = '
           onFocus={() => onFocusHandler(true)}
           onBlur={() => onFocusHandler(false)}
           disabled={disabled}
-          aria-label="checkbox"
+          aria-label={ariaLabel}
           onKeyDown={handleSpace}
           onChange={() => null}
         />

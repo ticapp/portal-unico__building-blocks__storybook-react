@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useState } from 'react';
-import { CheckboxGroup } from '../../../../components';
+import { CheckboxGroup } from '../../../../components/ui/checkbox-group';
 
 export default {
   title: 'Components/Checkbox Groups',

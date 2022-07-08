@@ -19,7 +19,7 @@ export const CheckboxGroup = ({ ariaLabelledby, ariaActiveDescendant, ariaLabel,
 
   const updateCheckList = (index: number, state: boolean) => {
     setCheckboxList((list: CheckboxProps[]) => {
-      const newList = list;
+      const newList = [...list];
       newList[index].checked = state;
       return newList;
     });
