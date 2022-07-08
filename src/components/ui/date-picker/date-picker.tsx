@@ -70,7 +70,7 @@ export interface DatePickerProps {
 
 export const DatePicker = ({
   className,
-  inputId = uuidv4(),
+  inputId,
   labeledBy,
   placeholder = 'dd-mm-aaaa',
   days,
@@ -79,6 +79,11 @@ export const DatePicker = ({
   date,
   onChange
 }: DatePickerProps) => {
+  const memoInputId = useMemo(() => inputId || uuidv4(), [inputId]);
+  const gridAriaLabelId = useMemo(() => `${memoInputId}-grid-aria-label`, [memoInputId]);
+  const modalAriaLabelId = useMemo(() => `${memoInputId}-modal-aria-label`, [memoInputId]);
+  const modalAriaDescribeId = useMemo(() => `${memoInputId}-modal-aria-describe-id`, [memoInputId]);
+
   const [isDialogVisible, setIsDialogVisible] = useState(false);
 
   const [isInitialized, setIsInitialized] = useState(false);
@@ -422,8 +427,7 @@ export const DatePicker = ({
     return `${MonthLabels[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
   };
 
-  const buildHeader = () => {
-    const gridAriaLabelId = uuidv4();
+  const headerMemo = useMemo(() => {
     return (
       <>
         <Col xs={1} className="header-action previous-year d-flex align-items-center justify-content-center">
@@ -479,9 +483,14 @@ export const DatePicker = ({
         </Col>
       </>
     );
-  };
+  }, [
+    modalActionsAriaLabels.previousYear,
+    modalActionsAriaLabels.previousMonth,
+    modalActionsAriaLabels.nextMonth,
+    modalActionsAriaLabels.nextYear
+  ]);
 
-  const buildWeekDays = () => {
+  const weekDaysMemo = useMemo(() => {
     return (
       <tr>
         {weekDaysLabels.map((wd) => (
@@ -493,58 +502,58 @@ export const DatePicker = ({
         ))}
       </tr>
     );
-  };
+  }, [weekDaysLabels]);
 
-  const buildWeek = (weekNumber) => {
-    const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    const dayOfWeek = firstDayOfMonth.getDay();
+  const monthMemo = useMemo(() => {
+    const buildWeek = (weekNumber) => {
+      const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+      const dayOfWeek = firstDayOfMonth.getDay();
 
-    firstDayOfMonth.setDate(firstDayOfMonth.getDate() - dayOfWeek);
+      firstDayOfMonth.setDate(firstDayOfMonth.getDate() - dayOfWeek);
 
-    firstDayOfMonth.setDate(firstDayOfMonth.getDate() + weekNumber * 7);
+      firstDayOfMonth.setDate(firstDayOfMonth.getDate() + weekNumber * 7);
 
-    const d = new Date(firstDayOfMonth);
+      const d = new Date(firstDayOfMonth);
 
-    return Array.from(Array(7).keys()).map(() => {
-      const isInCurrentMonth = d.getMonth() === currentDate.getMonth();
-      const isSelectedDate = isSameDay(d, currentDate);
+      return Array.from(Array(7).keys()).map(() => {
+        const isInCurrentMonth = d.getMonth() === currentDate.getMonth();
+        const isSelectedDate = isSameDay(d, currentDate);
 
-      const stringDate = getDateString(d);
+        const stringDate = getDateString(d);
 
-      const currentDay = d.getDate();
+        const currentDay = d.getDate();
 
-      const dayAriaLabel = `${modalActionsAriaLabels.currentDay} ${currentDay}`;
+        const dayAriaLabel = `${modalActionsAriaLabels.currentDay} ${currentDay}`;
 
-      const dayClasses = classNames(
-        'day d-flex align-items-center justify-content-center position-relative',
-        { disabled: !isInCurrentMonth },
-        { selected: isSelectedDate }
-      );
+        const dayClasses = classNames(
+          'day d-flex align-items-center justify-content-center position-relative',
+          { disabled: !isInCurrentMonth },
+          { selected: isSelectedDate }
+        );
 
-      d.setDate(currentDay + 1);
+        d.setDate(currentDay + 1);
 
-      return (
-        <td
-          key={uuidv4()}
-          data-date={stringDate}
-          className="day-container p-0 m-0 border-0"
-          aria-label={dayAriaLabel}
-          role={isSelectedDate ? 'gridcell' : 'none'}
-          aria-selected={isSelectedDate}
-          tabIndex={isSelectedDate ? 0 : -1}
-          onClick={() => selectDate(stringDate)}
-          onKeyDown={(evt) => onDayKeydown(evt, stringDate)}
-        >
-          <div className={dayClasses}>
-            <div className="label position-absolute top-50 start-50 translate-middle">{currentDay}</div>
-            <div className="marker position-absolute top-50 start-50 translate-middle">&nbsp;</div>
-          </div>
-        </td>
-      );
-    });
-  };
+        return (
+          <td
+            key={uuidv4()}
+            data-date={stringDate}
+            className="day-container p-0 m-0 border-0"
+            aria-label={dayAriaLabel}
+            role={isSelectedDate ? 'gridcell' : 'none'}
+            aria-selected={isSelectedDate}
+            tabIndex={isSelectedDate ? 0 : -1}
+            onClick={() => selectDate(stringDate)}
+            onKeyDown={(evt) => onDayKeydown(evt, stringDate)}
+          >
+            <div className={dayClasses}>
+              <div className="label position-absolute top-50 start-50 translate-middle">{currentDay}</div>
+              <div className="marker position-absolute top-50 start-50 translate-middle">&nbsp;</div>
+            </div>
+          </td>
+        );
+      });
+    };
 
-  const buildMonth = () => {
     return Array.from(Array(6).keys()).map((trCount) => {
       return (
         <tr role="row" key={uuidv4()}>
@@ -552,10 +561,7 @@ export const DatePicker = ({
         </tr>
       );
     });
-  };
-
-  const modalAriaLabelId = uuidv4();
-  const modalAriaDescribeId = uuidv4();
+  }, [currentDate]);
 
   useOutsideElementClick(mainContainer, hideDialog);
 
@@ -598,7 +604,7 @@ export const DatePicker = ({
             onKeyDown={onInputKeyDown}
           >
             <input
-              id={inputId}
+              id={memoInputId}
               ref={inputRef}
               type="text"
               className="w-100 border-0"
@@ -630,13 +636,13 @@ export const DatePicker = ({
                 </Col>
               </Row>
 
-              <Row className="header">{buildHeader()}</Row>
+              <Row className="header">{headerMemo}</Row>
 
               <Row>
                 <Col className="calendar d-flex align-items-center justify-content-center">
                   <table className="table-dates" role="grid">
-                    <thead>{buildWeekDays()}</thead>
-                    <tbody>{buildMonth()}</tbody>
+                    <thead>{weekDaysMemo}</thead>
+                    <tbody>{monthMemo}</tbody>
                   </table>
                 </Col>
               </Row>

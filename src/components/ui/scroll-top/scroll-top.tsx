@@ -34,14 +34,21 @@ export function ScrollTop({ className, threshold = 512 }: ScrollTopProps) {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setOffset(window.pageYOffset);
+    let isMounted = true;
 
-    window.removeEventListener('scroll', onScroll);
+    const onScroll = () => {
+      if (isMounted) {
+        setOffset(window.pageYOffset);
+      }
+    };
 
     //  https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      isMounted = false;
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   const classes = classNames('ama-scroll-top d-flex justify-content-center align-items-center rounded-circle', className, {

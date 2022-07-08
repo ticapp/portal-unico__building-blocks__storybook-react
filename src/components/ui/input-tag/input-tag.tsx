@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { KeyboardEvent, MouseEvent, useRef, useState } from 'react';
+import React, { KeyboardEvent, MouseEvent, useMemo, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useOutsideElementClick } from '../../hooks';
 import { Icon } from '../icon';
@@ -22,7 +22,7 @@ export interface InputTagProps {
   /** Set autocomplete options */
   options: InputTagOption[];
   /** On change event */
-  onChange?: (val: string[]) => void;
+  onChange?: (val: InputTagOption[]) => void;
   /** Aria label to show in list box */
   optionsAriaLabel?: string;
 }
@@ -37,7 +37,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
   const [activeOptionId, setActiveOptionId] = useState('');
   const [activeOptionIndex, setActiveOptionIndex] = useState(-1);
 
-  const [tags, setTags] = useState([] as string[]);
+  const [tags, setTags] = useState([] as InputTagOption[]);
   const [availableOptions, setAvailableOptions] = useState(options);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -52,6 +52,69 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
     setActiveOptionIndex(-1);
   };
 
+  function isScrollable(element) {
+    return element && element.clientHeight < element.scrollHeight;
+  }
+
+  function maintainScrollVisibility(elem, scrollParent) {
+    const { offsetHeight, offsetTop } = elem;
+    const { offsetHeight: parentOffsetHeight, scrollTop } = scrollParent;
+
+    const isAbove = offsetTop < scrollTop;
+    const isBelow = offsetTop + offsetHeight > scrollTop + parentOffsetHeight;
+
+    if (isAbove) {
+      scrollParent.scrollTo(0, offsetTop);
+    } else if (isBelow) {
+      scrollParent.scrollTo(0, offsetTop - parentOffsetHeight + offsetHeight);
+    }
+  }
+
+  function isElementInView(element) {
+    if (typeof window === 'undefined') {
+      return true;
+    }
+
+    const bounding = element.getBoundingClientRect();
+
+    return (
+      bounding.top >= 0 &&
+      bounding.left >= 0 &&
+      bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+  }
+
+  const focusByIndex = (index: number) => {
+    if (index === -1) {
+      setActiveOptionId('');
+      closeListBox();
+      return;
+    }
+
+    if (listBoxRef.current) {
+      const liOpttions = listBoxRef.current.querySelectorAll('li[role="option"]');
+      const elem = liOpttions[index];
+
+      liOpttions.forEach((e) => e.classList.remove('focus'));
+      elem.classList.add('focus');
+
+      setActiveOptionId(elem.id);
+
+      if (isScrollable(listBoxRef.current)) {
+        maintainScrollVisibility(elem, listBoxRef.current);
+        // ensure the new option is visible on screen
+        // ensure the new option is in view
+        if (!isElementInView(elem)) {
+          elem.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+          });
+        }
+      }
+    }
+  };
+
   const focusNextOption = () => {
     if (!availableOptions.length) {
       return;
@@ -64,15 +127,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
       const newIndex = Math.min(last + 1, availableOptions.length - 1);
 
-      if (listBoxRef.current) {
-        const liOpttions = listBoxRef.current.querySelectorAll('li[role="option"]');
-        const elem = liOpttions[newIndex];
-
-        liOpttions.forEach((e) => e.classList.remove('focus'));
-        elem.classList.add('focus');
-
-        setActiveOptionId(elem.id);
-      }
+      focusByIndex(newIndex);
 
       return newIndex;
     });
@@ -86,23 +141,29 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
     setActiveOptionIndex((last) => {
       const newIndex = Math.max(last - 1, -1);
 
-      if (listBoxRef.current) {
-        const liOpttions = listBoxRef.current.querySelectorAll('li[role="option"]');
-        const elem = liOpttions[newIndex];
-
-        liOpttions.forEach((e) => e.classList.remove('focus'));
-
-        if (newIndex === -1) {
-          setActiveOptionId('');
-          closeListBox();
-        } else {
-          elem.classList.add('focus');
-          setActiveOptionId(elem.id);
-        }
-      }
+      focusByIndex(newIndex);
 
       return newIndex;
     });
+  };
+
+  const focusFirst = () => {
+    if (!availableOptions.length) {
+      return;
+    }
+
+    setActiveOptionIndex(0);
+
+    focusByIndex(0);
+  };
+
+  const focusLast = () => {
+    if (!availableOptions.length) {
+      return;
+    }
+
+    setActiveOptionIndex(availableOptions.length - 1);
+    focusByIndex(availableOptions.length - 1);
   };
 
   const updateAvailableOptions = () => {
@@ -110,7 +171,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
     setTags((lastTags) => {
       const newAvailableOptions = options.filter((o) => {
-        return lastTags.indexOf(o.label) < 0;
+        return !lastTags.find((lt) => lt.id === o.id);
       });
 
       if (!val) {
@@ -146,8 +207,8 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
       inputRef.current.value = '';
     }
 
-    setTags((lastTags: string[]) => {
-      return [...lastTags, value];
+    setTags((lastTags) => {
+      return [...lastTags, option];
     });
 
     setTags((last) => {
@@ -162,7 +223,7 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
   const removeTag = (tag: string) => {
     setTags((last) => {
-      return last.filter((t) => t !== tag);
+      return last.filter((t) => t.label !== tag);
     });
 
     setTags((last) => {
@@ -209,10 +270,19 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
         focusNextOption();
         break;
 
+      case 'PageUp':
+        evt.preventDefault();
+        focusFirst();
+        break;
+      case 'PageDown':
+        evt.preventDefault();
+        focusLast();
+        break;
+
       case 'Backspace':
         if (inputRef.current && inputRef.current.value === '' && tags.length > 0) {
           const lastTag = tags[tags.length - 1];
-          removeTag(lastTag);
+          removeTag(lastTag.label);
         }
 
         break;
@@ -254,13 +324,16 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
 
   const onOptionMouseOver = (evt: MouseEvent<HTMLLIElement>) => {
     const { target } = evt;
-    focusLiElement(target as HTMLLIElement);
+    if ((target as HTMLElement).tagName === 'LI') {
+      focusLiElement(target as HTMLLIElement);
+    }
   };
 
   useOutsideElementClick(containerRef, () => closeListBox());
 
-  const customInputId = uuidv4();
-  const listBoxId = uuidv4();
+  const customInputId = useMemo(() => uuidv4(), []);
+  const listBoxId = useMemo(() => `${customInputId}-listbox`, []);
+
   const listboxClassname = classNames(
     { 'd-block': isOpen },
     { 'd-none': !isOpen },
@@ -274,14 +347,14 @@ export const InputTag = ({ className, labeledBy, placeholder, options, optionsAr
           return (
             <span
               className="tag d-flex align-items-center px-16 py-4"
-              key={uuidv4()}
+              key={t.id}
               role="button"
-              onClick={(evt: MouseEvent<HTMLSpanElement>) => onTagClick(evt, t)}
+              onClick={(evt: MouseEvent<HTMLSpanElement>) => onTagClick(evt, t.label)}
               tabIndex={0}
-              onKeyDown={(evt: KeyboardEvent<HTMLSpanElement>) => onTagKeyDown(evt, t)}
-              aria-label={t}
+              onKeyDown={(evt: KeyboardEvent<HTMLSpanElement>) => onTagKeyDown(evt, t.label)}
+              aria-label={t.label}
             >
-              <span className="tag-name me-4">{t}</span>
+              <span className="tag-name me-4">{t.label}</span>
               <Icon icon="ama-close-circle" size="sm" aria-hidden="true" />
             </span>
           );
