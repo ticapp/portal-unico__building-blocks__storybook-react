@@ -2,9 +2,10 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useId, useMemo, useRef, useState } from 'react';
+import React, { KeyboardEvent, ReactNode, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useActiveElement, useOutsideElementClick } from '../../hooks';
+import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
 import './select.scss';
 
@@ -355,16 +356,18 @@ const Select = ({
     }
   };
 
-  const onComboKeyDown = (event) => {
+  const onComboKeyDown = (evt: KeyboardEvent) => {
     if (disabled) {
       return;
     }
 
     const max = options.length - 1;
 
-    const action = getActionFromKey(event, isOpen);
+    const action = getActionFromKey(evt, isOpen);
 
-    const { key } = event;
+    const { key } = evt;
+
+    preventScrolling(evt);
 
     switch (action) {
       case SelectActions.Last:
@@ -421,14 +424,12 @@ const Select = ({
     }
   };
 
-  const onMenuKeyDown = (event) => {
-    event.preventDefault();
-
+  const onMenuKeyDown = (evt: KeyboardEvent) => {
     // move focus back to the combobox, if needed
     comboRef.current?.focus();
 
     // business as usual
-    onComboKeyDown(event);
+    onComboKeyDown(evt);
   };
 
   useOutsideElementClick(comboWrapperRef, () => updateMenuState(false));

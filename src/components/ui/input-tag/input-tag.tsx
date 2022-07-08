@@ -3,6 +3,7 @@
 import classNames from 'classnames';
 import React, { KeyboardEvent, MouseEvent, useId, useMemo, useRef, useState } from 'react';
 import { useOutsideElementClick } from '../../hooks';
+import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
 import './input-tag.scss';
 
@@ -14,10 +15,8 @@ export interface InputTagOption {
 export interface InputTagProps {
   /** Add classes to the input tag component */
   className?: string;
-
   /** Id to set in input */
   inputId?: string;
-
   /** Set input label id */
   labeledBy?: string;
   /** Set the placeholder of input */
@@ -243,6 +242,8 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
   const onKeyDownHandler = (evt: KeyboardEvent<HTMLInputElement>) => {
     const { key } = evt;
 
+    preventScrolling(evt);
+
     switch (key) {
       case 'Enter':
         if (activeOptionIndex >= 0) {
@@ -259,26 +260,39 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
 
         break;
       case 'Escape':
-        closeListBox();
+        if (isOpen) {
+          closeListBox();
+        }
         break;
 
       case 'ArrowUp':
-        evt.preventDefault();
-        if (isOpen) {
+        if (!isOpen) {
+          openListBox();
+        } else {
           focusPreviousOption();
         }
         break;
       case 'ArrowDown':
-        evt.preventDefault();
+        if (!isOpen) {
+          openListBox();
+        }
+
         focusNextOption();
         break;
 
       case 'PageUp':
-        evt.preventDefault();
+        if (!isOpen) {
+          openListBox();
+        }
+
         focusFirst();
+
         break;
       case 'PageDown':
-        evt.preventDefault();
+        if (!isOpen) {
+          openListBox();
+        }
+
         focusLast();
         break;
 
@@ -289,8 +303,16 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
         }
 
         break;
+
+      case 'Tab':
+        if (isOpen) {
+          closeListBox();
+        }
+        break;
       default:
-        openListBox();
+        if (!isOpen) {
+          openListBox();
+        }
         break;
     }
   };
@@ -305,6 +327,8 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
 
   const onTagKeyDown = (evt: KeyboardEvent<HTMLSpanElement>, tag: string) => {
     const { key } = evt;
+
+    preventScrolling(evt);
 
     if (key === 'Enter' || key === 'Space') {
       removeTag(tag);
@@ -371,7 +395,6 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
           onKeyDown={onKeyDownHandler}
           onChange={updateAvailableOptions}
           onClick={onClickHandler}
-          onFocus={openListBox}
           className="flex-fill d-inline-block m-0 p-0"
           aria-controls={listBoxId}
           aria-expanded={isOpen}
