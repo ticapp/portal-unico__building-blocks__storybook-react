@@ -8,11 +8,12 @@ import classNames from 'classnames';
 interface DataListValues {
   label: string;
   value: string;
+  classNames: string;
 }
 
 export interface DatalistProps {
   // Add title to the component
-  title: string;
+  title?: string;
   // Add all data to describe list
   data: Array<DataListValues>;
   // Set classNames in the component
@@ -25,16 +26,19 @@ export const Datalist = ({ title, data, className }: DatalistProps) => {
 
   return (
     <Container className={datalistClassName}>
-      <Row>
-        <Col className="d-flex mb-32" xs={12}>
-          <h2 className="w-100 text-start">{title}</h2>
-        </Col>
-      </Row>
+      {title && (
+        <Row>
+          <Col className="d-flex mb-32" xs={12}>
+            <h2 className="w-100 text-start">{title}</h2>
+          </Col>
+        </Row>
+      )}
+
       <dl className="row">
         {data &&
           data.map((item) => {
             return (
-              <Col key={uuidv4()} xs={12} sm={5} className={itemsClassName}>
+              <Col key={uuidv4()} className={`${itemsClassName} ${item.classNames || ''}`}>
                 <dt className="mb-8"> {item.label}</dt>
                 <dd className="mb-0">{item.value}</dd>
               </Col>
