@@ -8,9 +8,7 @@ $utilities: map-merge(
       class: font,
       values: (
         monospace: var(--#{$variable-prefix}font-monospace),
-        lato: $font-family-lato,
-        lato-bold: $font-family-lato-bold,
-        lato-extra-bold: $font-family-lato-extra-bold
+        lato: $font-family-lato
       )
     ),
     'font-size': (
