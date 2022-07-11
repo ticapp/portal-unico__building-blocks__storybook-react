@@ -47,70 +47,70 @@
 
 // Typings / TextStyles
 @mixin h1-normal {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 600);
   font-size: map-get($font-sizes, 64);
   line-height: map-get($line-heights, 72);
 }
 @mixin h1-bold {
-  font-family: $font-family-lato-extra-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 64);
   line-height: map-get($line-heights, 72);
 }
 @mixin h2-normal {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 600);
   font-size: map-get($font-sizes, 40);
   line-height: map-get($line-heights, 52);
 }
 @mixin h2-bold {
-  font-family: $font-family-lato-extra-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 40);
   line-height: map-get($line-heights, 52);
 }
 @mixin h3-normal {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 600);
   font-size: map-get($font-sizes, 32);
   line-height: map-get($line-heights, 40);
 }
 @mixin h3-bold {
-  font-family: $font-family-lato-extra-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 32);
   line-height: map-get($line-heights, 40);
 }
 @mixin h4-normal {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 600);
   font-size: map-get($font-sizes, 28);
   line-height: map-get($line-heights, 40);
 }
 @mixin h4-bold {
-  font-family: $font-family-lato-extra-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 28);
   line-height: map-get($line-heights, 40);
 }
 @mixin h5-normal {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 400);
   font-size: map-get($font-sizes, 20);
   line-height: map-get($line-heights, 32);
 }
 @mixin h5-bold {
-  font-family: $font-family-lato-extra-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 800);
   font-size: map-get($font-sizes, 20);
@@ -126,7 +126,7 @@
 }
 
 @mixin text-big-bold {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 700);
   font-size: map-get($font-sizes, 16);
@@ -142,7 +142,7 @@
 }
 
 @mixin text-medium-bold {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 700);
   font-size: map-get($font-sizes, 14);
@@ -158,7 +158,7 @@
 }
 
 @mixin text-small-bold {
-  font-family: $font-family-lato-bold;
+  font-family: $font-family-lato;
   font-style: normal;
   font-weight: map-get($font-weights, 700);
   font-size: map-get($font-sizes, 12);

@@ -113,7 +113,7 @@ export const Card = ({
                 link={link}
                 title={title}
                 isExternal={isExternal}
-                className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato-bold'}
+                className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato'}
               >
                 {linkLabel}
               </Link>

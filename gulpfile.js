@@ -16,16 +16,7 @@ gulp.task('scss-min', () => {
   return gulp
     .src('src/scss/index.scss')
     .pipe(
-      gap.prependText(
-        [
-          '/*!',
-          ' * ' + pkg.description,
-          ' * @version v' + pkg.version,
-          ' * @license ' + pkg.license,
-          ' */',
-          '',
-        ].join('\n')
-      )
+      gap.prependText(['/*!', ' * ' + pkg.description, ' * @version v' + pkg.version, ' * @license ' + pkg.license, ' */', ''].join('\n'))
     )
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
@@ -33,12 +24,12 @@ gulp.task('scss-min', () => {
     .pipe(
       cleanCSS({
         level: 2,
-        specialComments: 'all',
+        specialComments: 'all'
       })
     )
     .pipe(
       rename({
-        suffix: '.min',
+        suffix: '.min'
       })
     )
     .pipe(sourcemaps.write('.'))
@@ -48,16 +39,7 @@ gulp.task('scss-min', () => {
 
 // Assets
 gulp.task('assets', () => {
-  return gulp
-    .src(['src/assets/**'])
-    .pipe(gulp.dest('dist/cjs/assets'))
-    .pipe(gulp.dest('dist/esm/assets'))
-    .pipe(touch());
-});
-
-// Fonts
-gulp.task('fonts', () => {
-  return gulp.src(['src/fonts/**']).pipe(gulp.dest('dist/fonts')).pipe(touch());
+  return gulp.src(['src/assets/**']).pipe(gulp.dest('dist/cjs/assets')).pipe(gulp.dest('dist/esm/assets')).pipe(touch());
 });
 
 gulp.task('clean', function () {
@@ -73,8 +55,4 @@ gulp.task('scss', () => {
   return gulp.src(['src/scss/**']).pipe(gulp.dest('dist/cjs/scss')).pipe(gulp.dest('dist/esm/scss')).pipe(touch());
 });
 
-
-
-
-gulp.task('build', gulp.series('scss-min', 'assets', 'fonts','components','scss'));
-
+gulp.task('build', gulp.series('scss-min', 'assets', 'components', 'scss'));

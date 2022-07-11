@@ -1,15 +1,15 @@
 import classNames from 'classnames';
-import Highcharts, { Options } from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import accessibility from 'highcharts/modules/accessibility';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart, ChartOptions, registerables } from 'chart.js';
+
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from '../link';
 import './infractions-chart.scss';
 
-if (typeof Highcharts === 'object') {
-  accessibility(Highcharts);
+if (typeof window !== 'undefined') {
+  Chart.register(...registerables);
 }
 
 export interface InfractionCounter {
@@ -42,10 +42,10 @@ export interface InfractionsChartProps {
   /** Description to use in the graphic card */
   graphicDescription?: string;
 
-  /** Aria label to apply to the graphic */
-  ariaLabel?: string;
-  /** Aria description to apply to the graphic */
-  ariaDescription?: string;
+  /** Width of the square containing the donut pie chart */
+  graphicWidth?: number;
+  /** Chart intro for accessibility tools */
+  graphicFullIntro?: string;
 }
 
 export function InfractionsChart({
@@ -61,46 +61,10 @@ export function InfractionsChart({
   graphicTitle = 'Infrações',
   graphicDescription = 'Consulte o número de infrações associadas à sua carta de condução',
 
-  ariaLabel = 'Gráfico de infrações cometidas',
-  ariaDescription = 'Gráfico em que as fatias representam o número de infrações cometidas. Cada fatia tem um grau de severidade associado.'
-}: InfractionsChartProps) {
-  const options: Options = {
-    lang: {
-      accessibility: {
-        chartContainerLabel: ariaLabel,
-        graphicContainerLabel: ariaDescription
-      }
-    },
-    credits: { enabled: false },
-    chart: {
-      height: 224,
-      width: 224,
-      backgroundColor: 'transparent'
-    },
-    title: {
-      text: '',
-      style: {
-        height: 0
-      }
-    },
-    series: [
-      {
-        name: infractionsLabel,
-        type: 'pie',
-        data: counters.map((c) => ({
-          name: c.label,
-          y: c.value,
-          color: c.color
-        })),
-        dataLabels: {
-          enabled: false
-        },
-        size: '100%',
-        innerSize: '60%'
-      }
-    ]
-  };
+  graphicWidth = 220,
 
+  graphicFullIntro = 'Gráfico circular que mostra o total de infrações cometidas, divididas por gravidade.'
+}: InfractionsChartProps) {
   const infractionsTotal = counters.reduce((acc, c) => {
     return acc + c.value;
   }, 0);
@@ -108,6 +72,32 @@ export function InfractionsChart({
   const infractionCounterTitle = `${infractionsTotal} ${infractionsLabel}`;
 
   const classes = classNames('ama-donut-chart', className, 'position-relative bg-neutral-light p-24 p-md-32 m-0');
+
+  const buildGraphAriaLabel = useMemo(() => {
+    const valuesAccessible = counters
+      .map((c) => {
+        return `${c.label}: ${c.value}`;
+      })
+      .join(', ');
+
+    return `${graphicFullIntro} ${valuesAccessible}.`;
+  }, [graphicFullIntro, counters]);
+
+  const chartData = {
+    label: counters.map((c) => c.label),
+    datasets: [
+      {
+        data: counters.map((c) => c.value),
+        backgroundColor: counters.map((c) => c.color)
+      }
+    ]
+  };
+
+  const chartOptions = {
+    events: [],
+    animation: false
+  } as ChartOptions;
+
   return (
     <Container className={classes}>
       <Row className="mb-24 mb-md-32">
@@ -123,9 +113,9 @@ export function InfractionsChart({
         </Col>
       </Row>
 
-      <Row className="d-flex align-items-center justify-content-between mt-16 mt-md-0">
+      <Row role="img" aria-label={buildGraphAriaLabel} className="d-flex align-items-center justify-content-between mt-16 mt-md-0">
         <Col sm={12} md={6}>
-          <ul className="graph-legend">
+          <ul aria-hidden="true" className="graph-legend">
             {counters.map((c) => {
               return (
                 <li key={uuidv4()} className="d-flex align-items-center justify-content-start">
@@ -138,7 +128,9 @@ export function InfractionsChart({
           </ul>
         </Col>
         <Col sm={12} md={6} className="d-flex align-items-center justify-content-center">
-          <HighchartsReact highcharts={Highcharts} options={options} />
+          <div style={{ width: graphicWidth, height: graphicWidth }}>
+            <Doughnut options={chartOptions} data={chartData} />
+          </div>
         </Col>
       </Row>
 
@@ -148,7 +140,7 @@ export function InfractionsChart({
             link={link}
             title={title}
             isExternal={isExternal}
-            className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato-bold'}
+            className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato'}
           >
             {linkLabel}
           </Link>

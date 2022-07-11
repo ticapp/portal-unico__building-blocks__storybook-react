@@ -1,3 +1,6 @@
+//Font Family
+$font-family-lato: 'Lato', sans-serif;
+
 //Override grid gutter
 $grid-gutter-width: 0;
 
@@ -25,16 +28,11 @@ $btn-font-size-lg: $btn-font-size;
 
 $btn-line-height: 28px;
 $btn-font-weight: $font-weight-bold;
-$btn-font-family: 'Lato-Bold', sans-serif;
+$btn-font-family: $font-family-lato;
 
 $btn-link-color: $brand-green-main;
 $btn-link-hover-color: $neutral-black;
 $btn-link-disabled-color: $brand-green-main;
-
-//Font Family
-$font-family-lato: 'Lato', sans-serif;
-$font-family-lato-bold: 'Lato-Bold', sans-serif;
-$font-family-lato-extra-bold: 'Lato-Extra-Bold', sans-serif;
 
 //Tabs
 $nav-tabs-border-color: $neutral-light-grey;
