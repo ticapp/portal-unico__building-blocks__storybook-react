@@ -90,12 +90,13 @@ export const Card = ({
             </Col>
           )}
 
-          {mainTitle && description && (
-            <Col xs={12} md={12} xl={12}>
-              {mainTitle && <h3 className="h5-bold">{mainTitle}</h3>}
-              {description && <p className="text-medium-normal m-0">{description}</p>}
-            </Col>
-          )}
+          {mainTitle ||
+            (description && (
+              <Col xs={12} md={12} xl={12}>
+                {mainTitle && <h3 className="h5-bold">{mainTitle}</h3>}
+                {description && <p className="text-medium-normal m-0">{description}</p>}
+              </Col>
+            ))}
           {(children || (contentIcon && content)) && (
             <Col xs={12} md={12} xl={12} className={cssContent}>
               {contentIcon && content && (
