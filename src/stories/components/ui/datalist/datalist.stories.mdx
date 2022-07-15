@@ -14,54 +14,54 @@ import { Meta } from '@storybook/addon-docs';
 <h2>Component usage</h2>
 
 ```tsx
-import { Datalist } from 'ama-react-design-system/datalist';
+import { Datalist } from '@ama/react-design-system';
 
 const args = {
-    title: 'Carta de condução',
-    data: [
-      {
-        label: 'Nome',
-        value: 'Marta Pereira Rodrigues',
-        classNames: 'col-12 col-sm-6'
-      },
-      {
-        label: 'Data de nascimento',
-        value: '18/07/1991',
-        classNames: 'col-12 col-sm-6'
-      },
-      {
-        label: 'Morada',
-        value: 'Rua da Liberdade, nº 1',
-        classNames: 'col-12 col-sm-6'
-      },
-      {
-        label: 'País',
-        value: 'Portugal',
-        classNames: 'col-12 col-sm-6'
-      },
+  title: 'Carta de condução',
+  data: [
+    {
+      label: 'Nome',
+      value: 'Marta Pereira Rodrigues',
+      classNames: 'col-12 col-sm-6'
+    },
+    {
+      label: 'Data de nascimento',
+      value: '18/07/1991',
+      classNames: 'col-12 col-sm-6'
+    },
+    {
+      label: 'Morada',
+      value: 'Rua da Liberdade, nº 1',
+      classNames: 'col-12 col-sm-6'
+    },
+    {
+      label: 'País',
+      value: 'Portugal',
+      classNames: 'col-12 col-sm-6'
+    },
 
-      {
-        label: 'N. da carta de condução',
-        value: '123456789',
-        classNames: 'col-12 col-sm-6'
-      },
-      {
-        label: 'Categorias',
-        value: 'A, B, C',
-        classNames: 'col-12 col-sm-6'
-      },
-      {
-        label: 'Data de início',
-        value: '18/07/2019',
-        classNames: 'col-12 col-sm-6'
-      },
-      {
-        label: 'Data de validade',
-        value: '18/07/2021',
-        classNames: 'col-12 col-sm-6'
-      }
-    ]
-  };
-  
+    {
+      label: 'N. da carta de condução',
+      value: '123456789',
+      classNames: 'col-12 col-sm-6'
+    },
+    {
+      label: 'Categorias',
+      value: 'A, B, C',
+      classNames: 'col-12 col-sm-6'
+    },
+    {
+      label: 'Data de início',
+      value: '18/07/2019',
+      classNames: 'col-12 col-sm-6'
+    },
+    {
+      label: 'Data de validade',
+      value: '18/07/2021',
+      classNames: 'col-12 col-sm-6'
+    }
+  ]
+};
+
 <Datalist {...args} />;
 ```
