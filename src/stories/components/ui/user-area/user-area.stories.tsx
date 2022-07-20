@@ -12,37 +12,40 @@ export const Authenticated: Story<UserAreaProps> = () => {
   const options = [
     {
       authenticatedOption: false,
-      link: '/login',
+      value: 'login',
       icon: 'ama-login',
       label: 'Entrar no portal'
     },
     {
       authenticatedOption: false,
-      link: '/register',
+      value: 'register',
       icon: 'ama-add-user',
       label: 'Criar registo'
     },
-
     {
       authenticatedOption: true,
-      link: '/user-area',
+      value: 'user-area',
       icon: 'ama-user',
       label: 'Area Reservada'
     },
     {
       authenticatedOption: true,
-      link: 'logout',
+      value: 'logout',
       icon: 'ama-logout',
       label: 'Terminar sessão'
     }
   ] as UserAreaOption[];
+
+  const onUserAreaOptionChangeHandler = (val: UserAreaOption) => {
+    console.log(val);
+  };
 
   return (
     <BrowserRouter>
       <Container>
         <Row className="d-flex justify-content-center">
           <Col xs={4}>
-            <UserArea options={options} isAuthenticated username="John Doe" />
+            <UserArea options={options} onOptionChange={onUserAreaOptionChangeHandler} isAuthenticated username="John Doe" />
           </Col>
         </Row>
       </Container>
@@ -55,37 +58,40 @@ export const Anonymous: Story<UserAreaProps> = () => {
   const options = [
     {
       authenticatedOption: false,
-      link: '/login',
+      value: 'login',
       icon: 'ama-login',
       label: 'Entrar no portal'
     },
     {
       authenticatedOption: false,
-      link: '/register',
+      value: 'register',
       icon: 'ama-add-user',
       label: 'Criar registo'
     },
-
     {
       authenticatedOption: true,
-      link: '/user-area',
+      value: 'user-area',
       icon: 'ama-user',
       label: 'Area Reservada'
     },
     {
       authenticatedOption: true,
-      link: 'logout',
+      value: 'logout',
       icon: 'ama-logout',
       label: 'Terminar sessão'
     }
   ] as UserAreaOption[];
+
+  const onUserAreaOptionChangeHandler = (val: UserAreaOption) => {
+    console.log(val);
+  };
 
   return (
     <BrowserRouter>
       <Container>
         <Row className="d-flex justify-content-center">
           <Col xs={4}>
-            <UserArea options={options} isAuthenticated={false} />
+            <UserArea options={options} onOptionChange={onUserAreaOptionChangeHandler} isAuthenticated={false} username="John Doe" />
           </Col>
         </Row>
       </Container>

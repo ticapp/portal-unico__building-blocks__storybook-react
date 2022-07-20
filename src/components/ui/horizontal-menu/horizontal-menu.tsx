@@ -31,7 +31,8 @@ const HorizontalMenu: FC<HorizontalMenuProps> = ({
   username = '',
   isAuthenticated = false,
   options,
-  icon = 'ama-home'
+  icon = 'ama-home',
+  onOptionChange
 }: HorizontalMenuProps) => {
   const classes = classNames('ama-horizontal-menu', className, 'd-flex justify-content-between');
 
@@ -78,7 +79,7 @@ const HorizontalMenu: FC<HorizontalMenuProps> = ({
 
       {width >= 768 && (
         <div>
-          <UserArea username={username} options={options} isAuthenticated={isAuthenticated} />
+          <UserArea username={username} options={options} isAuthenticated={isAuthenticated} onOptionChange={onOptionChange} />
         </div>
       )}
     </div>

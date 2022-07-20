@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import { Col, Container, Nav, Offcanvas, Row } from 'react-bootstrap';
 import { UrlObject } from 'url';
 
@@ -44,6 +44,9 @@ export interface HeaderProps {
 
   /** Options to be used in user area */
   options: UserAreaOption[];
+  /** Callback to run whenever the user area option changes */
+  onOptionChange: (val: UserAreaOption) => void;
+
   /** Links to render in navbar */
   links: HorizontalMenuLink[];
 
@@ -69,6 +72,8 @@ const Header = ({
   onLanguageChange,
 
   options,
+  onOptionChange,
+
   links,
 
   isAuthenticated = false,
@@ -138,12 +143,30 @@ const Header = ({
 
   const classes = classNames('ama-header', className, 'w-100 pt-0 pb-0 pt-md-24 pb-md-16');
 
+  const handleclickUserAreaOption = (o: UserAreaOption) => {
+    onOptionChange?.(o);
+  };
+
+  const handleKeyDownUserAreaOption = (evt: KeyboardEvent, o: UserAreaOption) => {
+    const { key } = evt;
+
+    if (key === 'Enter') {
+      onOptionChange?.(o);
+    }
+  };
+
   const buildUserAreaOption = (o: UserAreaOption) => {
     return (
       <li key={uuidv4()} role="menuitem">
-        <NavLink className="nav-link" href={o.link}>
-          <span className="nav-link-label">{o.label}</span>
-        </NavLink>
+        <Nav.Item
+          tabIndex={0}
+          onClick={() => handleclickUserAreaOption(o)}
+          onKeyDown={(evt: KeyboardEvent) => handleKeyDownUserAreaOption(evt, o)}
+        >
+          <span className="nav-link">
+            <span className="nav-link-label">{o.label}</span>
+          </span>
+        </Nav.Item>
       </li>
     );
   };
@@ -208,7 +231,13 @@ const Header = ({
           <Row>
             <Col className="p-0 m-0">
               <div className="mx-16">
-                <HorizontalMenu isAuthenticated={isAuthenticated} username={username} options={options} links={links} />
+                <HorizontalMenu
+                  isAuthenticated={isAuthenticated}
+                  username={username}
+                  options={options}
+                  onOptionChange={onOptionChange}
+                  links={links}
+                />
               </div>
             </Col>
           </Row>
