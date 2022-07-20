@@ -54,26 +54,26 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
   const options = [
     {
       authenticatedOption: false,
-      link: '/login',
+      value: 'login',
       icon: 'ama-login',
       label: 'Entrar no portal'
     },
     {
       authenticatedOption: false,
-      link: '/register',
+      value: 'register',
       icon: 'ama-add-user',
       label: 'Criar registo'
     },
 
     {
       authenticatedOption: true,
-      link: '/user-area',
+      value: 'user-area',
       icon: 'ama-user',
       label: 'Area Reservada'
     },
     {
       authenticatedOption: true,
-      link: 'logout',
+      value: 'logout',
       icon: 'ama-logout',
       label: 'Terminar sessão'
     }
@@ -89,6 +89,10 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
     console.log(val);
   };
 
+  const onOptionChange = (val: UserAreaOption) => {
+    console.log(val);
+  };
+
   return (
     <BrowserRouter>
       <Header
@@ -100,6 +104,7 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
         languages={languages}
         activeLanguage={languages[0]}
         options={options}
+        onOptionChange={onOptionChange}
         links={links}
         onLanguageChange={languageChangeHandler}
       />
@@ -135,26 +140,26 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
   const options = [
     {
       authenticatedOption: false,
-      link: '/login',
+      value: 'login',
       icon: 'ama-login',
       label: 'Entrar no portal'
     },
     {
       authenticatedOption: false,
-      link: '/register',
+      value: 'register',
       icon: 'ama-add-user',
       label: 'Criar registo'
     },
 
     {
       authenticatedOption: true,
-      link: '/user-area',
+      value: 'user-area',
       icon: 'ama-user',
       label: 'Area Reservada'
     },
     {
       authenticatedOption: true,
-      link: 'logout',
+      value: 'logout',
       icon: 'ama-logout',
       label: 'Terminar sessão'
     }
@@ -327,6 +332,10 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
     { label: 'Jane Doe', id: uuidv4() }
   ];
 
+  const onOptionChange = (val: UserAreaOption) => {
+    console.log(val);
+  };
+
   return (
     <BrowserRouter>
       <Header
@@ -338,6 +347,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
         languages={languages}
         activeLanguage={languages[0]}
         options={options}
+        onOptionChange={onOptionChange}
         links={links}
       />
 

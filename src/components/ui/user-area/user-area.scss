@@ -5,83 +5,38 @@
     min-height: 44px;
     min-width: 250px;
 
-    .drop-down-header {
+    .toggler {
+      min-height: 44px;
       svg {
         fill: index.$neutral-black;
       }
-
-      .spacing {
-        width: 34px;
-      }
     }
 
-    .drop-down-container {
+    .drop-down-menu {
       // To ensure that header language dropdown have a greater z-index than this one.
       // Otherwise the chevron-down of the user area will apear when language dropdown is open.
       z-index: calc(index.$zindex-dropdown - 1);
+      border: 1px solid index.$brand-green-main;
 
-      .combo {
-        .option-icon {
-          margin-right: map-get(index.$spacers, 10);
+      @include index.shadow;
+      @include index.scrollbars;
+
+      background-color: index.$neutral-white;
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: 272px;
+
+      .menu-option {
+        min-height: 44px;
+
+        margin-bottom: map-get(index.$spacers, 10);
+        &:last-of-type {
+          margin-bottom: 0;
         }
 
-        .option-label {
-          @include index.text-big-bold;
-          color: index.$brand-green-main;
-
-          position: relative;
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            border-bottom: 2px solid index.$brand-green-main;
-          }
-        }
-
-        &.user-area-options {
-          height: 100%;
-          .tags {
-            display: none !important;
-          }
-
-          .combo-input {
-            padding: 0 !important;
-            border: 1px solid transparent;
-            height: 100%;
-
-            &:focus {
-              border: 1px solid transparent;
-            }
-          }
-
-          .combo-menu {
-            border: 1px solid index.$brand-green-main;
-
-            .combo-option {
-              &:hover {
-                background-color: rgba(0, 103, 47, 0.5);
-                .option-label {
-                  color: index.$neutral-black;
-                  &::after {
-                    border-bottom: 2px solid index.$neutral-black;
-                  }
-                }
-              }
-
-              &.checked,
-              &.selected {
-                background-color: rgba(0, 103, 47, 0.5);
-                .option-label {
-                  color: index.$neutral-black;
-                  &::after {
-                    border-bottom: 2px solid index.$neutral-black;
-                  }
-                }
-              }
-            }
-          }
+        &:hover,
+        &.active {
+          background-color: rgba(0, 103, 47, 0.5);
         }
       }
     }

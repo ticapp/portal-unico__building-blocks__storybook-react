@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
@@ -35,34 +36,37 @@ export const BasicHorizontalMenu: Story<HorizontalMenuProps> = () => {
   const options = [
     {
       authenticatedOption: false,
-      link: '/login',
+      value: 'login',
       icon: 'ama-login',
       label: 'Entrar no portal'
     },
     {
       authenticatedOption: false,
-      link: '/register',
+      value: 'register',
       icon: 'ama-add-user',
       label: 'Criar registo'
     },
-
     {
       authenticatedOption: true,
-      link: '/user-area',
+      value: 'user-area',
       icon: 'ama-user',
       label: 'Area Reservada'
     },
     {
       authenticatedOption: true,
-      link: 'logout',
+      value: 'logout',
       icon: 'ama-logout',
       label: 'Terminar sessão'
     }
   ] as UserAreaOption[];
 
+  const optionChangeHandler = (val: UserAreaOption) => {
+    console.log(val);
+  };
+
   return (
     <BrowserRouter>
-      <HorizontalMenu username="Area reservada" links={links} options={options} />
+      <HorizontalMenu username="Area reservada" links={links} options={options} onOptionChange={optionChangeHandler} />
     </BrowserRouter>
   );
 };

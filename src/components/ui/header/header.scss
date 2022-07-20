@@ -142,6 +142,22 @@
             @include index.text-big-normal;
             color: index.$neutral-black;
 
+            &:hover {
+              cursor: pointer;
+
+              .nav-link-label {
+                position: relative;
+                &:after {
+                  content: '';
+                  width: 100%;
+                  border-bottom: 1px solid index.$neutral-black;
+                  position: absolute;
+                  left: 0;
+                  top: 24px;
+                }
+              }
+            }
+
             &.active {
               .nav-link-label {
                 position: relative;

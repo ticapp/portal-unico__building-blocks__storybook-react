@@ -43,7 +43,7 @@ const Logo: FC<LogoProps> = ({
       )}
       {!isHomepage && (
         <div className={classes}>
-          <Link link={homepageLink} title={title}>
+          <Link link={homepageLink} title={title} aria-label={title}>
             <Image src={src} alt={alt} width={width} height={height} />
           </Link>
         </div>
