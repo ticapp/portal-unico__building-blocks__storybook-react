@@ -9,8 +9,8 @@ import { Meta } from '@storybook/addon-docs';
 <h2>Component usage</h2>
 
 ```jsx
-  const checkboxListData = [{ checked: true, label: 'dummy' }, { label: 'label' }];
-  const [checkboxListState, setCheckboxListState] = useState(checkboxListData);
+const checkboxListData = [{ checked: true, label: 'dummy' }, { label: 'label' }];
+const [checkboxListState, setCheckboxListState] = useState(checkboxListData);
 
-  return <CheckboxGroup data={checkboxListState} onCheckboxGroupChanged={setCheckboxListState} />;
+return <CheckboxGroup data={checkboxListState} onCheckboxGroupChanged={setCheckboxListState} />;
 ```

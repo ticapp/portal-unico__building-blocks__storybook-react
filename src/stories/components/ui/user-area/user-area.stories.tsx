@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
