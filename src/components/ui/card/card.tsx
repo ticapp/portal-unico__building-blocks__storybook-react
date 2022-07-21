@@ -82,7 +82,7 @@ export const Card = ({
   const cssContent = classNames('ama-card-content', contentClass, 'mt-16 mt-xl-32');
   return (
     <BsCard className={cssCard} {...props} border="light">
-      <Container fluid className="p-24 p-xl-32">
+      <Container fluid className="d-flex align-items-start justify-content-between flex-column h-100 p-24 p-xl-32">
         <Row>
           {preTitle && (
             <Col xs={12} md={12} xl={12}>
@@ -108,6 +108,16 @@ export const Card = ({
               {children}
             </Col>
           )}
+
+          {!isLinkLabel && cardHasLink && (
+            <Col xs={{ span: 6, offset: 6 }} md={{ span: 6, offset: 6 }} xl={{ span: 6, offset: 6 }} className="text-end mt-16 mt-xl-32">
+              <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? 'stretched-link' : ''}>
+                <Icon icon={linkIcon} ariaHidden="true" />
+              </Link>
+            </Col>
+          )}
+        </Row>
+        <Row>
           {isLinkLabel && cardHasLink && (
             <Col xs={6} md={6} xl={6} className="mt-16 mt-xl-32">
               <Link
@@ -117,13 +127,6 @@ export const Card = ({
                 className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato'}
               >
                 {linkLabel}
-              </Link>
-            </Col>
-          )}
-          {!isLinkLabel && cardHasLink && (
-            <Col xs={{ span: 6, offset: 6 }} md={{ span: 6, offset: 6 }} xl={{ span: 6, offset: 6 }} className="text-end mt-16 mt-xl-32">
-              <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? 'stretched-link' : ''}>
-                <Icon icon={linkIcon} ariaHidden="true" />
               </Link>
             </Col>
           )}
