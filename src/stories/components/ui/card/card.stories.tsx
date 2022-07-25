@@ -36,7 +36,7 @@ Cards.args = {
   link: 'https://www.ama.pt',
   isExternal: true,
   title: 'link para o site AMA',
-  linkLabel: 'Default',
+  linkLabel: 'Ver detalhes',
   linkIcon: 'ama-arrow-down-right',
   isLinkLabel: true,
   cardHasLink: true
