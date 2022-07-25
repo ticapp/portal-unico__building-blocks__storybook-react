@@ -1,30 +1,67 @@
+/* eslint-disable no-console */
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-import { PageError } from '../../../../components';
+import { ButtonProps, ErrorPage } from '../../../../components';
 
 export default {
   title: 'Pages/Error',
-  component: PageError
-} as ComponentMeta<typeof PageError>;
+  component: ErrorPage
+} as ComponentMeta<typeof ErrorPage>;
 
-const Template: ComponentStory<typeof PageError> = (args) => (
+const Template: ComponentStory<typeof ErrorPage> = (args) => (
   <BrowserRouter>
-    <PageError {...args} />
+    <ErrorPage {...args} />
   </BrowserRouter>
 );
 
-export const GenericPageError = Template.bind({});
-
-export const CustomPageError = Template.bind({});
-CustomPageError.args = {
-  title: 'Sample Error',
-  message:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sapien arcu, venenatis vel lobortis aliquet, facilisis eget neque. Aliquam a pharetra tellus. Suspendisse at turpis vitae lectus malesuada aliquet. Donec pretium tincidunt diam.',
+export const BasicErrorPage = Template.bind({});
+BasicErrorPage.args = {
+  title: 'Sem sinal',
+  subtitle: 'Erro 404, página não encontrada.',
   link: {
-    url: '#',
-    isExternal: false,
-    label: 'Back',
-    target: '_self'
+    title: 'Regressar à página inicial',
+    url: '/'
   }
+};
+
+export const DeadEndErrorPage = Template.bind({});
+DeadEndErrorPage.args = {
+  title: 'Sem sinal',
+  subtitle: 'Generic error. Try again...'
+};
+
+export const MultipleActionsErrorPage = Template.bind({});
+MultipleActionsErrorPage.args = {
+  title: 'Sem sinal',
+  subtitle: 'Generic error. Try again...',
+  buttons: [
+    {
+      className: 'shadow-none',
+      children: 'Action #1',
+      variant: 'outline-brand-green-main',
+      size: 'lg',
+      onClick: () => {
+        console.log('Action #1 pressed');
+      }
+    },
+    {
+      className: 'shadow-none',
+      children: 'Action #2',
+      variant: 'outline-brand-green-main',
+      size: 'lg',
+      onClick: () => {
+        console.log('Action #2 pressed');
+      }
+    },
+    {
+      className: 'shadow-none',
+      children: 'Action #3',
+      variant: 'outline-brand-green-main',
+      size: 'lg',
+      onClick: () => {
+        console.log('Action #3 pressed');
+      }
+    }
+  ] as ButtonProps[]
 };
