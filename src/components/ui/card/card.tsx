@@ -119,7 +119,7 @@ export const Card = ({
         </Row>
         <Row>
           {isLinkLabel && cardHasLink && (
-            <Col xs={6} md={6} xl={6} className="mt-16 mt-xl-32">
+            <Col xs={6} md={6} xl={6} className="mt-16 mt-xl-32 w-100">
               <Link
                 link={link}
                 title={title}
