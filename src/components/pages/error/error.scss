@@ -1,13 +1,25 @@
+@use '../../../scss/index.scss' as index;
+
 .ama {
-  &-page-error {
-    .btn {
-      &-primary {
-        a {
-          color: #fff;
-        }
-        svg {
-          fill: #fff;
-          padding-right: 10px;
+  &-error-page {
+    h1 {
+      @include index.h2-normal;
+    }
+
+    span {
+      @include index.text-big-bold;
+    }
+
+    .link {
+      @include index.text-big-normal;
+    }
+
+    .error-actions-container {
+      .error-action {
+        margin-right: map-get(index.$spacers, 16);
+
+        &:last-of-type {
+          margin-right: 0;
         }
       }
     }

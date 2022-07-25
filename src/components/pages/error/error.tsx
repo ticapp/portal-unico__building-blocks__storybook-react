@@ -1,53 +1,62 @@
 import classNames from 'classnames';
 import React from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
-import { Icon, Link } from '../../ui';
+import { Col, Container, Row } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
+import { Button, ButtonProps, Link } from '../../ui';
 import './error.scss';
 
-export interface PageErrorProps {
+export interface ErrorProps {
   /** Additional class to component */
   className?: string;
-  /** Error title */
-  title?: string;
-  /** Error message */
-  message?: string;
-  /** Info necessary to render the navigation button. Can be internal route or an external link */
+
+  /** Data to fill content */
+  title: string;
+
+  /** Subtitle */
+  subtitle: string;
+
+  /** Link to click */
   link?: {
-    url?: string;
-    isExternal?: boolean;
-    target?: string;
-    label?: string;
+    title: string;
+    url: string;
   };
+
+  /** Buttons for multiple actions */
+  buttons?: ButtonProps[];
 }
 
-export const PageError = ({ title = 'Error', message = 'An error occurred. Try again later...', link, className }: PageErrorProps) => {
-  const classes = classNames('ama-page-error', className);
+export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: ErrorProps) => {
+  const cssErrorPage = classNames(
+    'bg-brand-green-main fc-neutral-white',
+    'd-flex align-items-center justify-content-center flex-column m-0 pt-48 pb-32',
+    className
+  );
 
   return (
-    <div className={classes}>
-      <Container>
-        <Row className="d-flex flex-column-reverse flex-md-row pt-3">
-          <Col xs={12} md={8}>
-            <h1 className="text-center text-md-start">{title}</h1>
-            <p className="text-center text-md-start">{message}</p>
-          </Col>
-          <Col xs={12} md={4} className="d-flex justify-content-center">
-            <Icon size="xl" icon="ama-error" />
+    <Container fluid className="ama-error-page p-0">
+      <Row>
+        <Col className={cssErrorPage}>
+          <h1 className="font-family-lato mb-32 text-uppercase">{title}</h1>
+          <span className="mb-0">{subtitle}</span>
+
+          {link && (
+            <Link link={link.url} className="link fc-neutral-white">
+              {link.title}
+            </Link>
+          )}
+        </Col>
+      </Row>
+
+      {buttons.length > 0 && (
+        <Row className="mt-32 ">
+          <Col className="d-flex justify-content-center error-actions-container">
+            {buttons.map((bArgs) => {
+              const classes = `error-action ${bArgs.className}`;
+              return <Button key={uuidv4()} {...bArgs} className={classes} />;
+            })}
           </Col>
         </Row>
-        {link && (
-          <Row className="d-flex justify-content-center pt-3">
-            <Col xs={12} md={3}>
-              <Button variant="primary" className="w-100">
-                <Link link={link.url || '/'} isExternal={link.isExternal || false} target={link.target || '_self'}>
-                  <Icon icon="ama-arrow-left-circle" />
-                  <span className="back-label">{link.label || 'Back'}</span>
-                </Link>
-              </Button>
-            </Col>
-          </Row>
-        )}
-      </Container>
-    </div>
+      )}
+    </Container>
   );
 };

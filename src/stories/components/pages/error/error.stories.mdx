@@ -3,20 +3,10 @@ import { Meta } from '@storybook/addon-docs';
 <Meta title="Pages/Error/Error Docs" />
 
 <h2>Description</h2>
-
-<p>Main content of the error page</p>
+<p>Main content of a error page</p>
 
 <h2>Component usage</h2>
 
-```js
-<PageError
-  title={'Sample Error'}
-  message={'Lorem ipsum dolor sit amet.'}
-  link={{
-    url: '#',
-    isExternal: false,
-    label: 'Back',
-    target: '_self'
-  }}
-></PageError>
+```jsx
+<ErrorPage title="Sem sinal" subtitle="Erro 404, página não encontrada." link={{ title="Regressar à página inicial", url="/" }} />
 ```
