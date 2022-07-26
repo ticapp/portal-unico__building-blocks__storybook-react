@@ -28,7 +28,7 @@ export interface ErrorProps {
 export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: ErrorProps) => {
   const cssErrorPage = classNames(
     'bg-brand-green-main fc-neutral-white',
-    'd-flex align-items-center justify-content-center flex-column m-0 pt-48 pb-32',
+    'd-flex align-items-center justify-content-center flex-column m-0 p-48',
     className
   );
 
