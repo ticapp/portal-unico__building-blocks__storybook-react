@@ -9,6 +9,10 @@
 }
 
 .items-content {
+  &:last-child {
+    margin-bottom: 0 !important;
+  }
+
   dt {
     @include index.text-big-normal;
     color: index.$neutral-black;
