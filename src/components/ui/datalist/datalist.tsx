@@ -34,7 +34,7 @@ export const Datalist = ({ title, data, className }: DatalistProps) => {
         </Row>
       )}
 
-      <dl className="row">
+      <dl className="row mb-0">
         {data &&
           data.map((item) => {
             return (

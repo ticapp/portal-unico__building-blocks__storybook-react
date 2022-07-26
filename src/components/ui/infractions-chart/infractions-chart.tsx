@@ -71,7 +71,11 @@ export function InfractionsChart({
 
   const infractionCounterTitle = `${infractionsTotal} ${infractionsLabel}`;
 
-  const classes = classNames('ama-donut-chart', className, 'position-relative bg-neutral-light p-24 p-md-32 m-0');
+  const classes = classNames(
+    'ama-donut-chart',
+    className,
+    'd-flex align-items-start flex-column justify-content-between position-relative bg-neutral-light p-24 p-md-32 m-0'
+  );
 
   const buildGraphAriaLabel = useMemo(() => {
     const valuesAccessible = counters
@@ -100,38 +104,40 @@ export function InfractionsChart({
 
   return (
     <Container className={classes}>
-      <Row className="mb-24 mb-md-32">
-        <Col>
-          <h2 className="h5-bold mb-8">{graphicTitle}</h2>
-          <div className="text-medium-normal fc-neutral-dark">{graphicDescription}</div>
-        </Col>
-      </Row>
-
       <Row>
-        <Col>
-          <h3 className="h4-bold">{infractionCounterTitle.toLowerCase()}</h3>
-        </Col>
-      </Row>
+        <Row className="mb-24 mb-md-32">
+          <Col>
+            <h2 className="h5-bold mb-8">{graphicTitle}</h2>
+            <div className="text-medium-normal fc-neutral-dark">{graphicDescription}</div>
+          </Col>
+        </Row>
 
-      <Row role="img" aria-label={buildGraphAriaLabel} className="d-flex align-items-center justify-content-between mt-16 mt-md-0">
-        <Col sm={12} md={6}>
-          <ul aria-hidden="true" className="graph-legend">
-            {counters.map((c) => {
-              return (
-                <li key={uuidv4()} className="d-flex align-items-center justify-content-start">
-                  <div className="marker me-8" style={{ backgroundColor: c.color }} />
-                  <div className="legend-item text-medium-normal fc-neutral-dark">{c.label}</div>
-                  <div className="ms-8 text-medium-normal fc-neutral-dark">{`(${c.value})`}</div>
-                </li>
-              );
-            })}
-          </ul>
-        </Col>
-        <Col sm={12} md={6} className="d-flex align-items-center justify-content-center">
-          <div style={{ width: graphicWidth, height: graphicWidth }}>
-            <Doughnut options={chartOptions} data={chartData} />
-          </div>
-        </Col>
+        <Row>
+          <Col>
+            <h3 className="h4-bold">{infractionCounterTitle.toLowerCase()}</h3>
+          </Col>
+        </Row>
+
+        <Row role="img" aria-label={buildGraphAriaLabel} className="d-flex align-items-center justify-content-between mt-16 mt-md-0">
+          <Col sm={12} md={6}>
+            <ul aria-hidden="true" className="graph-legend">
+              {counters.map((c) => {
+                return (
+                  <li key={uuidv4()} className="d-flex align-items-center justify-content-start">
+                    <div className="marker me-8" style={{ backgroundColor: c.color }} />
+                    <div className="legend-item text-medium-normal fc-neutral-dark">{c.label}</div>
+                    <div className="ms-8 text-medium-normal fc-neutral-dark">{`(${c.value})`}</div>
+                  </li>
+                );
+              })}
+            </ul>
+          </Col>
+          <Col sm={12} md={6} className="d-flex align-items-center justify-content-center">
+            <div style={{ width: graphicWidth, height: graphicWidth }}>
+              <Doughnut options={chartOptions} data={chartData} />
+            </div>
+          </Col>
+        </Row>
       </Row>
 
       <Row>
