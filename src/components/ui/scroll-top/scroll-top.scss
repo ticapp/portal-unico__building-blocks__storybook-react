@@ -1,15 +1,27 @@
+@use '../../../scss/index.scss' as index;
+
 .ama {
   &-scroll-top {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background-color: #0902a2;
-    width: 4rem;
-    height: 4rem;
+    bottom: 1px;
+    width: 100%;
+    padding: 1px;
+    height: 2rem;
     z-index: 99999;
+    background-color: index.$neutral-white;
 
-    svg {
-      fill: #fff;
+    Button {
+      width: 100%;
+      display: block;
+      padding: 1px;
+    }
+
+    .icon {
+      margin-left: 237px;
+    }
+
+    .text {
+      margin-left: 4px;
     }
   }
 }

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { KeyboardEvent, useEffect, useState } from 'react';
+import { Button } from '../buttons';
 import { Icon } from '../icon';
 
 import './scroll-top.scss';
@@ -51,13 +52,16 @@ export function ScrollTop({ className, threshold = 512 }: ScrollTopProps) {
     };
   }, []);
 
-  const classes = classNames('ama-scroll-top d-flex justify-content-center align-items-center rounded-circle', className, {
+  const classes = classNames('ama-scroll-top d-flex', className, {
     'd-none': offset < threshold
   });
-
+  // 237
   return (
     <div tabIndex={0} role="button" className={classes} onClick={onClickHandler} onKeyDown={onkeydownHandler}>
-      <Icon icon="ama-collapse" />
+      <Button variant="outline-brand-green-main" size="sm">
+        <Icon className="icon" size="xs" icon="ama-arrow-up" />
+        <div className="text">Voltar ao topo</div>
+      </Button>
     </div>
   );
 }

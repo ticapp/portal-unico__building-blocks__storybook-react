@@ -5,6 +5,7 @@ const iconList: Record<string, string> = {
   'ama-arrow-left-circle': './AmaArrowLeftCircle',
   'ama-arrow-right-circle': './AmaArrowRightCircle',
   'ama-arrow-right': './AmaArrowRight',
+  'ama-arrow-up': './AmaArrowUp',
   'ama-badge': './AmaBadge',
   'ama-burger': './AmaBurger',
   'ama-calendar': './AmaCalendar',
