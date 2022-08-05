@@ -17,11 +17,13 @@
     }
 
     .icon {
+      position: relative;
       margin-left: 237px;
     }
 
     .text {
       margin-left: 4px;
+      text-decoration: underline;
     }
   }
 }
