@@ -6,7 +6,7 @@
     bottom: 1px;
     width: 100%;
     padding: 1px;
-    height: 2rem;
+    height: 52px;
     z-index: 99999;
     background-color: index.$neutral-white;
 
@@ -24,6 +24,7 @@
     .text {
       margin-left: 4px;
       text-decoration: underline;
+      text-underline-offset: 4px;
     }
   }
 }
