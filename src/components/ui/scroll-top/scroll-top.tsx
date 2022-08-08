@@ -11,9 +11,12 @@ export interface ScrollTopProps {
 
   /** Threshold to start showing the button (pixels) */
   threshold?: number;
+
+  /**  Text in component */
+  text: string;
 }
 
-export function ScrollTop({ className, threshold = 512 }: ScrollTopProps) {
+export function ScrollTop({ className, threshold = 512, text }: ScrollTopProps) {
   const scrollTop = () => {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
@@ -60,7 +63,7 @@ export function ScrollTop({ className, threshold = 512 }: ScrollTopProps) {
     <div tabIndex={0} role="button" className={classes} onClick={onClickHandler} onKeyDown={onkeydownHandler}>
       <Button variant="outline-brand-green-main" size="sm">
         <Icon className="icon" size="xs" icon="ama-arrow-up" />
-        <div className="text">Voltar ao topo</div>
+        <div className="text">{text}</div>
       </Button>
     </div>
   );

@@ -7,9 +7,9 @@ export default {
   component: ScrollTop
 } as ComponentMeta<typeof ScrollTop>;
 
-const Template: ComponentStory<typeof ScrollTop> = () => (
+const Template: ComponentStory<typeof ScrollTop> = (args) => (
   <div style={{ position: 'relative' }}>
-    <ScrollTop />
+    <ScrollTop {...args} />
     <p>Scroll down and press the icon...</p>
     <br />.
     <br />.
@@ -231,3 +231,6 @@ const Template: ComponentStory<typeof ScrollTop> = () => (
   </div>
 );
 export const BasicSkipNavigation = Template.bind({});
+BasicSkipNavigation.args = {
+  text: 'Voltar ao topo'
+};
