@@ -491,7 +491,7 @@ const Select = ({
         onMouseDown={onComboMouseDown}
         onKeyDown={onComboKeyDown}
       >
-        <div className="tags me-10 d-flex flex-wrap">
+        <div className="tags me-8 d-flex flex-wrap">
           {!multiSelection && (checkedIndex < 0 ? placeholder : options[checkedIndex].label)}
 
           {multiSelection &&

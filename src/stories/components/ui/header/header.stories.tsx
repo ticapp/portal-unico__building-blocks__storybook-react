@@ -97,7 +97,7 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
     <BrowserRouter>
       <Header
         isHomepage={props.isHomepage}
-        logoSrc={require('../../../../assets/img/logo.png')}
+        logoSrc="/logo.svg"
         isAuthenticated={props.isAuthenticated}
         username="Area reservada"
         homepageLink="/"
@@ -340,7 +340,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
     <BrowserRouter>
       <Header
         isHomepage={props.isHomepage}
-        logoSrc={require('../../../../assets/img/logo.png')}
+        logoSrc="/logo.svg"
         isAuthenticated={props.isAuthenticated}
         username="Area reservada"
         homepageLink="/"

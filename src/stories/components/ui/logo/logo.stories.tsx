@@ -12,7 +12,7 @@ export default {
 export const NoRedirect: Story<LogoProps> = () => {
   return (
     <BrowserRouter>
-      <Logo src={require('../../../../assets/img/logo.png')} />
+      <Logo src="/logo.svg" />
     </BrowserRouter>
   );
 };
@@ -21,7 +21,7 @@ NoRedirect.storyName = 'Logo with homepage redirect';
 export const Redirect: Story<LogoProps> = () => {
   return (
     <BrowserRouter>
-      <Logo isHomepage src={require('../../../../assets/img/logo.png')} />
+      <Logo isHomepage src="/logo.svg" />
     </BrowserRouter>
   );
 };
