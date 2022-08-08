@@ -58,11 +58,10 @@ export function ScrollTop({ className, threshold = 512, text }: ScrollTopProps) 
   const classes = classNames('ama-scroll-top d-flex', className, {
     'd-none': offset < threshold
   });
-  // 237
   return (
     <div tabIndex={0} role="button" className={classes} onClick={onClickHandler} onKeyDown={onkeydownHandler}>
       <Button variant="outline-brand-green-main" size="sm">
-        <Icon className="icon" size="xs" icon="ama-arrow-up" />
+        <Icon className="icon m-0" size="xs" icon="ama-arrow-up" />
         <div className="text">{text}</div>
       </Button>
     </div>
