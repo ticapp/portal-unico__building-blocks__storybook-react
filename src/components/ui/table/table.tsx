@@ -101,7 +101,12 @@ const TableDesktop = ({
   const renderThead = (item: Array<{ value: string | ReactNode; sorting: boolean }>, keys: string[]) => {
     return item?.map((data, i) => {
       return (
-        <th key={uuidv4()} scope="col" className="p-5 align-middle" aria-sort={getAriaSort(getClassNamesFor(keys[i]), data.sorting)}>
+        <th
+          key={uuidv4()}
+          scope="col"
+          className={`${data.sorting ? 'py-0' : 'py-16'} px-8 align-middle`}
+          aria-sort={getAriaSort(getClassNamesFor(keys[i]), data.sorting)}
+        >
           {data.sorting && (
             <Button
               variant="neutral-dark"
@@ -112,7 +117,7 @@ const TableDesktop = ({
               onClick={() => {
                 requestSort(keys[i]);
               }}
-              className={getClassNamesFor(keys[i]) ? `${getClassNamesFor(keys[i])} shadow-none w-100` : 'shadow-none w-100'}
+              className={getClassNamesFor(keys[i]) ? `${getClassNamesFor(keys[i])} shadow-none px-0 py-16` : 'shadow-none px-0 py-16'}
               disabled={!data.sorting}
               data-column-index={i}
             >
@@ -128,7 +133,7 @@ const TableDesktop = ({
               )}
             </Button>
           )}
-          {!data.sorting && <span className="p-16 text-medium-normal">{data.value}</span>}
+          {!data.sorting && <span className="text-medium-normal">{data.value}</span>}
         </th>
       );
     });

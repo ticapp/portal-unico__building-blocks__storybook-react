@@ -16,6 +16,24 @@
     th {
       background-color: transparent;
       color: index.$neutral-white;
+      &:first-of-type {
+        padding-left: map-get(index.$spacers, 16) !important;
+      }
+      &:last-of-type {
+        padding-right: map-get(index.$spacers, 16) !important;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        &:first-of-type {
+          padding-left: map-get(index.$spacers, 16) !important;
+        }
+        &:last-of-type {
+          padding-right: map-get(index.$spacers, 16) !important;
+        }
+      }
     }
   }
   .stretched-link {
