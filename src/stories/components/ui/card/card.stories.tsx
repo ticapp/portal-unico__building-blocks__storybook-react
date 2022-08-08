@@ -39,7 +39,8 @@ Cards.args = {
   linkLabel: 'Ver detalhes',
   linkIcon: 'ama-arrow-down-right',
   isLinkLabel: true,
-  cardHasLink: true
+  cardHasLink: true,
+  contentClass: 'card-info'
 } as CardProps;
 
 Cards.argTypes = {

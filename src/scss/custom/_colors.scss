@@ -2,13 +2,14 @@ $neutral-black: #212121;
 $neutral-dark: #242d37;
 $neutral-dark-grey: #707070;
 $neutral-light-grey: #c9c9c9;
-$neutral-light: #f4f4f4;
+$neutral-light: #f0f0f0;
 $neutral-white: #ffffff;
 
 $brand-green-main: #00672f;
 $brand-green-secondary: #248241;
 $brand-green-terciary: #428048;
 $brand-green-fourth: #06571c;
+$brand-green-hover: #99cdb1;
 
 $brand-yellow-main: #fbcf5f;
 $brand-yellow-secondary: #f5c037;
@@ -35,6 +36,7 @@ $theme-colors: map-merge(
     'brand-green-secondary': $brand-green-secondary,
     'brand-green-terciary': $brand-green-terciary,
     'brand-green-fourth': $brand-green-fourth,
+    'brand-green-hover': $brand-green-hover,
     'brand-yellow-main': $brand-yellow-main,
     'brand-yellow-secondary': $brand-yellow-secondary,
     'brand-yellow-terciary': $brand-yellow-terciary,
@@ -57,6 +59,7 @@ $colors: (
   'brand-green-secondary': $brand-green-secondary,
   'brand-green-terciary': $brand-green-terciary,
   'brand-green-fourth': $brand-green-fourth,
+  'brand-green-hover': $brand-green-hover,
   'brand-yellow-main': $brand-yellow-main,
   'brand-yellow-secondary': $brand-yellow-secondary,
   'brand-yellow-terciary': $brand-yellow-terciary,

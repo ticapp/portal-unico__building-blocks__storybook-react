@@ -14,9 +14,9 @@
 
       .ama-card-content {
         &.card-info {
-          color: index.$neutral-dark-grey;
+          color: index.$neutral-dark;
           svg > * {
-            fill: index.$neutral-dark-grey;
+            fill: index.$neutral-dark;
           }
         }
         &.card-success {
@@ -32,18 +32,6 @@
           }
         }
       }
-    }
-
-    &-brand-green-main {
-      @include index.bg-cards(
-        index.$neutral-white,
-        index.$brand-green-main,
-        index.$neutral-white,
-        index.$neutral-white,
-        index.$neutral-white,
-        '1px solid ' + index.$brand-yellow-fourth,
-        0
-      );
     }
   }
 }

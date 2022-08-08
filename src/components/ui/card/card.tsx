@@ -46,7 +46,7 @@ export interface CardProps extends BsCardProps {
   linkIcon?: string;
 
   /** theme card */
-  cardTheme?: 'ama-card-light' | 'ama-card-brand-green-main ' | string;
+  cardTheme?: 'ama-card-light' | string;
 
   /** All card as clickable area */
   stretchedLink?: boolean;
@@ -71,7 +71,7 @@ export const Card = ({
   title,
   linkLabel,
   linkIcon = '',
-  cardTheme = 'ama-card-brand-green-main',
+  cardTheme = 'ama-card-light',
   stretchedLink = false,
   isLinkLabel = true,
   cardHasLink = true,
@@ -79,7 +79,7 @@ export const Card = ({
   ...props
 }: CardProps) => {
   const cssCard = classNames('ama-card', className, cardTheme);
-  const cssContent = classNames('ama-card-content', contentClass, 'mt-16 mt-xl-32');
+  const cssContent = classNames('ama-card-content', contentClass, 'mt-16 mt-xl-24');
   return (
     <BsCard className={cssCard} {...props} border="light">
       <Container fluid className="d-flex align-items-start justify-content-between flex-column h-100 p-24 p-xl-32">
@@ -90,13 +90,12 @@ export const Card = ({
             </Col>
           )}
 
-          {mainTitle ||
-            (description && (
-              <Col xs={12} md={12} xl={12}>
-                {mainTitle && <h3 className="h5-bold">{mainTitle}</h3>}
-                {description && <p className="text-medium-normal m-0">{description}</p>}
-              </Col>
-            ))}
+          {(mainTitle || description) && (
+            <Col xs={12} md={12} xl={12}>
+              {mainTitle && <h3 className="h5-bold">{mainTitle}</h3>}
+              {description && <p className="text-medium-normal m-0">{description}</p>}
+            </Col>
+          )}
           {(children || (contentIcon && content)) && (
             <Col xs={12} md={12} xl={12} className={cssContent}>
               {contentIcon && content && (
@@ -110,7 +109,7 @@ export const Card = ({
           )}
 
           {!isLinkLabel && cardHasLink && (
-            <Col xs={{ span: 6, offset: 6 }} md={{ span: 6, offset: 6 }} xl={{ span: 6, offset: 6 }} className="text-end mt-16 mt-xl-32">
+            <Col xs={{ span: 6, offset: 6 }} md={{ span: 6, offset: 6 }} xl={{ span: 6, offset: 6 }} className="text-end mt-16 mt-xl-24">
               <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? 'stretched-link' : ''}>
                 <Icon icon={linkIcon} ariaHidden="true" />
               </Link>
@@ -119,7 +118,7 @@ export const Card = ({
         </Row>
         <Row>
           {isLinkLabel && cardHasLink && (
-            <Col xs={6} md={6} xl={6} className="mt-16 mt-xl-32 w-100">
+            <Col xs={6} md={6} xl={6} className="mt-16 mt-xl-24 w-100">
               <Link
                 link={link}
                 title={title}
