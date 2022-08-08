@@ -154,7 +154,7 @@ export const DatePicker = ({
     }
 
     let monthString = (d.getMonth() + 1).toString();
-    if (d.getMonth() <= 9) {
+    if (d.getMonth() + 1 <= 9) {
       monthString = `0${monthString}`;
     }
 
@@ -427,10 +427,6 @@ export const DatePicker = ({
     }
   };
 
-  const getCurrentMonthYear = () => {
-    return `${MonthLabels[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-  };
-
   const headerMemo = useMemo(() => {
     return (
       <>
@@ -459,7 +455,7 @@ export const DatePicker = ({
           </button>
         </Col>
         <Col aria-live="polite" className="d-flex align-items-center justify-content-center" id={gridAriaLabelId}>
-          {getCurrentMonthYear()}
+          {`${MonthLabels[currentDate.getMonth()]} ${currentDate.getFullYear()}`}
         </Col>
         <Col xs={1} className="header-action next-month d-flex align-items-center justify-content-center">
           <button
@@ -491,7 +487,9 @@ export const DatePicker = ({
     modalActionsAriaLabels.previousYear,
     modalActionsAriaLabels.previousMonth,
     modalActionsAriaLabels.nextMonth,
-    modalActionsAriaLabels.nextYear
+    modalActionsAriaLabels.nextYear,
+    MonthLabels,
+    currentDate
   ]);
 
   const weekDaysMemo = useMemo(() => {
@@ -565,7 +563,7 @@ export const DatePicker = ({
         </tr>
       );
     });
-  }, [currentDate]);
+  }, [currentDate, modalActionsAriaLabels.currentDay]);
 
   useOutsideElementClick(mainContainer, () => setIsDialogVisible(false));
 
