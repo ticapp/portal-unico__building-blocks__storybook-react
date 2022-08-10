@@ -191,13 +191,13 @@ export const Footer = ({
             </Container>
           </div>
         </div>
-        <Container className="px-16">
+        <Container fluid className="px-16">
           <Row>
             <Col className={cssLogos}>
               <List
                 listData={listDataRowImagesLink}
                 listStyleType="none"
-                className="mt-16 mb-24 px-0 d-grid d-md-flex flex-md-wrap justify-content-between mb-0"
+                className="px-0 d-grid d-md-flex flex-md-wrap justify-content-between mb-0"
               />
             </Col>
           </Row>
