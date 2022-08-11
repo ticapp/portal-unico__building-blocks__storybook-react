@@ -36,7 +36,7 @@ export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: Er
     <Container fluid className="ama-error-page">
       <Row>
         <Col className={cssErrorPage}>
-          <h4 className="font-family-lato mb-16 text-uppercase">{title}</h4>
+          <h4 className="mb-16 text-uppercase">{title}</h4>
           <span className="mb-0">{subtitle}</span>
           {link && (
             <Link link={link.url} className="link fc-neutral-white">
