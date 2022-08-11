@@ -26,9 +26,9 @@
 
 //Font Face
 // @include font-face('Lato Black', '/assets/fonts/LatoLatin-Black');
-// @include font-face('Lato Bold', '/assets/fonts/LatoLatin-Bold');
+@include font-face('Lato Bold', '/assets/fonts/LatoLatin-Bold');
 // @include font-face('Lato Hairline', '/assets/fonts/LatoLatin-Hairline');
-// @include font-face('Lato Heavy', '/assets/fonts/LatoLatin-Heavy');
+@include font-face('Lato Heavy', '/assets/fonts/LatoLatin-Heavy');
 // @include font-face('Lato Light', '/assets/fonts/LatoLatin-Light');
 // @include font-face('Lato Medium', '/assets/fonts/LatoLatin-Medium');
 @include font-face('Lato Regular', '/assets/fonts/LatoLatin-Regular');
@@ -38,6 +38,8 @@
 //Font Family
 $font-family-lato-regular: 'Lato Regular', sans-serif;
 $font-family-lato-semi-bold: 'Lato Semibold', sans-serif;
+$font-family-lato-bold: 'Lato Bold', sans-serif;
+$font-family-lato-heavy: 'Lato Heavy', sans-serif;
 
 //Fonts
 $font-sizes: (
@@ -67,6 +69,7 @@ $line-heights: (
   24: 1.5rem,
   28: 1.75rem,
   32: 2rem,
+  36: 2.25rem,
   40: 2.5rem,
   280: 17.5rem
 );
