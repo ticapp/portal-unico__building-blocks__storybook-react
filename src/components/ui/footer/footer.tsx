@@ -145,7 +145,7 @@ export const Footer = ({
   const renderContentInfo01 = () => {
     return contentInfo01?.map((content) => {
       return (
-        <div className="ama-footer-section-info-detail" key={uuidv4()}>
+        <div className="ama-footer-section-info-detail mb-16" key={uuidv4()}>
           <p className="lh-36 fw-400">{content.label}</p>
           <p className="strong lh-36 fw-400">{content.value}</p>
         </div>

@@ -47,17 +47,16 @@
         }
       }
       &-detail {
-        margin-bottom: 16px;
         p {
           font-size: 0.875rem !important;
-          margin-bottom: 0;
+          margin-bottom: 0 !important;
           &.strong {
             font-family: index.$font-family-lato-heavy;
             font-size: 1.375rem !important;
           }
         }
         &:last-of-type {
-          margin-bottom: 0px;
+          margin-bottom: 0px !important;
         }
       }
     }
