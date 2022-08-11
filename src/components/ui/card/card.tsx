@@ -92,7 +92,7 @@ export const Card = ({
 
           {(mainTitle || description) && (
             <Col xs={12} md={12} xl={12}>
-              {mainTitle && <h3 className="h5-bold">{mainTitle}</h3>}
+              {mainTitle && <h3 className="h4-bold">{mainTitle}</h3>}
               {description && <p className="text-medium-normal m-0">{description}</p>}
             </Col>
           )}
@@ -123,7 +123,7 @@ export const Card = ({
                 link={link}
                 title={title}
                 isExternal={isExternal}
-                className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato'}
+                className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold'}
               >
                 {linkLabel}
               </Link>
