@@ -1,15 +1,24 @@
+@use '../../../scss/index.scss' as index;
+
 .ama {
   &-scroll-top {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background-color: #0902a2;
-    width: 4rem;
-    height: 4rem;
+    bottom: 0px;
+    width: 100%;
+    height: 62px;
     z-index: 99999;
+    background-color: index.$neutral-white;
+    border: 1px solid index.$brand-green-main;
 
-    svg {
-      fill: #fff;
+    .text {
+      color: index.$brand-green-main;
+      text-decoration: underline;
+      text-decoration-color: index.$brand-green-main;
+      text-underline-offset: 8px;
+    }
+
+    .icon {
+      fill: index.$brand-green-main;
     }
   }
 }
