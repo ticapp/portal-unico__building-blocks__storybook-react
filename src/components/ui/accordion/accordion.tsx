@@ -23,8 +23,8 @@ export const Accordion = ({ className, accordionInfo, ...props }: AccordionProps
     return item?.map((content, index) => {
       return (
         <BsAccordion.Item className={item.length - 1 === index ? '' : 'mb-16'} eventKey={`tab-${index}`} key={uuidv4()}>
-          <BsAccordion.Header>{content.title}</BsAccordion.Header>
-          <BsAccordion.Body>
+          <BsAccordion.Header className="text-big-bold">{content.title}</BsAccordion.Header>
+          <BsAccordion.Body className="text-big-normal">
             <hr />
             {content.children}
           </BsAccordion.Body>

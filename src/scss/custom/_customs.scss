@@ -48,13 +48,6 @@ h4 {
   }
 }
 
-h5 {
-  @include h5-normal;
-  &.strong {
-    @include h5-bold;
-  }
-}
-
 .h1-normal {
   @include h1-normal;
 }
@@ -81,13 +74,6 @@ h5 {
 }
 .h4-bold {
   @include h4-bold;
-}
-
-.h5-normal {
-  @include h5-normal;
-}
-.h5-bold {
-  @include h5-bold;
 }
 
 .text-big-normal {

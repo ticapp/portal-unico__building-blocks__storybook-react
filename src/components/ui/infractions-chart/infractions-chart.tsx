@@ -107,7 +107,7 @@ export function InfractionsChart({
       <Row>
         <Row className="mb-24">
           <Col>
-            <h2 className="h5-bold mb-8">{graphicTitle}</h2>
+            <h2 className="h4-bold mb-8">{graphicTitle}</h2>
             <div className="text-medium-normal fc-neutral-dark">{graphicDescription}</div>
           </Col>
         </Row>
@@ -148,7 +148,7 @@ export function InfractionsChart({
             link={link}
             title={title}
             isExternal={isExternal}
-            className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold font-lato'}
+            className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold'}
           >
             {linkLabel}
           </Link>
