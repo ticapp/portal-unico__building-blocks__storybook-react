@@ -1,5 +1,5 @@
 import { create } from '@storybook/theming';
-import logo from '../src/assets/img/logo_ticapp.png'
+import logo from '../src/assets/img/logo_ticapp.png';
 
 export default create({
   base: 'light',
@@ -7,6 +7,5 @@ export default create({
   brandUrl: 'https://github.com/ticapp/portal-unico__building-blocks__storybook-react',
   brandImage: logo,
   brandTarget: '_self',
-
-  fontBase: '"Lato", sans-serif',
+  fontBase: '"Lato Regular", sans-serif'
 });

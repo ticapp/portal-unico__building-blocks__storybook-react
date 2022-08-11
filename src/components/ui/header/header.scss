@@ -6,7 +6,7 @@
       &.language-selector {
         .combo-input {
           .tags {
-            @include index.h5-bold;
+            @include index.h4-bold;
             font-size: map-get(index.$font-sizes, 14);
             line-height: map-get(index.$line-heights, 24);
           }
@@ -20,7 +20,7 @@
 
         .combo-menu {
           .combo-option-content {
-            @include index.h5-bold;
+            @include index.h4-bold;
             font-size: map-get(index.$font-sizes, 14);
             line-height: map-get(index.$line-heights, 24);
           }
@@ -97,7 +97,7 @@
               }
 
               .tags {
-                @include index.h5-bold;
+                @include index.h4-bold;
                 font-size: map-get(index.$font-sizes, 14);
                 line-height: map-get(index.$line-heights, 24);
                 color: index.$neutral-white;
@@ -107,7 +107,7 @@
             .combo-menu {
               .combo-option {
                 .combo-option-content {
-                  @include index.h5-bold;
+                  @include index.h4-bold;
                   font-size: map-get(index.$font-sizes, 14);
                   line-height: map-get(index.$line-heights, 24);
 
