@@ -372,7 +372,7 @@ const CustomDropdown = ({
         onMouseDown={onComboMouseDown}
         onKeyDown={onComboKeyDown}
       >
-        {dropdownControls && dropdownControls}
+        {!!dropdownControls && dropdownControls}
         {!dropdownControls && <span>{selectedIndex < 0 ? '' : options[selectedIndex].label}</span>}
         <Icon className="ms-8" icon={isOpen ? 'ama-chevron-up' : 'ama-chevron-down'} size="sm" ariaHidden />
       </div>
