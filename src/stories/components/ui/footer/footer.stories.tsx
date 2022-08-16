@@ -22,8 +22,8 @@ export const BasicFooter: Story<FooterProps> = () => {
     headerTitle03: 'Redes sociais',
     classFooterCopyright: 'text-center',
     classFooterCol01: 'bg-brand-yellow-terciary',
-    classFooterCol02: 'bg-brand-yellow-secondary border border-white border-bottom-0 border-top-0',
-    classFooterCol03: 'bg-brand-yellow-main border-white border-top-0 border-bottom-0',
+    classFooterCol02: 'bg-brand-yellow-secondary',
+    classFooterCol03: 'bg-brand-yellow-main',
     styleBackgroundFooterColor: { background: 'linear-gradient(to left, #fbcf5f 25%, #f5c037 25%, #efb82e 50%)' },
     listDataCol01: [
       {
@@ -35,7 +35,7 @@ export const BasicFooter: Story<FooterProps> = () => {
         ),
         hasExternalLink: true,
         link: 'https://eportugal.gov.pt/contactos',
-        title: 'external link'
+        title: 'abre numa nova janela'
       },
       {
         value: (
@@ -44,9 +44,9 @@ export const BasicFooter: Story<FooterProps> = () => {
             <span className="col-11 text-medium-normal"> Linhas úteis </span>
           </>
         ),
-        hasExternalLink: false,
-        link: 'https://eportugal.gov.pt/utils',
-        title: 'internal link'
+        hasExternalLink: true,
+        link: 'https://eportugal.gov.pt/linhas-uteis',
+        title: 'abre numa nova janela'
       }
     ],
     listDataCol02: [
@@ -58,8 +58,8 @@ export const BasicFooter: Story<FooterProps> = () => {
           </>
         ),
         hasExternalLink: true,
-        link: 'https://eportugal.gov.pt',
-        title: 'external link'
+        link: 'https://www.app.gov.pt',
+        title: 'abre numa nova janela'
       },
       {
         value: (
@@ -69,8 +69,8 @@ export const BasicFooter: Story<FooterProps> = () => {
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/mapa',
-        title: 'internal link'
+        link: 'https://eportugal.gov.pt/mapa-do-site',
+        title: 'abre numa nova janela'
       },
       {
         value: (
@@ -80,8 +80,8 @@ export const BasicFooter: Story<FooterProps> = () => {
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/terms',
-        title: 'internal link'
+        link: 'https://eportugal.gov.pt/termos-e-condicoes',
+        title: 'abre numa nova janela'
       },
       {
         value: (
@@ -91,28 +91,28 @@ export const BasicFooter: Story<FooterProps> = () => {
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/about',
-        title: 'internal link'
+        link: 'https://eportugal.gov.pt/sobre',
+        title: 'abre numa nova janela'
       }
     ],
     listDataCol03: [
       {
-        value: <Icon ariaHidden="true" icon="ama-twitter" alt="AMA Twitter" />,
+        value: <Icon ariaHidden="true" icon="ama-twitter" alt="AMA Twitter" size="sm" />,
         hasExternalLink: true,
-        link: 'https://twitter.com',
-        title: 'Twitter'
+        link: 'https://www.twitter.com/ama_gov_pt',
+        title: 'Página da Agência para a Modernização Administrativa no Twitter'
       },
       {
-        value: <Icon ariaHidden="true" icon="ama-facebook" alt="AMA Facebook" />,
+        value: <Icon ariaHidden="true" icon="ama-facebook" alt="AMA Facebook" size="sm" />,
         hasExternalLink: true,
-        link: 'https://facebook.com',
-        title: 'facebook'
+        link: 'https://www.facebook.com/ama.gov.pt',
+        title: 'Página da Agência para a Modernização Administrativa no Facebook'
       },
       {
-        value: <Icon ariaHidden="true" icon="ama-linkedin" alt="AMA Linkedin" />,
+        value: <Icon ariaHidden="true" icon="ama-linkedin" alt="AMA Linkedin" size="sm" />,
         hasExternalLink: true,
-        link: 'https://www.linkedin.com/',
-        title: 'linkedin'
+        link: 'https://www.linkedin.com/company/ama-gov-pt/',
+        title: 'Página da Agência para a Modernização Administrativa no Linkedin'
       }
     ],
     listDataRowImagesLink: [
