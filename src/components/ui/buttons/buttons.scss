@@ -22,30 +22,32 @@ $threshold: 55%;
       $background: $value,
       $border: $value,
       $color: contrast-color($value, $value, index.$neutral-white),
-      $hover-background: check-light($value, index.$color-contrast-light),
+      $hover-background: check-light($value, index.$color-contrast-light) !important,
       $hover-border: $value,
-      $hover-color: contrast-color(check-light($value, index.$color-contrast-light), $value, index.$neutral-white),
+      $hover-color: contrast-color(check-light($value, index.$color-contrast-light), $value, index.$neutral-white) !important,
       $active-background: check-light($value, transparent),
       $active-border: $value,
       $active-color: contrast-color($value, index.$neutral-white, $value)
     );
     &:hover {
       svg {
-        fill: contrast-color($value, $value, index.$neutral-white);
+        fill: $value;
       }
     }
     .btn-check:focus + &,
     &:focus {
-      background: contrast-color($value, transparent, $value);
-      color: contrast-color($value, $value, index.$neutral-white);
-      border-color: findColor($color, 'fourth');
-      border-width: 1px;
+      background: contrast-color($value, transparent, $value) !important;
+      color: contrast-color($value, $value, index.$neutral-white) !important;
+      box-shadow: 0 0 0 2px findColor($color, 'fourth') inset !important;
+
       svg {
         fill: contrast-color($value, $value, index.$neutral-white);
       }
     }
     svg {
       fill: contrast-color($value, $value, index.$neutral-white);
+      width: 28px !important;
+      height: 28px !important;
     }
   }
 }
@@ -56,23 +58,29 @@ $threshold: 55%;
       $color: $value,
       $color-hover: contrast-color(check-light($value, index.$color-contrast-light), index.$neutral-white, $value)
     );
+
+    background: contrast-color($value, transparent, index.$neutral-white) !important;
+
     &:hover {
+      background: contrast-color($value, index.$neutral-white, $value) !important;
+
       svg {
         fill: contrast-color($value, $value, index.$neutral-white);
       }
     }
     .btn-check:focus + &,
     &:focus {
-      background: contrast-color($value, $value, transparent);
-      color: contrast-color($value, index.$neutral-white, $value);
-      border-color: findColor($color, 'fourth');
-      border-width: 1px;
+      background: contrast-color($value, $value, transparent) !important;
+      color: contrast-color($value, index.$neutral-white, $value) !important;
+      box-shadow: 0 0 0 2px findColor($color, 'fourth') inset !important;
       svg {
         fill: contrast-color($value, index.$neutral-white, $value);
       }
     }
     svg {
       fill: contrast-color($value, index.$neutral-white, $value);
+      width: 28px !important;
+      height: 28px !important;
     }
   }
 }
