@@ -19,9 +19,9 @@ $btn-padding-y: 0.813rem;
 $btn-padding-y-sm: 0.563rem;
 $btn-padding-y-lg: $btn-padding-y;
 
-$btn-font-size: 1rem;
-$btn-line-height: 1.75rem;
-$btn-font-weight: $font-weight-bold;
+$btn-font-size: map-get($font-sizes, 16);
+$btn-line-height: map-get($line-heights, 28);
+$btn-font-weight: map-get($font-weights, 700);
 $btn-font-family: $font-family-lato-regular;
 $btn-font-size-sm: $btn-font-size;
 $btn-font-size-lg: $btn-font-size;

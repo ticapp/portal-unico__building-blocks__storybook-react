@@ -113,4 +113,5 @@ a {
   min-width: 44px;
   min-height: 44px;
   align-items: center;
+  font-weight: map-get($font-weights, 700);
 }
