@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { KeyboardEvent, MouseEvent, useId, useMemo, useRef, useState } from 'react';
+import React, { KeyboardEvent, MouseEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useOutsideElementClick } from '../../hooks';
 import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
@@ -43,6 +43,12 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
   const [availableOptions, setAvailableOptions] = useState(options);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(tags);
+    }
+  }, [tags]);
 
   const openListBox = () => {
     setIsOpen(true);
