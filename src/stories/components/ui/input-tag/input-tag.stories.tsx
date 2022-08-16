@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { ComponentMeta, Story } from '@storybook/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { v4 as uuidv4 } from 'uuid';
 import { InputTag, InputTagOption, InputTagProps } from '../../../../components';
 
@@ -15,6 +16,10 @@ export const SimpleTagInput: Story<InputTagProps> = (args) => {
   useEffect(() => {
     console.log(tags);
   }, [tags]);
+
+  const handleSetTags = (value: InputTagOption[]) => {
+    setTags(value);
+  };
 
   return (
     <>
@@ -52,7 +57,7 @@ export const SimpleTagInput: Story<InputTagProps> = (args) => {
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <label id="my-label">My Options</label>
-      <InputTag onChange={(e) => setTags(e)} labeledBy="my-label" options={args.options} />
+      <InputTag onChange={(e) => handleSetTags(e)} labeledBy="my-label" options={args.options} />
       <input />
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
