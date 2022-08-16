@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { FC } from 'react';
 import { Image } from 'react-bootstrap';
 import { UrlObject } from 'url';
@@ -33,16 +32,15 @@ const Logo: FC<LogoProps> = ({
   homepageLink = '/',
   isHomepage = false
 }: LogoProps) => {
-  const classes = classNames('ama-logo d-flex mb-0', { h1: isHomepage });
   return (
     <>
       {isHomepage && (
-        <h1 className={classes}>
+        <h1 className="ama-logo mb-0 lh-0 fs-0">
           <Image src={src} alt={alt} width={width} height={height} />
         </h1>
       )}
       {!isHomepage && (
-        <div className={classes}>
+        <div className="ama-logo lh-0 fs-0">
           <Link link={homepageLink} title={title} aria-label={title}>
             <Image src={src} alt={alt} width={width} height={height} />
           </Link>
