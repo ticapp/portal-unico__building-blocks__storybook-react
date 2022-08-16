@@ -43,6 +43,7 @@ $font-family-lato-heavy: 'Lato Heavy', sans-serif;
 
 //Fonts
 $font-sizes: (
+  0: 0,
   1: $h1-font-size,
   2: $h2-font-size,
   3: $h3-font-size,
@@ -61,7 +62,8 @@ $font-sizes: (
 
 //Line-heights
 $line-heights: (
-  1: 1,
+  0: 0,
+  1: 0.063rem,
   sm: $line-height-sm,
   base: $line-height-base,
   lg: $line-height-lg,

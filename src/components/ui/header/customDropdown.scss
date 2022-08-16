@@ -1,0 +1,30 @@
+@use '../../../scss/index.scss' as index;
+
+.custom-dropdown {
+  .custom-dropdown-menu {
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    max-height: 228px;
+    border: 2px solid index.$brand-green-main;
+    background-color: index.$white;
+    z-index: 9999;
+
+    .custom-dropdown-option {
+      display: flex;
+
+      &.selected {
+        &.checked {
+          &:after {
+            content: '\2714';
+          }
+        }
+      }
+
+      &.hover,
+      &:hover {
+        background-color: index.$brand-green-hover;
+      }
+    }
+  }
+}

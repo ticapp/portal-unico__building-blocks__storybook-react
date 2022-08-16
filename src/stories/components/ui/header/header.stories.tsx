@@ -7,17 +7,7 @@ import React from 'react';
 import { Image } from 'react-bootstrap';
 import { BrowserRouter } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  Footer,
-  FooterProps,
-  Header,
-  HeaderProps,
-  HorizontalMenuLink,
-  Icon,
-  InputTag,
-  SelectOption,
-  UserAreaOption
-} from '../../../../components';
+import { CustomDropdownOption, Footer, FooterProps, Header, HeaderProps, Icon, InputTag, UserAreaOption } from '../../../../components';
 
 export default {
   title: 'Components/Header',
@@ -28,29 +18,6 @@ export default {
 } as ComponentMeta<typeof Header>;
 
 export const HeaderExample: Story<HeaderProps> = (props) => {
-  const links: HorizontalMenuLink[] = [
-    {
-      id: '1',
-      label: 'Serviços',
-      link: '/services'
-    },
-    {
-      id: '2',
-      label: 'Entidades',
-      link: '/entities'
-    },
-    {
-      id: '3',
-      label: 'Atendimento',
-      link: '/attendance'
-    },
-    {
-      id: '4',
-      label: 'Notícias',
-      link: '/news'
-    }
-  ];
-
   const options = [
     {
       authenticatedOption: false,
@@ -79,11 +46,20 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
     }
   ] as UserAreaOption[];
 
-  const languages: SelectOption[] = [
-    { label: 'PT', value: 'pt' },
-    { label: 'EN', value: 'en' },
-    { label: 'ES', value: 'es' }
-  ];
+  const languages = [
+    {
+      label: 'PT',
+      value: 'pt'
+    },
+    {
+      label: 'ES',
+      value: 'es'
+    },
+    {
+      label: 'EN',
+      value: 'en'
+    }
+  ] as CustomDropdownOption[];
 
   const languageChangeHandler = (val) => {
     console.log(val);
@@ -98,6 +74,7 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
       <Header
         isHomepage={props.isHomepage}
         logoSrc="/logo.svg"
+        logoAlt="Homepage"
         isAuthenticated={props.isAuthenticated}
         username="Area reservada"
         homepageLink="/"
@@ -105,7 +82,6 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
         activeLanguage={languages[0]}
         options={options}
         onOptionChange={onOptionChange}
-        links={links}
         onLanguageChange={languageChangeHandler}
       />
     </BrowserRouter>
@@ -114,29 +90,6 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
 HeaderExample.storyName = 'Header example';
 
 export const HeaderFooterExample: Story<HeaderProps> = (props) => {
-  const links: HorizontalMenuLink[] = [
-    {
-      id: '1',
-      label: 'Serviços',
-      link: '/services'
-    },
-    {
-      id: '2',
-      label: 'Entidades',
-      link: '/entities'
-    },
-    {
-      id: '3',
-      label: 'Atendimento',
-      link: '/attendance'
-    },
-    {
-      id: '4',
-      label: 'Notícias',
-      link: '/news'
-    }
-  ];
-
   const options = [
     {
       authenticatedOption: false,
@@ -165,11 +118,20 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
     }
   ] as UserAreaOption[];
 
-  const languages: SelectOption[] = [
-    { label: 'PT', value: 'pt' },
-    { label: 'EN', value: 'en' },
-    { label: 'ES', value: 'es' }
-  ];
+  const languages = [
+    {
+      label: 'PT',
+      value: 'pt'
+    },
+    {
+      label: 'ES',
+      value: 'es'
+    },
+    {
+      label: 'EN',
+      value: 'en'
+    }
+  ] as CustomDropdownOption[];
 
   const args = {
     headerTitle01: 'Contactos e sites Públicos',
@@ -332,6 +294,10 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
     { label: 'Jane Doe', id: uuidv4() }
   ];
 
+  const languageChangeHandler = (val) => {
+    console.log(val);
+  };
+
   const onOptionChange = (val: UserAreaOption) => {
     console.log(val);
   };
@@ -341,6 +307,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
       <Header
         isHomepage={props.isHomepage}
         logoSrc="/logo.svg"
+        logoAlt="Homepage"
         isAuthenticated={props.isAuthenticated}
         username="Area reservada"
         homepageLink="/"
@@ -348,7 +315,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
         activeLanguage={languages[0]}
         options={options}
         onOptionChange={onOptionChange}
-        links={links}
+        onLanguageChange={languageChangeHandler}
       />
 
       <label id="my-label">My Options</label>
