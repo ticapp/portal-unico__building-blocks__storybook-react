@@ -16,8 +16,16 @@ const Template: ComponentStory<typeof Link> = (args) => (
 
 export const BasicReactRouterDomLink = Template.bind({});
 BasicReactRouterDomLink.args = {
-  link: 'https://www.google.com',
+  link: 'https://www.google.com/xpto',
   isExternal: true,
   target: '_blank',
-  children: 'Redirect To Google'
+  children: 'Redirect To Google',
+  className: 'bg-neutral-light'
+};
+
+BasicReactRouterDomLink.argTypes = {
+  linkTheme: {
+    options: ['ama-link-brand-green-main', 'ama-link-neutral-white', 'ama-link-brand-yellow-main', 'ama-link-semantic-info'],
+    control: { type: 'select' }
+  }
 };
