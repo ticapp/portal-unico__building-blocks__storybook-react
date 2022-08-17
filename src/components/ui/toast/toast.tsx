@@ -17,10 +17,17 @@ export interface ToastProps {
   autoClose?: false | number;
 }
 
+const iconName = {
+  info: 'ama-info',
+  error: 'ama-error-filled',
+  warning: 'ama-warning-triangle',
+  success: 'ama-checkmark-filled'
+};
+
 export function toast(content: ToastContent, props?: ToastProps) {
   const toastBuilder = () => (
     <div>
-      <Icon className={`ama-toast-icon ${content.type}`} size="lg" icon="ama-warning-triangle" />
+      <Icon className={`ama-toast-icon ${content.type}`} size="lg" icon={iconName[content.type]} />
       {content.text}
     </div>
   );

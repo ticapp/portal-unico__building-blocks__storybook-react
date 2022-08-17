@@ -1,6 +1,5 @@
 const iconList: Record<string, string> = {
   'ama-add-user': './AmaAddUser',
-  'ama-alert': './AmaAlert',
   'ama-arrow-down-right': './AmaArrowDownRight',
   'ama-arrow-left': './AmaArrowLeft',
   'ama-arrow-left-circle': './AmaArrowLeftCircle',
@@ -17,6 +16,7 @@ const iconList: Record<string, string> = {
   'ama-checkbox-checked-disabled': './AmaCheckboxCheckedDisabled',
   'ama-checkbox-focus': './AmaCheckboxFocus',
   'ama-checkbox-checked-focus': './AmaCheckboxCheckedFocus',
+  'ama-checkmark-filled': './AmaCheckmarkFilled',
   'ama-chevron-up': './AmaChevronUp',
   'ama-chevron-down': './AmaChevronDown',
   'ama-chevron-left': './AmaChevronLeft',
@@ -26,6 +26,7 @@ const iconList: Record<string, string> = {
   'ama-close': './AmaClose',
   'ama-collapse': './AmaCollapse',
   'ama-error': './AmaError',
+  'ama-error-filled': './AmaErrorFilled',
   'ama-expand': './AmaExpand',
   'ama-facebook': './AmaFacebook',
   'ama-face-satisfied': './AmaFaceSatisfied',
