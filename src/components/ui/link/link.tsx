@@ -29,6 +29,8 @@ export interface LinkProps {
   role?: string;
   /** Set link tab-index */
   tabIndex?: number;
+  /** Themes for Link */
+  linkTheme?: string;
 }
 
 export function Link({
@@ -41,9 +43,10 @@ export function Link({
   replace = false,
   scroll,
   role,
-  tabIndex = 0
+  tabIndex = 0,
+  linkTheme = 'ama-link-brand-green-main'
 }: LinkProps) {
-  const classes = classNames('ama-link', className);
+  const classes = classNames('ama-link', linkTheme, className);
 
   const { isNextJs } = usePlatform();
 

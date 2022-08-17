@@ -44,3 +44,31 @@
     }
   }
 }
+
+// Theme Links
+@mixin link-variant(
+  $color,
+  $text-underline-offset,
+  $hover-color,
+  $visited-color,
+  $visited-hover-color,
+  $disabled-color,
+  $disabled-opacity
+) {
+  color: $color;
+  text-underline-offset: $text-underline-offset;
+  &:hover {
+    color: $hover-color;
+  }
+  &:visited {
+    color: $visited-color;
+    &:hover {
+      color: $visited-hover-color;
+    }
+  }
+  &.disabled {
+    color: $disabled-color;
+    opacity: $disabled-opacity;
+    pointer-events: none;
+  }
+}
