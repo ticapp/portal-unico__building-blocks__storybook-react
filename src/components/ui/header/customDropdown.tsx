@@ -389,7 +389,7 @@ const CustomDropdown = ({
           const isSelected = selectedIndex === i;
 
           const optionClassnames = classNames(
-            'custom-dropdown-option w-100 d-flex align-items-center px-20 py-4',
+            'custom-dropdown-option w-100 d-flex align-items-center px-16 py-8',
             { selected: isSelected },
             { checked: isSelected && showCheckMark },
             { hover: hoverIndex === i }

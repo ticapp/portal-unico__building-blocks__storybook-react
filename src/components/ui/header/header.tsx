@@ -58,13 +58,14 @@ const Header = ({
 }) => {
   return (
     <Container fluid className="ama-header m-0 p-0">
-      <Container className="upper-lvl px-16 pb-0 pb-md-16">
+      <Container className="upper-lvl px-0 px-md-16 pb-0 pb-md-16">
         <Row>
-          <Col xs={12} md={2}>
+          <Col className="px-16" xs={12} md={2}>
             <Logo src={logoSrc} alt={logoAlt} isHomepage={isHomepage} homepageLink={homepageLink} title={homepageLinkTitle} />
           </Col>
-          <Col xs={12} md={10} className="d-flex justify-content-between justify-content-md-end align-items-center">
-            <div className="language-selector-container p-12">
+          <hr className="d-block d-md-none m-0 mt-16 p-0 " />
+          <Col xs={12} md={10} className="d-flex justify-content-between justify-content-md-end align-items-center p-16">
+            <div className="language-selector-container">
               <CustomDropdown
                 showCheckMark
                 active={activeLanguage}
@@ -73,7 +74,7 @@ const Header = ({
                 onChange={onLanguageChange}
               />
             </div>
-            <div className="user-area-container p-12">
+            <div className="user-area-container ms-8">
               <UserArea options={options} onOptionChange={onOptionChange} isAuthenticated={isAuthenticated} username={username} />
             </div>
           </Col>
