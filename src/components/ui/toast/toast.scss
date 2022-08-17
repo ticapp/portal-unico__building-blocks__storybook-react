@@ -1,0 +1,23 @@
+@use '../../../scss/index.scss' as index;
+
+.ama-toast{
+	&-info {
+		background: yellow;
+		border-left: 2px solid index.$semantic-info;
+	}
+
+	&-warning {
+		background: yellow;
+		border-left: 2px solid #eed600;
+	}
+
+	&-error {
+		background: yellow;
+		border-left: 2px solid index.$semantic-alerts;
+	}
+
+	&-success {
+		background: yellow;
+		border-left: 2px solid index.$semantic-alerts;
+	}
+}
