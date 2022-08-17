@@ -10,7 +10,37 @@ export default {
   title: 'Components/Toast'
 };
 
-export const BasicTabs: Story = () => {
+export const ErrorToast: Story = () => {
+  const onClick = () => {
+    toast({ type: 'error', text: 'Hi there!' });
+  };
+
+  return (
+    <div>
+      <Button onClick={onClick}>show toast</Button>
+      <ToastContainer />
+    </div>
+  );
+};
+
+ErrorToast.storyName = 'Error toast';
+
+export const WarningToast: Story = () => {
+  const onClick = () => {
+    toast({ type: 'warning', text: 'Hi there!' });
+  };
+
+  return (
+    <div>
+      <Button onClick={onClick}>show toast</Button>
+      <ToastContainer />
+    </div>
+  );
+};
+
+WarningToast.storyName = 'Warning toast';
+
+export const InfoToast: Story = () => {
   const onClick = () => {
     toast({ type: 'info', text: 'Hi there!' });
   };
@@ -23,4 +53,19 @@ export const BasicTabs: Story = () => {
   );
 };
 
-BasicTabs.storyName = 'Toast';
+InfoToast.storyName = 'Info toast';
+
+export const SuccessToast: Story = () => {
+  const onClick = () => {
+    toast({ type: 'success', text: 'Hi there!' });
+  };
+
+  return (
+    <div>
+      <Button onClick={onClick}>show toast</Button>
+      <ToastContainer />
+    </div>
+  );
+};
+
+SuccessToast.storyName = 'Success toast';

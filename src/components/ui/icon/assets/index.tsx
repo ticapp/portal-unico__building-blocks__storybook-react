@@ -1,5 +1,6 @@
 const iconList: Record<string, string> = {
   'ama-add-user': './AmaAddUser',
+  'ama-alert': './AmaAlert',
   'ama-arrow-down-right': './AmaArrowDownRight',
   'ama-arrow-left': './AmaArrowLeft',
   'ama-arrow-left-circle': './AmaArrowLeftCircle',
@@ -30,6 +31,7 @@ const iconList: Record<string, string> = {
   'ama-face-satisfied': './AmaFaceSatisfied',
   'ama-first-page': './AmaFirstPage',
   'ama-home': './AmaHome',
+  'ama-info': './AmaInfo',
   'ama-last-page': './AmaLastPage',
   'ama-linkedin': './AmaLinkedin',
   'ama-login': './AmaLogin',

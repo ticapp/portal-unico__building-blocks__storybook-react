@@ -20,7 +20,7 @@ export interface ToastProps {
 export function toast(content: ToastContent, props?: ToastProps) {
   const toastBuilder = () => (
     <div>
-      <Icon icon="ama-arrow-up" />
+      <Icon className={`ama-toast-icon ${content.type}`} size="lg" icon="ama-warning-triangle" />
       {content.text}
     </div>
   );

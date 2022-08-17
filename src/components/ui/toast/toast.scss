@@ -1,23 +1,41 @@
 @use '../../../scss/index.scss' as index;
 
 .ama-toast{
+	color: index.$neutral-black;
+
+	&-icon {
+		padding-right: 16px;
+		&.info {
+			fill: index.$semantic-info;
+		}
+		&.warning {
+			fill: index.$semantic-warning;
+		}
+		&.error {
+			fill: index.$semantic-alerts;
+		}
+		&.success {
+			fill: index.$semantic-success;
+		}
+	}
+
 	&-info {
-		background: yellow;
+		background: index.$semantic-info-lighter;
 		border-left: 2px solid index.$semantic-info;
 	}
 
 	&-warning {
-		background: yellow;
-		border-left: 2px solid #eed600;
+		background: index.$semantic-warning-lighter;
+		border-left: 2px solid index.$semantic-warning;
 	}
 
 	&-error {
-		background: yellow;
+		background: index.$semantic-alerts-lighter;
 		border-left: 2px solid index.$semantic-alerts;
 	}
 
 	&-success {
-		background: yellow;
-		border-left: 2px solid index.$semantic-alerts;
+		background: index.$semantic-success-light;
+		border-left: 2px solid index.$semantic-success;
 	}
 }
