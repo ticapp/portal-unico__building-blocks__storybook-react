@@ -17,8 +17,16 @@ $brand-yellow-terciary: #efb82e;
 $brand-yellow-fourth: #fff0cb;
 
 $semantic-success: #3ec663;
+$semantic-success-light: #e2f7e8;
+
 $semantic-info: #7bb1e5;
+$semantic-info-lighter: #e5f2fb;
+
 $semantic-alerts: #aa120a;
+$semantic-alerts-lighter: #fdd5d4;
+
+$semantic-warning: #eed600;
+$semantic-warning-lighter: #f8f4e1;
 
 $details-links-visited: #661299;
 
@@ -42,8 +50,13 @@ $theme-colors: map-merge(
     'brand-yellow-terciary': $brand-yellow-terciary,
     'brand-yellow-fourth': $brand-yellow-fourth,
     'semantic-success': $semantic-success,
+    'semantic-success-light': $semantic-success-light,
     'semantic-info': $semantic-info,
+    'semantic-info-lighter': $semantic-info-lighter,
     'semantic-alerts': $semantic-alerts,
+    'semantic-alerts-lighter': $semantic-alerts-lighter,
+    'semantic-warning': $semantic-warning,
+    'semantic-warning-lighter': $semantic-warning-lighter,
     'details-links-visited': $details-links-visited
   )
 );
@@ -65,7 +78,12 @@ $colors: (
   'brand-yellow-terciary': $brand-yellow-terciary,
   'brand-yellow-fourth': $brand-yellow-fourth,
   'semantic-success': $semantic-success,
+  'semantic-success-light': $semantic-success-light,
   'semantic-info': $semantic-info,
+  'semantic-info-lighter': $semantic-info-lighter,
   'semantic-alerts': $semantic-alerts,
+  'semantic-alerts-lighter': $semantic-alerts-lighter,
+  'semantic-warning': $semantic-warning,
+  'semantic-warning-lighter': $semantic-warning-lighter,
   'details-links-visited': $details-links-visited
 );

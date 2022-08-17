@@ -3,13 +3,24 @@
 .ama {
   &-footer {
     h2 {
+      font-family: index.$font-family-lato-bold;
       font-size: 1.5rem !important;
-      line-height: 36px !important;
-      font-weight: 700 !important;
       margin-bottom: 24px;
       @media screen and (max-width: 991px) {
         font-size: 1.25rem !important;
         text-transform: uppercase;
+      }
+    }
+
+    a {
+      min-height: auto;
+      min-width: auto;
+      span {
+        font-size: 0.875rem !important;
+        font-weight: 400 !important;
+      }
+      &:last-of-type {
+        margin-bottom: 0px;
       }
     }
 
@@ -26,20 +37,26 @@
         &:focus-visible {
           outline: 1px solid index.$brand-green-fourth;
         }
+        &:visited {
+          color: index.$details-links-visited;
+          fill: index.$details-links-visited;
+          &:hover {
+            color: index.$neutral-black;
+            fill: index.$neutral-black;
+          }
+        }
       }
       &-detail {
         p {
           font-size: 0.875rem !important;
-          line-height: 36px !important;
-          font-weight: 400 !important;
+          margin-bottom: 0 !important;
           &.strong {
+            font-family: index.$font-family-lato-heavy;
             font-size: 1.375rem !important;
-            line-height: 36px !important;
-            font-weight: 700 !important;
           }
         }
         &:last-of-type {
-          margin-bottom: 0px;
+          margin-bottom: 0px !important;
         }
       }
     }
@@ -57,7 +74,7 @@
       .ama-list {
         a {
           font-size: 0.875rem !important;
-          line-height: 36px !important;
+          line-height: 2.25rem !important;
           font-weight: 400 !important;
         }
       }
@@ -90,10 +107,34 @@
       }
     }
 
+    &-section-info-col-02 {
+      border-left: 1px solid index.$neutral-white;
+      border-right: 1px solid index.$neutral-white;
+      border-top: 0px;
+      border-bottom: 0px;
+
+      @media screen and (max-width: 991px) {
+        border-left: 0px;
+        border-right: 0px;
+        border-top: 1px solid index.$neutral-white;
+        border-bottom: 1px solid index.$neutral-white;
+      }
+    }
+
     &-section-info-col-03 {
       padding-right: 0 !important;
       @media screen and (max-width: 991px) {
         padding: 20px !important;
+      }
+      .ama-list {
+        li {
+          overflow: hidden;
+          vertical-align: middle;
+          a {
+            min-width: 50px;
+            min-height: 50px;
+          }
+        }
       }
     }
 
@@ -105,7 +146,7 @@
     }
 
     &-logos {
-      padding: 30px 60px !important;
+      padding: 30px 15px !important;
       @media screen and (max-width: 991px) {
         padding: 20px 0px !important;
       }
@@ -119,6 +160,9 @@
       .ama-list {
         li {
           @media screen and (max-width: 991px) {
+            a {
+              margin-bottom: 30px;
+            }
             @include index.media-breakpoint-up(xs) {
               @include index.make-col(4);
             }

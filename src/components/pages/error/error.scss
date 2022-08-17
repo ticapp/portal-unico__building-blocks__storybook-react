@@ -3,11 +3,11 @@
 .ama {
   &-error-page {
     h1 {
-      @include index.h2-normal;
+      @include index.h4-normal;
     }
 
     span {
-      @include index.text-big-bold;
+      @include index.text-big-normal;
     }
 
     .link {
