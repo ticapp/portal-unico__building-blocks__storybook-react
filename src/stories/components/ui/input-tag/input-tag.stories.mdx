@@ -34,9 +34,9 @@ const options = [
 
 const [tags, setTags] = useState([] as InputTagOption[]);
 
-useEffect(() => {
-  console.log(tags);
-}, [tags]);
+const handleSetTags = (value: InputTagOption[]) => {
+  setTags(value);
+};
 
-<InputTag onChange={(e) => setTags(e)} options={options} />
+<InputTag onChange={(e) => handleSetTags(e)} options={options} />
 ```

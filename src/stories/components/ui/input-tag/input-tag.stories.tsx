@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { ComponentMeta, Story } from '@storybook/react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 import { InputTag, InputTagOption, InputTagProps } from '../../../../components';
@@ -11,12 +11,8 @@ export default {
 } as ComponentMeta<typeof InputTag>;
 
 export const SimpleTagInput: Story<InputTagProps> = (args) => {
-  const [tags, setTags] = useState([] as InputTagOption[]);
-
-  console.log(tags);
-
   const handleSetTags = (value: InputTagOption[]) => {
-    setTags(value);
+    console.log(value);
   };
 
   return (
