@@ -174,7 +174,6 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
 
   const updateAvailableOptions = () => {
     const val = inputRef.current?.value || '';
-
     setTags((lastTags) => {
       const newAvailableOptions = options.filter((o) => {
         return !lastTags.find((lt) => lt.id === o.id);
