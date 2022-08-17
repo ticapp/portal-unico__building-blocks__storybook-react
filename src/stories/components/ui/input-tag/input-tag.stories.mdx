@@ -32,5 +32,11 @@ const options = [
     },
 ] as InputTagOption[];
 
-<InputTag options={options} />
+const [tags, setTags] = useState([] as InputTagOption[]);
+
+const handleSetTags = (value: InputTagOption[]) => {
+  setTags(value);
+};
+
+<InputTag onChange={(e) => handleSetTags(e)} options={options} />
 ```

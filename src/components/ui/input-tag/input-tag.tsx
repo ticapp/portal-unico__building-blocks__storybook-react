@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { KeyboardEvent, MouseEvent, useId, useMemo, useRef, useState } from 'react';
+import React, { KeyboardEvent, MouseEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useOutsideElementClick } from '../../hooks';
 import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
@@ -168,9 +168,12 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
     focusByIndex(availableOptions.length - 1);
   };
 
+  useEffect(() => {
+    onChange?.(tags);
+  }, [tags]);
+
   const updateAvailableOptions = () => {
     const val = inputRef.current?.value || '';
-
     setTags((lastTags) => {
       const newAvailableOptions = options.filter((o) => {
         return !lastTags.find((lt) => lt.id === o.id);
@@ -216,7 +219,6 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
     setTags((last) => {
       updateAvailableOptions();
 
-      onChange?.(last);
       return last;
     });
 
