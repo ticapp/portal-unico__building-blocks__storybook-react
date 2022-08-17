@@ -64,7 +64,7 @@ const Header = ({
             <Logo src={logoSrc} alt={logoAlt} isHomepage={isHomepage} homepageLink={homepageLink} title={homepageLinkTitle} />
           </Col>
           <hr className="d-block d-md-none m-0 mt-16 p-0 " />
-          <Col xs={12} md={10} className="d-flex justify-content-between justify-content-md-end align-items-center p-16">
+          <Col xs={12} md={10} className="d-flex justify-content-between justify-content-sm-end align-items-center p-16">
             <div className="language-selector-container">
               <CustomDropdown
                 showCheckMark
