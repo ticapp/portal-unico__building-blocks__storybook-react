@@ -40,7 +40,8 @@ export function toast(content: ToastContent, props?: ToastProps) {
     closeButton: CloseButtonBuilder,
     closeOnClick: false,
     position: 'bottom-right',
-    draggable: false
+    draggable: false,
+    hideProgressBar: true
   });
 }
 

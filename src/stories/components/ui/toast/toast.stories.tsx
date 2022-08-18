@@ -69,3 +69,18 @@ export const SuccessToast: Story = () => {
 };
 
 SuccessToast.storyName = 'Success toast';
+
+export const AutoCloseToast: Story = () => {
+  const onClick = () => {
+    toast({ type: 'info', text: 'I will auto close' }, { autoClose: 1000 });
+  };
+
+  return (
+    <div>
+      <Button onClick={onClick}>show toast</Button>
+      <ToastContainer />
+    </div>
+  );
+};
+
+AutoCloseToast.storyName = 'Auto close toast';
