@@ -25,6 +25,7 @@ export * from './skip-navigation';
 export * from './status-bar';
 export * from './table';
 export * from './tabs';
+export * from './toast';
 export * from './vertical-menu';
 export * from './date-picker';
 export * from './infractions-chart';

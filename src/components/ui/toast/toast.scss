@@ -1,8 +1,21 @@
 @use '../../../scss/index.scss' as index;
+@use '../../../../node_modules/react-toastify/dist/ReactToastify.css';
+
+.ama-toast-container {
+	right: 0 !important;
+}
+
+:root {
+	--toastify-toast-width: 100%;
+	@media screen and (min-width: 991px) {
+		--toastify-toast-width: 694px;
+	}
+}
 
 .ama-toast{
 	color: index.$neutral-black;
 	border-radius: 0;
+	margin: 20px 20px;
 
 	&-close-button {
 		align-self: center;

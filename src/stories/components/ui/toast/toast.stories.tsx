@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Story } from '@storybook/react';
-import { ToastContainer } from 'react-toastify';
-import { Button } from '../../../../components';
-
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from '../../../../components/ui/toast';
+import { Button, toast, ToastContainer } from '../../../../components';
 
 export default {
   title: 'Components/Toast'
 };
 
 export const ErrorToast: Story = () => {
+  const [count, setCount] = useState(1);
   const onClick = () => {
-    toast({ type: 'error', text: 'Hi there!' });
+    setCount((prev) => prev + 1);
+    toast({ type: 'error', text: count });
   };
 
   return (

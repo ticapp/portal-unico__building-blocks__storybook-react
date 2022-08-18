@@ -24,7 +24,7 @@ const iconName = {
   success: 'ama-checkmark-filled'
 };
 
-export function toast(content: ToastContent, props?: ToastProps) {
+export const toast = (content: ToastContent, props?: ToastProps) => {
   const cssToast = classNames('ama-toast', `${content.type}`, props?.className);
 
   const ToastBuilder = () => (
@@ -43,8 +43,8 @@ export function toast(content: ToastContent, props?: ToastProps) {
     draggable: false,
     hideProgressBar: true
   });
-}
+};
 
-export function ToastContainer() {
-  <TC newestOnTop />;
-}
+export const ToastContainer = () => {
+  return <TC newestOnTop className="ama-toast-container" />;
+};
