@@ -3,6 +3,10 @@
 .ama-toast{
 	color: index.$neutral-black;
 
+	&-close-button {
+		align-self: center;
+	}
+
 	&-icon {
 		padding-right: 16px;
 		&.info {
@@ -19,22 +23,22 @@
 		}
 	}
 
-	&-info {
+	&.info {
 		background: index.$semantic-info-lighter;
 		border-left: 2px solid index.$semantic-info;
 	}
 
-	&-warning {
+	&.warning {
 		background: index.$semantic-warning-lighter;
 		border-left: 2px solid index.$semantic-warning;
 	}
 
-	&-error {
+	&.error {
 		background: index.$semantic-alerts-lighter;
 		border-left: 2px solid index.$semantic-alerts;
 	}
 
-	&-success {
+	&.success {
 		background: index.$semantic-success-light;
 		border-left: 2px solid index.$semantic-success;
 	}

@@ -1,5 +1,6 @@
+import classNames from 'classnames';
 import React, { ReactNode } from 'react';
-import { toast as reactToast } from 'react-toastify';
+import { toast as reactToast, ToastContainer as TC } from 'react-toastify';
 import { Icon } from '../icon/icon';
 
 import './toast.scss';
@@ -10,9 +11,8 @@ export interface ToastContent {
 }
 
 export interface ToastProps {
+  /** Add class to component */
   className?: string;
-  /** Specifies toast position */
-  position?: 'top-center' | 'top-left' | 'top-right' | 'bottom-center' | 'bottom-left' | 'bottom-right';
   /** Indicates if toast auto closes */
   autoClose?: false | number;
 }
@@ -25,15 +25,25 @@ const iconName = {
 };
 
 export function toast(content: ToastContent, props?: ToastProps) {
-  const toastBuilder = () => (
+  const cssToast = classNames('ama-toast', `${content.type}`, props?.className);
+
+  const ToastBuilder = () => (
     <div>
       <Icon className={`ama-toast-icon ${content.type}`} size="lg" icon={iconName[content.type]} />
       {content.text}
     </div>
   );
-  reactToast(toastBuilder, {
-    ...props,
+  const CloseButtonBuilder = ({ closeToast }) => <Icon className="ama-toast-close-button" icon="ama-close" onClick={closeToast} />;
+  reactToast(ToastBuilder, {
     autoClose: props?.autoClose ?? false,
-    className: `ama-toast-${content.type}`
+    className: cssToast,
+    closeButton: CloseButtonBuilder,
+    closeOnClick: false,
+    position: 'bottom-right',
+    draggable: false
   });
+}
+
+export function ToastContainer() {
+  <TC newestOnTop />;
 }
