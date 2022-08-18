@@ -2,13 +2,14 @@
 
 .ama-toast{
 	color: index.$neutral-black;
+	border-radius: 0;
 
 	&-close-button {
 		align-self: center;
 	}
 
 	&-icon {
-		padding-right: 16px;
+		margin-right: 16px;
 		&.info {
 			fill: index.$semantic-info;
 		}
