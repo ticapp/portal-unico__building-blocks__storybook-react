@@ -101,7 +101,7 @@ export const Card = ({
               {contentIcon && content && (
                 <div className="d-flex align-items-center">
                   <Icon icon={contentIcon} ariaHidden="true" />
-                  <span className="h4-bold">{content}</span>
+                  <span className="h4-bold ms-8">{content}</span>
                 </div>
               )}
               {children}
