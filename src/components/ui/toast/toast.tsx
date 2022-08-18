@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
-import { toast as reactToast, ToastContainer as TC } from 'react-toastify';
+import { toast as reactToast } from 'react-toastify';
 import { Icon } from '../icon/icon';
 
 import './toast.scss';
@@ -43,8 +43,4 @@ export function toast(content: ToastContent, props?: ToastProps) {
     draggable: false,
     hideProgressBar: true
   });
-}
-
-export function ToastContainer() {
-  <TC newestOnTop />;
 }
