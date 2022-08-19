@@ -1,10 +1,11 @@
 import classNames from 'classnames';
-import React, { ReactNode, useContext } from 'react';
+import React, { ReactNode, useContext, useId } from 'react';
 import { Pagination as BsPagination, PaginationProps as BsPaginationProps } from 'react-bootstrap';
 import { useIsomorphicLayoutEffect, usePaginationData } from '../../hooks';
 
 import { Icon } from '../icon';
-import { Select, SelectOption } from '../select';
+import { Select } from '../select';
+
 import { TableContextType } from '../table';
 import { Context } from '../table/table';
 import './pagination.scss';
@@ -17,7 +18,7 @@ export interface PaginationProps extends BsPaginationProps {
   ariaLabelPaginationNav?: string;
 
   /** Lines Options */
-  linesOptions: SelectOption[];
+  linesOptions: string[] | number[];
 
   /** Data Info */
   data?: Array<{ [key: string]: string | number | boolean | ReactNode }>;
@@ -61,7 +62,7 @@ export const Pagination = ({
   const prevRef = React.useRef<HTMLSpanElement>(null);
   const nextRef = React.useRef<HTMLSpanElement>(null);
   const cssPagination = classNames('ama-pagination', className);
-  const pageData = usePaginationData(linesOptions[0]?.value || (data.length as string | number), data);
+  const pageData = usePaginationData(linesOptions[0] || (data.length as string | number), data);
   const context = useContext<TableContextType>(Context);
 
   useIsomorphicLayoutEffect(() => {
@@ -80,16 +81,22 @@ export const Pagination = ({
               {lineOptionsLabel}
             </label>
           )}
+
           <Select
             id="ama-lines-selector"
             className="lines-selector d-inline-flex"
-            labelledby="lines-per-page"
-            options={linesOptions}
+            aria-labelledby="lines-per-page"
             onChange={pageData?.linesOptionChangeHandler}
-            active={linesOptions[0]}
             disabled={linesOptions.length <= 1}
-            size="xs"
-          />
+            defaultValue={linesOptions[0]}
+          >
+            {linesOptions &&
+              linesOptions.map((o) => (
+                <option key={useId()} value={o}>
+                  {o}
+                </option>
+              ))}
+          </Select>
         </li>
         <li className="px-16">
           <div className="h-100 d-flex align-items-center">

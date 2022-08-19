@@ -93,3 +93,37 @@ $pagination-focus-outline: 0;
 $pagination-hover-color: $neutral-dark;
 $pagination-hover-bg: $neutral-light-grey;
 $pagination-hover-border-color: $neutral-light-grey;
+
+//Select
+$form-select-padding-x: 1rem;
+$form-select-padding-x-sm: 1rem;
+$form-select-padding-x-lg: 1rem;
+
+$form-select-padding-y: 1rem;
+$form-select-padding-y-sm: 1rem;
+$form-select-padding-y-lg: 1rem;
+
+$form-select-font-family: $font-family-lato;
+$form-select-font-size: map-get($font-sizes, 16);
+$form-select-font-size-sm: $form-select-font-size;
+$form-select-font-size-lg: $form-select-font-size;
+
+$form-select-line-height: map-get($line-heights, 24);
+$form-select-font-weight: map-get($font-weights, 400);
+$form-select-color: $neutral-black;
+
+$form-select-bg: $neutral-white;
+
+$form-select-disabled-color: $neutral-dark-grey;
+$form-select-disabled-bg: $neutral-white;
+$form-select-disabled-border-color: $neutral-light-grey;
+
+$form-select-indicator-color: $neutral-black;
+$form-select-indicator: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16.5L4.5 9L5.55 7.95L12 14.4L18.45 7.95L19.5 9L12 16.5Z" fill="#212121"/></svg>');
+$form-select-bg-size: 24px;
+
+$form-select-border-width: $input-border-width;
+$form-select-border-color: $neutral-black;
+$form-select-border-radius: 0px;
+
+$form-select-focus-border-color: $neutral-black;
