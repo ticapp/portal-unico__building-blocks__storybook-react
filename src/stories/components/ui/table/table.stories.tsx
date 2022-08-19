@@ -108,20 +108,7 @@ BasicTable.args = {
       col08: 860
     }
   ],
-  'linesOptions': [
-    {
-      value: 2,
-      label: '2'
-    },
-    {
-      value: 5,
-      label: '5'
-    },
-    {
-      value: 10,
-      label: '10'
-    }
-  ],
+  'linesOptions': [2, 5, 10],
   'pagination': true,
   'itemsCounter': true,
   'pagesCounter': true,
@@ -167,20 +154,7 @@ NoDataTable.args = {
     { value: 'Sanção acessória', sorting: true }
   ],
   'tableData': [],
-  'linesOptions': [
-    {
-      value: 2,
-      label: '2'
-    },
-    {
-      value: 5,
-      label: '5'
-    },
-    {
-      value: 10,
-      label: '10'
-    }
-  ],
+  'linesOptions': [2, 5, 10],
   'pagination': true,
   'itemsCounter': true,
   'pagesCounter': true,
@@ -234,21 +208,7 @@ TotalTable.args = {
       score: 15
     }
   ],
-
-  'linesOptions': [
-    {
-      value: 2,
-      label: '2'
-    },
-    {
-      value: 5,
-      label: '5'
-    },
-    {
-      value: 10,
-      label: '10'
-    }
-  ],
+  'linesOptions': [2, 5, 10],
   'noDataLabel': 'Não existem Movimentos',
   'borderless': true,
   'striped': false,
@@ -375,16 +335,7 @@ ClickableRowsTable.args = {
     }
   ],
 
-  'linesOptions': [
-    {
-      value: 5,
-      label: '5'
-    },
-    {
-      value: 10,
-      label: '10'
-    }
-  ],
+  'linesOptions': ['5', '10'],
   'pagination': true,
   'itemsCounter': true,
   'pagesCounter': true,

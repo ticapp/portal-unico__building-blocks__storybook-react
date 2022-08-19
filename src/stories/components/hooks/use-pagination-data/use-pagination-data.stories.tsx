@@ -1,5 +1,5 @@
 import { Story } from '@storybook/react';
-import React from 'react';
+import React, { useId } from 'react';
 import { Select, usePaginationData } from '../../../../components';
 
 export default {
@@ -30,16 +30,7 @@ export const Example: Story = () => {
     }
   ];
   const pageData = usePaginationData(5, data);
-  const linesOptions = [
-    {
-      value: 5,
-      label: '5'
-    },
-    {
-      value: 10,
-      label: '10'
-    }
-  ];
+  const linesOptions = [5, 10];
 
   return (
     <>
@@ -58,14 +49,19 @@ export const Example: Story = () => {
       </button>
       <Select
         id="ama-lines-selector"
-        className="lines-selector d-inline-flex"
-        labelledby="lines-per-page"
-        options={linesOptions}
+        className="lines-selector"
+        aria-labelledby="lines-per-page"
         onChange={pageData?.linesOptionChangeHandler}
-        active={linesOptions[0]}
         disabled={linesOptions.length <= 1}
-        size="xs"
-      />
+        defaultValue={linesOptions[0]}
+      >
+        {linesOptions &&
+          linesOptions.map((o) => (
+            <option key={useId()} value={o}>
+              {o}
+            </option>
+          ))}
+      </Select>
     </>
   );
 };

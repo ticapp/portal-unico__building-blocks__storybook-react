@@ -8,9 +8,10 @@ $grid-breakpoints: (
 );
 
 $container-max-widths: (
-  sm: 1600px,
-  md: 1600px,
-  lg: 1600px,
-  xl: 1600px,
+  xs: 575px,
+  sm: 767px,
+  md: 991px,
+  lg: 1279px,
+  xl: 1599px,
   xxl: 1600px
 );
