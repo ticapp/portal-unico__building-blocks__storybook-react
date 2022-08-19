@@ -146,7 +146,7 @@ export const Footer = ({
     return contentInfo01?.map((content) => {
       return (
         <div className="ama-footer-section-info-detail mb-40" key={uuidv4()}>
-          <p className="fw-500">{content.label}</p>
+          <p className="fw-400">{content.label}</p>
           <p className="strong fw-900">{content.value}</p>
         </div>
       );
