@@ -1,4 +1,4 @@
-@use '../../../scss/index.scss' as index;
+@use '../../../scss/customs.scss' as index;
 
 //Check if color white keep white, if not goes black
 @function check-coloring($color) {

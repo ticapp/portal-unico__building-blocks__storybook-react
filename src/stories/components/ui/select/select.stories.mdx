@@ -16,28 +16,14 @@ import { Meta } from '@storybook/addon-docs';
 ```tsx
 import { Select } from '@ama/react-design-system';
 
-const options = [
-  {
-    label: 'Option #1',
-    value: 1
-  },
-  {
-    label: 'Option #2',
-    value: 2
-  },
-  {
-    label: 'Option #3',
-    value: 3
-  },
-  {
-    label: 'Option #4',
-    value: 4
-  },
-  {
-    label: 'Option #5',
-    value: 5
-  }
-] as SelectOption[];
-
-<Select options={options} />;
+<Select defaultValue="">
+  <option value="" disabled hidden>
+    Select a value
+  </option>
+  <option value="1">Option #1</option>
+  <option value="2">Option #2</option>
+  <option value="3">Option #3</option>
+  <option value="4">Option #4</option>
+  <option value="5">Option #5</option>
+</Select>;
 ```

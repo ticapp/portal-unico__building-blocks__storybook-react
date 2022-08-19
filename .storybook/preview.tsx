@@ -1,5 +1,7 @@
 import dsTheme from './DsTheme';
 
+import '../src/scss/index.min.css';
+
 export const parameters = {
   layout: 'fullscreen',
   actions: { argTypesRegex: '^on[A-Z].*' },

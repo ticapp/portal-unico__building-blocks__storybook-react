@@ -1,5 +1,4 @@
-import { ReactNode, useState } from 'react';
-import { SelectOption } from '../../ui/select/select';
+import { ChangeEvent, ReactNode, useState } from 'react';
 
 export type paginationDataType = { [key: string]: string | number | boolean | ReactNode } | null[];
 
@@ -12,7 +11,7 @@ export type usePaginationDataType = {
   currentData: paginationDataType[];
   startIndex: number;
   endIndex: number;
-  linesOptionChangeHandler: (val: SelectOption | SelectOption[]) => void;
+  linesOptionChangeHandler: (val: ChangeEvent<HTMLSelectElement>) => void;
 } | null;
 
 export const usePaginationData = (linesPage: string | number, data: paginationDataType[]) => {
@@ -51,12 +50,13 @@ export const usePaginationData = (linesPage: string | number, data: paginationDa
     });
   };
 
-  const linesOptionChangeHandler = (val: SelectOption | SelectOption[]) => {
+  const linesOptionChangeHandler = (evt: ChangeEvent<HTMLSelectElement>) => {
+    const val = Number(evt.target.value);
     setCurrentPage(1);
-    setContentPerPage(val['value']);
+    setContentPerPage(val);
     setCurrentData(() => {
-      setTotalPageCount(Math.ceil(data.length / val['value']));
-      return updateCurrentData(1, val['value']);
+      setTotalPageCount(Math.ceil(data.length / val));
+      return updateCurrentData(1, val);
     });
   };
 

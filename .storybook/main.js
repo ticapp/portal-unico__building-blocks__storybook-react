@@ -1,4 +1,4 @@
-const EslintWebpackPlugin = require('eslint-webpack-plugin');
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 
 module.exports = {
   stories: ['../src/**/welcome.stories.mdx', '../src/**/*.stories.mdx', '../src/**/*.stories.@(ts|tsx)'],
@@ -25,21 +25,23 @@ module.exports = {
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
       propFilter: (prop) => {
-        return prop.parent
-          ? prop.parent.name !== 'DOMAttributes' && prop.parent.name !== 'HTMLAttributes' && prop.parent.name !== 'AriaAttributes'
-          : true;
+        if (!prop.parent) {
+          return true;
+        }
+
+        return (
+          !/node_modules/.test(prop.parent.fileName) &&
+          prop.parent.name !== 'DOMAttributes' &&
+          prop.parent.name !== 'HTMLAttributes' &&
+          prop.parent.name !== 'AriaAttributes'
+        );
       }
     }
   },
 
   webpackFinal: (config) => {
-    return {
-      ...config,
-      plugins: config.plugins.filter((plugin) => {
-        // Remove the eslint-webpack-plugin: We already check our code, storybook doesn't need to bother
-        // doing it again with potentially different options.
-        return !(plugin instanceof EslintWebpackPlugin);
-      })
-    };
+    config.plugins.push(new SpeedMeasurePlugin());
+    config.plugins = config.plugins.filter((plugin) => plugin.constructor.name !== 'ESLintWebpackPlugin');
+    return config;
   }
 };
