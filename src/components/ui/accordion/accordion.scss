@@ -2,7 +2,7 @@
 
 .ama-accordion {
   .accordion-button {
-    @include index.text-big-normal;
+    @include index.text-big-bold;
     &:focus {
       border: 0;
     }
