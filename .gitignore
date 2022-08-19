@@ -15,10 +15,6 @@
 /.vscode
 .npmrc
 
-#sass
-/src/scss/*.css
-/src/scss/*.map
-
 # misc
 .DS_Store
 .env.local
