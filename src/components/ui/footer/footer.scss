@@ -3,7 +3,6 @@
 .ama {
   &-footer {
     h2 {
-      font-family: index.$font-family-lato-bold;
       font-size: 1.5rem !important;
       margin-bottom: 24px;
       @media screen and (max-width: 991px) {
@@ -51,7 +50,7 @@
           font-size: 0.875rem !important;
           margin-bottom: 0 !important;
           &.strong {
-            font-family: index.$font-family-lato-heavy;
+            font-weight: 900;
             font-size: 1.375rem !important;
           }
         }

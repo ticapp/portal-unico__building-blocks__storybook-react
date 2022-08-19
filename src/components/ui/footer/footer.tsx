@@ -162,7 +162,7 @@ export const Footer = ({
               <Row>
                 <Col xs={12} lg={6} xl={6} className={cssFooterCol01}>
                   <Row>
-                    <h2 className="fw-400 lh-36">{headerTitle01}</h2>
+                    <h2 className="fw-900 lh-36">{headerTitle01}</h2>
                     <Col xs={12} lg={8} xl={8}>
                       {renderContentInfo01()}
                     </Col>
@@ -173,7 +173,7 @@ export const Footer = ({
                 </Col>
                 <Col xs={12} lg={3} xl={3} className={cssFooterCol02}>
                   <Row>
-                    <h2 className="fw-400 lh-36">{headerTitle02}</h2>
+                    <h2 className="fw-900 lh-36">{headerTitle02}</h2>
                     <Col>
                       <List listData={listDataCol02} listStyleType={listDataCol02Type} className="mb-24" />
                     </Col>
@@ -181,7 +181,7 @@ export const Footer = ({
                 </Col>
                 <Col xs={12} lg={3} xl={3} className={cssFooterCol03}>
                   <Row>
-                    <h2 className="fw-400 lh-36">{headerTitle03}</h2>
+                    <h2 className="fw-900 lh-36">{headerTitle03}</h2>
                     <Col xs={9} lg={6} xl={6}>
                       <List listData={listDataCol03} listStyleType="none" className="mb-24 px-0 d-flex align-items-start" />
                     </Col>
