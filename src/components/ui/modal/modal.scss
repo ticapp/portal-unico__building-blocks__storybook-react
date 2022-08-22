@@ -1,0 +1,16 @@
+@use '../../../scss/customs.scss' as index;
+
+.ama-modal {
+  .modal-content {
+    border-radius: 0;
+  }
+  &-header-btn-close {
+    background-color: transparent;
+    border: transparent;
+    svg {
+      fill: index.$neutral-black;
+      width: 48px !important;
+      height: 48px !important;
+    }
+  }
+}
