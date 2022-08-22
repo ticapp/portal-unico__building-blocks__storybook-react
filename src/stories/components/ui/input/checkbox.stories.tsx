@@ -3,7 +3,7 @@ import { ComponentMeta, Story } from '@storybook/react';
 import { Checkbox, CheckboxProps } from '../../../../components/ui';
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'Components/Inputs',
   component: Checkbox
 } as ComponentMeta<typeof Checkbox>;
 
@@ -41,4 +41,4 @@ Checkboxes.args = {
   label: 'label da checkbox'
 } as CheckboxProps;
 
-Checkboxes.storyName = 'Checkboxes';
+Checkboxes.storyName = 'Checkbox';
