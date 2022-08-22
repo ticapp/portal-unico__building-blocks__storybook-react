@@ -29,7 +29,7 @@ const InnerInputText = (
 ) => {
   const containerDisabledClassNames = classNames(
     'ama-input-container',
-    'd-flex align-items-start justify-content-center flex-column',
+    'd-flex align-items-start justify-content-center flex-column w-100',
     className,
     { disabled: isDisabled }
   );

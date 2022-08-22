@@ -96,4 +96,4 @@ export const BasicInputRadioGroup: ComponentStory<typeof InputRadioGroup> = () =
   );
 };
 
-BasicInputRadioGroup.storyName = 'Basic Input Group';
+BasicInputRadioGroup.storyName = 'Radio Input Group';

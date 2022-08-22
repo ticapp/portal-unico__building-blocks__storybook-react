@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { CheckboxGroup } from '../../../../components/ui/checkbox-group';
 
 export default {
-  title: 'Components/Checkbox Groups',
+  title: 'Components/Inputs Groups',
   component: CheckboxGroup
 } as ComponentMeta<typeof CheckboxGroup>;
 
@@ -14,4 +14,4 @@ export const BasicCheckboxGroup: ComponentStory<typeof CheckboxGroup> = () => {
   return <CheckboxGroup data={checkboxListState} onCheckboxGroupChanged={setCheckboxListState} />;
 };
 
-BasicCheckboxGroup.storyName = 'Basic Checkbox Group';
+BasicCheckboxGroup.storyName = 'Checkbox Input Group';

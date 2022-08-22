@@ -1,16 +1,32 @@
 @use '../../../scss/customs.scss' as index;
 
 .ama-input-tag {
-  .input-container {
-    border: 1px solid black;
+  min-height: 56px;
+  min-width: 56px;
 
+  border: none;
+  box-shadow: 0 0 0 1px index.$neutral-black inset;
+
+  &.focus {
+    box-shadow: 0 0 0 2px index.$neutral-black inset;
+  }
+
+  .input-container {
     .tag {
       white-space: pre;
-      min-height: 44px;
+      height: 44px;
       border-radius: 22px;
 
-      border: 1px solid index.$neutral-light-grey;
       background-color: index.$neutral-light;
+
+      border: none;
+      box-shadow: 0 0 0 1px transparent inset;
+
+      &:hover,
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px index.$neutral-light-grey inset;
+      }
 
       .tag-name {
         @include index.text-medium-normal;
@@ -21,11 +37,13 @@
     input {
       @include index.text-medium-normal;
       color: index.$neutral-black;
+
+      border: none;
       background-color: index.$neutral-white;
+
       &::placeholder {
         color: index.$neutral-dark-grey;
       }
-      border: none;
 
       &:focus {
         outline: none;
@@ -34,7 +52,6 @@
   }
 
   .autocomplete-container {
-    position: relative;
     ul {
       @include index.shadow;
       @include index.scrollbars;
