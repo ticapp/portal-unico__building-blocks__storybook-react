@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 import { Icon } from '../icon';
 import { CustomDropdown, CustomDropdownOption } from './customDropdown';
@@ -14,6 +15,8 @@ export interface UserAreaOption {
 }
 
 export interface UserAreaProps {
+  /** Additional classnames */
+  className?: string;
   /** Username to set */
   username?: string;
   /** Defines if the user is authenticated. Affects the class name of the component */
@@ -29,6 +32,7 @@ export interface UserAreaProps {
 }
 
 const UserArea: FC<UserAreaProps> = ({
+  className = '',
   username = 'Area reservada',
   isAuthenticated = false,
   options = [],
@@ -62,8 +66,11 @@ const UserArea: FC<UserAreaProps> = ({
     } as CustomDropdownOption;
   };
 
+  const classes = classNames('ama-user-area', className);
+
   return (
     <CustomDropdown
+      className={classes}
       dropdownControls={
         <>
           <Icon className="me-8" size="md" icon="ama-user" alt={username} ariaHidden />

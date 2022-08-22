@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { FC } from 'react';
 import { Image } from 'react-bootstrap';
 import { UrlObject } from 'url';
@@ -6,6 +7,8 @@ import { Link } from '../link';
 declare type Url = string | UrlObject;
 
 export interface LogoProps {
+  /** Additional classnames */
+  className: string;
   /** Image source path */
   src: string;
   /** Image alt text */
@@ -24,6 +27,7 @@ export interface LogoProps {
 }
 
 const Logo: FC<LogoProps> = ({
+  className = '',
   src,
   alt = 'Página inicial',
   width,
@@ -32,15 +36,17 @@ const Logo: FC<LogoProps> = ({
   homepageLink = '/',
   isHomepage = false
 }: LogoProps) => {
+  const classes = classNames('ama-logo lh-0 fs-0', className, { 'mb-0': isHomepage });
+
   return (
     <>
       {isHomepage && (
-        <h1 className="ama-logo mb-0 lh-0 fs-0">
+        <h1 className={classes}>
           <Image src={src} alt={alt} width={width} height={height} />
         </h1>
       )}
       {!isHomepage && (
-        <div className="ama-logo lh-0 fs-0">
+        <div className={classes}>
           <Link link={homepageLink} title={title} aria-label={title}>
             <Image src={src} alt={alt} width={width} height={height} />
           </Link>

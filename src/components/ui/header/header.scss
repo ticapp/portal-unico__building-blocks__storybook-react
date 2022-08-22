@@ -1,13 +1,40 @@
+@use '../../../scss/customs.scss' as index;
+
 .ama-header {
-  .upper-lvl {
-    padding-top: 25px;
+  .ama-burger-button {
+    background-color: transparent;
+    border: none;
+    min-height: 48px;
+    min-width: 48px;
+  }
 
-    .language-selector-container {
-      min-width: 80px;
+  .language-selector-container {
+    min-width: 80px;
+  }
+
+  .user-area-container {
+    min-width: 200px;
+  }
+}
+
+.ama-header-offcanvas {
+  .offcanvas-header {
+    .ama-close-offcanvas-button {
+      background-color: transparent;
+      border: none;
+      min-height: 48px;
+      min-width: 48px;
     }
+  }
 
-    .user-area-container {
-      min-width: 200px;
+  .offcanvas-body {
+    .lang-user-container {
+      border-top: 1px solid index.$neutral-light-grey;
+
+      .mobile-language-selector {
+        min-width: 120px;
+        border-right: 1px solid index.$neutral-light-grey;
+      }
     }
   }
 }

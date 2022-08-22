@@ -15,6 +15,7 @@ export interface CustomDropdownOption {
 }
 
 export interface CustomDropdownProps {
+  className?: string;
   /** Aria label to apply to the dropdown */
   ariaLabel?: string;
   /** Default selected option */
@@ -33,6 +34,7 @@ export interface CustomDropdownProps {
 }
 
 const CustomDropdown = ({
+  className = '',
   ariaLabel = 'Dropdown',
   options,
   onChange,
@@ -355,7 +357,7 @@ const CustomDropdown = ({
     }
   }, []);
 
-  const wrapperClassNames = classNames('custom-dropdown position-relative', { open: isOpen });
+  const wrapperClassNames = classNames('custom-dropdown position-relative', className, { open: isOpen });
 
   return (
     <div id={uid} ref={comboWrapperRef} className={wrapperClassNames}>
