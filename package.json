@@ -1,7 +1,7 @@
 {
   "name": "@ama/react-design-system",
   "description": "AMA Design system",
-  "version": "0.2.9",
+  "version": "0.2.13",
   "publishConfig": {
     "access": "public",
     "registry": "https://ticappsonar.northeurope.cloudapp.azure.com/nexus/repository/npm-general"
@@ -12,13 +12,17 @@
     "dist"
   ],
   "scripts": {
-    "start": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "watch-sass": "sass --load-path=./ --watch ./src/scss/index.scss ./src/scss/index.min.css",
+    "start-storybook": "start-storybook -p 6006",
+    "start": "npm-run-all --parallel watch-sass start-storybook",
+    "build-sass": "sass --load-path=./ ./src/scss/index.scss ./src/scss/index.min.css",
+    "generate-storybook": "build-storybook",
+    "build-storybook": "npm run build-sass && npm run generate-storybook",
     "clean": "gulp clean",
-    "build": "npm run clean && npm run build:styles && npm run build:esm && npm run build:cjs",
     "build:styles": "gulp build",
     "build:esm": "tsc",
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
+    "build": "npm run clean && npm run build:styles && npm run build:esm && npm run build:cjs",
     "lint": "eslint ./src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix ./src/**/*.{js,jsx,ts,tsx,json}",
     "format": "prettier --write ./src/**/*.{js,jsx,ts,tsx,css,scss,mdx,md,json} --config ./.prettierrc"
@@ -84,12 +88,15 @@
     "react-refresh": "^0.14.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
-    "sass": "^1.53.0",
-    "sass-loader": "13.0.2",
+    "sass": "^1.54.4",
+    "sass-loader": "^13.0.2",
+    "speed-measure-webpack-plugin": "^1.5.0",
+    "storybook-addon-sass-postcss": "^0.1.3",
+    "storybook-addon-turbo-build": "^1.1.0",
     "style-loader": "3.3.1",
     "typescript": "^4.7.4",
     "uuid": "^8.3.2",
-    "webpack": "^5.73.0"
+    "webpack": "^5.74.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -104,8 +111,11 @@
     "react-bootstrap": "^2.4.0",
     "react-chartjs-2": "^4.2.0",
     "react-router-dom": "^6.3.0",
+<<<<<<< HEAD
     "react-toastify": "^9.0.8",
     "sass": "^1.53.0",
+=======
+>>>>>>> develop
     "uuid": "^8.3.2"
   }
 }
