@@ -111,11 +111,8 @@
     "react-bootstrap": "^2.4.0",
     "react-chartjs-2": "^4.2.0",
     "react-router-dom": "^6.3.0",
-<<<<<<< HEAD
     "react-toastify": "^9.0.8",
     "sass": "^1.53.0",
-=======
->>>>>>> develop
     "uuid": "^8.3.2"
   }
 }
