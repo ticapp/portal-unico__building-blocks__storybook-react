@@ -30,12 +30,24 @@ const iconName = {
 export const toast = (content: ToastContent, props?: ToastProps) => {
   const cssToast = classNames('ama-toast', `${content.type}`, props?.className);
   let toastId: Id;
-  const defaultId = uuidv4();
+  const ComponentId = uuidv4();
 
-  const updateToast = () => {
+  const updateToastDraggable = () => {
     reactToast.update(toastId, { draggable: window.innerWidth <= 991 });
   };
-  window.addEventListener('resize', updateToast);
+  window.addEventListener('resize', updateToastDraggable);
+
+  reactToast.onChange(payload => {
+    if (payload.status === "added") {
+      const elm = document.getElementById(ComponentId);
+      if (elm) {
+        const triggerBottom = window.innerHeight;
+        const boxBottom = elm.getBoundingClientRect().bottom;
+        elm.style.display = boxBottom >= triggerBottom ? "none" : "flex-inline";
+      }
+      
+    }
+  });
 
   const ToastBuilder = () => {
     return (
@@ -54,7 +66,7 @@ export const toast = (content: ToastContent, props?: ToastProps) => {
     position: 'top-right',
     draggable: window.innerWidth <= 991,
     hideProgressBar: true,
-    toastId: props?.id ?? defaultId
+    toastId: ComponentId
   });
 };
 
