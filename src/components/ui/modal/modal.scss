@@ -12,5 +12,17 @@
       width: 48px !important;
       height: 48px !important;
     }
+    &:hover {
+      svg {
+        fill: index.$neutral-light-grey;
+      }
+    }
+    &:focus {
+      background: transparent !important;
+      svg {
+        fill: index.$neutral-black;
+      }
+      box-shadow: 0 0 0 2px index.$neutral-black inset !important;
+    }
   }
 }

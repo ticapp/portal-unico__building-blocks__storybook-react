@@ -15,10 +15,11 @@ import { Icon } from '../icon';
 import './modal.scss';
 import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
 
-interface ActionsButtons {
+export interface ActionsButtonsProps {
   variant: string;
   label: string | ReactNode;
   size?: boolean | 'auto' | number | { span: boolean | 'auto' | number; offset: number; order: 'first' | 'last' | number };
+  onClickActionButton: () => void;
 }
 
 export interface ModalProps extends BsModalProps {
@@ -27,20 +28,21 @@ export interface ModalProps extends BsModalProps {
   /** Inner childs of the component to be rendered */
   children?: ReactNode;
   /** Action Buttons */
-  actionButtons: Array<ActionsButtons>;
+  actionButtons: ActionsButtonsProps[];
   /** Modal size */
   size: 'sm' | 'lg';
+  /** On close button action */
+  onClose: () => void;
 }
 
-export const Modal = ({ className, children, actionButtons, ...props }: ModalProps) => {
+export const Modal = ({ className, children, actionButtons, onClose, ...props }: ModalProps) => {
   const cssTabs = classNames('ama-modal', className);
-  const [modalShow, setModalShow] = React.useState(props.show);
   const { width } = useWindowSize();
 
   return (
-    <BsModal className={cssTabs} {...props} centered show={modalShow}>
+    <BsModal className={cssTabs} {...props} centered>
       <BsModalHeader className="border-0 justify-content-end px-40 pt-40 pb-16">
-        <Button className="ama-modal-header-btn-close p-0" onClick={() => setModalShow(false)}>
+        <Button className="ama-modal-header-btn-close p-0" onClick={onClose}>
           <Icon icon="ama-close" size="lg" />
         </Button>
       </BsModalHeader>
@@ -51,7 +53,11 @@ export const Modal = ({ className, children, actionButtons, ...props }: ModalPro
             {actionButtons.map((element, index) => {
               return (
                 <Col xs={12} md={element.size} className={index > 0 ? `ms-md-24 mb-24 mb-md-0` : ''} key={uuidv4()}>
-                  <Button variant={element.variant} className={width < 768 ? 'w-100 justify-content-center' : ''}>
+                  <Button
+                    onClick={element.onClickActionButton}
+                    variant={element.variant}
+                    className={width < 768 ? 'w-100 justify-content-center' : ''}
+                  >
                     {element.label}
                   </Button>
                 </Col>
