@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Components/Toasts/Toasts Docs" />
+
+<h1 className="mb-32">
+  <u>Toast</u>
+</h1>
+
+<h2> Description </h2>
+<p className="fs-16">A component to shows notifications using toasts</p>
+<p className="fs-16">Check all props available in each example on Docs Toasts.</p>
+
+<h2>Component usage</h2>
+
+```tsx
+import { toast, ToastContainer } from '@ama/react-design-system';
+
+const Example = () => {
+	const onClick = () => {
+		toast({ type: 'warning', text: 'Hi there!' });
+	};
+
+	return (
+	<div>
+		<Button onClick={onClick}>show toast</Button>
+		<ToastContainer />
+	</div>
+);
+}
+```
