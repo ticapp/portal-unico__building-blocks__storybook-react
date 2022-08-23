@@ -3,6 +3,7 @@
 
 .ama-toast-container {
 	right: 0 !important;
+	z-index: 100000;
 }
 
 :root {
@@ -12,7 +13,7 @@
 	}
 }
 
-.ama-toast{
+.ama-toast {
 	color: index.$neutral-black;
 	border-radius: 0;
 	margin: 20px 20px;

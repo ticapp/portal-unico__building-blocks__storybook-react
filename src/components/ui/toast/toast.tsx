@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
-import { toast as reactToast, ToastContainer as TC } from 'react-toastify';
+import { Id, toast as reactToast, ToastContainer as TC } from 'react-toastify';
+import { v4 as uuidv4 } from 'uuid';
 import { Icon } from '../icon/icon';
 
 import './toast.scss';
@@ -15,6 +16,8 @@ export interface ToastProps {
   className?: string;
   /** Indicates if toast auto closes */
   autoClose?: false | number;
+  /** Component id (that way we avoid repeated toasts) */
+  id?: string;
 }
 
 const iconName = {
@@ -26,25 +29,35 @@ const iconName = {
 
 export const toast = (content: ToastContent, props?: ToastProps) => {
   const cssToast = classNames('ama-toast', `${content.type}`, props?.className);
+  let toastId: Id;
+  const defaultId = uuidv4();
 
-  const ToastBuilder = () => (
-    <div>
-      <Icon className={`ama-toast-icon ${content.type}`} size="lg" icon={iconName[content.type]} />
-      {content.text}
-    </div>
-  );
+  const updateToast = () => {
+    reactToast.update(toastId, { draggable: window.innerWidth <= 991 });
+  };
+  window.addEventListener('resize', updateToast);
+
+  const ToastBuilder = () => {
+    return (
+      <div>
+        <Icon className={`ama-toast-icon ${content.type}`} size="lg" icon={iconName[content.type]} />
+        {content.text}
+      </div>
+    );
+  };
   const CloseButtonBuilder = ({ closeToast }) => <Icon className="ama-toast-close-button" icon="ama-close" onClick={closeToast} />;
-  reactToast(ToastBuilder, {
+  toastId = reactToast(ToastBuilder, {
     autoClose: props?.autoClose ?? false,
     className: cssToast,
     closeButton: CloseButtonBuilder,
     closeOnClick: false,
-    position: 'bottom-right',
-    draggable: false,
-    hideProgressBar: true
+    position: 'top-right',
+    draggable: window.innerWidth <= 991,
+    hideProgressBar: true,
+    toastId: props?.id ?? defaultId
   });
 };
 
 export const ToastContainer = () => {
-  return <TC newestOnTop className="ama-toast-container" />;
+  return <TC newestOnTop containerId="ama-toast-container" className="ama-toast-container" />;
 };

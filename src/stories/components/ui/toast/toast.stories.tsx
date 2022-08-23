@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react';
-import { Button, toast, ToastContainer } from '../../../../components';
+import { Button, ScrollTop, toast, ToastContainer } from '../../../../components';
 
 export default {
   title: 'Components/Toast'
@@ -82,3 +82,236 @@ export const AutoCloseToast: Story = () => {
 };
 
 AutoCloseToast.storyName = 'Auto close toast';
+
+export const ToastWithScrolltop: Story = () => {
+  const onClick = () => {
+    toast({ type: 'info', text: 'Hey there with scroll top' });
+  };
+
+  return (
+    <div>
+      <Button onClick={onClick}>show toast</Button>
+      <ToastContainer />
+      <ScrollTop text="Leva-me para o topo!" />
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+      <br />.
+    </div>
+  );
+};
+
+ToastWithScrolltop.storyName = 'Toast with scroll top';
