@@ -1,8 +1,8 @@
-@use '../../../scss/index.scss' as index;
+@use '../../../scss/customs.scss' as index;
 
 .ama-accordion {
   .accordion-button {
-    @include index.text-big-normal;
+    @include index.text-big-bold;
     &:focus {
       border: 0;
     }

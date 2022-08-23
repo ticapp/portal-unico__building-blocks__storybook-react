@@ -1,33 +1,40 @@
-@use '../../../scss/index.scss' as index;
+@use '../../../scss/customs.scss' as index;
 
 .ama-pagination {
   background-color: index.$neutral-light;
   border: 1px solid index.$neutral-light-grey;
+
   li {
     &:not(:first-of-type) {
       border-left: 1px solid index.$neutral-light-grey;
     }
+
     .lines-selector {
-      .combo-input {
-        padding: 7px !important;
-        border: 1px solid transparent;
-        .tags {
-          @include index.text-medium-normal;
-        }
+      width: auto;
+      background-color: transparent !important;
+      border: none;
+      box-shadow: 0 0 0 1px transparent inset !important;
+      &:focus {
+        box-shadow: 0 0 0 1px index.$neutral-black inset !important;
       }
     }
-  }
-  .page-link {
-    min-height: 44px;
-    min-width: 44px;
-    border-radius: 0 !important;
-  }
-  .page-item {
-    &.disabled {
+
+    &.page-item {
       .page-link {
-        background-color: index.$neutral-light;
-        svg {
-          fill: index.$neutral-light-grey;
+        min-height: 56px;
+        min-width: 56px;
+        border-radius: 0 !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &.disabled {
+        .page-link {
+          background-color: index.$neutral-light;
+          svg {
+            fill: index.$neutral-light-grey;
+          }
         }
       }
     }

@@ -1,23 +1,5 @@
-@import 'node_modules/bootstrap/scss/functions';
-@import 'node_modules/bootstrap/scss/variables';
-@import 'node_modules/bootstrap/scss/maps';
-@import 'node_modules/bootstrap/scss/mixins';
-@import 'node_modules/bootstrap/scss/utilities';
-@import 'node_modules/bootstrap/scss/helpers';
-@import 'node_modules/bootstrap/scss/utilities/api';
-
 //  Make the customizations
-@import './custom/breakpoints';
-@import './custom/colors';
-@import './custom/spacing';
-@import './custom/mixins';
-@import './custom/fonts';
-@import './custom/variables';
-@import './custom/zindexes';
-@import './custom/customs';
+@import './customs.scss';
 
-//Final
-@import './custom/utilities';
-//...
 //  Import bootstrap to set changes
 @import 'node_modules/bootstrap/scss/bootstrap.scss';

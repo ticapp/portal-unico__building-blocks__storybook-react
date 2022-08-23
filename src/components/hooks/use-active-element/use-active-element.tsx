@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useActiveElement = () => {
-  const [activeElement, setActiveElement] = useState(null);
+  const [activeElement, setActiveElement] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     let isMounted = true;

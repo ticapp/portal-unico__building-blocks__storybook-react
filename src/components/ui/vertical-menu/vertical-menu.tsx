@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
 import React, { FC, ReactNode, useId } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigateTo, usePathname, useWindowSize } from '../../hooks';
+import { usePathname } from '../../hooks';
 import { NavLink } from '../navlink';
-import { Select, SelectOption } from '../select';
+
 import './vertical-menu.scss';
 
 export interface VerticalMenuLink {
@@ -21,70 +20,7 @@ export interface VerticalMenuProps {
   links: VerticalMenuLink[];
 }
 
-const VerticalMenuMobile: FC<VerticalMenuProps> = ({ ariaLabel, links }: VerticalMenuProps) => {
-  const flatLinks = (link: VerticalMenuLink, lvl: number) => {
-    if (!link.children) {
-      return { ...link, lvl };
-    }
-
-    return [{ ...link, lvl }].concat(link.children.map((innerLink) => flatLinks(innerLink, lvl + 1)).flat());
-  };
-
-  const flatLinkArray = links.map((l) => flatLinks(l, 0)).flat();
-
-  const selectOptions = flatLinkArray.map((l) => {
-    return {
-      label: l.label,
-      value: l.link || uuidv4(),
-      disabled: !l.link,
-      labelElement: (
-        <span className={`ps-${l.lvl * 24}`}>
-          {l.link && (
-            <NavLink exact href={l.link} className="vertical-nav-link w-100" tabIndex={-1}>
-              <span className="label d-inline-flex align-items-center">{l.label}</span>
-            </NavLink>
-          )}
-
-          {!l.link && (
-            <span className="label d-inline-flex align-items-center" tabIndex={-1}>
-              {l.label}
-            </span>
-          )}
-        </span>
-      )
-    } as SelectOption;
-  });
-
-  const pathname = usePathname();
-  const activeLinkIndex = flatLinkArray.findIndex((l) => l.link === pathname);
-  const { navigateTo } = useNavigateTo();
-
-  const selectChangeHandler = (val) => {
-    if (!Array.isArray(val)) {
-      const newActive = flatLinkArray.find((l) => l.link === val.value);
-      if (newActive && newActive.link) {
-        navigateTo(newActive.link);
-      }
-    }
-  };
-
-  const classes = classNames('ama-vertical-menu-mobile');
-  return (
-    <div className={classes}>
-      <label id="label-for-navigation-select" className="d-none">
-        {ariaLabel}
-      </label>
-      <Select
-        labelledby="label-for-navigation-select"
-        options={selectOptions}
-        active={selectOptions[activeLinkIndex]}
-        onChange={selectChangeHandler}
-      />
-    </div>
-  );
-};
-
-const VerticalMenuDesktop: FC<VerticalMenuProps> = ({ ariaLabel, links }: VerticalMenuProps) => {
+const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation Menu', links = [] }: VerticalMenuProps) => {
   const uid = useId();
 
   const pathname = usePathname();
@@ -143,24 +79,12 @@ const VerticalMenuDesktop: FC<VerticalMenuProps> = ({ ariaLabel, links }: Vertic
   };
 
   return (
-    <nav aria-label={ariaLabel} className={classes}>
-      <ul aria-label={ariaLabel} role="tree" className="root">
-        {links.map((verticalMenuItem, i) => buildMenuItem(verticalMenuItem, 0, i))}
-      </ul>
-    </nav>
-  );
-};
-
-const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation Menu', links = [] }: VerticalMenuProps) => {
-  const { width } = useWindowSize();
-
-  const classes = classNames('ama-vertical-menu');
-
-  return (
-    <div className={classes}>
-      {width >= 768 && <VerticalMenuDesktop ariaLabel={ariaLabel} links={links} />}
-
-      {width < 768 && <VerticalMenuMobile ariaLabel={ariaLabel} links={links} />}
+    <div className="ama-vertical-menu">
+      <nav aria-label={ariaLabel} className={classes}>
+        <ul aria-label={ariaLabel} role="tree" className="root">
+          {links.map((verticalMenuItem, i) => buildMenuItem(verticalMenuItem, 0, i))}
+        </ul>
+      </nav>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
-import React, { KeyboardEvent, MouseEvent, useId, useMemo, useRef, useState } from 'react';
-import { useOutsideElementClick } from '../../hooks';
+import React, { KeyboardEvent, MouseEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useActiveElement, useOutsideElementClick } from '../../hooks';
 import { preventScrolling } from '../../libs';
 import { Icon } from '../icon';
 import './input-tag.scss';
@@ -30,8 +30,6 @@ export interface InputTagProps {
 }
 
 export const InputTag = ({ className, inputId, labeledBy, placeholder, options, optionsAriaLabel = 'Opções', onChange }: InputTagProps) => {
-  const classes = classNames('ama-input-tag', className);
-
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listBoxRef = useRef<HTMLUListElement>(null);
@@ -168,9 +166,12 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
     focusByIndex(availableOptions.length - 1);
   };
 
+  useEffect(() => {
+    onChange?.(tags);
+  }, [tags]);
+
   const updateAvailableOptions = () => {
     const val = inputRef.current?.value || '';
-
     setTags((lastTags) => {
       const newAvailableOptions = options.filter((o) => {
         return !lastTags.find((lt) => lt.id === o.id);
@@ -191,7 +192,7 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
   };
 
   const tryAddTag = (tag = ''): void => {
-    const value = tag || inputRef.current?.value || '';
+    const value = tag || inputRef.current?.value.trim() || '';
 
     if (!value) {
       return;
@@ -216,7 +217,6 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
     setTags((last) => {
       updateAvailableOptions();
 
-      onChange?.(last);
       return last;
     });
 
@@ -358,6 +358,11 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
   const memoInputId = useMemo(() => inputId || uid, [inputId]);
   const listBoxId = useMemo(() => `${memoInputId}-listbox`, [memoInputId]);
 
+  const { activeElement } = useActiveElement();
+  const inputFocused = activeElement && containerRef && containerRef.current?.contains(activeElement);
+
+  const classes = classNames('ama-input-tag d-flex align-items-center w-100 position-relative', className, { focus: inputFocused });
+
   const listboxClassname = classNames(
     { 'd-block': isOpen },
     { 'd-none': !isOpen },
@@ -366,11 +371,11 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
 
   return (
     <div ref={containerRef} className={classes}>
-      <div className="input-container px-16 py-12 d-flex flex-wrap gap-10">
+      <div className="input-container px-16 py-6 d-flex flex-wrap gap-10 w-100">
         {tags.map((t) => {
           return (
             <span
-              className="tag d-flex align-items-center px-16 py-4"
+              className="tag d-flex align-items-center px-16 py-10"
               key={t.id}
               role="button"
               onClick={(evt: MouseEvent<HTMLSpanElement>) => onTagClick(evt, t.label)}
@@ -402,7 +407,7 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
         />
       </div>
 
-      <div className="autocomplete-container">
+      <div className="autocomplete-container position-absolute bottom-0 w-100">
         <ul id={listBoxId} ref={listBoxRef} role="listbox" aria-label={optionsAriaLabel} className={listboxClassname}>
           {availableOptions.map((o, i) => {
             const liClassNames = classNames({ focus: activeOptionIndex === i }, 'w-100 d-flex align-items-center py-8 px-16');
