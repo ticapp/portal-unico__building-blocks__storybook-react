@@ -27,49 +27,50 @@ const iconName = {
   success: 'ama-checkmark-filled'
 };
 
+const MIN_DESKTOP_SIZE = 991;
+
 export const toast = (content: ToastContent, props?: ToastProps) => {
-  const cssToast = classNames('ama-toast', `${content.type}`, props?.className);
+  const cssToast = classNames('ama-toast', 'm-20', `${content.type}`, props?.className);
   let toastId: Id;
   const ComponentId = uuidv4();
 
   const updateToastDraggable = () => {
-    reactToast.update(toastId, { draggable: window.innerWidth <= 991 });
+    reactToast.update(toastId, { draggable: window.innerWidth <= MIN_DESKTOP_SIZE });
   };
   window.addEventListener('resize', updateToastDraggable);
 
-  reactToast.onChange(payload => {
-    if (payload.status === "added") {
+  reactToast.onChange((payload) => {
+    if (payload.status === 'added') {
       const elm = document.getElementById(ComponentId);
       if (elm) {
         const triggerBottom = window.innerHeight;
         const boxBottom = elm.getBoundingClientRect().bottom;
-        elm.style.display = boxBottom >= triggerBottom ? "none" : "flex-inline";
+        elm.style.display = boxBottom >= triggerBottom ? 'none' : 'flex-inline';
       }
-      
     }
   });
 
   const ToastBuilder = () => {
     return (
       <div>
-        <Icon className={`ama-toast-icon ${content.type}`} size="lg" icon={iconName[content.type]} />
+        <Icon className={`ama-toast-icon m-16 ${content.type}`} size="lg" icon={iconName[content.type]} />
         {content.text}
       </div>
     );
   };
-  const CloseButtonBuilder = ({ closeToast }) => <Icon className="ama-toast-close-button" icon="ama-close" onClick={closeToast} />;
+  const CloseButtonBuilder = ({ closeToast }) => <Icon className="align-self-center" icon="ama-close" onClick={closeToast} />;
   toastId = reactToast(ToastBuilder, {
     autoClose: props?.autoClose ?? false,
     className: cssToast,
     closeButton: CloseButtonBuilder,
     closeOnClick: false,
     position: 'top-right',
-    draggable: window.innerWidth <= 991,
+    draggable: window.innerWidth <= MIN_DESKTOP_SIZE,
     hideProgressBar: true,
     toastId: ComponentId
   });
 };
 
 export const ToastContainer = () => {
-  return <TC newestOnTop containerId="ama-toast-container" className="ama-toast-container" />;
+  return <TC newestOnTop containerId="ama-toast-container" className="ama-toast-container end-0" />;
 };

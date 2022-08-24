@@ -2,7 +2,6 @@
 @use '../../../../node_modules/react-toastify/dist/ReactToastify.css';
 
 .ama-toast-container {
-	right: 0 !important;
 	z-index: 100000;
 }
 
@@ -16,14 +15,8 @@
 .ama-toast {
 	color: index.$neutral-black;
 	border-radius: 0;
-	margin: 20px 20px;
-
-	&-close-button {
-		align-self: center;
-	}
 
 	&-icon {
-		margin-right: 16px;
 		&.info {
 			fill: index.$semantic-info;
 		}
