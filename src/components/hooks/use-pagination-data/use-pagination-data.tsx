@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode, useState } from 'react';
+import { ChangeEvent, ReactNode, useEffect, useState } from 'react';
 
 export type paginationDataType = { [key: string]: string | number | boolean | ReactNode } | null[];
 
@@ -35,6 +35,10 @@ export const usePaginationData = (linesPage: string | number, data: paginationDa
   const [currentData, setCurrentData] = useState<paginationDataType[]>(() => {
     return updateCurrentData(currentPage, contentPerPage);
   });
+
+  useEffect(() => {
+    setCurrentData(updateCurrentData(currentPage, contentPerPage));
+  }, [data]);
 
   const goToNextPage = () => {
     setCurrentPage((page) => page + 1);
