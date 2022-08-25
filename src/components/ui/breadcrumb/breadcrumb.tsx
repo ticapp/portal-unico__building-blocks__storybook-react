@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useId, useRef, useState } from 'react';
 import { useOutsideElementClick, usePathname, useWindowSize } from '../../hooks';
 import { Icon } from '../icon';
 import { Link } from '../link';
@@ -61,7 +60,7 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, navAriaLabel, linkAriaLabel
           const isAtualLink = index === breadcrumbs.length - 1;
 
           return (
-            <li key={uuidv4()} className="d-flex align-items-center justify-content-center">
+            <li key={useId()} className="d-flex align-items-center justify-content-center">
               <Link link={page.url} aria-label={linkAriaLabel} className={linkClassNames}>
                 {page.name}
               </Link>
@@ -132,7 +131,7 @@ const BreadCrumbMobile = ({
               const linkClassNames = classNames('items', isSelected);
 
               return (
-                <li key={uuidv4()}>
+                <li key={useId()}>
                   <Link className={linkClassNames} aria-current={isSelected && 'page'} link={page.url}>
                     {page.name}
                   </Link>

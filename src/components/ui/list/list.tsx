@@ -1,7 +1,6 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useId } from 'react';
 import classNames from 'classnames';
 import { UrlObject } from 'url';
-import { v4 as uuidv4 } from 'uuid';
 import { Link } from '../link';
 
 export interface ListProps extends HTMLAttributes<HTMLElement> {
@@ -59,7 +58,7 @@ export function List({
   }
 
   const listOptions = listData?.map((option) => (
-    <li key={uuidv4()} style={{ listStyle: listStyleStr }}>
+    <li key={useId()} style={{ listStyle: listStyleStr }}>
       {option.hasExternalLink ? (
         <Link link={option.link} isExternal target="_blank" title={option.title}>
           {option.value}

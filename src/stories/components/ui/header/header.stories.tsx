@@ -3,10 +3,9 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable global-require */
 import { ComponentMeta, Story } from '@storybook/react';
-import React from 'react';
+import React, { useId } from 'react';
 import { Image } from 'react-bootstrap';
 import { BrowserRouter } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import { CustomDropdownOption, Footer, FooterProps, Header, HeaderProps, Icon, InputTag, UserAreaOption } from '../../../../components';
 
 export default {
@@ -285,13 +284,13 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
   } as FooterProps;
 
   const inputTagOptions = [
-    { label: 'John Doe', id: uuidv4() },
-    { label: 'Anna Doe', id: uuidv4() },
-    { label: 'Mark Doe', id: uuidv4() },
-    { label: 'Billy Doe', id: uuidv4() },
-    { label: 'Martha Doe', id: uuidv4() },
-    { label: 'Daisy Doe', id: uuidv4() },
-    { label: 'Jane Doe', id: uuidv4() }
+    { label: 'John Doe', id: useId() },
+    { label: 'Anna Doe', id: useId() },
+    { label: 'Mark Doe', id: useId() },
+    { label: 'Billy Doe', id: useId() },
+    { label: 'Martha Doe', id: useId() },
+    { label: 'Daisy Doe', id: useId() },
+    { label: 'Jane Doe', id: useId() }
   ];
 
   const languageChangeHandler = (val) => {

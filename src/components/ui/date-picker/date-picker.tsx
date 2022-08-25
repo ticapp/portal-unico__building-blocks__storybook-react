@@ -3,7 +3,6 @@
 import classNames from 'classnames';
 import React, { KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
 import { useOutsideElementClick } from '../../hooks';
 import { Icon } from '../../index';
 import { preventScrolling } from '../../libs';
@@ -82,6 +81,9 @@ export const DatePicker = ({
 }: DatePickerProps) => {
   const uid = useId();
   const memoInputId = useMemo(() => inputId || uid, [inputId]);
+  const weekDayMemoId = useMemo(() => `${memoInputId}-week-day-id`, [memoInputId]);
+  const dayTdId = useMemo(() => `${memoInputId}-day-td-id`, [memoInputId]);
+  const weekTrId = useMemo(() => `${memoInputId}-week-tr-id`, [memoInputId]);
   const gridAriaLabelId = useMemo(() => `${memoInputId}-grid-aria-label`, [memoInputId]);
   const modalAriaLabelId = useMemo(() => `${memoInputId}-modal-aria-label`, [memoInputId]);
   const modalAriaDescribeId = useMemo(() => `${memoInputId}-modal-aria-describe-id`, [memoInputId]);
@@ -495,13 +497,15 @@ export const DatePicker = ({
   const weekDaysMemo = useMemo(() => {
     return (
       <tr>
-        {weekDaysLabels.map((wd) => (
-          <th className="week-day-container" role="columnheader" key={uuidv4()} scope="col" aria-label={wd}>
-            <div className="week-day d-flex align-items-center justify-content-center position-relative disabled">
-              <div className="label">{wd.slice(0, 3)}</div>
-            </div>
-          </th>
-        ))}
+        {weekDaysLabels.map((wd) => {
+          return (
+            <th className="week-day-container" role="columnheader" key={wd + weekDayMemoId} scope="col" aria-label={wd}>
+              <div className="week-day d-flex align-items-center justify-content-center position-relative disabled">
+                <div className="label">{wd.slice(0, 3)}</div>
+              </div>
+            </th>
+          );
+        })}
       </tr>
     );
   }, [weekDaysLabels]);
@@ -537,7 +541,7 @@ export const DatePicker = ({
 
         return (
           <td
-            key={uuidv4()}
+            key={dayTdId + currentDay}
             data-date={stringDate}
             className="day-container p-0 m-0 border-0"
             aria-label={dayAriaLabel}
@@ -558,7 +562,7 @@ export const DatePicker = ({
 
     return Array.from(Array(6).keys()).map((trCount) => {
       return (
-        <tr role="row" key={uuidv4()}>
+        <tr role="row" key={weekTrId + trCount}>
           {buildWeek(trCount)}
         </tr>
       );

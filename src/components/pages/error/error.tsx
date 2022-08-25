@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useId } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
 import { Button, ButtonProps, Link } from '../../ui';
 import './error.scss';
 
@@ -50,7 +49,7 @@ export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: Er
           <Col className="d-flex justify-content-center error-actions-container">
             {buttons.map((bArgs) => {
               const classes = `error-action ${bArgs.className}`;
-              return <Button key={uuidv4()} {...bArgs} className={classes} />;
+              return <Button key={useId()} {...bArgs} className={classes} />;
             })}
           </Col>
         </Row>

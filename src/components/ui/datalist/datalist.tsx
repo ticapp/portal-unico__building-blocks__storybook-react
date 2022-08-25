@@ -1,6 +1,4 @@
-import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
-
+import React, { useId } from 'react';
 import './datalist.scss';
 import { Col, Container, Row } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -38,7 +36,7 @@ export const Datalist = ({ title, data, className }: DatalistProps) => {
         {data &&
           data.map((item) => {
             return (
-              <Col key={uuidv4()} className={`${itemsClassName} ${item.classNames || ''}`}>
+              <Col key={useId()} className={`${itemsClassName} ${item.classNames || ''}`}>
                 <dt className="mb-8"> {item.label}</dt>
                 <dd className="mb-0">{item.value}</dd>
               </Col>
