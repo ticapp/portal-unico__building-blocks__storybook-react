@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useId } from 'react';
 import { InputText } from '../../../../components/ui/input-text';
 
 export default {
@@ -11,7 +10,7 @@ export default {
 export const BasicInputText: ComponentStory<typeof InputText> = (args) => {
   const [inputValue, setInputValue] = useState('');
 
-  return <InputText {...args} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />;
+  return <InputText {...args} inputId={useId()} value={inputValue} onChange={(e) => setInputValue(e.target.value)} />;
 };
 
 BasicInputText.storyName = 'Basic Input Text';
@@ -21,7 +20,6 @@ BasicInputText.args = {
   placeholder: 'Placeholder',
   name: 'input-text1',
   value: '',
-  inputId: uuidv4(),
   isDisabled: false,
   type: 'password'
 };

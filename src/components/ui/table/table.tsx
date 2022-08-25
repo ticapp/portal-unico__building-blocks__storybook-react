@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState, useId } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
 import { paginationDataType, sortDataType, useIsomorphicLayoutEffect, usePaginationDataType, useSortTableData } from '../../hooks';
 
 import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
@@ -102,7 +101,7 @@ const TableDesktop = ({
     return item?.map((data, i) => {
       return (
         <th
-          key={uuidv4()}
+          key={useId()}
           scope="col"
           className={`${data.sorting ? 'py-0' : 'py-16'} px-8 align-middle`}
           aria-sort={getAriaSort(getClassNamesFor(keys[i]), data.sorting)}
@@ -141,7 +140,7 @@ const TableDesktop = ({
 
   const renderTd = (content: sortDataType) => {
     return Object.keys(content).map((k) => (
-      <td className="text-medium-normal" key={uuidv4()}>
+      <td className="text-medium-normal" key={useId()}>
         {React.isValidElement(content[k]?.[0]) ? content[k]?.[0] : content[k]}
       </td>
     ));
@@ -150,7 +149,7 @@ const TableDesktop = ({
   const renderTr = (item: sortDataType[]) => {
     return item?.map((content: sortDataType) => {
       return (
-        <tr key={uuidv4()} className="align-middle position-relative">
+        <tr key={useId()} className="align-middle position-relative">
           {renderTd(content)}
         </tr>
       );
@@ -173,7 +172,7 @@ const TableDesktop = ({
             <tr className="align-middle position-relative">
               {tableHeaders.map((_value, index) => {
                 return (
-                  <td className="text-medium-normal" key={uuidv4()}>
+                  <td className="text-medium-normal" key={useId()}>
                     {index > 0 ? '-' : noDataLabel}
                   </td>
                 );
@@ -222,14 +221,14 @@ const TableMobile = ({ ...props }: TableProps) => {
   const checkLinkButton = (element, key) => {
     if (React.isValidElement(element[1])) {
       return (
-        <React.Fragment key={uuidv4()}>
+        <React.Fragment key={useId()}>
           <dt className="d-none">{tableHeaders[key].value}</dt>
           <dd className="col-12 m-0 p-16 position-relative">{element[1]}</dd>
         </React.Fragment>
       );
     }
     return (
-      <React.Fragment key={uuidv4()}>
+      <React.Fragment key={useId()}>
         <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
         <dd className="col-6 m-0 p-16 position-relative">{element}</dd>
       </React.Fragment>
@@ -238,7 +237,7 @@ const TableMobile = ({ ...props }: TableProps) => {
 
   const dataListItem = tableData.map((item) => {
     return (
-      <React.Fragment key={uuidv4()}>
+      <React.Fragment key={useId()}>
         {mobileLegendRow && (
           <dt className="p-16" aria-hidden>
             {mobileLegendRow}
@@ -249,7 +248,7 @@ const TableMobile = ({ ...props }: TableProps) => {
             return checkLinkButton(value[1], key);
           }
           return (
-            <React.Fragment key={uuidv4()}>
+            <React.Fragment key={useId()}>
               <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
               <dd className="col-6 m-0 p-16 position-relative">{value[1]}</dd>
             </React.Fragment>
@@ -293,7 +292,7 @@ const TableMobile = ({ ...props }: TableProps) => {
         {dataShown.length > 0 && dataShown}
         {dataShown.length === 0 &&
           tableHeaders.map((item, index) => (
-            <React.Fragment key={uuidv4()}>
+            <React.Fragment key={useId()}>
               <dt className="col-6 m-0 p-16">{item.value}</dt>
               <dd className="col-6 m-0 p-16 position-relative">{index > 0 ? '-' : noDataLabel}</dd>
             </React.Fragment>

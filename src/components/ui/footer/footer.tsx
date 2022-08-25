@@ -1,9 +1,8 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useId } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 import './footer.scss';
 import { UrlObject } from 'url';
-import { v4 as uuidv4 } from 'uuid';
 import { List } from '../list';
 
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
@@ -145,7 +144,7 @@ export const Footer = ({
   const renderContentInfo01 = () => {
     return contentInfo01?.map((content) => {
       return (
-        <div className="ama-footer-section-info-detail mb-40" key={uuidv4()}>
+        <div className="ama-footer-section-info-detail mb-40" key={useId()}>
           <p className="fw-400">{content.label}</p>
           <p className="strong fw-900">{content.value}</p>
         </div>

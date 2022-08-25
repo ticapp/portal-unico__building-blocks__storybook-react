@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
-
-import { v4 as uuidv4 } from 'uuid';
+import React, { useEffect, useId, useState } from 'react';
 import { InputRadio } from './input-radio';
 
 export interface InputRadioData {
@@ -27,6 +25,7 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, isDisab
   const [inputRadioValues, setInputRadioValues] = useState<Array<InputRadioData>>([]);
   const [inputRadioCheckedId, setInputRadioCheckedId] = useState<string>('');
   const inputRadioGroupClassName = classNames('ama-input-radio-group', className);
+  const uid = useId();
 
   useEffect(() => {
     const setInitialCheckedValue = radiosData.map((data) => {
@@ -99,7 +98,7 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, isDisab
             index={index}
             nextInputRadio={nextInputRadio}
             previousInputRadio={previousInputRadio}
-            key={uuidv4()}
+            key={radio.id + uid + inputRadioCheckedId}
             setRadioChecked={setRadioChecked}
             inputRadioCheckedId={inputRadioCheckedId}
             inputId={radio.id}

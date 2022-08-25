@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useId } from 'react';
 import { Accordion as BsAccordion, AccordionProps as BsAccordionProps } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
 import './accordion.scss';
 
 export interface AccordionInfo {
@@ -22,7 +21,7 @@ export const Accordion = ({ className, accordionInfo, ...props }: AccordionProps
   const renderItemTab = (item: AccordionInfo[]) => {
     return item?.map((content, index) => {
       return (
-        <BsAccordion.Item className={item.length - 1 === index ? '' : 'mb-16'} eventKey={`tab-${index}`} key={uuidv4()}>
+        <BsAccordion.Item className={item.length - 1 === index ? '' : 'mb-16'} eventKey={`tab-${index}`} key={useId()}>
           <BsAccordion.Header className="text-big-bold">{content.title}</BsAccordion.Header>
           <BsAccordion.Body className="text-big-normal">
             <hr />

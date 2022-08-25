@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useId } from 'react';
 import { Tab as BsTab, TabProps as BsTabProps, Tabs as BsTabs, TabsProps as BsTabsProps } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
 import './tabs.scss';
 
 export interface TabsProps extends BsTabsProps {
@@ -20,7 +19,7 @@ export const Tabs = ({ className, tabsName, ...props }: TabsProps & TabProps) =>
   const renderTab = (tab) => {
     return tab?.map((content) => {
       return (
-        <BsTab key={uuidv4()} eventKey={content.keyTab} title={content.label} disabled={content.disabled ? content.disabled : false}>
+        <BsTab key={useId()} eventKey={content.keyTab} title={content.label} disabled={content.disabled ? content.disabled : false}>
           {content.children}
         </BsTab>
       );
