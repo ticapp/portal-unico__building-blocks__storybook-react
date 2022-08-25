@@ -30,7 +30,7 @@ const iconName = {
 
 const MIN_DESKTOP_SIZE = 991;
 
-const currentToasts: Id[] = [];
+const currentToasts: { toastId: Id; reactToast: Id }[] = [];
 
 export const toast = (content: ToastContent, props?: ToastProps) => {
   const cssToast = classNames('ama-toast', 'm-20', `${content.type}`, props?.className);
@@ -45,8 +45,9 @@ export const toast = (content: ToastContent, props?: ToastProps) => {
     );
   };
   const CloseButtonBuilder = ({ closeToast }) => <Icon className="align-self-center" icon="ama-close" onClick={closeToast} />;
-  currentToasts.push(
-    reactToast(ToastBuilder, {
+  currentToasts.push({
+    toastId: ComponentId,
+    reactToast: reactToast(ToastBuilder, {
       autoClose: props?.autoClose ?? false,
       className: cssToast,
       closeButton: CloseButtonBuilder,
@@ -61,29 +62,31 @@ export const toast = (content: ToastContent, props?: ToastProps) => {
         }
       }
     })
-  );
+  });
 };
 
 export const ToastContainer = () => {
   const { width, height } = useWindowSize();
-  const toastRef = useRef<any>(null);
-  const [currentBottomPos, setCurrentBottomPos] = useState(toastRef.current ? toastRef.current.getBoundingClientRect().bottom : 0);
+  const toastRef = useRef<HTMLDivElement | null>(null);
   const [isDraggable, setIsDraggable] = useState(false);
 
   useEffect(() => {
-    if (toastRef.current) {
-      const { bottom } = toastRef.current.getBoundingClientRect();
-      toastRef.current.style.display = bottom >= height ? 'none' : 'flex-inline';
-      if (currentBottomPos !== bottom) {
-        setCurrentBottomPos(bottom);
+    reactToast.onChange((payload) => {
+      if (payload.status === 'added') {
+        currentToasts.forEach((t) => {
+          const elm = document.getElementById(t.toastId.toString());
+          if (elm) {
+            elm.style.display = elm.getBoundingClientRect().bottom >= height ? 'none' : 'flex-inline';
+          }
+        });
       }
-    }
-  }, [currentBottomPos]);
+    });
+  });
 
   useEffect(() => {
     const draggable = width <= MIN_DESKTOP_SIZE;
     currentToasts.forEach((t) => {
-      reactToast.update(t, {
+      reactToast.update(t.reactToast, {
         draggable
       });
     });
