@@ -11182,13 +11182,13 @@ textarea.form-control-lg {
     margin-left: auto;
   }
   .modal-sm {
-    --bs-modal-width: 300px;
+    --bs-modal-width: 592px;
   }
 }
 @media (min-width: 992px) {
   .modal-lg,
 .modal-xl {
-    --bs-modal-width: 800px;
+    --bs-modal-width: 801px;
   }
 }
 @media (min-width: 1280px) {

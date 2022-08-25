@@ -30,3 +30,4 @@ export * from './date-picker';
 export * from './infractions-chart';
 export * from './input-tag';
 export * from './input-radio-group';
+export * from './modal';
