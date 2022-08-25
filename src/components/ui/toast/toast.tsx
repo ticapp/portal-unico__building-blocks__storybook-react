@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { Id, toast as reactToast, ToastContainer as TC } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
+import { useWindowSize } from '../../hooks';
 import { Icon } from '../icon/icon';
 
 import './toast.scss';
@@ -29,26 +30,11 @@ const iconName = {
 
 const MIN_DESKTOP_SIZE = 991;
 
+const currentToasts: Id[] = [];
+
 export const toast = (content: ToastContent, props?: ToastProps) => {
   const cssToast = classNames('ama-toast', 'm-20', `${content.type}`, props?.className);
-  let toastId: Id;
-  const ComponentId = uuidv4();
-
-  const updateToastDraggable = () => {
-    reactToast.update(toastId, { draggable: window.innerWidth <= MIN_DESKTOP_SIZE });
-  };
-  window.addEventListener('resize', updateToastDraggable);
-
-  reactToast.onChange((payload) => {
-    if (payload.status === 'added') {
-      const elm = document.getElementById(ComponentId);
-      if (elm) {
-        const triggerBottom = window.innerHeight;
-        const boxBottom = elm.getBoundingClientRect().bottom;
-        elm.style.display = boxBottom >= triggerBottom ? 'none' : 'flex-inline';
-      }
-    }
-  });
+  const ComponentId = props?.id ?? uuidv4();
 
   const ToastBuilder = () => {
     return (
@@ -59,18 +45,50 @@ export const toast = (content: ToastContent, props?: ToastProps) => {
     );
   };
   const CloseButtonBuilder = ({ closeToast }) => <Icon className="align-self-center" icon="ama-close" onClick={closeToast} />;
-  toastId = reactToast(ToastBuilder, {
-    autoClose: props?.autoClose ?? false,
-    className: cssToast,
-    closeButton: CloseButtonBuilder,
-    closeOnClick: false,
-    position: 'top-right',
-    draggable: window.innerWidth <= MIN_DESKTOP_SIZE,
-    hideProgressBar: true,
-    toastId: ComponentId
-  });
+  currentToasts.push(
+    reactToast(ToastBuilder, {
+      autoClose: props?.autoClose ?? false,
+      className: cssToast,
+      closeButton: CloseButtonBuilder,
+      closeOnClick: false,
+      position: 'top-right',
+      hideProgressBar: true,
+      toastId: ComponentId,
+      onClose: () => {
+        const index = currentToasts.findIndex((t) => t === ComponentId);
+        if (index !== -1) {
+          currentToasts.splice(index, 1);
+        }
+      }
+    })
+  );
 };
 
 export const ToastContainer = () => {
-  return <TC newestOnTop containerId="ama-toast-container" className="ama-toast-container end-0" />;
+  const { width, height } = useWindowSize();
+  const toastRef = useRef<any>(null);
+  const [currentBottomPos, setCurrentBottomPos] = useState(toastRef.current ? toastRef.current.getBoundingClientRect().bottom : 0);
+  const [isDraggable, setIsDraggable] = useState(false);
+
+  useEffect(() => {
+    if (toastRef.current) {
+      const { bottom } = toastRef.current.getBoundingClientRect();
+      toastRef.current.style.display = bottom >= height ? 'none' : 'flex-inline';
+      if (currentBottomPos !== bottom) {
+        setCurrentBottomPos(bottom);
+      }
+    }
+  }, [currentBottomPos]);
+
+  useEffect(() => {
+    const draggable = width <= MIN_DESKTOP_SIZE;
+    currentToasts.forEach((t) => {
+      reactToast.update(t, {
+        draggable
+      });
+    });
+    setIsDraggable(draggable);
+  }, [width]);
+
+  return <TC newestOnTop ref={toastRef} draggable={isDraggable} containerId="ama-toast-container" className="ama-toast-container end-0" />;
 };
