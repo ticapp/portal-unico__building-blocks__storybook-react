@@ -75,6 +75,8 @@ const TableDesktop = ({
   delete tableProps.labelSeeLess;
   delete tableProps.titleMobileDL;
 
+  const uid = useId();
+
   const [elementsPerPage, setElementsPerPage] = useState<paginationDataType[]>();
   const context = React.useContext<TableContextType>(Context);
   useEffect(() => {
@@ -139,17 +141,19 @@ const TableDesktop = ({
   };
 
   const renderTd = (content: sortDataType) => {
-    return Object.keys(content).map((k) => (
-      <td className="text-medium-normal" key={useId()}>
+    return Object.keys(content).map((k, index) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <td className="text-medium-normal" key={`${uid}-${index}-td`}>
         {React.isValidElement(content[k]?.[0]) ? content[k]?.[0] : content[k]}
       </td>
     ));
   };
 
   const renderTr = (item: sortDataType[]) => {
-    return item?.map((content: sortDataType) => {
+    return item?.map((content: sortDataType, index: number) => {
       return (
-        <tr key={useId()} className="align-middle position-relative">
+        // eslint-disable-next-line react/no-array-index-key
+        <tr key={`${uid}-${index}-tr`} className="align-middle position-relative">
           {renderTd(content)}
         </tr>
       );
