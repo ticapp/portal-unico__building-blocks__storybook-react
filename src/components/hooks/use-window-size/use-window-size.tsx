@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
 export const useWindowSize = () => {
-  const [width, setWidth] = useState(1920);
-  const [height, setHeight] = useState(1080);
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
 
   useEffect(() => {
     let isMouted = true;
