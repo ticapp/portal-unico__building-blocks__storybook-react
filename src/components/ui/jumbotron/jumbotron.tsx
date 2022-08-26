@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useId } from 'react';
 import classNames from 'classnames';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface JumbotronProps {
   /** Add classes to the Jumbotron component */
@@ -20,13 +19,13 @@ export const Jumbotron = ({ className, jumboTitle, description, ...props }: Jumb
     return jumboTitle?.map((title, i) => {
       if (jumboTitle.length - 1 === i) {
         return (
-          <span className="h4-bold" key={uuidv4()}>
+          <span className="h4-bold" key={useId()}>
             {title}
           </span>
         );
       }
       return (
-        <React.Fragment key={uuidv4()}>
+        <React.Fragment key={useId()}>
           <span className="h4-bold">{title}</span>
           <br />
         </React.Fragment>

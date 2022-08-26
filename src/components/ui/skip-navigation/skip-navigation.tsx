@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import React, { DOMAttributes } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { DOMAttributes, useId } from 'react';
 import { Link } from '../link';
 import './skip-navigation.scss';
 
@@ -29,7 +28,7 @@ export function SkipNavigation({ className, ariaLabel, options }: SkipNavigation
   const renderSkipNavLinks = (item: SkipNavigationOptions[]) => {
     return item?.map((nav) => {
       return (
-        <li key={uuidv4()}>
+        <li key={useId()}>
           <Link link={`#${nav.idLink}`} isExternal target="_self">
             {nav.content}
           </Link>

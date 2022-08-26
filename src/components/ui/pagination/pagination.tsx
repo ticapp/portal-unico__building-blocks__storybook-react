@@ -71,7 +71,8 @@ export const Pagination = ({
     }
     (prevRef.current?.lastChild?.lastChild as HTMLSpanElement).innerText = previousAriaLabel;
     (nextRef.current?.lastChild?.lastChild as HTMLSpanElement).innerText = nextAriaLabel;
-  }, [pageData?.currentPage, pageData?.contentPerPage]);
+  }, [pageData?.currentPage, pageData?.contentPerPage, pageData?.currentData]);
+
   return (
     <nav aria-label={ariaLabelPaginationNav}>
       <BsPagination {...props} className={cssPagination}>
