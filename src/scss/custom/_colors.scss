@@ -30,37 +30,6 @@ $semantic-warning-lighter: #f8f4e1;
 
 $details-links-visited: #661299;
 
-//We can use this as we used 'primary' on btn for example 'btn-neutral-black'
-$theme-colors: map-merge(
-  $theme-colors,
-  (
-    'neutral-black': $neutral-black,
-    'neutral-dark': $neutral-dark,
-    'neutral-dark-grey': $neutral-dark-grey,
-    'neutral-light-grey': $neutral-light-grey,
-    'neutral-light': $neutral-light,
-    'neutral-white': $neutral-white,
-    'brand-green-main': $brand-green-main,
-    'brand-green-secondary': $brand-green-secondary,
-    'brand-green-terciary': $brand-green-terciary,
-    'brand-green-fourth': $brand-green-fourth,
-    'brand-green-hover': $brand-green-hover,
-    'brand-yellow-main': $brand-yellow-main,
-    'brand-yellow-secondary': $brand-yellow-secondary,
-    'brand-yellow-terciary': $brand-yellow-terciary,
-    'brand-yellow-fourth': $brand-yellow-fourth,
-    'semantic-success': $semantic-success,
-    'semantic-success-light': $semantic-success-light,
-    'semantic-info': $semantic-info,
-    'semantic-info-lighter': $semantic-info-lighter,
-    'semantic-alerts': $semantic-alerts,
-    'semantic-alerts-lighter': $semantic-alerts-lighter,
-    'semantic-warning': $semantic-warning,
-    'semantic-warning-lighter': $semantic-warning-lighter,
-    'details-links-visited': $details-links-visited
-  )
-);
-
 $colors: (
   'neutral-black': $neutral-black,
   'neutral-dark': $neutral-dark,
@@ -87,3 +56,6 @@ $colors: (
   'semantic-warning-lighter': $semantic-warning-lighter,
   'details-links-visited': $details-links-visited
 );
+
+//We can use this as we used 'primary' on btn for example 'btn-neutral-black'
+$theme-colors: map-merge($theme-colors, $colors);

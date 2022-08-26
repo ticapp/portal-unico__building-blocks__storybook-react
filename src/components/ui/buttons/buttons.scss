@@ -92,6 +92,6 @@ $threshold: 55%;
     color: index.$details-links-visited !important;
   }
   &:focus {
-    border: 1px solid index.$neutral-black;
+    box-shadow: 0 0 0 2px index.$neutral-black inset !important;
   }
 }
