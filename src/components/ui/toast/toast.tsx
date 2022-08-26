@@ -30,6 +30,7 @@ const iconName = {
 };
 
 const MIN_DESKTOP_SIZE = 991;
+const OFFSET_SCROLL_TOP = 32; 
 
 const currentToasts: Id[] = [];
 const getToastsList = () => currentToasts;
@@ -68,7 +69,7 @@ export const toast = (content: ToastContent, props?: ToastProps) => {
 };
 
 export const ToastContainer = () => {
-  const { width } = useWindowSize();
+  const { width, height } = useWindowSize();
   const toastRef = useRef<HTMLDivElement | null>(null);
   const [isDraggable, setIsDraggable] = useState(false);
   const [toastsList, setToastsList] = useState(getToastsList());
@@ -92,7 +93,7 @@ export const ToastContainer = () => {
       currentToasts.forEach(tId => {
         const elm = document.getElementById(tId.toString());
         if (elm) {
-          elm.style.visibility = elm.getBoundingClientRect().bottom >= window.innerHeight ? 'hidden' : 'visible';
+          elm.style.visibility = elm.getBoundingClientRect().bottom >= height - OFFSET_SCROLL_TOP ? 'hidden' : 'visible';
         }
       });
     });

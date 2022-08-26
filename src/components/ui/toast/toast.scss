@@ -2,7 +2,7 @@
 @use '../../../../node_modules/react-toastify/dist/ReactToastify.css';
 
 .ama-toast-container {
-	z-index: 100000;
+	z-index: 99999;
 }
 
 :root {
