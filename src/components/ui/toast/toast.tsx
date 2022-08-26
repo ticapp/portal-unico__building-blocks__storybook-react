@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import classNames from 'classnames';
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { Id, toast as reactToast, ToastContainer as TC } from 'react-toastify';
@@ -30,12 +31,14 @@ const iconName = {
 
 const MIN_DESKTOP_SIZE = 991;
 
-const currentToasts: { toastId: Id; reactToast: Id }[] = [];
+const currentToasts: Id[] = [];
+const getToastsList = () => currentToasts;
+const toastEvent = new Event('externalVar');
 
 export const toast = (content: ToastContent, props?: ToastProps) => {
   const cssToast = classNames('ama-toast', 'm-20', `${content.type}`, props?.className);
   const ComponentId = props?.id ?? uuidv4();
-
+  
   const ToastBuilder = () => {
     return (
       <div>
@@ -45,9 +48,8 @@ export const toast = (content: ToastContent, props?: ToastProps) => {
     );
   };
   const CloseButtonBuilder = ({ closeToast }) => <Icon className="align-self-center" icon="ama-close" onClick={closeToast} />;
-  currentToasts.push({
-    toastId: ComponentId,
-    reactToast: reactToast(ToastBuilder, {
+  currentToasts.push(
+    reactToast(ToastBuilder, {
       autoClose: props?.autoClose ?? false,
       className: cssToast,
       closeButton: CloseButtonBuilder,
@@ -62,31 +64,44 @@ export const toast = (content: ToastContent, props?: ToastProps) => {
         }
       }
     })
-  });
+  );
 };
 
 export const ToastContainer = () => {
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
   const toastRef = useRef<HTMLDivElement | null>(null);
   const [isDraggable, setIsDraggable] = useState(false);
+  const [toastsList, setToastsList] = useState(getToastsList());
 
   useEffect(() => {
-    reactToast.onChange((payload) => {
-      if (payload.status === 'added') {
-        currentToasts.forEach((t) => {
-          const elm = document.getElementById(t.toastId.toString());
-          if (elm) {
-            elm.style.display = elm.getBoundingClientRect().bottom >= height ? 'none' : 'flex-inline';
-          }
-        });
+    const externalVar = (event) => {
+      if( event.originalEvent !== currentToasts ) {
+        const data = getToastsList();
+        if (data) {
+          setToastsList(data);
+        }
       }
-    });
+    };
+    window.addEventListener('externalVar', externalVar);
+    window.dispatchEvent(toastEvent);
+    return () => window.removeEventListener('externalVar', externalVar);
   });
+
+  useEffect(() => {
+    reactToast.onChange(() => {
+      currentToasts.forEach(tId => {
+        const elm = document.getElementById(tId.toString());
+        if (elm) {
+          elm.style.visibility = elm.getBoundingClientRect().bottom >= window.innerHeight ? 'hidden' : 'visible';
+        }
+      });
+    });
+  }, [toastsList]);
 
   useEffect(() => {
     const draggable = width <= MIN_DESKTOP_SIZE;
     currentToasts.forEach((t) => {
-      reactToast.update(t.reactToast, {
+      reactToast.update(t, {
         draggable
       });
     });
