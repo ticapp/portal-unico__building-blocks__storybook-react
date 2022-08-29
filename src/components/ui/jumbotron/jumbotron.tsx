@@ -1,4 +1,4 @@
-import React, { useId } from 'react';
+import React, { ReactNode, useId } from 'react';
 import classNames from 'classnames';
 
 export interface JumbotronProps {
@@ -9,7 +9,7 @@ export interface JumbotronProps {
   jumboTitle: Array<string>;
 
   /** Description of title */
-  description?: string;
+  description?: string | ReactNode;
 }
 
 export const Jumbotron = ({ className, jumboTitle, description, ...props }: JumbotronProps) => {
@@ -36,7 +36,7 @@ export const Jumbotron = ({ className, jumboTitle, description, ...props }: Jumb
   return (
     <div className={cssJumbotron} {...props}>
       <h1 className="h4-bold">{renderTitle()}</h1>
-      {description && <p className="p-0">{description}</p>}
+      {description && React.isValidElement(description) ? description : <p className="p-0">{description}</p>}
     </div>
   );
 };
