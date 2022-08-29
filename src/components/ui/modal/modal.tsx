@@ -44,7 +44,7 @@ export const Modal = ({ className, children, actionButtons, onClose, ...props }:
   return (
     <BsModal className={cssTabs} {...props} centered>
       <BsModalHeader className="border-0 justify-content-end px-40 pt-40 pb-16">
-        <Button className="ama-modal-header-btn-close p-0" onClick={onClose}>
+        <Button variant="link" className="p-0" onClick={onClose}>
           <Icon icon="ama-close" size="lg" />
         </Button>
       </BsModalHeader>

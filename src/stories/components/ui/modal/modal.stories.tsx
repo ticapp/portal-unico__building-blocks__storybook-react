@@ -26,7 +26,7 @@ export default {
   }
 } as ComponentMeta<typeof Modal>;
 
-export const BasicModal: Story<ModalProps> = (props) => {
+export const BasicModal: Story<ModalProps> = () => {
   const [modalShow, setModalShow] = React.useState(true);
 
   const args = {
@@ -63,7 +63,7 @@ export const BasicModal: Story<ModalProps> = (props) => {
           Erat diam maecenas nibh at ipsum libero ac. Amet convallis blandit at luctus feugiat Erat diam maecenas nibh at ipsum libero ac.
           Amet convallis blandit at luctus feugiat
         </p>
-        <p className="text-big-normal">
+        <p className="text-big-big fc-brand-green-main">
           Erat diam maecenas nibh at ipsum libero ac. Amet convallis blandit at luctus feugiat Erat diam maecenas nibh at ipsum libero ac.
           Amet convallis blandit at luctus feugiat
         </p>
@@ -99,7 +99,7 @@ export const BasicModal: Story<ModalProps> = (props) => {
       <Button variant="brand-green-main" onClick={() => setModalShow(true)}>
         Open Modal
       </Button>
-      <Modal {...args} {...props} />
+      <Modal {...args} />
     </>
   );
 };
