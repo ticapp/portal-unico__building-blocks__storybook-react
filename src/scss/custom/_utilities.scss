@@ -180,6 +180,11 @@ $utilities: map-merge(
       property: color,
       class: text,
       values: $colors
+    ),
+    'border-color': (
+      property: border-color,
+      class: border,
+      values: $theme-colors
     )
   )
 );
