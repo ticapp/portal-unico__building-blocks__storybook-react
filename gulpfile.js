@@ -1,16 +1,16 @@
-const gulpSass = require('gulp-sass');
-const nodeSass = require('sass');
+import gulpSass from 'gulp-sass';
+import nodeSass from 'sass';
 
-const gulp = require('gulp'),
-  sass = gulpSass(nodeSass),
-  autoprefixer = require('gulp-autoprefixer'),
-  sourcemaps = require('gulp-sourcemaps'),
-  cleanCSS = require('gulp-clean-css'),
-  rename = require('gulp-rename'),
-  gap = require('gulp-append-prepend'),
-  touch = require('gulp-touch-cmd'),
-  pkg = require('./package.json'),
-  del = require('del');
+import gulp from 'gulp';
+const sass = gulpSass(nodeSass);
+import autoprefixer from 'gulp-autoprefixer';
+import sourcemaps from 'gulp-sourcemaps';
+import cleanCSS from 'gulp-clean-css';
+import rename from 'gulp-rename';
+import gap from 'gulp-append-prepend';
+import touch from 'gulp-touch-cmd';
+import pkg from './package.json' assert { type: 'json' };
+import { deleteAsync } from 'del';
 
 gulp.task('scss-min', () => {
   return gulp
@@ -43,7 +43,7 @@ gulp.task('assets', () => {
 });
 
 gulp.task('clean', function () {
-  return del('dist/**', { force: true });
+  return deleteAsync('dist/**', { force: true });
 });
 
 // Components style
