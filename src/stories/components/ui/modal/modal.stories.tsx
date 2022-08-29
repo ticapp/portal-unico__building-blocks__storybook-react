@@ -63,7 +63,7 @@ export const BasicModal: Story<ModalProps> = () => {
           Erat diam maecenas nibh at ipsum libero ac. Amet convallis blandit at luctus feugiat Erat diam maecenas nibh at ipsum libero ac.
           Amet convallis blandit at luctus feugiat
         </p>
-        <p className="text-big-big text-brand-green-main">
+        <p className="text-big-big fc-brand-green-main">
           Erat diam maecenas nibh at ipsum libero ac. Amet convallis blandit at luctus feugiat Erat diam maecenas nibh at ipsum libero ac.
           Amet convallis blandit at luctus feugiat
         </p>

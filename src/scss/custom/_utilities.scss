@@ -174,12 +174,6 @@ $utilities: map-merge(
       property: gap,
       class: gap,
       values: $spacers
-    ),
-    'text': (
-      responsive: true,
-      property: color,
-      class: text,
-      values: $colors
     )
   )
 );
