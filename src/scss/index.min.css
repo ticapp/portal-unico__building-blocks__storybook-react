@@ -16140,6 +16140,10 @@ textarea.form-control-lg {
   z-index: 1080 !important;
 }
 
+.z-toast {
+  z-index: 1090 !important;
+}
+
 .text-neutral-black {
   color: #212121 !important;
 }
@@ -17885,6 +17889,9 @@ textarea.form-control-lg {
   .z-sm-tooltip {
     z-index: 1080 !important;
   }
+  .z-sm-toast {
+    z-index: 1090 !important;
+  }
   .text-sm-neutral-black {
     color: #212121 !important;
   }
@@ -19606,6 +19613,9 @@ textarea.form-control-lg {
   }
   .z-md-tooltip {
     z-index: 1080 !important;
+  }
+  .z-md-toast {
+    z-index: 1090 !important;
   }
   .text-md-neutral-black {
     color: #212121 !important;
@@ -21329,6 +21339,9 @@ textarea.form-control-lg {
   .z-lg-tooltip {
     z-index: 1080 !important;
   }
+  .z-lg-toast {
+    z-index: 1090 !important;
+  }
   .text-lg-neutral-black {
     color: #212121 !important;
   }
@@ -23051,6 +23064,9 @@ textarea.form-control-lg {
   .z-xl-tooltip {
     z-index: 1080 !important;
   }
+  .z-xl-toast {
+    z-index: 1090 !important;
+  }
   .text-xl-neutral-black {
     color: #212121 !important;
   }
@@ -24772,6 +24788,9 @@ textarea.form-control-lg {
   }
   .z-xxl-tooltip {
     z-index: 1080 !important;
+  }
+  .z-xxl-toast {
+    z-index: 1090 !important;
   }
   .text-xxl-neutral-black {
     color: #212121 !important;
