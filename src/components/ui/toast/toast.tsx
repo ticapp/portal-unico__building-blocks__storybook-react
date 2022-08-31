@@ -1,9 +1,9 @@
-/* eslint-disable prettier/prettier */
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { Id, toast as reactToast, ToastContainer as TC } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import { useWindowSize } from '../../hooks';
+import { ToastContext, ToastContextType } from '../../libs/useToast';
 import { Icon } from '../icon/icon';
 
 import './toast.scss';
@@ -30,8 +30,10 @@ const iconName = {
 };
 
 const MIN_DESKTOP_SIZE = 991;
-const OFFSET_SCROLL_TOP = 32; 
+const OFFSET_SCROLL_TOP = 32;
 
+console.log(useContext<ToastContextType>(ToastContext));
+// const { value } = useContext<ToastContextType>(ToastContext);
 const currentToasts: Id[] = [];
 const getToastsList = () => currentToasts;
 const toastEvent = new Event('externalVar');
@@ -39,7 +41,6 @@ const toastEvent = new Event('externalVar');
 export const toast = (content: ToastContent, props?: ToastProps) => {
   const cssToast = classNames('ama-toast', 'm-20', `${content.type}`, props?.className);
   const ComponentId = props?.id ?? uuidv4();
-  
   const ToastBuilder = () => {
     return (
       <div>
@@ -76,7 +77,7 @@ export const ToastContainer = () => {
 
   useEffect(() => {
     const externalVar = (event) => {
-      if( event.originalEvent !== currentToasts ) {
+      if (event.originalEvent !== currentToasts) {
         const data = getToastsList();
         if (data) {
           setToastsList(data);
@@ -90,7 +91,7 @@ export const ToastContainer = () => {
 
   useEffect(() => {
     reactToast.onChange(() => {
-      currentToasts.forEach(tId => {
+      currentToasts.forEach((tId) => {
         const elm = document.getElementById(tId.toString());
         if (elm) {
           elm.style.visibility = elm.getBoundingClientRect().bottom >= height - OFFSET_SCROLL_TOP ? 'hidden' : 'visible';
