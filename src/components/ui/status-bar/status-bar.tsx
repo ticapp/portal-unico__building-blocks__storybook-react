@@ -13,6 +13,8 @@ export interface StatusBarProps {
   title: string;
   subtitle: string;
   icon: string;
+  /** responsive status */
+  isMobile?: boolean;
 }
 
 export interface StatusBarPropsMobile {
@@ -53,11 +55,11 @@ export const StatusBarMobile = ({ className, url, icon, title, subtitle }: Statu
   );
 };
 
-export const StatusBar = ({ className, url, icon, backButtonText, title, subtitle }: StatusBarProps) => {
+export const StatusBar = ({ isMobile, className, url, icon, backButtonText, title, subtitle }: StatusBarProps) => {
   const containerClassName = classNames('ama-status-bar-container', 'w-100 d-flex align-items-center justify-content-center', className);
   const infoContainerClassName = classNames('status-bar-content', 'w-100 d-flex align-items-center justify-content-between my-0 mx-auto');
 
-  const { width } = useWindowSize();
+  const { width } = useWindowSize(isMobile);
 
   if (width >= 768) {
     return (

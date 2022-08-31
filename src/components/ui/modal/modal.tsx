@@ -33,11 +33,14 @@ export interface ModalProps extends BsModalProps {
   size: 'sm' | 'lg';
   /** On close button action */
   onClose: () => void;
+
+  /** responsive status */
+  isMobile?: boolean;
 }
 
-export const Modal = ({ className, children, actionButtons, onClose, ...props }: ModalProps) => {
+export const Modal = ({ isMobile, className, children, actionButtons, onClose, ...props }: ModalProps) => {
   const cssTabs = classNames('ama-modal', className);
-  const { width } = useWindowSize();
+  const { width } = useWindowSize(isMobile);
   const modalBodyRef = useRef(null);
   const { isContainerBig } = useModalContainerLogic(modalBodyRef);
 

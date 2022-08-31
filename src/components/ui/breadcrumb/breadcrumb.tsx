@@ -41,6 +41,8 @@ export interface BreadCrumbProps {
   ariaHasPopUp: boolean;
   // ** Set Breadcrumb Mobile Title*/
   breadCrumbMobileTitle: string;
+  /** responsive status */
+  isMobile?: boolean;
 }
 
 const BreadCrumbDesktop = ({ className, breadcrumbs, navAriaLabel, linkAriaLabel }: BreadCrumbDesktopProps) => {
@@ -152,9 +154,10 @@ export const BreadCrumb = ({
   buttonAriaLabel,
   ariaHasPopUp,
   linkAriaLabel,
-  breadCrumbMobileTitle
+  breadCrumbMobileTitle,
+  isMobile
 }: BreadCrumbProps) => {
-  const { width } = useWindowSize();
+  const { width } = useWindowSize(isMobile);
 
   if (width >= 768) {
     return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} linkAriaLabel={linkAriaLabel} />;

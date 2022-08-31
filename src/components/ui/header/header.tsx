@@ -43,6 +43,9 @@ export interface HeaderProps {
   burgerMenuAriaLabel?: string;
   burgerOpenAriaLabel?: string;
   burgerCloseAriaLabel?: string;
+
+  /** responsive status */
+  isMobile?: boolean;
 }
 
 const Header = ({
@@ -68,9 +71,11 @@ const Header = ({
   burgerMenuBody = false,
   burgerMenuAriaLabel = 'Navigation Menu Overlay',
   burgerOpenAriaLabel = 'Open Navigation Menu Overlay',
-  burgerCloseAriaLabel = 'Close Navigation Menu Overlay'
+  burgerCloseAriaLabel = 'Close Navigation Menu Overlay',
+
+  isMobile
 }) => {
-  const { width } = useWindowSize();
+  const { width } = useWindowSize(isMobile);
   const [showMenuOverlay, setShowMenuOverlay] = useState(false);
 
   const offCanvasCloseHandler = () => {
