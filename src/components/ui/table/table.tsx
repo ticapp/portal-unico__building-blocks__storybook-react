@@ -39,6 +39,9 @@ export interface TableProps extends BsTableProps {
 
   /** title mobile description list */
   titleMobileDL?: string;
+
+  /** responsive status */
+  isMobile?: boolean;
 }
 
 export type TableContextType = {
@@ -313,8 +316,8 @@ const TableMobile = ({ ...props }: TableProps) => {
   );
 };
 
-export const Table = (props: TableProps & PaginationProps) => {
-  const { width } = useWindowSize();
+export const Table = ({ isMobile, ...props }: TableProps & PaginationProps) => {
+  const { width } = useWindowSize(isMobile);
 
   return (
     <>
