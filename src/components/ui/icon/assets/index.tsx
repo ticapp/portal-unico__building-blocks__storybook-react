@@ -40,6 +40,7 @@ const iconList: Record<string, string> = {
   'ama-radio-focus': './AmaRadioFocus',
   'ama-radio-disabled-unselected': './AmaRadioDisabledUnselected',
   'ama-radio-disabled-selected': './AmaRadioDisabledSelected',
+  'ama-search': './AmaSearch.tsx',
   'ama-twitter': './AmaTwitter',
   'ama-user': './AmaUser',
   'ama-warning': './AmaWarning',
