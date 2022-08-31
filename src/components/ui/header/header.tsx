@@ -74,7 +74,7 @@ const Header = ({
   burgerCloseAriaLabel = 'Close Navigation Menu Overlay',
 
   isMobile
-}) => {
+}: HeaderProps) => {
   const { width } = useWindowSize(isMobile);
   const [showMenuOverlay, setShowMenuOverlay] = useState(false);
 
