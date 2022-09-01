@@ -18,9 +18,11 @@ export interface VerticalMenuProps {
   ariaLabel?: string;
   /** List of available links to render */
   links: VerticalMenuLink[];
+  /** On activate link */
+  onActivate?: (item: VerticalMenuLink) => void;
 }
 
-const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation Menu', links = [] }: VerticalMenuProps) => {
+const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation Menu', links = [], onActivate }: VerticalMenuProps) => {
   const uid = useId();
 
   const pathname = usePathname();
@@ -33,6 +35,10 @@ const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation 
     }
 
     return parent.children.some((s) => hasActiveDescendant(s));
+  };
+
+  const onClickHandler = (item: VerticalMenuLink) => {
+    onActivate?.(item);
   };
 
   const buildMenuItem = (item: VerticalMenuLink, lvl: number, idx: number) => {
@@ -52,6 +58,7 @@ const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation 
               activeClassName="active"
               role="treeitem"
               aria-owns={item.children ? subMenuId : ''}
+              onClick={() => onClickHandler(item)}
             >
               <span className="label d-inline-flex align-items-center">{item.label}</span>
             </NavLink>
