@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Col, Container, Offcanvas, Row } from 'react-bootstrap';
 import { UserArea, UserAreaOption } from './user-area';
 import './header.scss';
