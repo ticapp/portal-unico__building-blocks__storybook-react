@@ -85,7 +85,14 @@ const TableDesktop = ({
     }
   }, [context?.value]);
 
-  const { items, requestSort, sortConfig } = useSortTableData(elementsPerPage || tableData, tableData, context?.value, null);
+  let logicItems;
+  if (tableData?.length === 0 || elementsPerPage?.length === 0) {
+    logicItems = tableData;
+  } else {
+    logicItems = elementsPerPage;
+  }
+
+  const { items, requestSort, sortConfig } = useSortTableData(logicItems, tableData, context?.value, null);
   const cssTable = classNames('ama-table', className, 'mb-0', totalTable && 'ama-table-total');
   const getClassNamesFor = (name: string) => {
     return sortConfig?.key === name ? sortConfig?.direction : undefined;
@@ -176,7 +183,7 @@ const TableDesktop = ({
             <tr className="align-middle position-relative">
               {tableHeaders.map((_value, index) => {
                 return (
-                  <td className="text-medium-normal" key={useId()}>
+                  <td className="text-medium-normal" key={uid + index + 'td'}>
                     {index > 0 ? '-' : noDataLabel}
                   </td>
                 );
