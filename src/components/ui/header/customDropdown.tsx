@@ -52,7 +52,6 @@ const CustomDropdown = ({
 
   const comboWrapperRef = useRef(null);
 
-  const [isInitialized, setIsInitialized] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isComboExpanded, setIsComboExpanded] = useState(false);
 
@@ -338,24 +337,18 @@ const CustomDropdown = ({
 
   useOutsideElementClick(comboWrapperRef, () => updateMenuState(false));
 
-  useEffect(() => {
-    setIsInitialized(true);
-  }, []);
-
   // Initial values
   useEffect(() => {
-    if (isInitialized) {
-      return;
-    }
-
     if (active) {
       setSelectedIndex(options.findIndex((o) => o.value === active.value));
     }
+  }, [active]);
 
+  useEffect(() => {
     if (open) {
       updateMenuState(true);
     }
-  }, []);
+  }, [open]);
 
   const wrapperClassNames = classNames('custom-dropdown position-relative', className, { open: isOpen });
 
