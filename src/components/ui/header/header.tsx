@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Col, Container, Offcanvas, Row } from 'react-bootstrap';
 import { UserArea, UserAreaOption } from './user-area';
 import './header.scss';
@@ -69,7 +69,7 @@ const Header = ({
   burgerMenuAriaLabel = 'Navigation Menu Overlay',
   burgerOpenAriaLabel = 'Open Navigation Menu Overlay',
   burgerCloseAriaLabel = 'Close Navigation Menu Overlay'
-}) => {
+}: HeaderProps) => {
   const { width } = useWindowSize();
   const [showMenuOverlay, setShowMenuOverlay] = useState(false);
 

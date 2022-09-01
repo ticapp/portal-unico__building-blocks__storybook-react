@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable global-require */
 import { ComponentMeta, Story } from '@storybook/react';
-import React, { useId } from 'react';
+import React, { useId, useState } from 'react';
 import { Image } from 'react-bootstrap';
 import { BrowserRouter } from 'react-router-dom';
 import { CustomDropdownOption, Footer, FooterProps, Header, HeaderProps, Icon, InputTag, UserAreaOption } from '../../../../components';
@@ -60,8 +60,11 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
     }
   ] as CustomDropdownOption[];
 
+  const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
+
   const languageChangeHandler = (val) => {
     console.log(val);
+    setCurrentLanguage(val);
   };
 
   const onOptionChange = (val: UserAreaOption) => {
@@ -78,7 +81,7 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
         username="Area reservada"
         homepageLink="/"
         languages={languages}
-        activeLanguage={languages[0]}
+        activeLanguage={currentLanguage}
         options={options}
         onOptionChange={onOptionChange}
         onLanguageChange={languageChangeHandler}
@@ -293,8 +296,10 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
     { label: 'Jane Doe', id: useId() }
   ];
 
+  const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
+
   const languageChangeHandler = (val) => {
-    console.log(val);
+    setCurrentLanguage(val);
   };
 
   const onOptionChange = (val: UserAreaOption) => {
@@ -311,7 +316,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
         username="Area reservada"
         homepageLink="/"
         languages={languages}
-        activeLanguage={languages[0]}
+        activeLanguage={currentLanguage}
         options={options}
         onOptionChange={onOptionChange}
         onLanguageChange={languageChangeHandler}
