@@ -183,7 +183,7 @@ const TableDesktop = ({
             <tr className="align-middle position-relative">
               {tableHeaders.map((_value, index) => {
                 return (
-                  <td className="text-medium-normal" key={uid + index + 'td'}>
+                  <td className="text-medium-normal" key={`${uid + index}td`}>
                     {index > 0 ? '-' : noDataLabel}
                   </td>
                 );
