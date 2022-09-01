@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
@@ -50,9 +51,13 @@ export const BasicVerticalMenu: Story<VerticalMenuProps> = () => {
     }
   ];
 
+  const onActivatedLink = (item: VerticalMenuLink) => {
+    console.log(item);
+  };
+
   return (
     <BrowserRouter>
-      <VerticalMenu links={links} />
+      <VerticalMenu links={links} onActivate={onActivatedLink} />
     </BrowserRouter>
   );
 };
