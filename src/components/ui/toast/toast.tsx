@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React, { ReactNode, useContext, useEffect, useRef, useState } from 'react';
-import { Id, toast as reactToast, ToastContainer as TC } from 'react-toastify';
+import { toast as reactToast, ToastContainer as TC } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import { useWindowSize } from '../../hooks';
-import { ToastContext, ToastContextType } from '../../libs/useToast';
+import { ToastContext, ToastContextType } from '../../libs/utils/useToast';
 import { Icon } from '../icon/icon';
 
 import './toast.scss';
@@ -32,10 +32,7 @@ const iconName = {
 const MIN_DESKTOP_SIZE = 991;
 const OFFSET_SCROLL_TOP = 32;
 
-console.log(useContext<ToastContextType>(ToastContext));
-// const { value } = useContext<ToastContextType>(ToastContext);
-const currentToasts: Id[] = [];
-const getToastsList = () => currentToasts;
+let context: null | ToastContextType;
 const toastEvent = new Event('externalVar');
 
 export const toast = (content: ToastContent, props?: ToastProps) => {
@@ -50,35 +47,38 @@ export const toast = (content: ToastContent, props?: ToastProps) => {
     );
   };
   const CloseButtonBuilder = ({ closeToast }) => <Icon className="align-self-center" icon="ama-close" onClick={closeToast} />;
-  currentToasts.push(
-    reactToast(ToastBuilder, {
-      autoClose: props?.autoClose ?? false,
-      className: cssToast,
-      closeButton: CloseButtonBuilder,
-      closeOnClick: false,
-      position: 'top-right',
-      hideProgressBar: true,
-      toastId: ComponentId,
-      onClose: () => {
+  const newId = reactToast(ToastBuilder, {
+    autoClose: props?.autoClose ?? false,
+    className: cssToast,
+    closeButton: CloseButtonBuilder,
+    closeOnClick: false,
+    position: 'top-right',
+    hideProgressBar: true,
+    toastId: ComponentId,
+    onClose: () => {
+      const currentToasts = context?.value.getAllToast();
+      if (currentToasts) {
         const index = currentToasts.findIndex((t) => t === ComponentId);
         if (index !== -1) {
-          currentToasts.splice(index, 1);
+          context?.value.removeToast(index);
         }
       }
-    })
-  );
+    }
+  });
+  context?.value.setToast(newId);
 };
 
 export const ToastContainer = () => {
   const { width, height } = useWindowSize();
   const toastRef = useRef<HTMLDivElement | null>(null);
   const [isDraggable, setIsDraggable] = useState(false);
-  const [toastsList, setToastsList] = useState(getToastsList());
+  context = useContext<ToastContextType>(ToastContext);
+  const [toastsList, setToastsList] = useState(context?.value.getAllToast());
 
   useEffect(() => {
     const externalVar = (event) => {
-      if (event.originalEvent !== currentToasts) {
-        const data = getToastsList();
+      if (event.originalEvent !== context?.value) {
+        const data = context?.value.getAllToast();
         if (data) {
           setToastsList(data);
         }
@@ -91,23 +91,39 @@ export const ToastContainer = () => {
 
   useEffect(() => {
     reactToast.onChange(() => {
-      currentToasts.forEach((tId) => {
-        const elm = document.getElementById(tId.toString());
-        if (elm) {
-          elm.style.visibility = elm.getBoundingClientRect().bottom >= height - OFFSET_SCROLL_TOP ? 'hidden' : 'visible';
+      const length = context?.value.getAllToast()?.length;
+      if (length) {
+        for (let i = 0; i < length; i += 1) {
+          const toastId = context?.value.getToast(i)?.toString();
+          if (toastId) {
+            const elm = document.getElementById(toastId);
+            if (elm) {
+              if (elm.getBoundingClientRect().bottom >= height - OFFSET_SCROLL_TOP) {
+                context?.value.hide(elm);
+              } else {
+                context?.value.show(elm);
+              }
+            }
+          }
         }
-      });
+      }
     });
   }, [toastsList]);
 
   useEffect(() => {
     const draggable = width <= MIN_DESKTOP_SIZE;
-    currentToasts.forEach((t) => {
-      reactToast.update(t, {
-        draggable
-      });
-    });
-    setIsDraggable(draggable);
+    const length = context?.value.getAllToast()?.length;
+    if (length) {
+      for (let i = 0; i < length; i += 1) {
+        const toastId = context?.value.getToast(i);
+        if (toastId) {
+          reactToast.update(toastId, {
+            draggable
+          });
+        }
+      }
+      setIsDraggable(draggable);
+    }
   }, [width]);
 
   return <TC newestOnTop ref={toastRef} draggable={isDraggable} containerId="ama-toast-container" className="ama-toast-container end-0" />;

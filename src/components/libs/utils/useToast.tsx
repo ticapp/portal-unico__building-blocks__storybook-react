@@ -1,5 +1,5 @@
 import React, { createContext, useMemo } from 'react';
-import { ToastContainer, Id } from 'react-toastify';
+import { Id } from 'react-toastify';
 
 export class ToastManager {
   private currentToasts: Id[];
@@ -8,7 +8,7 @@ export class ToastManager {
     this.currentToasts = [];
   }
 
-  getAllToast = (): Id[] | undefined => {
+  getAllToast = (): Id[] => {
     return this.currentToasts;
   };
 
@@ -20,18 +20,20 @@ export class ToastManager {
     this.currentToasts.push(tId);
   };
 
-  show = (index: number): void => {
-    const elm = document.getElementById(this.currentToasts[index].toString());
-    if (elm) {
-      elm.style.visibility = 'visible';
-    }
+  removeToast = (tId: Id): void => {
+    this.currentToasts.splice(Number(tId), 1);
   };
 
-  hide = (index: number): void => {
-    const elm = document.getElementById(this.currentToasts[index].toString());
-    if (elm) {
-      elm.style.visibility = 'hidden';
-    }
+  // eslint-disable-next-line class-methods-use-this
+  show = (elm: HTMLElement): void => {
+    // eslint-disable-next-line no-param-reassign
+    elm.style.visibility = 'visible';
+  };
+
+  // eslint-disable-next-line class-methods-use-this
+  hide = (elm: HTMLElement): void => {
+    // eslint-disable-next-line no-param-reassign
+    elm.style.visibility = 'hidden';
   };
 }
 
@@ -41,10 +43,5 @@ export const ToastProvider = (children, value: ToastManager) => {
   const providerValue = useMemo(() => {
     return { value };
   }, [value]);
-  return (
-    <ToastContext.Provider value={providerValue}>
-      {children}
-      <ToastContainer />
-    </ToastContext.Provider>
-  );
+  return <ToastContext.Provider value={providerValue}>{children}</ToastContext.Provider>;
 };

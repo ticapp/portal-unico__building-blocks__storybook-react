@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react';
-import { Button, ScrollTop, toast, ToastContainer } from '../../../../components';
+import { Button, ScrollTop, toast, ToastContainer, ToastManager, ToastProvider } from '../../../../components';
 
 export default {
   title: 'Components/Toast'
 };
 
 export const ErrorToast: Story = () => {
+  const toastManager = new ToastManager();
   const [count, setCount] = useState(1);
   const onClick = () => {
     setCount((prev) => prev + 1);
     toast({ type: 'error', text: count });
   };
 
+  // {homes.map(home => <div>{home.name}</div>)}
+
   return (
-    <div>
-      <Button onClick={onClick}>show toast</Button>
-      <ToastContainer />
-    </div>
+    <ToastProvider value={toastManager}>
+      <>
+        <Button onClick={onClick}>show toast</Button>
+        <ToastContainer />
+      </>
+    </ToastProvider>
   );
 };
 
