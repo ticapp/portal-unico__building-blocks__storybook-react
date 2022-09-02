@@ -1,12 +1,19 @@
 import classNames from 'classnames';
-import React, { ReactNode, useEffect, useState, useId } from 'react';
+import React, { ReactNode, useEffect, useId, useState } from 'react';
 import { Table as BsTable, TableProps as BsTableProps } from 'react-bootstrap';
-import { paginationDataType, sortDataType, useIsomorphicLayoutEffect, usePaginationDataType, useSortTableData } from '../../hooks';
+import {
+  paginationDataType,
+  sortDataType,
+  useIsomorphicLayoutEffect,
+  usePaginationDataType,
+  useSortTableData,
+  useWindowSize
+} from '../../hooks';
 
-import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
 import { Button } from '../buttons';
 import { Icon } from '../icon';
 import { Pagination, PaginationProps } from '../pagination';
+import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
 import './table.scss';
 
 export interface TableProps extends BsTableProps {
@@ -322,11 +329,15 @@ const TableMobile = ({ ...props }: TableProps) => {
 
 export const Table = (props: TableProps & PaginationProps) => {
   const { width } = useWindowSize();
-
   return (
     <>
-      {width >= 1280 && <TableDesktop {...props} />}
-      {width < 1280 && <TableMobile {...props} />}
+      <ResponsiveWrapper condition={width >= 1280}>
+        <TableDesktop {...props} />
+      </ResponsiveWrapper>
+
+      <ResponsiveWrapper condition={width < 1280}>
+        <TableMobile {...props} />
+      </ResponsiveWrapper>
     </>
   );
 };

@@ -1,19 +1,19 @@
 import classNames from 'classnames';
-import React, { ReactNode, useRef, useId } from 'react';
+import React, { ReactNode, useId, useRef } from 'react';
 import {
-  Modal as BsModal,
-  ModalProps as BsModalProps,
-  ModalHeader as BsModalHeader,
-  ModalBody as BsModalBody,
-  Row,
   Col,
-  Container
+  Container,
+  Modal as BsModal,
+  ModalBody as BsModalBody,
+  ModalHeader as BsModalHeader,
+  ModalProps as BsModalProps,
+  Row
 } from 'react-bootstrap';
+import { useModalContainerLogic } from '../../hooks/use-modal-container-logic/use-modal-container-logic';
+import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
 import { Button } from '../buttons';
 import { Icon } from '../icon';
 import './modal.scss';
-import { useWindowSize } from '../../hooks/use-window-size/use-window-size';
-import { useModalContainerLogic } from '../../hooks/use-modal-container-logic/use-modal-container-logic';
 
 export interface ActionsButtonsProps {
   variant: string;

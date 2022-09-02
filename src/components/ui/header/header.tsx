@@ -7,6 +7,7 @@ import { CustomDropdown, CustomDropdownOption } from './customDropdown';
 import { Icon } from '../icon';
 import { useWindowSize } from '../../hooks';
 import { Button } from '../buttons';
+import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
 
 export interface HeaderProps {
   /** Path for logo image */
@@ -149,7 +150,7 @@ const Header = ({
         </Row>
       </Container>
       <hr className="m-0 p-0" />
-      {width < 768 && (
+      <ResponsiveWrapper condition={width < 768}>
         <Offcanvas
           id="navigation-menu-offcanvas"
           aria-label={burgerMenuAriaLabel}
@@ -201,7 +202,7 @@ const Header = ({
             </Row>
           </Offcanvas.Body>
         </Offcanvas>
-      )}
+      </ResponsiveWrapper>
     </Container>
   );
 };
