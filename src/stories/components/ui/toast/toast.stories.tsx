@@ -1,36 +1,34 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react';
-import { Button, ScrollTop, toast, ToastContainer, ToastManager, ToastProvider } from '../../../../components';
+import { Button, ToastContainer, ToastProps, ToastType, useToast } from '../../../../components';
 
 export default {
   title: 'Components/Toast'
 };
 
 export const ErrorToast: Story = () => {
-  const toastManager = new ToastManager();
   const [count, setCount] = useState(1);
+  const factory = useToast();
+
   const onClick = () => {
     setCount((prev) => prev + 1);
-    toast({ type: 'error', text: count });
+    factory.send({ type: ToastType.ERROR, content: count } as ToastProps);
   };
 
   // {homes.map(home => <div>{home.name}</div>)}
 
   return (
-    <ToastProvider value={toastManager}>
-      <>
-        <Button onClick={onClick}>show toast</Button>
-        <ToastContainer />
-      </>
-    </ToastProvider>
+    <ToastContainer>
+      <Button onClick={onClick}>show toast</Button>
+    </ToastContainer>
   );
 };
 
 ErrorToast.storyName = 'Error toast';
-
+/*
 export const WarningToast: Story = () => {
   const onClick = () => {
-    toast({ type: 'warning', text: 'Hi there!' });
+    useToast({ type: 'warning', text: 'Hi there!' });
   };
 
   return (
@@ -45,7 +43,7 @@ WarningToast.storyName = 'Warning toast';
 
 export const InfoToast: Story = () => {
   const onClick = () => {
-    toast({ type: 'info', text: 'Hi there!' });
+    useToast({ type: 'info', text: 'Hi there!' });
   };
 
   return (
@@ -60,7 +58,7 @@ InfoToast.storyName = 'Info toast';
 
 export const SuccessToast: Story = () => {
   const onClick = () => {
-    toast({ type: 'success', text: 'Hi there!' });
+    useToast({ type: 'success', text: 'Hi there!' });
   };
 
   return (
@@ -75,7 +73,7 @@ SuccessToast.storyName = 'Success toast';
 
 export const AutoCloseToast: Story = () => {
   const onClick = () => {
-    toast({ type: 'info', text: 'I will auto close' }, { autoClose: 1000 });
+    useToast({ type: 'info', text: 'I will auto close' }, { autoClose: 1000 });
   };
 
   return (
@@ -90,7 +88,7 @@ AutoCloseToast.storyName = 'Auto close toast';
 
 export const ToastWithScrolltop: Story = () => {
   const onClick = () => {
-    toast({ type: 'info', text: 'Hey there with scroll top' });
+    useToast({ type: 'info', text: 'Hey there with scroll top' });
   };
 
   return (
@@ -320,3 +318,4 @@ export const ToastWithScrolltop: Story = () => {
 };
 
 ToastWithScrolltop.storyName = 'Toast with scroll top';
+*/
