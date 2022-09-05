@@ -83,7 +83,6 @@ const TableDesktop = ({
   delete tableProps.titleMobileDL;
 
   const uid = useId();
-
   const [elementsPerPage, setElementsPerPage] = useState<paginationDataType[]>();
   const context = React.useContext<TableContextType>(Context);
   useEffect(() => {
@@ -117,7 +116,8 @@ const TableDesktop = ({
     return item?.map((data, i) => {
       return (
         <th
-          key={useId()}
+          // eslint-disable-next-line react/no-array-index-key
+          key={`${uid}-th-${i}`}
           scope="col"
           className={`${data.sorting ? 'py-0' : 'py-16'} px-8 align-middle`}
           aria-sort={getAriaSort(getClassNamesFor(keys[i]), data.sorting)}
@@ -155,7 +155,7 @@ const TableDesktop = ({
   };
 
   const renderTd = (content: sortDataType) => {
-    return Object.keys(content).map((k, index) => (
+    return Object.keys(content)?.map((k, index) => (
       // eslint-disable-next-line react/no-array-index-key
       <td className="text-medium-normal" key={`${uid}-${index}-td`}>
         {React.isValidElement(content[k]?.[0]) ? content[k]?.[0] : content[k]}
@@ -175,7 +175,7 @@ const TableDesktop = ({
   };
 
   const dataKeys = (content: Array<{ [key: string]: string | number | boolean | ReactNode }>) => {
-    return Object.keys(Object.assign({}, ...content));
+    return content ? Object.keys(Object.assign({}, ...content)) : [];
   };
 
   return (
@@ -186,9 +186,9 @@ const TableDesktop = ({
         </thead>
         <tbody>
           {items && renderTr(items)}
-          {items['length'] === 0 && (
+          {items && items['length'] === 0 && (
             <tr className="align-middle position-relative">
-              {tableHeaders.map((_value, index) => {
+              {tableHeaders?.map((_value, index) => {
                 return (
                   <td className="text-medium-normal" key={`${uid + index}td`}>
                     {index > 0 ? '-' : noDataLabel}
@@ -229,9 +229,9 @@ const TableMobile = ({ ...props }: TableProps) => {
     labelSeeLess = 'Ver menos',
     titleMobileDL = 'Lista'
   } = { ...props };
+  const uid = useId();
   const cssTableMobile = classNames('ama-table-mobile', className, totalTable && 'ama-table-mobile-total');
-
-  const totalItems = tableData.length;
+  const totalItems = tableData?.length;
   const [seeMore, setSeeMore] = useState<boolean>(true);
   const [itemsShown, setItemsShown] = useState<number>(totalTable ? totalItems : 2);
   const [seeMoreItems, setSeeMoreItems] = useState<number>(totalItems);
@@ -239,34 +239,36 @@ const TableMobile = ({ ...props }: TableProps) => {
   const checkLinkButton = (element, key) => {
     if (React.isValidElement(element[1])) {
       return (
-        <React.Fragment key={useId()}>
+        <React.Fragment key={`${uid}datalist${key}`}>
           <dt className="d-none">{tableHeaders[key].value}</dt>
           <dd className="col-12 m-0 p-16 position-relative">{element[1]}</dd>
         </React.Fragment>
       );
     }
     return (
-      <React.Fragment key={useId()}>
+      <React.Fragment key={`${uid}datalist${key}`}>
         <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
         <dd className="col-6 m-0 p-16 position-relative">{element}</dd>
       </React.Fragment>
     );
   };
 
-  const dataListItem = tableData.map((item) => {
+  const dataListItem = tableData?.map((item, index) => {
     return (
-      <React.Fragment key={useId()}>
+      // eslint-disable-next-line react/no-array-index-key
+      <React.Fragment key={`${uid}-legend-${index}`}>
         {mobileLegendRow && (
           <dt className="p-16" aria-hidden>
             {mobileLegendRow}
           </dt>
         )}
-        {Object.entries(item).map((value, key) => {
+        {Object.entries(item)?.map((value, key) => {
           if (key === Object.entries(item).length - 1) {
             return checkLinkButton(value[1], key);
           }
           return (
-            <React.Fragment key={useId()}>
+            // eslint-disable-next-line react/no-array-index-key
+            <React.Fragment key={`${uid}-datalist-first-${index}${key}`}>
               <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
               <dd className="col-6 m-0 p-16 position-relative">{value[1]}</dd>
             </React.Fragment>
@@ -276,15 +278,15 @@ const TableMobile = ({ ...props }: TableProps) => {
     );
   });
 
-  const [dataShown, setDataShown] = useState<ReactNode[]>(dataListItem.slice(0, itemsShown));
+  const [dataShown, setDataShown] = useState<ReactNode[]>(dataListItem?.slice(0, itemsShown));
 
   const getItems = () => {
     if (seeMore) {
-      setDataShown(dataListItem.slice(0, itemsShown));
-      return dataListItem.slice(0, itemsShown);
+      setDataShown(dataListItem?.slice(0, itemsShown));
+      return dataListItem?.slice(0, itemsShown);
     }
-    setDataShown(dataListItem.slice(0, 2));
-    return dataListItem.slice(0, 2);
+    setDataShown(dataListItem?.slice(0, 2));
+    return dataListItem?.slice(0, 2);
   };
 
   const toggle = () => {
@@ -307,17 +309,18 @@ const TableMobile = ({ ...props }: TableProps) => {
   return (
     <div className={cssTableMobile}>
       <dl className="row" title={titleMobileDL}>
-        {dataShown.length > 0 && dataShown}
-        {dataShown.length === 0 &&
-          tableHeaders.map((item, index) => (
-            <React.Fragment key={useId()}>
+        {dataShown?.length > 0 && dataShown}
+        {dataShown?.length === 0 &&
+          tableHeaders?.map((item, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <React.Fragment key={`${uid}-no-data-${index}`}>
               <dt className="col-6 m-0 p-16">{item.value}</dt>
               <dd className="col-6 m-0 p-16 position-relative">{index > 0 ? '-' : noDataLabel}</dd>
             </React.Fragment>
           ))}
       </dl>
 
-      {dataShown.length > 0 && !totalTable && (
+      {dataShown?.length > 0 && !totalTable && (
         <Button className="shadow-none mx-auto" variant="link" onClick={toggle}>
           {seeMore ? `${labelSeeMore[0]} (${seeMoreItems})  ` : `${labelSeeLess[0]}`}
           <span className="visually-hidden"> {labelSeeLess[1]}</span>
