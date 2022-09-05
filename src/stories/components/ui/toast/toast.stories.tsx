@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Story } from '@storybook/react';
-import { Button, ToastContainer, ToastProps, ToastType, useToast } from '../../../../components';
+import { Button, ScrollTop, ToastContainer, ToastProps, ToastType, useToast } from '../../../../components';
 
 export default {
   title: 'Components/Toast'
@@ -15,8 +15,6 @@ export const ErrorToast: Story = () => {
     factory.send({ type: ToastType.ERROR, content: count } as ToastProps);
   };
 
-  // {homes.map(home => <div>{home.name}</div>)}
-
   return (
     <ToastContainer>
       <Button onClick={onClick}>show toast</Button>
@@ -25,76 +23,81 @@ export const ErrorToast: Story = () => {
 };
 
 ErrorToast.storyName = 'Error toast';
-/*
+
 export const WarningToast: Story = () => {
+  const factory = useToast();
+
   const onClick = () => {
-    useToast({ type: 'warning', text: 'Hi there!' });
+    factory.send({ type: ToastType.WARNING, content: 'Hi there!' } as ToastProps);
   };
 
   return (
-    <div>
+    <ToastContainer>
       <Button onClick={onClick}>show toast</Button>
-      <ToastContainer />
-    </div>
+    </ToastContainer>
   );
 };
 
 WarningToast.storyName = 'Warning toast';
 
 export const InfoToast: Story = () => {
+  const factory = useToast();
+
   const onClick = () => {
-    useToast({ type: 'info', text: 'Hi there!' });
+    factory.send({ type: ToastType.INFO, content: 'Hi there!' } as ToastProps);
   };
 
   return (
-    <div>
+    <ToastContainer>
       <Button onClick={onClick}>show toast</Button>
-      <ToastContainer />
-    </div>
+    </ToastContainer>
   );
 };
 
 InfoToast.storyName = 'Info toast';
 
 export const SuccessToast: Story = () => {
+  const factory = useToast();
+
   const onClick = () => {
-    useToast({ type: 'success', text: 'Hi there!' });
+    factory.send({ type: ToastType.SUCCESS, content: 'Hi there!' } as ToastProps);
   };
 
   return (
-    <div>
+    <ToastContainer>
       <Button onClick={onClick}>show toast</Button>
-      <ToastContainer />
-    </div>
+    </ToastContainer>
   );
 };
 
 SuccessToast.storyName = 'Success toast';
 
 export const AutoCloseToast: Story = () => {
+  const factory = useToast();
+
   const onClick = () => {
-    useToast({ type: 'info', text: 'I will auto close' }, { autoClose: 1000 });
+    factory.send({ type: ToastType.INFO, content: 'I will auto close', autoClose: 1000 } as ToastProps);
   };
 
   return (
-    <div>
+    <ToastContainer>
       <Button onClick={onClick}>show toast</Button>
-      <ToastContainer />
-    </div>
+    </ToastContainer>
   );
 };
 
 AutoCloseToast.storyName = 'Auto close toast';
 
 export const ToastWithScrolltop: Story = () => {
+  const factory = useToast();
+
   const onClick = () => {
-    useToast({ type: 'info', text: 'Hey there with scroll top' });
+    factory.send({ type: ToastType.INFO, content: 'Hey there with scroll top' } as ToastProps);
   };
 
   return (
-    <div>
+    <ToastContainer>
       <Button onClick={onClick}>show toast</Button>
-      <ToastContainer />
       <ScrollTop text="Leva-me para o topo!" />
       <br />.
       <br />.
@@ -313,9 +316,8 @@ export const ToastWithScrolltop: Story = () => {
       <br />.
       <br />.
       <br />.
-    </div>
+    </ToastContainer>
   );
 };
 
 ToastWithScrolltop.storyName = 'Toast with scroll top';
-*/

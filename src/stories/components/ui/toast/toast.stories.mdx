@@ -13,18 +13,18 @@ import { Meta } from '@storybook/addon-docs';
 <h2>Component usage</h2>
 
 ```tsx
-import { toast, ToastContainer } from '@ama/react-design-system';
+import { useToast, ToastContainer, ToastProps, ToastType } from '@ama/react-design-system';
 
 const Example = () => {
+	const factory = useToast();
 	const onClick = () => {
-		toast({ type: 'warning', text: 'Hi there!' });
+		factory.useToast({ type: ToastType.WARNING, content: 'Hi there!' });
 	};
 
 	return (
-	<div>
+	<ToastContainer>
 		<Button onClick={onClick}>show toast</Button>
-		<ToastContainer />
-	</div>
+	</ToastContainer>
 );
 }
 ```
