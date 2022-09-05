@@ -28,6 +28,7 @@ const iconList: Record<string, string> = {
   'ama-expand': './AmaExpand',
   'ama-facebook': './AmaFacebook',
   'ama-face-satisfied': './AmaFaceSatisfied',
+  'ama-filter': './AmaFilter',
   'ama-first-page': './AmaFirstPage',
   'ama-home': './AmaHome',
   'ama-last-page': './AmaLastPage',

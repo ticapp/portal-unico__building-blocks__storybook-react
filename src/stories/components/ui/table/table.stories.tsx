@@ -22,7 +22,7 @@ export const BasicTable: Story<TableProps & PaginationProps> = (args) => {
 BasicTable.args = {
   'aria-label': 'Tabela com as minhas infrações, cabeçalhos com botões para ordenação',
   'tableHeaders': [
-    { value: 'Infração', sorting: false },
+    { value: 'Infração', sorting: true },
     { value: 'N.º processo', sorting: true },
     { value: 'Data', sorting: true },
     { value: 'Veículo', sorting: true },

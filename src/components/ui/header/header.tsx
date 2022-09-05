@@ -7,7 +7,7 @@ import { CustomDropdown, CustomDropdownOption } from './customDropdown';
 import { Icon } from '../icon';
 import { useWindowSize } from '../../hooks';
 import { Button } from '../buttons';
-import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
+import { ResponsiveWrapper } from '../responsive-wrapper';
 
 export interface HeaderProps {
   /** Path for logo image */

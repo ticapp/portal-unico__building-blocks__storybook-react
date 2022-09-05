@@ -13,7 +13,7 @@ import {
 import { Button } from '../buttons';
 import { Icon } from '../icon';
 import { Pagination, PaginationProps } from '../pagination';
-import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
+import { ResponsiveWrapper } from '../responsive-wrapper';
 import './table.scss';
 
 export interface TableProps extends BsTableProps {
