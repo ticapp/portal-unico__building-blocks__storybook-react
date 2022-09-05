@@ -129,6 +129,49 @@ $form-select-border-radius: 0px;
 
 $form-select-focus-border-color: $neutral-black;
 
+//Input/FormControls
+$input-padding-y: map-get($spacers, 16);
+$input-padding-x: map-get($spacers, 16);
+$input-padding-y-sm: map-get($spacers, 16);
+$input-padding-x-sm: map-get($spacers, 16);
+$input-padding-y-lg: map-get($spacers, 16);
+$input-padding-x-lg: map-get($spacers, 16);
+
+$input-font-family: $font-family-lato;
+$input-font-size: map-get($font-sizes, 14);
+$input-font-weight: map-get($font-weights, 400);
+$input-line-height: map-get($line-heights, 24);
+
+$input-font-size-sm: map-get($font-sizes, 14);
+$input-font-size-lg: map-get($font-sizes, 14);
+
+$input-bg: $neutral-white;
+$input-disabled-color: $neutral-light-grey;
+$input-disabled-bg: $neutral-light;
+$input-disabled-border-color: $neutral-light-grey;
+
+$input-color: $neutral-black;
+$input-border-color: $neutral-black;
+$input-border-width: 1px;
+$input-box-shadow: $box-shadow-inset;
+
+$input-border-radius: 0px;
+$input-border-radius-sm: 0px;
+$input-border-radius-lg: 0px;
+
+$input-focus-bg: $neutral-white;
+$input-focus-border-color: $neutral-black;
+$input-focus-color: $neutral-black;
+$input-focus-width: $input-btn-focus-width;
+$input-focus-box-shadow: $input-btn-focus-box-shadow;
+
+$input-placeholder-color: $neutral-dark-grey;
+$input-plaintext-color: $neutral-black;
+
+$input-height: 56px;
+$input-height-sm: 56px;
+$input-height-lg: 56px;
+
 //Modal
 $modal-sm: 592px;
 $modal-lg: 801px;

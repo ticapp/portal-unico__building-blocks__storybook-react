@@ -1,132 +1,39 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { ComponentMeta, Story } from '@storybook/react';
-import React from 'react';
-import { DatePicker, DatePickerProps, DaysLabels, MonthsLabels, ModalAriaLabels } from '../../../../components/ui';
+import React, { useState } from 'react';
+import { DatePicker, DatePickerProps } from '../../../../components/ui';
 
 export default {
   title: 'Components/Date Picker',
   component: DatePicker
 } as ComponentMeta<typeof DatePicker>;
 
+const toInputDate = (d: Date) => {
+  const rawDay = d.getDate();
+  const day = rawDay < 10 ? `0${rawDay}` : rawDay;
+
+  const rawMonth = d.getMonth() + 1;
+  const month = rawMonth < 10 ? `0${rawMonth}` : rawMonth;
+
+  const year = d.getFullYear();
+
+  const strDate = `${year}-${month}-${day}`;
+
+  return strDate;
+};
+
 export const BasicDatePicker: Story<DatePickerProps> = () => {
+  const [date, setDate] = useState(toInputDate(new Date()));
+
+  const onDateChangeHandler = (e) => {
+    setDate(e.target.value);
+  };
+
   return (
     <>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <label id="date-picker-label">Escolha uma data:</label>
-      <DatePicker labeledBy="date-picker-label" />
-      <input />
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
+      <DatePicker aria-labelledby="date-picker-label" value={date} onChange={onDateChangeHandler} />
     </>
   );
 };
 BasicDatePicker.storyName = 'Basic Date Picker';
-
-export const CustomDatePicker: Story<DatePickerProps> = () => {
-  const date = new Date('1987-06-25T00:00:00.000Z');
-
-  const days = {
-    sunday: 'Sunday',
-    monday: 'Monday',
-    tuesday: 'Tuesday',
-    wednesday: 'Wednesday',
-    thursday: 'Thursday',
-    friday: 'Friday',
-    saturday: 'Saturday'
-  } as DaysLabels;
-
-  const months = {
-    january: 'January',
-    february: 'February',
-    march: 'March',
-    april: 'April',
-    may: 'May',
-    june: 'June',
-    july: 'July',
-    august: 'August',
-    september: 'September',
-    october: 'October',
-    november: 'November',
-    december: 'December'
-  } as MonthsLabels;
-
-  const modalAriaLabels = {
-    title: 'Pick a date',
-    description: 'You can navigate the picker using the keyboard',
-    currentDay: 'Day',
-    nextMonth: 'Next month',
-    nextYear: 'Next Year',
-    previousMonth: 'Previous month',
-    previousYear: 'Previous year'
-  } as ModalAriaLabels;
-
-  return (
-    <>
-      <label id="date-picker-label">Pick a date:</label>
-      <DatePicker
-        labeledBy="date-picker-label"
-        placeholder="dd-mm-yyyy"
-        date={date}
-        days={days}
-        months={months}
-        modalAriaLabels={modalAriaLabels}
-      />
-    </>
-  );
-};
-CustomDatePicker.storyName = 'Custom Date Picker';
