@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useId, useRef, useState } from 'react';
 import { useOutsideElementClick, usePathname, useWindowSize } from '../../hooks';
 import { Icon } from '../icon';
 import { Link } from '../link';
+import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
 import './breadcrumb.scss';
 
 interface CrumbItems {
@@ -61,13 +61,13 @@ const BreadCrumbDesktop = ({ className, breadcrumbs, navAriaLabel, linkAriaLabel
           const isAtualLink = index === breadcrumbs.length - 1;
 
           return (
-            <li key={uuidv4()} className="d-flex align-items-center justify-content-center">
+            <li key={useId()} className="d-flex align-items-center justify-content-center">
               <Link link={page.url} aria-label={linkAriaLabel} className={linkClassNames}>
                 {page.name}
               </Link>
               {!isAtualLink && (
                 <span className={iconContainerClassNames}>
-                  <Icon className="icon-style" icon="ama-chevron-right" />
+                  <Icon className="icon-style" icon="ama-chevron-right" aria-hidden />
                 </span>
               )}
             </li>
@@ -86,6 +86,7 @@ const BreadCrumbMobile = ({
   ariaHasPopUp,
   breadCrumbMobileTitle
 }: BreadCrumbMobileProps) => {
+  const prefix = useId();
   const historyCrumbRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -126,13 +127,15 @@ const BreadCrumbMobile = ({
       {isOpen && (
         <nav ref={historyCrumbRef} className={cssHistoryContainer} aria-label={navAriaLabel}>
           <ol>
-            {breadcrumbs.map((page) => {
+            {breadcrumbs.map((page, index) => {
+              const key = `${prefix}-key-${index}`;
+
               const isSelected = page.url === crumbSelectedUrl ? 'selected' : '';
 
               const linkClassNames = classNames('items', isSelected);
 
               return (
-                <li key={uuidv4()}>
+                <li key={key}>
                   <Link className={linkClassNames} aria-current={isSelected && 'page'} link={page.url}>
                     {page.name}
                   </Link>
@@ -146,28 +149,18 @@ const BreadCrumbMobile = ({
   );
 };
 
-export const BreadCrumb = ({
-  className,
-  breadcrumbs,
-  navAriaLabel,
-  buttonAriaLabel,
-  ariaHasPopUp,
-  linkAriaLabel,
-  breadCrumbMobileTitle
-}: BreadCrumbProps) => {
+export const BreadCrumb = (props: BreadCrumbProps) => {
   const { width } = useWindowSize();
 
-  if (width >= 768) {
-    return <BreadCrumbDesktop className={className} breadcrumbs={breadcrumbs} navAriaLabel={navAriaLabel} linkAriaLabel={linkAriaLabel} />;
-  }
   return (
-    <BreadCrumbMobile
-      className={className}
-      breadcrumbs={breadcrumbs}
-      navAriaLabel={navAriaLabel}
-      buttonAriaLabel={buttonAriaLabel}
-      ariaHasPopUp={ariaHasPopUp}
-      breadCrumbMobileTitle={breadCrumbMobileTitle}
-    />
+    <>
+      <ResponsiveWrapper condition={width >= 768}>
+        <BreadCrumbDesktop {...props} />
+      </ResponsiveWrapper>
+
+      <ResponsiveWrapper condition={width < 768}>
+        <BreadCrumbMobile {...props} />
+      </ResponsiveWrapper>
+    </>
   );
 };

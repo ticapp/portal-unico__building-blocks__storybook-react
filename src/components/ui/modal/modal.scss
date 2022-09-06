@@ -1,0 +1,30 @@
+@use '../../../scss/customs.scss' as index;
+
+.ama-modal {
+  .modal-content {
+    border-radius: 0;
+    .modal-body {
+      @media screen and (min-width: 768px) {
+        max-height: calc(100vh - 210px);
+        overflow-y: auto;
+      }
+    }
+  }
+  .btn-link {
+    svg {
+      fill: index.$neutral-black;
+      width: 48px !important;
+      height: 48px !important;
+    }
+    &:hover {
+      svg {
+        fill: index.$neutral-light-grey;
+      }
+    }
+    &:focus {
+      svg {
+        fill: index.$neutral-black;
+      }
+    }
+  }
+}

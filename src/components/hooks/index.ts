@@ -8,3 +8,4 @@ export * from './use-platform';
 export * from './use-window-size';
 export * from './use-isomorphic-layout-effect';
 export * from './use-toast';
+export * from './use-modal-container-logic';

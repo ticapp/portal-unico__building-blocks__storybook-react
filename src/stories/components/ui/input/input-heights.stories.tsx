@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React, { useId } from 'react';
 import { Button, ButtonProps, InputTag, Select } from '../../../../components';

@@ -31,9 +31,8 @@ export const useSortTableData = (items: sortDataType[], originalData: sortDataTy
   };
 
   const sortedItems = useMemo(() => {
-    const sortableItems = [...originalData] as sortDataType[];
-    itemsSort(sortableItems);
-    return ifHasContextValue(sortableItems);
+    itemsSort(originalData);
+    return ifHasContextValue(originalData);
   }, [items, sortConfig]);
 
   const requestSort = (key: string) => {

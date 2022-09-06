@@ -1,10 +1,8 @@
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React, { useMemo, useId } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart, ChartOptions, registerables } from 'chart.js';
-
-import { v4 as uuidv4 } from 'uuid';
 import { Link } from '../link';
 import './infractions-chart.scss';
 
@@ -124,7 +122,7 @@ export function InfractionsChart({
               <ul aria-hidden="true" className="graph-legend">
                 {counters.map((c) => {
                   return (
-                    <li key={uuidv4()} className="d-flex align-items-center justify-content-start">
+                    <li key={useId()} className="d-flex align-items-center justify-content-start">
                       <div className="marker me-8" style={{ backgroundColor: c.color }} />
                       <div className="legend-item text-medium-normal fc-neutral-dark">{c.label}</div>
                       <div className="ms-8 text-medium-normal fc-neutral-dark">{`(${c.value})`}</div>

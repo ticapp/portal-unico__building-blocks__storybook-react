@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Col, Container, Offcanvas, Row } from 'react-bootstrap';
 import { UserArea, UserAreaOption } from './user-area';
 import './header.scss';
@@ -7,6 +7,7 @@ import { CustomDropdown, CustomDropdownOption } from './customDropdown';
 import { Icon } from '../icon';
 import { useWindowSize } from '../../hooks';
 import { Button } from '../buttons';
+import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
 
 export interface HeaderProps {
   /** Path for logo image */
@@ -40,6 +41,8 @@ export interface HeaderProps {
 
   /** Elements to render in mobile when burger menu is pressed */
   burgerMenuBody?: ReactNode;
+  burgerMenuVisible?: boolean;
+  onBurgerVisibilityChange?: (visible: boolean) => void;
   burgerMenuAriaLabel?: string;
   burgerOpenAriaLabel?: string;
   burgerCloseAriaLabel?: string;
@@ -65,13 +68,15 @@ const Header = ({
   isAuthenticated = false,
   username = 'Area Reservada',
 
+  burgerMenuVisible = false,
+  onBurgerVisibilityChange,
   burgerMenuBody = false,
   burgerMenuAriaLabel = 'Navigation Menu Overlay',
   burgerOpenAriaLabel = 'Open Navigation Menu Overlay',
   burgerCloseAriaLabel = 'Close Navigation Menu Overlay'
-}) => {
+}: HeaderProps) => {
   const { width } = useWindowSize();
-  const [showMenuOverlay, setShowMenuOverlay] = useState(false);
+  const [showMenuOverlay, setShowMenuOverlay] = useState(burgerMenuVisible);
 
   const offCanvasCloseHandler = () => {
     setShowMenuOverlay(false);
@@ -92,6 +97,14 @@ const Header = ({
       }
     }
   };
+
+  useEffect(() => {
+    setShowMenuOverlay(burgerMenuVisible);
+  }, [burgerMenuVisible]);
+
+  useEffect(() => {
+    onBurgerVisibilityChange?.(showMenuOverlay);
+  }, [showMenuOverlay]);
 
   return (
     <Container fluid className="ama-header m-0 p-0">
@@ -137,7 +150,7 @@ const Header = ({
         </Row>
       </Container>
       <hr className="m-0 p-0" />
-      {width < 768 && (
+      <ResponsiveWrapper condition={width < 768}>
         <Offcanvas
           id="navigation-menu-offcanvas"
           aria-label={burgerMenuAriaLabel}
@@ -189,7 +202,7 @@ const Header = ({
             </Row>
           </Offcanvas.Body>
         </Offcanvas>
-      )}
+      </ResponsiveWrapper>
     </Container>
   );
 };

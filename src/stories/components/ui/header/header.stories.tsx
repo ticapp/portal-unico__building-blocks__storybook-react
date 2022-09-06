@@ -3,11 +3,21 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable global-require */
 import { ComponentMeta, Story } from '@storybook/react';
-import React from 'react';
+import React, { useId, useState } from 'react';
 import { Image } from 'react-bootstrap';
 import { BrowserRouter } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import { CustomDropdownOption, Footer, FooterProps, Header, HeaderProps, Icon, InputTag, UserAreaOption } from '../../../../components';
+import {
+  CustomDropdownOption,
+  Footer,
+  FooterProps,
+  Header,
+  HeaderProps,
+  Icon,
+  InputTag,
+  UserAreaOption,
+  VerticalMenu,
+  VerticalMenuLink
+} from '../../../../components';
 
 export default {
   title: 'Components/Header',
@@ -61,12 +71,65 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
     }
   ] as CustomDropdownOption[];
 
+  const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
+  const [burgerMenuVisible, setBurgerMenuVisible] = useState(false);
+
   const languageChangeHandler = (val) => {
     console.log(val);
+    setCurrentLanguage(val);
   };
 
   const onOptionChange = (val: UserAreaOption) => {
     console.log(val);
+  };
+
+  const links: VerticalMenuLink[] = [
+    {
+      label: 'link 1-1',
+      link: '/example-lvl1-link1'
+    },
+    {
+      label: 'link 1-2',
+      children: [
+        {
+          label: 'link 2-1',
+          link: '/example-lvl2-link1'
+        },
+        {
+          label: 'link 2-2',
+          link: '/example-lvl2-link2'
+        },
+        {
+          label: 'link 2-3',
+          children: [
+            {
+              label: 'link 3-1',
+              link: '/example-lvl3-link1'
+            },
+            {
+              label: 'link 3-2',
+              link: '/example-lvl3-link2'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      label: 'link 1-3',
+      link: '/example-lvl1-link3'
+    },
+    {
+      label: 'link 1-4',
+      link: '/example-lvl1-link4'
+    }
+  ];
+
+  const onActivatedLink = () => {
+    setBurgerMenuVisible(false);
+  };
+
+  const onBurgerVisibilityChangeHandler = (visible: boolean) => {
+    setBurgerMenuVisible(visible);
   };
 
   return (
@@ -79,10 +142,13 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
         username="Area reservada"
         homepageLink="/"
         languages={languages}
-        activeLanguage={languages[0]}
+        activeLanguage={currentLanguage}
         options={options}
         onOptionChange={onOptionChange}
         onLanguageChange={languageChangeHandler}
+        burgerMenuVisible={burgerMenuVisible}
+        onBurgerVisibilityChange={onBurgerVisibilityChangeHandler}
+        burgerMenuBody={<VerticalMenu links={links} onActivate={onActivatedLink} />}
       />
     </BrowserRouter>
   );
@@ -285,17 +351,19 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
   } as FooterProps;
 
   const inputTagOptions = [
-    { label: 'John Doe', id: uuidv4() },
-    { label: 'Anna Doe', id: uuidv4() },
-    { label: 'Mark Doe', id: uuidv4() },
-    { label: 'Billy Doe', id: uuidv4() },
-    { label: 'Martha Doe', id: uuidv4() },
-    { label: 'Daisy Doe', id: uuidv4() },
-    { label: 'Jane Doe', id: uuidv4() }
+    { label: 'John Doe', id: useId() },
+    { label: 'Anna Doe', id: useId() },
+    { label: 'Mark Doe', id: useId() },
+    { label: 'Billy Doe', id: useId() },
+    { label: 'Martha Doe', id: useId() },
+    { label: 'Daisy Doe', id: useId() },
+    { label: 'Jane Doe', id: useId() }
   ];
 
+  const [currentLanguage, setCurrentLanguage] = useState(languages[0]);
+
   const languageChangeHandler = (val) => {
-    console.log(val);
+    setCurrentLanguage(val);
   };
 
   const onOptionChange = (val: UserAreaOption) => {
@@ -312,7 +380,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
         username="Area reservada"
         homepageLink="/"
         languages={languages}
-        activeLanguage={languages[0]}
+        activeLanguage={currentLanguage}
         options={options}
         onOptionChange={onOptionChange}
         onLanguageChange={languageChangeHandler}

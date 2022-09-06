@@ -6,7 +6,7 @@ import { Meta } from '@storybook/addon-docs';
   <u>Date Picker</u>
 </h1>
 
-<h2>Description </h2>
+<h2>Description</h2>
 <p className="fs-16">A component that renders a date picker.</p>
 <p className="fs-16">Check all props available in each example on Docs tab.</p>
 
@@ -15,59 +15,6 @@ import { Meta } from '@storybook/addon-docs';
 ```tsx
 import { DatePicker } from '@ama/react-design-system';
 
-<DatePicker />;
-```
-
-<h2>Custom component usage</h2>
-
-```tsx
-import { DatePicker } from '@ama/react-design-system';
-
-const date = new Date("1987-06-25T00:00:00.000Z");
-
-const days = {
-    sunday: "Sunday",
-    monday: "Monday",
-    tuesday: "Tuesday",
-    wednesday: "Wednesday",
-    thursday: "Thursday",
-    friday: "Friday",
-    saturday: "Saturday"
-} as DaysLabels;
-
-const months = {
-    january: "January",
-    february: "February",
-    march: "March",
-    april: "April",
-    may: "May",
-    june: "June",
-    july: "July",
-    august: "August",
-    september: "September",
-    october: "October",
-    november: "November",
-    december: "December"
-} as MonthsLabels;
-
-const modalAriaLabels = {
-    title: "Pick a date",
-    description: "You can navigate the picker using the keyboard",
-    currentDay:"Day",
-    nextMonth:'Next month',
-    nextYear:'Next Year',
-    previousMonth:'Previous month',
-    previousYear:'Previous year'
-} as ModalAriaLabels;
-
-
-<label id="date-picker-label">Pick a date:</label>
-<DatePicker
-    labeledBy="date-picker-label"
-    placeholder="dd-mm-yyyy"
-    date={date}
-    days={days}
-    months={months}
-    modalAriaLabels={modalAriaLabels}
-/>
+<label id="date-picker-label">Date:</label>
+<DatePicker aria-labelledby="date-picker-label" />
 ```
