@@ -3,6 +3,7 @@ import React, { ReactNode, useId, useState } from 'react';
 import { toast as reactToastify } from 'react-toastify';
 import { Icon } from '../../ui';
 
+// eslint-disable-next-line no-shadow
 export enum ToastType {
   INFO = 'info',
   ERROR = 'error',
@@ -10,6 +11,7 @@ export enum ToastType {
   SUCCESS = 'success'
 }
 
+// eslint-disable-next-line no-shadow
 export enum ToastPostion {
   TOP_RIGHT = 'top-right',
   TOP_CENTER = 'top-center',
