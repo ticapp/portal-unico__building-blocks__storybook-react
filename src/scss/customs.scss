@@ -17,3 +17,18 @@
 @import './custom/zindexes';
 @import './custom/customs';
 @import './custom/utilities';
+
+@import 'node_modules/react-toastify/scss/variables';
+@import 'node_modules/react-toastify/scss/toastContainer';
+@import 'node_modules/react-toastify/scss/toast';
+@import 'node_modules/react-toastify/scss/theme';
+@import 'node_modules/react-toastify/scss/closeButton';
+@import 'node_modules/react-toastify/scss/progressBar';
+@import 'node_modules/react-toastify/scss/icons';
+
+// entrance and exit animations
+@import 'node_modules/react-toastify/scss/animations/bounce.scss';
+@import 'node_modules/react-toastify/scss/animations/zoom.scss';
+@import 'node_modules/react-toastify/scss/animations/flip.scss';
+@import 'node_modules/react-toastify/scss/animations/slide.scss';
+@import 'node_modules/react-toastify/scss/animations/spin.scss';

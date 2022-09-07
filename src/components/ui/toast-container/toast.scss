@@ -1,53 +1,52 @@
 @use '../../../scss/index.scss' as index;
-@use '../../../../node_modules/react-toastify/dist/ReactToastify.css';
 
 .ama-toast-container {
-	z-index: 99999;
+  z-index: 99999;
 }
 
 :root {
-	--toastify-toast-width: 100%;
-	@media screen and (min-width: 991px) {
-		--toastify-toast-width: 694px;
-	}
+  --toastify-toast-width: 100%;
+  @media screen and (min-width: 991px) {
+    --toastify-toast-width: 694px;
+  }
 }
 
 .ama-toast {
-	color: index.$neutral-black;
-	border-radius: 0;
+  color: index.$neutral-black;
+  border-radius: 0;
 
-	&-icon {
-		&.info {
-			fill: index.$semantic-info;
-		}
-		&.warning {
-			fill: index.$semantic-warning;
-		}
-		&.error {
-			fill: index.$semantic-alerts;
-		}
-		&.success {
-			fill: index.$semantic-success;
-		}
-	}
+  &-icon {
+    &.info {
+      fill: index.$semantic-info;
+    }
+    &.warning {
+      fill: index.$semantic-warning;
+    }
+    &.error {
+      fill: index.$semantic-alerts;
+    }
+    &.success {
+      fill: index.$semantic-success;
+    }
+  }
 
-	&.info {
-		background: index.$semantic-info-lighter;
-		border-left: 2px solid index.$semantic-info;
-	}
+  &.info {
+    background: index.$semantic-info-lighter;
+    border-left: 2px solid index.$semantic-info;
+  }
 
-	&.warning {
-		background: index.$semantic-warning-lighter;
-		border-left: 2px solid index.$semantic-warning;
-	}
+  &.warning {
+    background: index.$semantic-warning-lighter;
+    border-left: 2px solid index.$semantic-warning;
+  }
 
-	&.error {
-		background: index.$semantic-alerts-lighter;
-		border-left: 2px solid index.$semantic-alerts;
-	}
+  &.error {
+    background: index.$semantic-alerts-lighter;
+    border-left: 2px solid index.$semantic-alerts;
+  }
 
-	&.success {
-		background: index.$semantic-success-light;
-		border-left: 2px solid index.$semantic-success;
-	}
+  &.success {
+    background: index.$semantic-success-light;
+    border-left: 2px solid index.$semantic-success;
+  }
 }
