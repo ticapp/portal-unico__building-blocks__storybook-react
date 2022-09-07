@@ -55,7 +55,7 @@ export function ScrollTop({ className, threshold = 512, text }: ScrollTopProps) 
     };
   }, []);
 
-  const classes = classNames('ama-scroll-top d-flex justify-content-center align-items-center pb-16 pt-16', className, {
+  const classes = classNames('ama-scroll-top z-index-fixed d-flex justify-content-center align-items-center pb-16 pt-16', className, {
     'd-none': offset < threshold
   });
   return (
