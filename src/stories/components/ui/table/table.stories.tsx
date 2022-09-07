@@ -11,10 +11,59 @@ export default {
 
 export const BasicTable: Story<TableProps & PaginationProps> = (args) => {
   const [value, setValue] = useState(null);
+  // State for button add
+  // const [table, setTable] = useState(args.tableData);
 
   return (
     <Context.Provider value={useMemo(() => ({ value, setValue } as TableContextType), [value])}>
-      <Table {...args} />
+      <Table
+        {...args}
+        // tableData={table}
+      />
+      {/* Uncomment button and state to add new data to table (for tests purpose) */}
+      {/* <Button
+        onClick={() =>
+          setTable([
+            {
+              col01: (
+                <span className="text-medium-normal">
+                  <Icon icon="ama-circle-solid" className="me-8 d-none d-xl-inline" size="xxs" ariaHidden="true" />
+                  Muito grave
+                </span>
+              ),
+              col02: 104779934,
+              col03: 2018 - 10 - 17,
+              col04: '45 QG 56',
+              col05: 'Rua das Beatas, em frente ao número 36, Lisboa',
+              col06: 'Concluído',
+              col07: 'Pago',
+              col08: 'Não aplicável'
+            },
+            {
+              col01: 100,
+              col02: 200,
+              col03: 300,
+              col04: 400,
+              col05: 500,
+              col06: 600,
+              col07: 700,
+              col08: 800
+            },
+            {
+              col01: 1000,
+              col02: 201,
+              col03: 3000,
+              col04: 4000,
+              col05: 5000,
+              col06: 6000,
+              col07: 7000,
+              col08: 8000
+            }
+          ])
+        }
+      >
+        Add Data
+      </Button> */}
     </Context.Provider>
   );
 };
@@ -86,6 +135,26 @@ BasicTable.args = {
       col06: 600,
       col07: 700,
       col08: 800
+    },
+    {
+      col01: 1000000,
+      col02: 203,
+      col03: 300,
+      col04: 400,
+      col05: 520,
+      col06: 600,
+      col07: 700,
+      col08: 800
+    },
+    {
+      col01: 1000000,
+      col02: 204,
+      col03: 300,
+      col04: 400,
+      col05: 550,
+      col06: 600,
+      col07: 700,
+      col08: 860
     },
     {
       col01: 1000000,
