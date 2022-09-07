@@ -68,7 +68,8 @@ export const Icon: FC<IconProps> = ({
   padding,
   onIconLoad,
   onIconLoadError,
-  ariaHidden = 'false'
+  ariaHidden = 'false',
+  ...props
 }) => {
   const [IconComponent, setCurrentIcon] = useState<FC<SVGProps<SVGSVGElement>>>(iconsCache[icon]);
 
@@ -117,5 +118,5 @@ export const Icon: FC<IconProps> = ({
     return <EmptyIcon className={classes} role="img" aria-hidden={ariaHidden} {...iconAttributes} />;
   }
 
-  return <IconComponent className={classes} role="img" aria-hidden={ariaHidden} {...iconAttributes} />;
+  return <IconComponent className={classes} role="img" aria-hidden={ariaHidden} {...iconAttributes} {...props} />;
 };
