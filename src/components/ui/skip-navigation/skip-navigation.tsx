@@ -23,7 +23,7 @@ export interface SkipNavigationProps extends DOMAttributes<Element> {
 }
 
 export function SkipNavigation({ className, ariaLabel, options }: SkipNavigationProps) {
-  const cssSkipNavigation = classNames('ama-skipNavigation', className);
+  const cssSkipNavigation = classNames('ama-skip-navigation', className);
 
   const renderSkipNavLinks = (item: SkipNavigationOptions[]) => {
     return item?.map((nav) => {
