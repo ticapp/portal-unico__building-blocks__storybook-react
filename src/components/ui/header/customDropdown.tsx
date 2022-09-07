@@ -374,7 +374,7 @@ const CustomDropdown = ({
 
       <div
         ref={listboxRef}
-        className={isOpen ? 'custom-dropdown-menu d-flex flex-column position-absolute top-100 end-0 w-100' : 'd-none'}
+        className={isOpen ? 'custom-dropdown-menu d-flex flex-column position-absolute z-index-dropdown top-100 end-0 w-100' : 'd-none'}
         role="listbox"
         id={selectControlsId}
         onKeyDown={onMenuKeyDown}

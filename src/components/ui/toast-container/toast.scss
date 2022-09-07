@@ -1,13 +1,9 @@
 @use '../../../scss/index.scss' as index;
 
-.ama-toast-container {
-  z-index: 99999;
-}
-
 :root {
-  --toastify-toast-width: 100%;
+  --toastify-toast-width: 100% !important;
   @media screen and (min-width: 991px) {
-    --toastify-toast-width: 694px;
+    --toastify-toast-width: 694px !important;
   }
 }
 
