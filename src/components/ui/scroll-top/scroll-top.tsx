@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import React, { KeyboardEvent, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
+import { useWindowSize } from '../../hooks';
 import { Icon } from '../icon';
 
 import './scroll-top.scss';
 
-export interface ScrollTopProps {
+export interface DesktopScrollTopProps {
   /** Additional class names */
   className?: string;
 
@@ -14,15 +16,17 @@ export interface ScrollTopProps {
 
   /**  Text in component */
   text: string;
-
-  /** min screen height for desktop */
-  desktopMinHeight?: number;
-
-  /** min screen width for desktop */
-  desktopMinWidth?: number;
 }
 
-export function ScrollTop({ className, threshold = 512, text, desktopMinHeight = 900, desktopMinWidth = 1440 }: ScrollTopProps) {
+export interface MobileScrollTopProps {
+  /** Additional class names */
+  className?: string;
+
+  /** Threshold to start showing the button (pixels) */
+  threshold?: number;
+}
+
+function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTopProps) {
   const scrollTop = () => {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
@@ -42,11 +46,6 @@ export function ScrollTop({ className, threshold = 512, text, desktopMinHeight =
   };
 
   const [offset, setOffset] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    console.log(isMobile);
-  }, [isMobile]);
 
   useEffect(() => {
     let isMounted = true;
@@ -57,22 +56,12 @@ export function ScrollTop({ className, threshold = 512, text, desktopMinHeight =
       }
     };
 
-    const onResize = () => {
-      if (isMounted) {
-        const isDesktop = desktopMinHeight <= window.innerHeight || desktopMinWidth <= window.innerWidth;
-        console.log('is desktop: ', isDesktop);
-        setIsMobile(!isDesktop);
-      }
-    };
-
     //  https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
 
     return () => {
       isMounted = false;
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
     };
   }, []);
 
@@ -92,3 +81,18 @@ export function ScrollTop({ className, threshold = 512, text, desktopMinHeight =
     </div>
   );
 }
+
+export const ScrollTop = (props: DesktopScrollTopProps & MobileScrollTopProps) => {
+  const { width } = useWindowSize();
+  return (
+    <>
+      <ResponsiveWrapper condition={width >= 768}>
+        <DesktopScrollTop {...props} />
+      </ResponsiveWrapper>
+
+      <ResponsiveWrapper condition={width < 768}>
+        <div {...props} />
+      </ResponsiveWrapper>
+    </>
+  );
+};
