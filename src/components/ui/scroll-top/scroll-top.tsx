@@ -14,9 +14,15 @@ export interface ScrollTopProps {
 
   /**  Text in component */
   text: string;
+
+  /** min screen height for desktop */
+  desktopMinHeight?: number;
+
+  /** min screen width for desktop */
+  desktopMinWidth?: number;
 }
 
-export function ScrollTop({ className, threshold = 512, text }: ScrollTopProps) {
+export function ScrollTop({ className, threshold = 512, text, desktopMinHeight = 900, desktopMinWidth = 1440 }: ScrollTopProps) {
   const scrollTop = () => {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0);
@@ -36,6 +42,11 @@ export function ScrollTop({ className, threshold = 512, text }: ScrollTopProps) 
   };
 
   const [offset, setOffset] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    console.log(isMobile);
+  }, [isMobile]);
 
   useEffect(() => {
     let isMounted = true;
@@ -46,12 +57,22 @@ export function ScrollTop({ className, threshold = 512, text }: ScrollTopProps) 
       }
     };
 
+    const onResize = () => {
+      if (isMounted) {
+        const isDesktop = desktopMinHeight <= window.innerHeight || desktopMinWidth <= window.innerWidth;
+        console.log('is desktop: ', isDesktop);
+        setIsMobile(!isDesktop);
+      }
+    };
+
     //  https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
 
     return () => {
       isMounted = false;
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
     };
   }, []);
 
