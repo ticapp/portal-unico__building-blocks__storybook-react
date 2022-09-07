@@ -24,15 +24,18 @@ export interface MobileScrollTopProps {
 
   /** Threshold to start showing the button (pixels) */
   threshold?: number;
+
+  /** component position */
+  position?: 'right' | 'left';
 }
 
-function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTopProps) {
-  const scrollTop = () => {
-    if (typeof window !== 'undefined') {
-      window.scrollTo(0, 0);
-    }
-  };
+const scrollTop = () => {
+  if (typeof window !== 'undefined') {
+    window.scrollTo(0, 0);
+  }
+};
 
+function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTopProps) {
   const onClickHandler = () => {
     scrollTop();
   };
@@ -65,7 +68,7 @@ function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTop
     };
   }, []);
 
-  const classes = classNames('ama-scroll-top d-flex justify-content-center align-items-center pb-16 pt-16', className, {
+  const classes = classNames('ama-scroll-top-bar d-flex justify-content-center align-items-center pb-16 pt-16', className, {
     'd-none': offset < threshold
   });
   return (
@@ -82,6 +85,54 @@ function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTop
   );
 }
 
+function MobileScrollTop({ className, threshold = 512, position = 'right' }: MobileScrollTopProps) {
+  const bsPosition = { right: 'end-0', left: 'start-0' };
+  const onClickHandler = () => {
+    scrollTop();
+  };
+
+  const onkeydownHandler = (evt: KeyboardEvent) => {
+    const { key } = evt;
+
+    if (key === 'Enter') {
+      scrollTop();
+    }
+  };
+
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const onScroll = () => {
+      if (isMounted) {
+        setOffset(window.scrollY);
+      }
+    };
+
+    //  https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      isMounted = false;
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
+  const classes = classNames(
+    `ama-scroll-top-square d-flex justify-content-center align-items-center h-48 w-48 ${bsPosition[position]}`,
+    className,
+    {
+      'd-none': offset < threshold
+    }
+  );
+  return (
+    <div tabIndex={0} role="button" className={classes} onClick={onClickHandler} onKeyDown={onkeydownHandler}>
+      <Icon className="icon" size="xs" icon="ama-arrow-up" />
+    </div>
+  );
+}
+
 export const ScrollTop = (props: DesktopScrollTopProps & MobileScrollTopProps) => {
   const { width } = useWindowSize();
   return (
@@ -91,7 +142,7 @@ export const ScrollTop = (props: DesktopScrollTopProps & MobileScrollTopProps) =
       </ResponsiveWrapper>
 
       <ResponsiveWrapper condition={width < 768}>
-        <div {...props} />
+        <MobileScrollTop {...props} />
       </ResponsiveWrapper>
     </>
   );
