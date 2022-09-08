@@ -234,3 +234,9 @@ export const BasicSkipNavigation = Template.bind({});
 BasicSkipNavigation.args = {
   text: 'Voltar ao topo'
 };
+
+export const LeftSideSkipNavigation = Template.bind({});
+LeftSideSkipNavigation.args = {
+  text: 'Põe o tamanho do ecra em mobile',
+  position: 'left'
+};
