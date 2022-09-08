@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { useId } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Button, ButtonProps, Link } from '../../ui';
+import { Button, ButtonProps, Icon, Link } from '../../ui';
 import './error.scss';
 
 export interface ErrorProps {
@@ -25,20 +25,17 @@ export interface ErrorProps {
 }
 
 export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: ErrorProps) => {
-  const cssErrorPage = classNames(
-    'bg-brand-green-main fc-neutral-white',
-    'd-flex align-items-center justify-content-center flex-column m-0 p-40',
-    className
-  );
+  const cssErrorPage = classNames('bg-neutral-light', 'd-flex align-items-center justify-content-center flex-column m-0 p-40', className);
 
   return (
     <Container fluid className="ama-error-page px-0 py-80">
       <Row>
         <Col className={cssErrorPage}>
-          <h1 className="mb-16 text-uppercase">{title}</h1>
+          <Icon icon="ama-warning-circle" className="mb-16" />
+          <h1 className="mb-16 text-uppercase fc-semantic-alerts">{title}</h1>
           <span className="mb-0">{subtitle}</span>
           {link && (
-            <Link link={link.url} className="link fc-neutral-white">
+            <Link link={link.url} className="link link-dark">
               {link.title}
             </Link>
           )}
@@ -48,7 +45,7 @@ export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: Er
         <Row className="mt-32">
           <Col className="d-flex justify-content-center error-actions-container">
             {buttons.map((bArgs) => {
-              const classes = `error-action ${bArgs.className}`;
+              const classes = `error-action ${bArgs.className} btn-outline-semantic-alerts`;
               return <Button key={useId()} {...bArgs} className={classes} />;
             })}
           </Col>
