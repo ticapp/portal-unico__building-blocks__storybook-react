@@ -37,7 +37,7 @@ export const ToastContainer = ({ bottomVisibilityThreshold = 32, children }: Toa
 
   return (
     <>
-      <ReactToastifyContainer newestOnTop draggable containerId="ama-toast-container" className="ama-toast-container end-0" />
+      <ReactToastifyContainer newestOnTop draggable containerId="ama-toast-container" className="ama-toast-container end-0 z-index-toast" />
       {children}
     </>
   );

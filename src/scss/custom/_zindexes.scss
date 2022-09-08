@@ -1,12 +1,28 @@
+$zindex-accessibility: 1095 !default;
+
+$zindex-dropdown: 2000 !default;
+
 $zindexes: (
-  'dropdown': $zindex-dropdown,
+  //  1020
   'sticky': $zindex-sticky,
+  //  1030
   'fixed': $zindex-fixed,
+  //  1040
   'offcanvas-backdrop': $zindex-offcanvas-backdrop,
+  //  1045
   'offcanvas': $zindex-offcanvas,
+  //  1050
   'modal-backdrop': $zindex-modal-backdrop,
+  //  1055
   'modal': $zindex-modal,
+  //  1070
   'popover': $zindex-popover,
+  //  1080
   'tooltip': $zindex-tooltip,
-  'toast': $zindex-toast
+  //  1090
+  'toast': $zindex-toast,
+  //  1095
+  'accessibility': $zindex-accessibility,
+  //  2000
+  'dropdown': $zindex-dropdown
 );

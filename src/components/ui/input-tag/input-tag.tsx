@@ -23,27 +23,70 @@ export interface InputTagProps {
   placeholder?: string;
   /** Set autocomplete options */
   options: InputTagOption[];
+
+  /** Set selected options */
+  value?: InputTagOption[];
+
   /** On change event */
   onChange?: (val: InputTagOption[]) => void;
   /** Aria label to show in list box */
   optionsAriaLabel?: string;
 }
 
-export const InputTag = ({ className, inputId, labeledBy, placeholder, options, optionsAriaLabel = 'Opções', onChange }: InputTagProps) => {
+export const InputTag = ({
+  className,
+  inputId,
+  labeledBy,
+  placeholder,
+  options,
+  value = [],
+  optionsAriaLabel = 'Opções',
+  onChange
+}: InputTagProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listBoxRef = useRef<HTMLUListElement>(null);
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const [activeOptionId, setActiveOptionId] = useState('');
   const [activeOptionIndex, setActiveOptionIndex] = useState(-1);
 
-  const [tags, setTags] = useState([] as InputTagOption[]);
-  const [availableOptions, setAvailableOptions] = useState(options);
+  const [tags, setTags] = useState(value);
+  const [availableOptions, setAvailableOptions] = useState([] as InputTagOption[]);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const updateAvailableOptions = (lastTags) => {
+    const val = inputRef.current?.value || '';
+
+    const newAvailableOptions = options.filter((o) => {
+      return !lastTags.find((lt) => lt.id === o.id);
+    });
+
+    if (!val) {
+      setAvailableOptions(newAvailableOptions);
+    } else {
+      const filteredOptions = newAvailableOptions.filter((l) => {
+        return l.label.toLowerCase().indexOf(val.toLowerCase()) >= 0;
+      });
+
+      setAvailableOptions(filteredOptions);
+    }
+  };
+
+  useEffect(() => {
+    setTags((ts) => {
+      const areEqual = JSON.stringify(ts) === JSON.stringify(value);
+      return areEqual ? ts : value;
+    });
+  }, [value]);
+
+  useEffect(() => {
+    updateAvailableOptions(tags);
+    onChange?.(tags);
+  }, [tags]);
 
   const openListBox = () => {
-    setIsOpen(true);
+    setIsOpen(availableOptions.length > 0);
   };
 
   const closeListBox = () => {
@@ -166,40 +209,15 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
     focusByIndex(availableOptions.length - 1);
   };
 
-  useEffect(() => {
-    onChange?.(tags);
-  }, [tags]);
-
-  const updateAvailableOptions = () => {
-    const val = inputRef.current?.value || '';
-    setTags((lastTags) => {
-      const newAvailableOptions = options.filter((o) => {
-        return !lastTags.find((lt) => lt.id === o.id);
-      });
-
-      if (!val) {
-        setAvailableOptions(newAvailableOptions);
-      } else {
-        const filteredOptions = newAvailableOptions.filter((l) => {
-          return l.label.toLowerCase().indexOf(val.toLowerCase()) >= 0;
-        });
-
-        setAvailableOptions(filteredOptions);
-      }
-
-      return lastTags;
-    });
-  };
-
   const tryAddTag = (tag = ''): void => {
-    const value = tag || inputRef.current?.value.trim() || '';
+    const v = tag || inputRef.current?.value.trim() || '';
 
-    if (!value) {
+    if (!v) {
       return;
     }
 
     const option = availableOptions.find((o) => {
-      return o.label.toLowerCase() === value.toLowerCase();
+      return o.label.toLowerCase() === v.toLowerCase();
     });
 
     if (!option) {
@@ -211,13 +229,8 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
     }
 
     setTags((lastTags) => {
-      return [...lastTags, option];
-    });
-
-    setTags((last) => {
-      updateAvailableOptions();
-
-      return last;
+      const newTags = [...lastTags, option];
+      return newTags;
     });
 
     closeListBox();
@@ -225,17 +238,13 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
 
   const removeTag = (tag: string) => {
     setTags((last) => {
-      return last.filter((t) => t.label !== tag);
-    });
+      const newTags = last.filter((t) => t.label !== tag);
 
-    setTags((last) => {
-      updateAvailableOptions();
-
-      if (last.length === 0 && inputRef.current) {
+      if (newTags.length === 0 && inputRef.current) {
         inputRef.current.focus();
       }
 
-      return last;
+      return newTags;
     });
   };
 
@@ -394,7 +403,7 @@ export const InputTag = ({ className, inputId, labeledBy, placeholder, options, 
           ref={inputRef}
           placeholder={placeholder}
           onKeyDown={onKeyDownHandler}
-          onChange={updateAvailableOptions}
+          onChange={() => updateAvailableOptions(tags)}
           onClick={onClickHandler}
           className="flex-fill d-inline-block m-0 p-0"
           aria-controls={listBoxId}

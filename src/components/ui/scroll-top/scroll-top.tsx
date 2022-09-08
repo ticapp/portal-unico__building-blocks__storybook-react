@@ -68,7 +68,7 @@ function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTop
     };
   }, []);
 
-  const classes = classNames('ama-scroll-top-bar d-flex justify-content-center align-items-center pb-16 pt-16', className, {
+  const classes = classNames('ama-scroll-top-bar z-index-fixed d-flex justify-content-center align-items-center pb-16 pt-16', className, {
     'd-none': offset < threshold
   });
   return (
@@ -120,7 +120,7 @@ function MobileScrollTop({ className, threshold = 512, position = 'right' }: Mob
   }, []);
 
   const classes = classNames(
-    `ama-scroll-top-square d-flex justify-content-center align-items-center h-48 w-48 ${bsPosition[position]}`,
+    `ama-scroll-top-square z-index-fixed d-flex justify-content-center align-items-center h-48 w-48 ${bsPosition[position]}`,
     className,
     {
       'd-none': offset < threshold

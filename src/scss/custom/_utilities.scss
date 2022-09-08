@@ -163,10 +163,10 @@ $utilities: map-merge(
           )
         )
     ),
-    'zindex': (
+    'z-index': (
       responsive: true,
       property: z-index,
-      class: z,
+      class: z-index,
       values: $zindexes
     ),
     'gap': (

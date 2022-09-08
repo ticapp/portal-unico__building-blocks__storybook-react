@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { ComponentMeta, Story } from '@storybook/react';
-import React, { useId } from 'react';
-import { InputTag, InputTagOption, InputTagProps, InputText } from '../../../../components';
+import React, { useId, useState } from 'react';
+import { Button, InputTag, InputTagOption, InputTagProps, InputText } from '../../../../components';
 
 export default {
   title: 'Components/Inputs',
@@ -10,8 +10,15 @@ export default {
 } as ComponentMeta<typeof InputTag>;
 
 export const SimpleTagInput: Story<InputTagProps> = (args) => {
+  const [selectedTags, setSelectedTags] = useState([] as InputTagOption[]);
+
   const handleSetTags = (value: InputTagOption[]) => {
-    console.log(value);
+    setSelectedTags(value);
+    console.log('story state', value);
+  };
+
+  const onButtonClickHandler = () => {
+    setSelectedTags(() => [] as InputTagOption[]);
   };
 
   const options = [
@@ -32,8 +39,15 @@ export const SimpleTagInput: Story<InputTagProps> = (args) => {
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <label id="my-label">My Options</label>
-      <InputTag onChange={(e) => handleSetTags(e)} labeledBy="my-label" options={options} placeholder={args.placeholder} />
+      <InputTag
+        onChange={(e) => handleSetTags(e)}
+        labeledBy="my-label"
+        options={options}
+        value={selectedTags}
+        placeholder={args.placeholder}
+      />
       <InputText />
+      <Button onClick={onButtonClickHandler}>Clear</Button>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
