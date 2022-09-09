@@ -35,35 +35,40 @@ const scrollTop = () => {
   }
 };
 
-function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTopProps) {
-  const onClickHandler = () => {
+const onkeydownHandler = (evt: KeyboardEvent) => {
+  const { key } = evt;
+
+  if (key === 'Enter') {
     scrollTop();
-  };
+  }
+};
 
-  const onkeydownHandler = (evt: KeyboardEvent) => {
-    const { key } = evt;
+const onClickHandler = () => {
+  scrollTop();
+};
 
-    if (key === 'Enter') {
-      scrollTop();
-    }
-  };
+const handleScroll = (mounted: boolean, changeOffset: (y: number) => void) => {
+  if (mounted) {
+    changeOffset(window.scrollY);
+  }
+};
 
+function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTopProps) {
   const [offset, setOffset] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    let isMounted = true;
+    setIsMounted(true);
 
     const onScroll = () => {
-      if (isMounted) {
-        setOffset(window.scrollY);
-      }
+      handleScroll(isMounted, setOffset);
     };
 
     //  https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      isMounted = false;
+      setIsMounted(false);
       window.removeEventListener('scroll', onScroll);
     };
   }, []);
@@ -87,34 +92,22 @@ function DesktopScrollTop({ className, threshold = 512, text }: DesktopScrollTop
 
 function MobileScrollTop({ className, threshold = 512, position = 'right' }: MobileScrollTopProps) {
   const bsPosition = { right: 'end-0', left: 'start-0' };
-  const onClickHandler = () => {
-    scrollTop();
-  };
 
-  const onkeydownHandler = (evt: KeyboardEvent) => {
-    const { key } = evt;
-
-    if (key === 'Enter') {
-      scrollTop();
-    }
-  };
-
+  const [isMounted, setIsMounted] = useState(false);
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    let isMounted = true;
+    setIsMounted(true);
 
     const onScroll = () => {
-      if (isMounted) {
-        setOffset(window.scrollY);
-      }
+      handleScroll(isMounted, setOffset);
     };
 
     //  https://stackoverflow.com/questions/37721782/what-are-passive-event-listeners
     window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      isMounted = false;
+      setIsMounted(false);
       window.removeEventListener('scroll', onScroll);
     };
   }, []);

@@ -229,8 +229,7 @@ export const InputTag = ({
     }
 
     setTags((lastTags) => {
-      const newTags = [...lastTags, option];
-      return newTags;
+      return [...lastTags, option];
     });
 
     closeListBox();

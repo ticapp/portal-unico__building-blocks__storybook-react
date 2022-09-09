@@ -3,7 +3,7 @@
 .ama {
   &-error-page {
     h1 {
-      @include index.h4-normal;
+      @include index.h3-normal;
     }
 
     span {
@@ -12,6 +12,12 @@
 
     .link {
       @include index.text-big-normal;
+    }
+
+    .icon {
+      fill: index.$semantic-alerts;
+      stroke: index.$semantic-alerts;
+      stroke-width: 0.5px;
     }
 
     .error-actions-container {
