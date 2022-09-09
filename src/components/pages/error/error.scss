@@ -16,6 +16,8 @@
 
     .icon {
       fill: index.$semantic-alerts;
+      stroke: index.$semantic-alerts;
+      stroke-width: 0.5px;
     }
 
     .error-actions-container {

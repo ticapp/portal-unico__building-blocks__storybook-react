@@ -32,7 +32,7 @@ export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: Er
       <Row>
         <Col className={cssErrorPage}>
           <Icon icon="ama-warning-circle" className="mb-16" />
-          <h1 className="mb-16 text-uppercase fc-semantic-alerts">{title}</h1>
+          <h4 className="mb-16 text-uppercase fc-semantic-alerts">{title}</h4>
           <span className="mb-0">{subtitle}</span>
           {link && (
             <Link link={link.url} className="link link-dark">
