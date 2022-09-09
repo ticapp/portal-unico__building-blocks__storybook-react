@@ -34,6 +34,7 @@ const iconList: Record<string, string> = {
   'ama-first-page': './AmaFirstPage',
   'ama-home': './AmaHome',
   'ama-info': './AmaInfo',
+  'ama-info-circle': './AmaInfoCircle',
   'ama-last-page': './AmaLastPage',
   'ama-linkedin': './AmaLinkedin',
   'ama-login': './AmaLogin',
