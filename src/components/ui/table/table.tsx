@@ -35,9 +35,6 @@ export interface TableProps extends BsTableProps {
   /** Total table */
   totalTable?: boolean;
 
-  /** Mobile table row with legend */
-  mobileLegendRow?: ReactNode | string | number;
-
   /** Label See More */
   labelSeeMore?: Array<string>;
 
@@ -77,7 +74,6 @@ const TableDesktop = ({
     ...tableProps
   } = props;
 
-  delete tableProps.mobileLegendRow;
   delete tableProps.labelSeeMore;
   delete tableProps.labelSeeLess;
   delete tableProps.titleMobileDL;
@@ -224,7 +220,6 @@ const TableMobile = ({ ...props }: TableProps) => {
     tableData,
     noDataLabel,
     totalTable = false,
-    mobileLegendRow = null,
     labelSeeMore = 'Ver mais',
     labelSeeLess = 'Ver menos',
     titleMobileDL = 'Lista'
@@ -243,7 +238,7 @@ const TableMobile = ({ ...props }: TableProps) => {
       return (
         <React.Fragment key={`${uid}datalist${key}`}>
           <dt className="d-none">{tableHeaders[key].value}</dt>
-          <dd className="col-12 m-0 p-16 position-relative">{element[1]}</dd>
+          <dd className="col-12 m-0 p-16 position-relative">{element[1]}rrrr</dd>
         </React.Fragment>
       );
     }
@@ -259,14 +254,21 @@ const TableMobile = ({ ...props }: TableProps) => {
     return (
       // eslint-disable-next-line react/no-array-index-key
       <React.Fragment key={`${uid}-legend-${index}`}>
-        {mobileLegendRow && (
-          <dt className="p-16" aria-hidden>
-            {mobileLegendRow}
-          </dt>
-        )}
         {Object.entries(item)?.map((value, key) => {
           if (key === Object.entries(item).length - 1) {
             return checkLinkButton(value[1], key);
+          }
+          if (key === 0) {
+            if (React.isValidElement(value[1])) {
+              return (
+                // eslint-disable-next-line react/no-array-index-key
+                <React.Fragment key={`${uid}icon${key}`}>
+                  <dt className="p-16" aria-hidden>
+                    {value[1].props.children[0]}
+                  </dt>
+                </React.Fragment>
+              );
+            }
           }
           return (
             // eslint-disable-next-line react/no-array-index-key
@@ -306,14 +308,21 @@ const TableMobile = ({ ...props }: TableProps) => {
       return (
         // eslint-disable-next-line react/no-array-index-key
         <React.Fragment key={`${uid}-legend-${index}`}>
-          {mobileLegendRow && (
-            <dt className="p-16" aria-hidden>
-              {mobileLegendRow}
-            </dt>
-          )}
           {Object.entries(item)?.map((value, key) => {
             if (key === Object.entries(item).length - 1) {
               return checkLinkButton(value[1], key);
+            }
+            if (key === 0) {
+              if (React.isValidElement(value[1])) {
+                return (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <React.Fragment key={`${uid}icon${key}`}>
+                    <dt className="p-16" aria-hidden>
+                      {value[1].props.children[0]}
+                    </dt>
+                  </React.Fragment>
+                );
+              }
             }
             return (
               // eslint-disable-next-line react/no-array-index-key

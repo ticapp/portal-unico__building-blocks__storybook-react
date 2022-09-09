@@ -84,7 +84,7 @@ BasicTable.args = {
     {
       col01: (
         <span className="text-medium-normal">
-          <Icon icon="ama-circle-solid" className="me-8 d-none d-xl-inline" size="xxs" ariaHidden="true" />
+          <Icon icon="ama-circle-solid" className="me-8 d-xl-inline" size="xxs" ariaHidden="true" />
           Muito grave
         </span>
       ),
@@ -189,7 +189,6 @@ BasicTable.args = {
   'borderless': true,
   'striped': true,
   'hover': true,
-  'mobileLegendRow': <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
   'labelSeeLess': ['Ver menos', ' items da lista'],
   'labelSeeMore': ['Ver mais', ' items da lista'],
   'ariaLabelPaginationNav': 'Paginação da tabela',
@@ -236,7 +235,6 @@ NoDataTable.args = {
   'borderless': true,
   'striped': true,
   'hover': true,
-  'mobileLegendRow': <Icon icon="ama-circle-solid" className="me-8" size="xxs" ariaHidden="true" />,
   'labelSeeLess': ['Ver menos', ' items da lista'],
   'labelSeeMore': ['Ver mais', ' items da lista'],
   'ariaLabelPaginationNav': 'Paginação da tabela',
