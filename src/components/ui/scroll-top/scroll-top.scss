@@ -1,7 +1,7 @@
 @use '../../../scss/customs.scss' as index;
 
 .ama {
-  &-scroll-top {
+  &-scroll-top-bar {
     position: fixed;
     bottom: 0px;
     width: 100%;
@@ -15,6 +15,19 @@
       text-decoration-color: index.$brand-green-main;
       text-underline-offset: 8px;
     }
+
+    .icon {
+      fill: index.$brand-green-main;
+    }
+  }
+
+  &-scroll-top-square {
+    position: fixed;
+    bottom: 0px;
+    width: 48px;
+    height: 48px;
+    background-color: index.$neutral-white;
+    border: 1px solid index.$brand-green-main;
 
     .icon {
       fill: index.$brand-green-main;

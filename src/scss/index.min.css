@@ -16795,10 +16795,6 @@ textarea.form-control-lg {
   color: #661299 !important;
 }
 
-.z-index-dropdown {
-  z-index: 1000 !important;
-}
-
 .z-index-sticky {
   z-index: 1020 !important;
 }
@@ -16837,6 +16833,10 @@ textarea.form-control-lg {
 
 .z-index-accessibility {
   z-index: 1095 !important;
+}
+
+.z-index-dropdown {
+  z-index: 1000 !important;
 }
 
 @media (min-width: 576px) {
@@ -18461,9 +18461,6 @@ textarea.form-control-lg {
   .text-sm-center {
     text-align: center !important;
   }
-  .z-index-sm-dropdown {
-    z-index: 1000 !important;
-  }
   .z-index-sm-sticky {
     z-index: 1020 !important;
   }
@@ -18493,6 +18490,9 @@ textarea.form-control-lg {
   }
   .z-index-sm-accessibility {
     z-index: 1095 !important;
+  }
+  .z-index-sm-dropdown {
+    z-index: 1000 !important;
   }
 }
 @media (min-width: 768px) {
@@ -20117,9 +20117,6 @@ textarea.form-control-lg {
   .text-md-center {
     text-align: center !important;
   }
-  .z-index-md-dropdown {
-    z-index: 1000 !important;
-  }
   .z-index-md-sticky {
     z-index: 1020 !important;
   }
@@ -20149,6 +20146,9 @@ textarea.form-control-lg {
   }
   .z-index-md-accessibility {
     z-index: 1095 !important;
+  }
+  .z-index-md-dropdown {
+    z-index: 1000 !important;
   }
 }
 @media (min-width: 992px) {
@@ -21773,9 +21773,6 @@ textarea.form-control-lg {
   .text-lg-center {
     text-align: center !important;
   }
-  .z-index-lg-dropdown {
-    z-index: 1000 !important;
-  }
   .z-index-lg-sticky {
     z-index: 1020 !important;
   }
@@ -21805,6 +21802,9 @@ textarea.form-control-lg {
   }
   .z-index-lg-accessibility {
     z-index: 1095 !important;
+  }
+  .z-index-lg-dropdown {
+    z-index: 1000 !important;
   }
 }
 @media (min-width: 1280px) {
@@ -23429,9 +23429,6 @@ textarea.form-control-lg {
   .text-xl-center {
     text-align: center !important;
   }
-  .z-index-xl-dropdown {
-    z-index: 1000 !important;
-  }
   .z-index-xl-sticky {
     z-index: 1020 !important;
   }
@@ -23461,6 +23458,9 @@ textarea.form-control-lg {
   }
   .z-index-xl-accessibility {
     z-index: 1095 !important;
+  }
+  .z-index-xl-dropdown {
+    z-index: 1000 !important;
   }
 }
 @media (min-width: 1600px) {
@@ -25085,9 +25085,6 @@ textarea.form-control-lg {
   .text-xxl-center {
     text-align: center !important;
   }
-  .z-index-xxl-dropdown {
-    z-index: 1000 !important;
-  }
   .z-index-xxl-sticky {
     z-index: 1020 !important;
   }
@@ -25117,6 +25114,9 @@ textarea.form-control-lg {
   }
   .z-index-xxl-accessibility {
     z-index: 1095 !important;
+  }
+  .z-index-xxl-dropdown {
+    z-index: 1000 !important;
   }
 }
 @media (min-width: 1200px) {
