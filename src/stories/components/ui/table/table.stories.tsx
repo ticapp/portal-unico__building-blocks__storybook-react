@@ -84,8 +84,7 @@ BasicTable.args = {
     {
       col01: (
         <span className="text-medium-normal">
-          <Icon icon="ama-circle-solid" className="me-8 d-xl-inline" size="xxs" ariaHidden="true" />
-          Muito grave
+          <Icon icon="ama-circle-solid" className="me-8 d-xl-inline" size="xxs" ariaHidden="true" />B Grave
         </span>
       ),
       col02: 104779934,
@@ -97,7 +96,11 @@ BasicTable.args = {
       col08: 'Não aplicável'
     },
     {
-      col01: 10,
+      col01: (
+        <span className="text-medium-normal">
+          <Icon icon="ama-circle-solid" className="me-8 d-xl-inline" size="xxs" ariaHidden="true" />A Muito Grave
+        </span>
+      ),
       col02: 20,
       col03: 30,
       col04: 40,
@@ -107,7 +110,11 @@ BasicTable.args = {
       col08: 80
     },
     {
-      col01: 100,
+      col01: (
+        <span className="text-medium-normal">
+          <Icon icon="ama-circle-solid" className="me-8 d-xl-inline" size="xxs" ariaHidden="true" />C Leve
+        </span>
+      ),
       col02: 200,
       col03: 300,
       col04: 400,
