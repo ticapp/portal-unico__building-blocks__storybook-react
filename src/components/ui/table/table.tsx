@@ -238,7 +238,7 @@ const TableMobile = ({ ...props }: TableProps) => {
       return (
         <React.Fragment key={`${uid}datalist${key}`}>
           <dt className="d-none">{tableHeaders[key].value}</dt>
-          <dd className="col-12 m-0 p-16 position-relative">{element[1]}rrrr</dd>
+          <dd className="col-12 m-0 p-16 position-relative">{element[1]}</dd>
         </React.Fragment>
       );
     }
