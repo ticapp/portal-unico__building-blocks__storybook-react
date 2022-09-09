@@ -266,6 +266,8 @@ const TableMobile = ({ ...props }: TableProps) => {
                   <dt className="p-16" aria-hidden>
                     {value[1].props.children[0]}
                   </dt>
+                  <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
+                  <dd className="col-6 m-0 p-16 position-relative">{value[1].props.children[1]}</dd>
                 </React.Fragment>
               );
             }
@@ -320,6 +322,8 @@ const TableMobile = ({ ...props }: TableProps) => {
                     <dt className="p-16" aria-hidden>
                       {value[1].props.children[0]}
                     </dt>
+                    <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
+                    <dd className="col-6 m-0 p-16 position-relative">{value[1].props.children[1]}</dd>
                   </React.Fragment>
                 );
               }
