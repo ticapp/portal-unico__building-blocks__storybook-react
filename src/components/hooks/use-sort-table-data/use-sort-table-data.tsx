@@ -24,8 +24,8 @@ export const useSortTableData = (items: sortDataType[], originalData: sortDataTy
       sortableItems.sort((a: sortDataType, b: sortDataType) => {
         const newA = React.isValidElement(a[sortConfig.key]) ? (a[sortConfig.key].props.children[1] as string) : a[sortConfig.key];
         const newB = React.isValidElement(b[sortConfig.key]) ? (b[sortConfig.key].props.children[1] as string) : b[sortConfig.key];
-        toggleDirection(newA, newB);
-        return 0;
+
+        return toggleDirection(newA, newB);
       });
     }
   };
