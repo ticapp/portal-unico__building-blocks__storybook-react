@@ -295,18 +295,8 @@ const TableMobile = ({ ...props }: TableProps) => {
     return dataListItem?.slice(0, 2);
   };
 
-  useEffect(() => {
-    setNewTableData(tableData);
-    setSeeMore(true);
-    setItemsShown(totalTable ? tableData?.length : 2);
-    setSeeMoreItems(tableData?.length);
-    setItemsShown(2);
-
-    let isSee = false;
-    if (totalItems <= (totalTable ? tableData?.length : 2)) {
-      isSee = true;
-    }
-    const newdataListItem = tableData?.map((item, index) => {
+  const manageNewData = () => {
+    return tableData?.map((item, index) => {
       return (
         // eslint-disable-next-line react/no-array-index-key
         <React.Fragment key={`${uid}-legend-${index}`}>
@@ -339,6 +329,21 @@ const TableMobile = ({ ...props }: TableProps) => {
         </React.Fragment>
       );
     });
+  };
+
+  useEffect(() => {
+    setNewTableData(tableData);
+    setSeeMore(true);
+    setItemsShown(totalTable ? tableData?.length : 2);
+    setSeeMoreItems(tableData?.length);
+    setItemsShown(2);
+
+    let isSee = false;
+    if (totalItems <= (totalTable ? tableData?.length : 2)) {
+      isSee = true;
+    }
+
+    const newdataListItem = manageNewData();
 
     if (isSee) {
       setDataShown(newdataListItem?.slice(0, totalTable ? tableData?.length : 2));
