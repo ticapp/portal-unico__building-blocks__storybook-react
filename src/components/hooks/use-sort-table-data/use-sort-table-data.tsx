@@ -1,4 +1,4 @@
-import { useState, useMemo, ReactNode } from 'react';
+import React, { useState, useMemo, ReactNode } from 'react';
 
 export type sortDataType = { [key: string]: string | number | boolean | ReactNode } | null[];
 
@@ -10,10 +10,13 @@ export const useSortTableData = (items: sortDataType[], originalData: sortDataTy
   const itemsSort = (sortableItems: sortDataType[]) => {
     if (sortConfig) {
       sortableItems.sort((a: sortDataType, b: sortDataType) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
+        const newA = React.isValidElement(a[sortConfig.key]) ? (a[sortConfig.key].props.children[1] as string) : a[sortConfig.key];
+        const newB = React.isValidElement(b[sortConfig.key]) ? (b[sortConfig.key].props.children[1] as string) : b[sortConfig.key];
+
+        if (newA < newB) {
           return sortConfig.direction === 'ascending' ? -1 : 1;
         }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
+        if (newA > newB) {
           return sortConfig.direction === 'ascending' ? 1 : -1;
         }
         return 0;

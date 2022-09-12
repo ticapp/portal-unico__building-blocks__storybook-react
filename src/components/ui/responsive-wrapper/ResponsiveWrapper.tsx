@@ -5,7 +5,7 @@ export interface ResponsiveWrapperProps {
   children: ReactNode;
 }
 
-const ResponsiveWrapper = ({ children, condition }) => {
+export const ResponsiveWrapper = ({ children, condition }) => {
   const [isMounted, setIsMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(isMounted && condition);
 
@@ -29,5 +29,3 @@ const ResponsiveWrapper = ({ children, condition }) => {
     </div>
   );
 };
-
-export { ResponsiveWrapper };

@@ -3,7 +3,7 @@ import React from 'react';
 import { useWindowSize } from '../../hooks';
 import { Icon } from '../icon';
 import { Link } from '../link';
-import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
+import { ResponsiveWrapper } from '../responsive-wrapper';
 
 import './status-bar.scss';
 

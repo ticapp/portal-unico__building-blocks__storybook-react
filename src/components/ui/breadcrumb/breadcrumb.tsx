@@ -3,7 +3,7 @@ import React, { useId, useRef, useState } from 'react';
 import { useOutsideElementClick, usePathname, useWindowSize } from '../../hooks';
 import { Icon } from '../icon';
 import { Link } from '../link';
-import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
+import { ResponsiveWrapper } from '../responsive-wrapper';
 import './breadcrumb.scss';
 
 interface CrumbItems {

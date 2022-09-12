@@ -13,7 +13,7 @@ import {
 import { Button } from '../buttons';
 import { Icon } from '../icon';
 import { Pagination, PaginationProps } from '../pagination';
-import { ResponsiveWrapper } from '../responsive-wrapper/ResponsiveWrapper';
+import { ResponsiveWrapper } from '../responsive-wrapper';
 import './table.scss';
 
 export interface TableProps extends BsTableProps {
@@ -34,9 +34,6 @@ export interface TableProps extends BsTableProps {
 
   /** Total table */
   totalTable?: boolean;
-
-  /** Mobile table row with legend */
-  mobileLegendRow?: ReactNode | string | number;
 
   /** Label See More */
   labelSeeMore?: Array<string>;
@@ -77,7 +74,6 @@ const TableDesktop = ({
     ...tableProps
   } = props;
 
-  delete tableProps.mobileLegendRow;
   delete tableProps.labelSeeMore;
   delete tableProps.labelSeeLess;
   delete tableProps.titleMobileDL;
@@ -223,15 +219,16 @@ const TableMobile = ({ ...props }: TableProps) => {
     tableHeaders,
     tableData,
     noDataLabel,
-    totalTable,
-    mobileLegendRow = null,
+    totalTable = false,
     labelSeeMore = 'Ver mais',
     labelSeeLess = 'Ver menos',
     titleMobileDL = 'Lista'
   } = { ...props };
+
   const uid = useId();
   const cssTableMobile = classNames('ama-table-mobile', className, totalTable && 'ama-table-mobile-total');
-  const totalItems = tableData?.length;
+  const [newTableData, setNewTableData] = useState(tableData);
+  const totalItems = newTableData?.length;
   const [seeMore, setSeeMore] = useState<boolean>(true);
   const [itemsShown, setItemsShown] = useState<number>(totalTable ? totalItems : 2);
   const [seeMoreItems, setSeeMoreItems] = useState<number>(totalItems);
@@ -253,18 +250,27 @@ const TableMobile = ({ ...props }: TableProps) => {
     );
   };
 
-  const dataListItem = tableData?.map((item, index) => {
+  const dataListItem = newTableData?.map((item, index) => {
     return (
       // eslint-disable-next-line react/no-array-index-key
       <React.Fragment key={`${uid}-legend-${index}`}>
-        {mobileLegendRow && (
-          <dt className="p-16" aria-hidden>
-            {mobileLegendRow}
-          </dt>
-        )}
         {Object.entries(item)?.map((value, key) => {
           if (key === Object.entries(item).length - 1) {
             return checkLinkButton(value[1], key);
+          }
+          if (key === 0) {
+            if (React.isValidElement(value[1])) {
+              return (
+                // eslint-disable-next-line react/no-array-index-key
+                <React.Fragment key={`${uid}icon${key}`}>
+                  <dt className="p-16" aria-hidden>
+                    {value[1].props.children[0]}
+                  </dt>
+                  <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
+                  <dd className="col-6 m-0 p-16 position-relative">{value[1].props.children[1]}</dd>
+                </React.Fragment>
+              );
+            }
           }
           return (
             // eslint-disable-next-line react/no-array-index-key
@@ -288,6 +294,58 @@ const TableMobile = ({ ...props }: TableProps) => {
     setDataShown(dataListItem?.slice(0, 2));
     return dataListItem?.slice(0, 2);
   };
+
+  useEffect(() => {
+    setNewTableData(tableData);
+    setSeeMore(true);
+    setItemsShown(totalTable ? tableData?.length : 2);
+    setSeeMoreItems(tableData?.length);
+    setItemsShown(2);
+
+    let isSee = false;
+    if (totalItems <= (totalTable ? tableData?.length : 2)) {
+      isSee = true;
+    }
+    const newdataListItem = tableData?.map((item, index) => {
+      return (
+        // eslint-disable-next-line react/no-array-index-key
+        <React.Fragment key={`${uid}-legend-${index}`}>
+          {Object.entries(item)?.map((value, key) => {
+            if (key === Object.entries(item).length - 1) {
+              return checkLinkButton(value[1], key);
+            }
+            if (key === 0) {
+              if (React.isValidElement(value[1])) {
+                return (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <React.Fragment key={`${uid}icon${key}`}>
+                    <dt className="p-16" aria-hidden>
+                      {value[1].props.children[0]}
+                    </dt>
+                    <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
+                    <dd className="col-6 m-0 p-16 position-relative">{value[1].props.children[1]}</dd>
+                  </React.Fragment>
+                );
+              }
+            }
+            return (
+              // eslint-disable-next-line react/no-array-index-key
+              <React.Fragment key={`${uid}-datalist-first-${index}${key}`}>
+                <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
+                <dd className="col-6 m-0 p-16 position-relative">{value[1]}</dd>
+              </React.Fragment>
+            );
+          })}
+        </React.Fragment>
+      );
+    });
+
+    if (isSee) {
+      setDataShown(newdataListItem?.slice(0, totalTable ? tableData?.length : 2));
+    } else {
+      setDataShown(newdataListItem?.slice(0, 2));
+    }
+  }, [tableData]);
 
   const toggle = () => {
     getItems();
@@ -320,7 +378,7 @@ const TableMobile = ({ ...props }: TableProps) => {
           ))}
       </dl>
 
-      {dataShown?.length > 0 && !totalTable && (
+      {dataShown?.length > 0 && !totalTable && newTableData?.length > 2 && (
         <Button className="shadow-none mx-auto" variant="link" onClick={toggle}>
           {seeMore ? `${labelSeeMore[0]} (${seeMoreItems})  ` : `${labelSeeLess[0]}`}
           <span className="visually-hidden"> {labelSeeLess[1]}</span>
