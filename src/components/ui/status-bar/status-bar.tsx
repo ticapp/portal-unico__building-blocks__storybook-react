@@ -11,17 +11,17 @@ export interface StatusBarProps {
   url: string;
   className?: string;
   backButtonText: string;
-  title: string;
-  subtitle: string;
-  icon: string;
+  title?: string;
+  subtitle?: string;
+  icon?: string;
 }
 
 export interface StatusBarPropsMobile {
   url: string;
   className?: string;
-  title: string;
-  subtitle: string;
-  icon: string;
+  title?: string;
+  subtitle?: string;
+  icon?: string;
 }
 
 const StatusBarMobile = ({ className, url, icon, title, subtitle }: StatusBarPropsMobile) => {
@@ -44,8 +44,8 @@ const StatusBarMobile = ({ className, url, icon, title, subtitle }: StatusBarPro
 
         <div className="info-container py-8 pe-12 m-0 d-flex align-items-center justify-content-center">
           <div className="info-content me-24">
-            <p className="m-0">{title}</p>
-            <span className="m-0">{subtitle}</span>
+            {title && <p className="m-0">{title}</p>}
+            {subtitle && <span className="m-0">{subtitle}</span>}
           </div>
           {icon && <Icon ariaHidden icon={icon} />}
         </div>
@@ -68,8 +68,8 @@ const StatusBarDesktop = ({ className, url, icon, backButtonText, title, subtitl
 
         <div className="info-container py-8 m-0 d-flex align-items-center justify-content-center">
           <div className="info-content me-24">
-            <p className="m-0">{title}</p>
-            <span className="m-0">{subtitle}</span>
+            {title && <p className="m-0">{title}</p>}
+            {subtitle && <span className="m-0">{subtitle}</span>}
           </div>
           {icon && <Icon ariaHidden icon={icon} />}
         </div>

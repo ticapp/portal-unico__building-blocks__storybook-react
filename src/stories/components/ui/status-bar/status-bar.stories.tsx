@@ -25,3 +25,18 @@ BasicStatusBar.args = {
   icon: 'ama-badge',
   backButtonText: 'Voltar ao início'
 };
+
+export const SimpleStatusBar: ComponentStory<typeof StatusBar> = (args) => {
+  return (
+    <BrowserRouter>
+      <StatusBar {...args} />
+    </BrowserRouter>
+  );
+};
+
+SimpleStatusBar.storyName = 'SimpleBar Example';
+
+SimpleStatusBar.args = {
+  url: 'https://www.google.com',
+  backButtonText: 'Voltar ao início'
+};
