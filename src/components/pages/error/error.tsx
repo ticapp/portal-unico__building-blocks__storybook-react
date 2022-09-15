@@ -31,7 +31,7 @@ export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: Er
     <Container fluid className="ama-error-page px-0 py-80">
       <Row>
         <Col className={cssErrorPage}>
-          <Icon icon="ama-warning-circle" className="mb-16" />
+          <Icon icon="ama-warning-circle" className="mb-16 error-icon" />
           <h4 className="mb-16 text-uppercase fc-semantic-alerts">{title}</h4>
           <span className="mb-0">{subtitle}</span>
           {link && (
@@ -45,7 +45,7 @@ export const ErrorPage = ({ className, title, subtitle, link, buttons = [] }: Er
         <Row className="mt-32">
           <Col className="d-flex justify-content-center error-actions-container">
             {buttons.map((bArgs) => {
-              const classes = `error-action ${bArgs.className} btn-outline-semantic-alerts`;
+              const classes = `error-action ${bArgs.className}`;
               return <Button key={useId()} {...bArgs} className={classes} />;
             })}
           </Col>
