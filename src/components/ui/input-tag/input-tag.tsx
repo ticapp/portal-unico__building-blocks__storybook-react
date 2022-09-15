@@ -415,7 +415,7 @@ export const InputTag = ({
         />
       </div>
 
-      <div className="autocomplete-container position-absolute bottom-0 w-100">
+      <div className="autocomplete-container z-index-dropdown position-absolute bottom-0 w-100">
         <ul id={listBoxId} ref={listBoxRef} role="listbox" aria-label={optionsAriaLabel} className={listboxClassname}>
           {availableOptions.map((o, i) => {
             const liClassNames = classNames({ focus: activeOptionIndex === i }, 'w-100 d-flex align-items-center py-8 px-16');

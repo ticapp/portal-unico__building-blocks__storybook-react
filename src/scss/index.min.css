@@ -9093,7 +9093,7 @@ textarea.form-control-lg {
   --bs-dropdown-header-padding-x: 1rem;
   --bs-dropdown-header-padding-y: 0.5rem;
   position: absolute;
-  z-index: 1000;
+  z-index: 2000;
   display: none;
   min-width: var(--bs-dropdown-min-width);
   padding: var(--bs-dropdown-padding-y) var(--bs-dropdown-padding-x);
@@ -16836,7 +16836,7 @@ textarea.form-control-lg {
 }
 
 .z-index-dropdown {
-  z-index: 1000 !important;
+  z-index: 2000 !important;
 }
 
 @media (min-width: 576px) {
@@ -18492,7 +18492,7 @@ textarea.form-control-lg {
     z-index: 1095 !important;
   }
   .z-index-sm-dropdown {
-    z-index: 1000 !important;
+    z-index: 2000 !important;
   }
 }
 @media (min-width: 768px) {
@@ -20148,7 +20148,7 @@ textarea.form-control-lg {
     z-index: 1095 !important;
   }
   .z-index-md-dropdown {
-    z-index: 1000 !important;
+    z-index: 2000 !important;
   }
 }
 @media (min-width: 992px) {
@@ -21804,7 +21804,7 @@ textarea.form-control-lg {
     z-index: 1095 !important;
   }
   .z-index-lg-dropdown {
-    z-index: 1000 !important;
+    z-index: 2000 !important;
   }
 }
 @media (min-width: 1280px) {
@@ -23460,7 +23460,7 @@ textarea.form-control-lg {
     z-index: 1095 !important;
   }
   .z-index-xl-dropdown {
-    z-index: 1000 !important;
+    z-index: 2000 !important;
   }
 }
 @media (min-width: 1600px) {
@@ -25116,7 +25116,7 @@ textarea.form-control-lg {
     z-index: 1095 !important;
   }
   .z-index-xxl-dropdown {
-    z-index: 1000 !important;
+    z-index: 2000 !important;
   }
 }
 @media (min-width: 1200px) {
