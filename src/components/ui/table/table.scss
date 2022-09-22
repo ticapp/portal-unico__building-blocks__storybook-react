@@ -69,6 +69,11 @@
     dt {
       border-bottom: 1px solid index.$neutral-light;
     }
+    dt {
+      &.col-12 {
+        border-bottom: none !important;
+      }
+    }
 
     dt {
       @include index.text-medium-bold;
