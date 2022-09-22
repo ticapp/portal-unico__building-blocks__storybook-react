@@ -199,7 +199,8 @@ BasicTable.args = {
   'labelSeeLess': ['Ver menos', ' items da lista'],
   'labelSeeMore': ['Ver mais', ' items da lista'],
   'ariaLabelPaginationNav': 'Paginação da tabela',
-  'titleMobileDL': 'Lista de infrações'
+  'titleMobileDL': 'Lista de infrações',
+  'columnMobileListTable': 'col-6'
 } as TableProps & PaginationProps;
 
 BasicTable.argTypes = {};

@@ -41,8 +41,11 @@ export interface TableProps extends BsTableProps {
   /** Label See Less */
   labelSeeLess?: Array<string>;
 
-  /** title mobile description list */
+  /** Title mobile description list */
   titleMobileDL?: string;
+
+  /** Class number columns for mobile table list */
+  columnMobileListTable?: 'col-6' | 'col-12';
 }
 
 export type TableContextType = {
@@ -77,6 +80,7 @@ const TableDesktop = ({
   delete tableProps.labelSeeMore;
   delete tableProps.labelSeeLess;
   delete tableProps.titleMobileDL;
+  delete tableProps.columnMobileListTable;
 
   const uid = useId();
   const [elementsPerPage, setElementsPerPage] = useState<paginationDataType[]>();
@@ -222,11 +226,13 @@ const TableMobile = ({ ...props }: TableProps) => {
     totalTable = false,
     labelSeeMore = 'Ver mais',
     labelSeeLess = 'Ver menos',
-    titleMobileDL = 'Lista'
+    titleMobileDL = 'Lista',
+    columnMobileListTable = 'col-6'
   } = { ...props };
 
   const uid = useId();
   const cssTableMobile = classNames('ama-table-mobile', className, totalTable && 'ama-table-mobile-total');
+  const cssTableMobileColumn = classNames(columnMobileListTable);
   const [newTableData, setNewTableData] = useState(tableData);
   const totalItems = newTableData?.length;
   const [seeMore, setSeeMore] = useState<boolean>(true);
@@ -244,8 +250,8 @@ const TableMobile = ({ ...props }: TableProps) => {
     }
     return (
       <React.Fragment key={`${uid}datalist${key}`}>
-        <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
-        <dd className="col-6 m-0 p-16 position-relative">{element}</dd>
+        <dt className={`${cssTableMobileColumn} m-0 p-16`}>{tableHeaders[key].value}</dt>
+        <dd className={`${cssTableMobileColumn} m-0 p-16 position-relative`}>{element}</dd>
       </React.Fragment>
     );
   };
@@ -266,8 +272,8 @@ const TableMobile = ({ ...props }: TableProps) => {
                   <dt className="p-16" aria-hidden>
                     {value[1].props.children[0]}
                   </dt>
-                  <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
-                  <dd className="col-6 m-0 p-16 position-relative">{value[1].props.children[1]}</dd>
+                  <dt className={`${cssTableMobileColumn} m-0 p-16`}>{tableHeaders[key].value}</dt>
+                  <dd className={`${cssTableMobileColumn} m-0 p-16 position-relative`}>{value[1].props.children[1]}</dd>
                 </React.Fragment>
               );
             }
@@ -275,8 +281,8 @@ const TableMobile = ({ ...props }: TableProps) => {
           return (
             // eslint-disable-next-line react/no-array-index-key
             <React.Fragment key={`${uid}-datalist-first-${index}${key}`}>
-              <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
-              <dd className="col-6 m-0 p-16 position-relative">{value[1]}</dd>
+              <dt className={`${cssTableMobileColumn} m-0 p-16`}>{tableHeaders[key].value}</dt>
+              <dd className={`${cssTableMobileColumn} m-0 p-16 position-relative`}>{value[1]}</dd>
             </React.Fragment>
           );
         })}
@@ -312,8 +318,8 @@ const TableMobile = ({ ...props }: TableProps) => {
                     <dt className="p-16" aria-hidden>
                       {value[1].props.children[0]}
                     </dt>
-                    <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
-                    <dd className="col-6 m-0 p-16 position-relative">{value[1].props.children[1]}</dd>
+                    <dt className={`${cssTableMobileColumn} m-0 p-16`}>{tableHeaders[key].value}</dt>
+                    <dd className={`${cssTableMobileColumn} m-0 p-16 position-relative`}>{value[1].props.children[1]}</dd>
                   </React.Fragment>
                 );
               }
@@ -321,8 +327,8 @@ const TableMobile = ({ ...props }: TableProps) => {
             return (
               // eslint-disable-next-line react/no-array-index-key
               <React.Fragment key={`${uid}-datalist-first-${index}${key}`}>
-                <dt className="col-6 m-0 p-16">{tableHeaders[key].value}</dt>
-                <dd className="col-6 m-0 p-16 position-relative">{value[1]}</dd>
+                <dt className={`${cssTableMobileColumn} m-0 p-16`}>{tableHeaders[key].value}</dt>
+                <dd className={`${cssTableMobileColumn} m-0 p-16 position-relative`}>{value[1]}</dd>
               </React.Fragment>
             );
           })}
@@ -377,8 +383,8 @@ const TableMobile = ({ ...props }: TableProps) => {
           tableHeaders?.map((item, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <React.Fragment key={`${uid}-no-data-${index}`}>
-              <dt className="col-6 m-0 p-16">{item.value}</dt>
-              <dd className="col-6 m-0 p-16 position-relative">{index > 0 ? '-' : noDataLabel}</dd>
+              <dt className={`${cssTableMobileColumn} m-0 p-16`}>{item.value}</dt>
+              <dd className={`${cssTableMobileColumn} m-0 p-16 position-relative`}>{index > 0 ? '-' : noDataLabel}</dd>
             </React.Fragment>
           ))}
       </dl>
