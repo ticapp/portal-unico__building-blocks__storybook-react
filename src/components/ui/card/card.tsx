@@ -40,7 +40,7 @@ export interface CardProps extends BsCardProps {
   title?: string;
 
   /** Link label */
-  linkLabel?: string;
+  linkLabel?: string | ReactNode;
 
   /** Icon link */
   linkIcon?: string;

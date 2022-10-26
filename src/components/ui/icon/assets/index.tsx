@@ -30,6 +30,7 @@ const iconList: Record<string, string> = {
   'ama-expand': './AmaExpand',
   'ama-facebook': './AmaFacebook',
   'ama-face-satisfied': './AmaFaceSatisfied',
+  'ama-face-unsatisfied': './AmaFaceUnsatisfied',
   'ama-filter': './AmaFilter',
   'ama-first-page': './AmaFirstPage',
   'ama-home': './AmaHome',
