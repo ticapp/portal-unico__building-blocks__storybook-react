@@ -54,7 +54,7 @@ const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation 
             <NavLink
               exact
               href={item.link}
-              className="vertical-nav-link"
+              className={`${pathname.startsWith(item.link) ? 'active' : ''} vertical-nav-link`}
               activeClassName="active"
               role="treeitem"
               aria-owns={item.children ? subMenuId : ''}
