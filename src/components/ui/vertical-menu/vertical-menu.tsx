@@ -47,6 +47,12 @@ const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation 
     const liId = `${uid}-li-lvl-${lvl}-${idx}`;
     const subMenuId = `${uid}-sub-lvl-${lvl}-${idx}`;
 
+    const additionalArgs = {};
+
+    if (item.children) {
+      additionalArgs['aria-owns'] = subMenuId;
+    }
+
     return (
       <li key={liId} className={liClasses} role="none">
         <div className="tree-item-container">
@@ -57,20 +63,15 @@ const VerticalMenu: FC<VerticalMenuProps> = ({ ariaLabel = 'Vertical Navigation 
               className={`${pathname.startsWith(item.link) ? 'active' : ''} vertical-nav-link`}
               activeClassName="active"
               role="treeitem"
-              aria-owns={item.children ? subMenuId : ''}
               onClick={() => onClickHandler(item)}
+              {...additionalArgs}
             >
               <span className="label d-inline-flex align-items-center">{item.label}</span>
             </NavLink>
           )}
 
           {!item.link && (
-            <span
-              className="label d-inline-flex align-items-center"
-              role="treeitem"
-              tabIndex={0}
-              aria-owns={item.children ? subMenuId : ''}
-            >
+            <span className="label d-inline-flex align-items-center" role="treeitem" tabIndex={0} {...additionalArgs}>
               {item.label}
             </span>
           )}
