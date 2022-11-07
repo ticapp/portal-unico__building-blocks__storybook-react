@@ -63,7 +63,7 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
 export const Icon: FC<IconProps> = ({
   size = 'md',
   icon = '',
-  alt = '',
+  alt,
   className,
   padding,
   onIconLoad,

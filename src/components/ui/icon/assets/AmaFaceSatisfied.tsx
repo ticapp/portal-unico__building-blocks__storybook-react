@@ -1,13 +1,18 @@
 import * as React from 'react';
 
-export const component = (props: React.SVGProps<SVGSVGElement>) => {
+export const component = (props: React.SVGProps<SVGSVGElement> | any) => {
+  const newProps = { ...props };
+  delete newProps.alt;
+  delete newProps.title;
+
   const cssStyle = `
         .cls-1 {
             fill: none;
         }
     `;
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" {...newProps} role="img">
+      {props.title && <title>{props.title}</title>}
       <defs>
         <style>{cssStyle}</style>
       </defs>

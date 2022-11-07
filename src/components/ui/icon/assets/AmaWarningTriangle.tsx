@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-export const component = (props: React.SVGProps<SVGSVGElement>) => {
+export const component = (props: React.SVGProps<SVGSVGElement> | any) => {
+  const newProps = { ...props };
+  delete newProps.alt;
+  delete newProps.title;
+
   const cssStyle = `
 		.cls-1 {
 			fill: none;
@@ -8,7 +12,8 @@ export const component = (props: React.SVGProps<SVGSVGElement>) => {
 	`;
 
   return (
-    <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" {...props}>
+    <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" {...newProps} role="img">
+      {props.title && <title>{props.title}</title>}
       <defs>
         <style>{cssStyle}</style>
       </defs>
