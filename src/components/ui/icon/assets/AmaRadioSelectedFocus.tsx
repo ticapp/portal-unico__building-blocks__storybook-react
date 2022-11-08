@@ -1,8 +1,13 @@
 import * as React from 'react';
 
-export const component = (props: React.SVGProps<SVGSVGElement>) => {
+export const component = (props: React.SVGProps<SVGSVGElement> | any) => {
+  const newProps = { ...props };
+  delete newProps.alt;
+  delete newProps.title;
+
   return (
-    <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" {...newProps} role="img">
+      {props.title && <title>{props.title}</title>}
       <path
         d="M15 0.5C23.0081 0.5 29.5 6.99187 29.5 15C29.5 23.0081 23.0081 29.5 15 29.5C6.99187 29.5 0.5 23.0081 0.5 15C0.5 6.99187 6.99187 0.5 15 0.5Z"
         fill="white"

@@ -1,8 +1,13 @@
 import * as React from 'react';
 
-export const component = (props: React.SVGProps<SVGSVGElement>) => {
+export const component = (props: React.SVGProps<SVGSVGElement> | any) => {
+  const newProps = { ...props };
+  delete newProps.alt;
+  delete newProps.title;
+
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" {...newProps} role="img">
+      {props.title && <title>{props.title}</title>}
       <g clipPath="url(#clip0_415_79)">
         <path d="M17 22V14H13V16H15V22H12V24H20V22H17Z" />
         <path d="M16 8C15.7033 8 15.4133 8.08797 15.1666 8.2528C14.92 8.41762 14.7277 8.65189 14.6142 8.92597C14.5006 9.20006 14.4709 9.50166 14.5288 9.79264C14.5867 10.0836 14.7296 10.3509 14.9393 10.5607C15.1491 10.7704 15.4164 10.9133 15.7074 10.9712C15.9983 11.0291 16.2999 10.9994 16.574 10.8858C16.8481 10.7723 17.0824 10.58 17.2472 10.3334C17.412 10.0867 17.5 9.79667 17.5 9.5C17.5 9.10218 17.342 8.72064 17.0607 8.43934C16.7794 8.15804 16.3978 8 16 8Z" />
