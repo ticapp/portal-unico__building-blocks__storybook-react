@@ -386,8 +386,8 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
         onLanguageChange={languageChangeHandler}
       />
 
-      <label id="my-label">My Options</label>
-      <InputTag labeledBy="my-label" options={inputTagOptions} />
+      <label htmlFor="input-tag-id-1">My Options</label>
+      <InputTag inputId="input-tag-id-1" labeledBy="my-label" options={inputTagOptions} />
 
       <Footer {...args} />
     </BrowserRouter>

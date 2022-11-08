@@ -31,8 +31,8 @@ export const BasicDatePicker: Story<DatePickerProps> = () => {
 
   return (
     <>
-      <label id="date-picker-label">Escolha uma data:</label>
-      <DatePicker aria-labelledby="date-picker-label" value={date} onChange={onDateChangeHandler} />
+      <label htmlFor="datepickerid">Escolha uma data:</label>
+      <DatePicker id="datepickerid" value={date} onChange={onDateChangeHandler} />
     </>
   );
 };

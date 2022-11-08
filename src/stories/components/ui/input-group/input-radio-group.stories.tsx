@@ -57,7 +57,6 @@ export const BasicInputRadioGroup: ComponentStory<typeof InputRadioGroup> = () =
       <p>Test scrolling...</p>
       <p>Test scrolling...</p>
       <p>Test scrolling...</p>
-      <label id="input-radio-group-label">Radio group label</label>
       <InputRadioGroup radiosData={data} ariaLabelledby="input-radio-group-label" />
       <p>Test scrolling...</p>
       <p>Test scrolling...</p>

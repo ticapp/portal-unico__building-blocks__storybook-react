@@ -20,8 +20,8 @@ export const SingleSelect: Story<FormSelectProps> = () => {
       <p>TEST PREVENT SCROLL</p>
       <p>TEST PREVENT SCROLL</p>
       <p>TEST PREVENT SCROLL</p>
-      <label id="test-select-id">My Options</label>
-      <Select aria-labelledby="test-select-id" defaultValue="">
+      <label htmlFor="test-select-id">My Options</label>
+      <Select id="test-select-id" defaultValue="">
         <option value="" hidden disabled>
           Select a value...
         </option>
