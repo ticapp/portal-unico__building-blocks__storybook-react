@@ -106,7 +106,7 @@ export const Checkbox = ({
           onChange={() => null}
         />
         <div className={`ordered-items ${labelPosition} d-flex align-items-center`}>
-          <div className="icons" id={checkboxId} onMouseDown={focus} role="none">
+          <div className="icons" onMouseDown={focus} role="none">
             {iconBuilder()}
           </div>
           <label id={labelId} htmlFor={checkboxId}>

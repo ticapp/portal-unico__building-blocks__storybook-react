@@ -68,7 +68,7 @@ export const Icon: FC<IconProps> = ({
   padding,
   onIconLoad,
   onIconLoadError,
-  ariaHidden = 'false',
+  ariaHidden,
   ...props
 }) => {
   const [IconComponent, setCurrentIcon] = useState<FC<SVGProps<SVGSVGElement>>>(iconsCache[icon]);
@@ -104,9 +104,14 @@ export const Icon: FC<IconProps> = ({
     };
   }, [icon, onIconLoad, onIconLoadError]);
 
+  const ariaHiddenProps = {};
+  if (typeof ariaHidden !== 'undefined') {
+    ariaHiddenProps['aria-hidden'] = ariaHidden;
+  }
+
   if (!isBundledIcon(icon)) {
     // Assume that it is a base64 image and let the browser do his work
-    return <img src={icon} alt={alt} className={classes} aria-hidden={ariaHidden} />;
+    return <img src={icon} alt={alt} className={classes} {...ariaHiddenProps} />;
   }
 
   const iconAttributes = {
@@ -115,8 +120,8 @@ export const Icon: FC<IconProps> = ({
   };
 
   if (!IconComponent) {
-    return <EmptyIcon className={classes} role="img" aria-hidden={ariaHidden} {...iconAttributes} />;
+    return <EmptyIcon className={classes} role="img" {...iconAttributes} {...ariaHiddenProps} />;
   }
 
-  return <IconComponent className={classes} role="img" aria-hidden={ariaHidden} {...iconAttributes} {...props} />;
+  return <IconComponent className={classes} role="img" {...iconAttributes} {...props} {...ariaHiddenProps} />;
 };

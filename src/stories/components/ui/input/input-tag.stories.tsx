@@ -38,15 +38,16 @@ export const SimpleTagInput: Story<InputTagProps> = (args) => {
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
-      <label id="my-label">My Options</label>
+      <label htmlFor="my-tag-label">My Options</label>
       <InputTag
         onChange={(e) => handleSetTags(e)}
-        labeledBy="my-label"
+        inputId="my-tag-label"
         options={options}
         value={selectedTags}
         placeholder={args.placeholder}
       />
-      <InputText />
+      <label htmlFor="my-text-label">My Options</label>
+      <InputText id="my-text-label" />
       <Button onClick={onButtonClickHandler}>Clear</Button>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>
       <p>DUMMY CONTENT TO TEST PREVENT SCROLLING</p>

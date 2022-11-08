@@ -352,20 +352,28 @@ const CustomDropdown = ({
 
   const wrapperClassNames = classNames('custom-dropdown position-relative', className, { open: isOpen });
 
+  const newProps = {};
+  if (ariaLabel) {
+    newProps['aria-label'] = ariaLabel;
+  }
+
+  if (hoverIndex >= 0) {
+    newProps['aria-activedescendant'] = `${uid}-listbox-option-${hoverIndex}`;
+  }
+
   return (
     <div id={uid} ref={comboWrapperRef} className={wrapperClassNames}>
       <div
         className="d-flex align-items-center justify-content-between"
         ref={comboRef}
-        aria-label={ariaLabel}
         aria-controls={selectControlsId}
         aria-expanded={isComboExpanded}
         aria-haspopup="listbox"
-        aria-activedescendant={hoverIndex >= 0 ? `${uid}-listbox-option-${hoverIndex}` : ''}
         role="combobox"
         tabIndex={0}
         onMouseDown={onComboMouseDown}
         onKeyDown={onComboKeyDown}
+        {...newProps}
       >
         {!!dropdownControls && dropdownControls}
         {!dropdownControls && <span>{selectedIndex < 0 ? '' : options[selectedIndex].label}</span>}

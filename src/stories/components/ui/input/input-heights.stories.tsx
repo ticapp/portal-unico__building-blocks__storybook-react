@@ -29,7 +29,8 @@ export const InputHeights: ComponentStory<typeof InputText> = () => {
 
   return (
     <div className="d-flex align-items-center">
-      <Select aria-labelledby="test-select-id" defaultValue="">
+      <label htmlFor="test-select-id">Label</label>
+      <Select id="test-select-id" defaultValue="">
         <option value="" hidden disabled>
           Select a value...
         </option>
@@ -39,8 +40,10 @@ export const InputHeights: ComponentStory<typeof InputText> = () => {
         <option value="4">Option #4</option>
         <option value="5">Option #5</option>
       </Select>
-      <InputTag options={tagOptions} placeholder={tagPlaceholder} />
-      <InputText />
+      <label htmlFor="test-tag-id">Label</label>
+      <InputTag inputId="test-tag-id" options={tagOptions} placeholder={tagPlaceholder} />
+      <label htmlFor="test-text-id">Label</label>
+      <InputText id="test-text-id" />
       <Button {...defaultButtton} />
     </div>
   );

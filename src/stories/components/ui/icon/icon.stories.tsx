@@ -13,7 +13,7 @@ export const Size: Story<IconProps> = ({ icon }: IconProps) => {
   return (
     <div style={{ backgroundColor: '#ebebeb' }}>
       {dimensions.map((size) => (
-        <Icon className="p-1" key={size} size={size} icon={icon || 'ama-user'} />
+        <Icon className="p-1" key={size} size={size} icon={icon || 'ama-user'} ariaHidden />
       ))}
     </div>
   );
@@ -30,7 +30,7 @@ Size.argTypes = {
 };
 
 export const ExternalImage: Story<IconProps> = ({ icon, size }: IconProps) => {
-  return <Icon icon={icon || 'https://picsum.photos/50'} size={size || 'md'} />;
+  return <Icon icon={icon || 'https://picsum.photos/50'} size={size || 'md'} ariaHidden />;
 };
 ExternalImage.storyName = 'External Image';
 ExternalImage.argTypes = {
@@ -52,7 +52,7 @@ export const IconList: Story<IconProps> = ({ size }: IconProps) => {
     <Row>
       {allIcons.map((icon) => (
         <Col md={3} key={icon}>
-          <Icon icon={icon} size={size || 'md'} />
+          <Icon icon={icon} size={size || 'md'} ariaHidden />
           <span className="ps-3">{icon}</span>
         </Col>
       ))}
