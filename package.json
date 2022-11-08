@@ -1,7 +1,7 @@
 {
   "name": "@ama/react-design-system",
   "description": "AMA Design system",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "publishConfig": {
     "access": "public",
     "registry": "https://ticappsonar.northeurope.cloudapp.azure.com/nexus/repository/npm-general"
