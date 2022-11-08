@@ -77,7 +77,7 @@ export const Alert: FC<AlertProps> = ({
       <InnerAlert onClose={() => setShow(false)} bsPrefix="ama-alert" {...props}>
         {header && (
           <InnerAlert.Heading as="h2" className="header d-flex align-items-center">
-            {validIcon && <Icon icon={validIcon} onIconLoadError={onIconLoadError} className={`icon ${color}`} alt={alt} />}
+            {validIcon && <Icon icon={validIcon} onIconLoadError={onIconLoadError} className={`icon ${color}`} alt={alt} ariaHidden />}
             {header}
           </InnerAlert.Heading>
         )}

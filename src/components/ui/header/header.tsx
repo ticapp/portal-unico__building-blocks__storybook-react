@@ -203,6 +203,9 @@ const Header = ({
           </Offcanvas.Body>
         </Offcanvas>
       </ResponsiveWrapper>
+      <ResponsiveWrapper condition={width >= 768}>
+        <input id="navigation-menu-offcanvas" type="hidden" />
+      </ResponsiveWrapper>
     </Container>
   );
 };

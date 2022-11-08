@@ -377,6 +377,16 @@ export const InputTag = ({
     'w-100 position-absolute top-0 left-0 w-100 py-16 px-0'
   );
 
+  const newProps = {};
+
+  if (activeOptionId) {
+    newProps['aria-activedescendant'] = activeOptionId;
+  }
+
+  if (labeledBy) {
+    newProps['aria-labelledby'] = labeledBy;
+  }
+
   return (
     <div ref={containerRef} className={classes}>
       <div className="input-container px-16 py-6 d-flex flex-wrap gap-10 w-100">
@@ -400,7 +410,6 @@ export const InputTag = ({
         <input
           id={memoInputId}
           ref={inputRef}
-          placeholder={placeholder}
           onKeyDown={onKeyDownHandler}
           onChange={() => updateAvailableOptions(tags)}
           onClick={onClickHandler}
@@ -408,15 +417,14 @@ export const InputTag = ({
           aria-controls={listBoxId}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
-          aria-labelledby={labeledBy}
-          aria-activedescendant={activeOptionId}
           role="combobox"
           aria-autocomplete="list"
+          data-placeholder={placeholder}
         />
       </div>
 
       <div className="autocomplete-container z-index-dropdown position-absolute bottom-0 w-100">
-        <ul id={listBoxId} ref={listBoxRef} role="listbox" aria-label={optionsAriaLabel} className={listboxClassname}>
+        <ul id={listBoxId} ref={listBoxRef} role="listbox" className={listboxClassname} aria-label={optionsAriaLabel}>
           {availableOptions.map((o, i) => {
             const liClassNames = classNames({ focus: activeOptionIndex === i }, 'w-100 d-flex align-items-center py-8 px-16');
             return (

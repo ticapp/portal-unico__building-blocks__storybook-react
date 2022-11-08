@@ -18,13 +18,14 @@ export interface StatusBarProps {
 
 export interface StatusBarPropsMobile {
   url: string;
+  backButtonText: string;
   className?: string;
   title?: string;
   subtitle?: string;
   icon?: string;
 }
 
-const StatusBarMobile = ({ className, url, icon, title, subtitle }: StatusBarPropsMobile) => {
+const StatusBarMobile = ({ className, url, icon, backButtonText, title, subtitle }: StatusBarPropsMobile) => {
   const containerClassName = classNames(
     'ama-status-bar-container-mobile',
     'w-100 px-16 d-flex align-items-center justify-content-center',
@@ -38,7 +39,7 @@ const StatusBarMobile = ({ className, url, icon, title, subtitle }: StatusBarPro
   return (
     <div className={containerClassName}>
       <div className={infoContainerClassName}>
-        <Link link={url} className="redirect d-flex align-items-center justify-content-center pl-16 py-8">
+        <Link title={backButtonText} link={url} className="redirect d-flex align-items-center justify-content-center pl-16 py-8">
           <Icon className="me-8" ariaHidden icon="ama-arrow-left" />
         </Link>
 

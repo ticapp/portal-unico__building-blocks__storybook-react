@@ -13,15 +13,17 @@ export interface InputRadioData {
 export interface InputRadioGroupProps {
   /** Add classes to the InputRadio component */
   className?: string;
-  // ** Set aria-labelledby */
-  ariaLabelledby: string;
-  //* * Set radios */
+  /** Set aria-labelledby */
+  ariaLabelledby?: string;
+  /** Set aria-label */
+  ariaLabel?: string;
+  /** Set radios */
   radiosData: Array<InputRadioData>;
-  //* * Set if is disabled */
+  /** Set if is disabled */
   isDisabled?: boolean;
 }
 
-export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, isDisabled }: InputRadioGroupProps) => {
+export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, ariaLabel, isDisabled }: InputRadioGroupProps) => {
   const [inputRadioValues, setInputRadioValues] = useState<Array<InputRadioData>>([]);
   const [inputRadioCheckedId, setInputRadioCheckedId] = useState<string>('');
   const inputRadioGroupClassName = classNames('ama-input-radio-group', className);
@@ -83,15 +85,22 @@ export const InputRadioGroup = ({ className, radiosData, ariaLabelledby, isDisab
     }
   };
 
+  const newProps = {};
+
+  if (ariaLabelledby) {
+    newProps['aria-labelledby'] = ariaLabelledby;
+  }
+
+  if (ariaLabel) {
+    newProps['aria-label'] = ariaLabel;
+  }
+
+  if (inputRadioCheckedId) {
+    newProps['aria-activedescendant'] = inputRadioCheckedId;
+  }
+
   return (
-    <div
-      className={inputRadioGroupClassName}
-      aria-activedescendant={inputRadioCheckedId}
-      role="radiogroup"
-      tabIndex={-1}
-      aria-labelledby={ariaLabelledby}
-      aria-label="input radio group"
-    >
+    <div className={inputRadioGroupClassName} role="radiogroup" tabIndex={-1} {...newProps}>
       {inputRadioValues &&
         inputRadioValues.map((radio, index) => (
           <InputRadio

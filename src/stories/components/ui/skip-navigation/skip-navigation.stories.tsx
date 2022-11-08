@@ -89,6 +89,14 @@ const Template: ComponentStory<typeof SkipNavigation> = (args) => (
     <div id="main">
       <Button>This button will focus after skip and first tab</Button>
     </div>
+    <div id="menu">
+      This is random text...This is random text...This is random text...This is random text...This is random text...This is random
+      text...This is random text...This is random text...This is random text...This is random text...This is random text...This is random
+      text...This is random text...This is random text...This is random text...This is random text...This is random text...This is random
+      text...This is random text...This is random text...This is random text...This is random text...This is random text...This is random
+      text...This is random text...This is random text...This is random text...This is random text...This is random text...This is random
+      text...This is random text...This is random text...
+    </div>
   </BrowserRouter>
 );
 

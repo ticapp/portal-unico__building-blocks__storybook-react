@@ -42,8 +42,22 @@ export const CheckboxGroup = ({ ariaLabelledby, ariaActiveDescendant, ariaLabel,
     }
   }, [data]);
 
+  const newProps = {};
+
+  if (ariaLabelledby) {
+    newProps['aria-labelledby'] = ariaLabelledby;
+  }
+
+  if (ariaLabel) {
+    newProps['aria-label'] = ariaLabel;
+  }
+
+  if (ariaActiveDescendant) {
+    newProps['aria-activedescendant'] = ariaActiveDescendant;
+  }
+
   return (
-    <div tabIndex={-1} aria-labelledby={ariaLabelledby} aria-label={ariaLabel} aria-activedescendant={ariaActiveDescendant}>
+    <div tabIndex={-1} {...newProps}>
       {data.map((val, index) => {
         return (
           <Checkbox
