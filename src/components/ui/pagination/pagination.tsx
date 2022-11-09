@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React, { ReactNode, useContext, useId } from 'react';
-import { Pagination as BsPagination, PaginationProps as BsPaginationProps } from 'react-bootstrap';
 import { useIsomorphicLayoutEffect, usePaginationData } from '../../hooks';
 
 import { Icon } from '../icon';
@@ -10,7 +9,7 @@ import { TableContextType } from '../table';
 import { Context } from '../table/table';
 import './pagination.scss';
 
-export interface PaginationProps extends BsPaginationProps {
+export interface PaginationProps {
   /** Add classes to the Card component */
   className?: string;
 
@@ -56,12 +55,9 @@ export const Pagination = ({
   lineOptionsLabel,
   itemsCounterLabel = ['-', 'de', 'items'],
   pagesCounterLabel = ['de', 'páginas'],
-  ariaLabelPaginationNav = 'Paginação',
-  ...props
+  ariaLabelPaginationNav = 'Paginação'
 }: PaginationProps) => {
-  const prevRef = React.useRef<HTMLSpanElement>(null);
-  const nextRef = React.useRef<HTMLSpanElement>(null);
-  const cssPagination = classNames('ama-pagination', className);
+  const cssPagination = classNames('ama-pagination d-flex align-items-center', className);
   const pageData = usePaginationData(linesOptions[0] || (data.length as string | number), data);
   const context = useContext<TableContextType>(Context);
 
@@ -69,14 +65,12 @@ export const Pagination = ({
     if (context) {
       context.setValue(pageData);
     }
-    (prevRef.current?.lastChild?.lastChild as HTMLSpanElement).innerText = previousAriaLabel;
-    (nextRef.current?.lastChild?.lastChild as HTMLSpanElement).innerText = nextAriaLabel;
   }, [pageData?.currentPage, pageData?.contentPerPage, pageData?.currentData]);
 
   return (
     <nav aria-label={ariaLabelPaginationNav}>
-      <BsPagination {...props} className={cssPagination}>
-        <li className="px-16 align-middle">
+      <ul className={cssPagination}>
+        <li className="d-flex align-items-center justify-content-center px-16 align-middle">
           {lineOptionsLabel && (
             <label className="text-medium-normal" id="lines-per-page" htmlFor="ama-lines-selector">
               {lineOptionsLabel}
@@ -99,7 +93,7 @@ export const Pagination = ({
               ))}
           </Select>
         </li>
-        <li className="px-16">
+        <li className="d-flex align-items-center justify-content-center px-16">
           <div className="h-100 d-flex align-items-center">
             {itemsCounter && (
               <span className="text-medium-normal px-8">
@@ -115,13 +109,17 @@ export const Pagination = ({
             )}
           </div>
         </li>
-        <BsPagination.Prev className="ms-auto" onClick={pageData?.gotToPreviousPage} disabled={pageData?.currentPage === 1} ref={prevRef}>
-          <Icon icon="ama-chevron-left" size="xs" />
-        </BsPagination.Prev>
-        <BsPagination.Next onClick={pageData?.goToNextPage} disabled={pageData?.currentPage === pageData?.totalPageCount} ref={nextRef}>
-          <Icon icon="ama-chevron-right" size="xs" />
-        </BsPagination.Next>
-      </BsPagination>
+        <li className="d-flex align-items-center justify-content-center ms-auto">
+          <button type="button" onClick={pageData?.gotToPreviousPage} disabled={pageData?.currentPage === 1}>
+            <Icon icon="ama-chevron-left" size="xs" alt={previousAriaLabel} />
+          </button>
+        </li>
+        <li className="d-flex align-items-center justify-content-center">
+          <button type="button" onClick={pageData?.goToNextPage} disabled={pageData?.currentPage === pageData?.totalPageCount}>
+            <Icon icon="ama-chevron-right" size="xs" alt={nextAriaLabel} />
+          </button>
+        </li>
+      </ul>
     </nav>
   );
 };

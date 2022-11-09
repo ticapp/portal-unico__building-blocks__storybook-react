@@ -3,8 +3,12 @@
 .ama-pagination {
   background-color: index.$neutral-light;
   border: 1px solid index.$neutral-light-grey;
+  list-style: none;
 
   li {
+    min-height: 56px;
+    min-width: 56px;
+
     &:not(:first-of-type) {
       border-left: 1px solid index.$neutral-light-grey;
     }
@@ -19,22 +23,22 @@
       }
     }
 
-    &.page-item {
-      .page-link {
-        min-height: 56px;
-        min-width: 56px;
-        border-radius: 0 !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    button {
+      min-height: 56px;
+      min-width: 56px;
+      border-radius: 0 !important;
+      border: none;
+      outline: none;
+      box-shadow: 0 0 0 1px transparent inset !important;
+      &:focus {
+        box-shadow: 0 0 0 1px index.$neutral-black inset !important;
+        outline: none;
       }
 
-      &.disabled {
-        .page-link {
-          background-color: index.$neutral-light;
-          svg {
-            fill: index.$neutral-light-grey;
-          }
+      &:disabled {
+        background-color: index.$neutral-light;
+        svg {
+          fill: index.$neutral-light-grey;
         }
       }
     }
