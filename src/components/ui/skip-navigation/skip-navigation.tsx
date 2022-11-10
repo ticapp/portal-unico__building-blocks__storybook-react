@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React, { DOMAttributes, useId } from 'react';
-import { Link } from '../link';
 import './skip-navigation.scss';
 
 export interface SkipNavigationOptions {
@@ -29,9 +28,7 @@ export function SkipNavigation({ className, ariaLabel, options }: SkipNavigation
     return item?.map((nav) => {
       return (
         <li key={useId()}>
-          <Link link={`#${nav.idLink}`} isExternal target="_self">
-            {nav.content}
-          </Link>
+          <a href={`#${nav.idLink}`}>{nav.content}</a>
         </li>
       );
     });
