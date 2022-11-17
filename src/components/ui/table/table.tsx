@@ -181,6 +181,7 @@ const TableDesktop = ({
   return (
     <>
       <BsTable {...tableProps} className={cssTable}>
+        <caption hidden>{tableProps['aria-label']}</caption>
         <thead>
           <tr>{renderThead(tableHeaders, dataKeys(tableData))}</tr>
         </thead>
