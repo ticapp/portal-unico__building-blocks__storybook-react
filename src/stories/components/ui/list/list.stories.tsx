@@ -19,7 +19,7 @@ BasicList.args = {
   listData: [
     {
       value: 'Contactos ePortugal (external Link)',
-      hasExternalLink: false,
+      hasExternalLink: true,
       link: '',
       title: ''
     },
