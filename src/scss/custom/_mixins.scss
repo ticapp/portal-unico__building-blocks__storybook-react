@@ -25,8 +25,18 @@
   scrollbar-color: $foreground-color $background-color;
 }
 
-//Card background
-@mixin bg-cards($color, $background, $fill, $link-color, $link-hover, $link-focus-border, $border-radius) {
+//Card background index.$details-links-visited
+@mixin bg-cards(
+  $color,
+  $background,
+  $fill,
+  $link-color,
+  $link-hover,
+  $link-focus-border,
+  $border-radius,
+  $visited-color,
+  $visited-hover-color
+) {
   color: $color;
   background-color: $background;
   border-radius: $border-radius;
@@ -41,6 +51,12 @@
     }
     &:focus {
       border: $link-focus-border;
+    }
+    &:visited {
+      color: $visited-color;
+      &:hover {
+        color: $visited-hover-color;
+      }
     }
   }
 }

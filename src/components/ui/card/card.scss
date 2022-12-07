@@ -9,7 +9,9 @@
         index.$brand-green-main,
         index.$neutral-black,
         '1px solid ' + index.$brand-yellow-fourth,
-        0
+        0,
+        index.$details-links-visited,
+        index.$neutral-black
       );
 
       .ama-card-content {
