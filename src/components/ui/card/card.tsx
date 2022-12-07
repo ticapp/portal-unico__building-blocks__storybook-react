@@ -56,6 +56,9 @@ export interface CardProps extends BsCardProps {
 
   /** Card with/without link */
   cardHasLink?: boolean;
+
+  /** Target Link */
+  target?: string;
 }
 
 export const Card = ({
@@ -68,6 +71,7 @@ export const Card = ({
   content,
   link = '',
   isExternal,
+  target,
   title,
   linkLabel,
   linkIcon = '',
@@ -110,7 +114,7 @@ export const Card = ({
 
           {!isLinkLabel && cardHasLink && (
             <Col xs={{ span: 6, offset: 6 }} md={{ span: 6, offset: 6 }} xl={{ span: 6, offset: 6 }} className="text-end mt-16 mt-xl-24">
-              <Link link={link} title={title} isExternal={isExternal} className={stretchedLink ? 'stretched-link' : ''}>
+              <Link link={link} title={title} isExternal={isExternal} target={target} className={stretchedLink ? 'stretched-link' : ''}>
                 <Icon icon={linkIcon} ariaHidden="true" />
               </Link>
             </Col>
@@ -123,6 +127,7 @@ export const Card = ({
                 link={link}
                 title={title}
                 isExternal={isExternal}
+                target={target}
                 className={stretchedLink ? 'text-big-bold stretched-link' : 'text-big-bold'}
               >
                 {linkLabel}
