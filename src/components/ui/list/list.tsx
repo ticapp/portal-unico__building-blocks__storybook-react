@@ -8,7 +8,14 @@ export interface ListProps extends HTMLAttributes<HTMLElement> {
   className?: string;
 
   /** Data to fill List options */
-  listData?: Array<{ value: React.ReactNode; hasExternalLink?: boolean; link: string | UrlObject; title?: string; ariaLabel?: string }>;
+  listData?: Array<{
+    value: React.ReactNode;
+    hasExternalLink?: boolean;
+    link: string | UrlObject;
+    title?: string;
+    ariaLabel?: string;
+    target?: string;
+  }>;
 
   /** Bullets types */
   listStyleType?:
@@ -40,7 +47,8 @@ export function List({
       value: 'Option value',
       hasExternalLink: true,
       link: 'url',
-      title: 'title'
+      title: 'title',
+      target: '_self'
     }
   ],
   listStyleType = 'disc',
@@ -64,7 +72,7 @@ export function List({
           {option.value}
         </Link>
       ) : (
-        <Link link={option.link} title={option.title}>
+        <Link link={option.link} title={option.title} target={option.target}>
           {option.value}
         </Link>
       )}
