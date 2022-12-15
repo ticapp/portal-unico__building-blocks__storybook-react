@@ -29,6 +29,8 @@ export interface HeaderProps {
   activeLanguage?: CustomDropdownOption;
   /** Event fired when a new language is selected */
   onLanguageChange?: (val: CustomDropdownOption) => void;
+  /** Control hide/show language select */
+  showLanguage?: boolean;
 
   /** Show or hide authentication menu options */
   isAuthenticated?: boolean;
@@ -61,6 +63,7 @@ const Header = ({
 
   activeLanguage,
   onLanguageChange,
+  showLanguage = true,
 
   options = [] as UserAreaOption[],
   onOptionChange,
@@ -133,15 +136,17 @@ const Header = ({
           </Col>
           <Col md={8} className="d-none d-md-block">
             <div className="d-flex justify-content-end align-items-center">
-              <div className="language-selector-container">
-                <CustomDropdown
-                  showCheckMark
-                  active={activeLanguage}
-                  options={languages}
-                  ariaLabel={languageLabel}
-                  onChange={onLanguageChange}
-                />
-              </div>
+              {showLanguage && (
+                <div className="language-selector-container">
+                  <CustomDropdown
+                    showCheckMark
+                    active={activeLanguage}
+                    options={languages}
+                    ariaLabel={languageLabel}
+                    onChange={onLanguageChange}
+                  />
+                </div>
+              )}
               <div className="user-area-container ms-8">
                 <UserArea options={options} onOptionChange={onOptionChange} isAuthenticated={isAuthenticated} username={username} />
               </div>
@@ -179,16 +184,18 @@ const Header = ({
 
             <Row>
               <Col className="d-flex lang-user-container">
-                <div className="flex-grow-0 mobile-language-selector">
-                  <CustomDropdown
-                    showCheckMark
-                    className="px-24 py-16"
-                    active={activeLanguage}
-                    options={languages}
-                    ariaLabel={languageLabel}
-                    onChange={onLanguageChange}
-                  />
-                </div>
+                {showLanguage && (
+                  <div className="flex-grow-0 mobile-language-selector">
+                    <CustomDropdown
+                      showCheckMark
+                      className="px-24 py-16"
+                      active={activeLanguage}
+                      options={languages}
+                      ariaLabel={languageLabel}
+                      onChange={onLanguageChange}
+                    />
+                  </div>
+                )}
                 <div className="flex-grow-1 mobile-user-area">
                   <UserArea
                     className="px-24 py-16"
