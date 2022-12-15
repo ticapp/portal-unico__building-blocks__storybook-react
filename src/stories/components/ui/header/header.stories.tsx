@@ -33,26 +33,26 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
       authenticatedOption: false,
       value: 'login',
       icon: 'ama-login',
-      label: 'Entrar no portal'
+      label: 'Iniciar sessão'
     },
     {
       authenticatedOption: false,
       value: 'register',
       icon: 'ama-add-user',
-      label: 'Criar registo'
+      label: 'Criar conta'
     },
 
     {
       authenticatedOption: true,
       value: 'user-area',
-      icon: 'ama-user',
-      label: 'Area Reservada'
+      icon: 'ama-my-area',
+      label: 'A minha área'
     },
     {
       authenticatedOption: true,
       value: 'logout',
-      icon: 'ama-logout',
-      label: 'Terminar sessão'
+      icon: 'ama-exit',
+      label: 'Sair'
     }
   ] as UserAreaOption[];
 
@@ -139,7 +139,7 @@ export const HeaderExample: Story<HeaderProps> = (props) => {
         logoSrc="/logo.svg"
         logoAlt="Homepage"
         isAuthenticated={props.isAuthenticated}
-        username="Area reservada"
+        username="Área reservada"
         homepageLink="/"
         languages={languages}
         activeLanguage={currentLanguage}
@@ -161,26 +161,26 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
       authenticatedOption: false,
       value: 'login',
       icon: 'ama-login',
-      label: 'Entrar no portal'
+      label: 'Iniciar sessão'
     },
     {
       authenticatedOption: false,
       value: 'register',
       icon: 'ama-add-user',
-      label: 'Criar registo'
+      label: 'Criar conta'
     },
 
     {
       authenticatedOption: true,
       value: 'user-area',
-      icon: 'ama-user',
-      label: 'Area Reservada'
+      icon: 'ama-my-area',
+      label: 'A minha área'
     },
     {
       authenticatedOption: true,
       value: 'logout',
-      icon: 'ama-logout',
-      label: 'Terminar sessão'
+      icon: 'ama-exit',
+      label: 'Sair'
     }
   ] as UserAreaOption[];
 
@@ -200,12 +200,27 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
   ] as CustomDropdownOption[];
 
   const args = {
-    headerTitle01: 'Contactos e sites Públicos',
+    headerTitle01: 'Contactos e links úteis',
     contentInfo01: [
-      { label: 'Centro de Contacto Cidadão (dias úteis: 9h - 18h)', value: '300 003 990 ou 210 489 010' },
-      { label: 'Centro de Contacto Empresas (dias úteis: 9h - 18h)', value: '300 003 980 ou 210 489 011' }
+      {
+        label: (
+          <>
+            Linha Cidadão <br /> Dias úteis: 9h às 18h
+          </>
+        ),
+        value: '300 003 990 ou 210 489 010'
+      },
+      {
+        label: (
+          <>
+            Centro de Contacto Empresas <br />
+            Dias úteis: 9h às 18h
+          </>
+        ),
+        value: '300 003 980 ou 210 489 011'
+      }
     ],
-    headerTitle02: 'Links úteis',
+    headerTitle02: 'Sobre o portal',
     headerTitle03: 'Redes sociais',
     classFooterCopyright: 'text-center',
     classFooterCol01: 'bg-brand-yellow-terciary',
@@ -216,89 +231,112 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
-            <span className="col-11 text-medium-normal">Contactos ePortugal</span>
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
+            <span className="col-11 text-medium-normal">Contactos</span>
           </>
         ),
         hasExternalLink: true,
         link: 'https://eportugal.gov.pt/contactos',
-        title: 'external link'
+        title: 'abre numa nova janela'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
             <span className="col-11 text-medium-normal"> Linhas úteis </span>
           </>
         ),
         hasExternalLink: true,
-        link: 'https://eportugal.gov.pt/utils',
-        title: 'internal link'
+        link: 'https://eportugal.gov.pt/linhas-uteis',
+        title: 'abre numa nova janela'
+      },
+
+      {
+        value: (
+          <>
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
+            <span className="col-11 text-medium-normal"> Diretório dos sítios públicos </span>
+          </>
+        ),
+        hasExternalLink: true,
+        link: 'https://eportugal.gov.pt/diretorio-dos-sitios-publicos',
+        title: 'abre numa nova janela'
       }
     ],
     listDataCol02: [
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
-            <span className="col-11 text-medium-normal">APP.GOV.PT </span>
-          </>
-        ),
-        hasExternalLink: true,
-        link: 'https://eportugal.gov.pt',
-        title: 'external link'
-      },
-      {
-        value: (
-          <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
             <span className="col-11 text-medium-normal">Mapa do site </span>
           </>
         ),
-        hasExternalLink: false,
-        link: '/react/ui/mapa',
-        title: 'internal link'
+        hasExternalLink: true,
+        link: 'https://eportugal.gov.pt/mapa-do-site',
+        title: 'abre numa nova janela'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
             <span className="col-11 text-medium-normal">Termos e condições</span>
           </>
         ),
-        hasExternalLink: false,
-        link: '/react/ui/terms',
-        title: 'internal link'
+        hasExternalLink: true,
+        link: 'https://eportugal.gov.pt/termos-e-condições',
+        title: 'abre numa nova janela'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
+            <span className="col-11 text-medium-normal">Acessibilidade</span>
+          </>
+        ),
+        hasExternalLink: true,
+        link: 'https://eportugal.gov.pt/acessibilidade',
+        title: 'abre numa nova janela'
+      },
+      {
+        value: (
+          <>
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
             <span className="col-11 text-medium-normal">Sobre o portal </span>
           </>
         ),
         hasExternalLink: false,
-        link: '/react/ui/about',
-        title: 'internal link'
+        link: 'https://eportugal.gov.pt/sobre',
+        title: 'abre numa nova janela'
+      },
+      {
+        value: (
+          <>
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
+            <span className="col-11 text-medium-normal">APP.GOV.PT </span>
+          </>
+        ),
+        hasExternalLink: true,
+        link: 'https://www.app.gov.pt/Application/All?language=pt-PT&store=1&privacy=all',
+        title: 'abre numa nova janela'
       }
     ],
     listDataCol03: [
       {
-        value: <Icon ariaHidden="true" icon="ama-twitter" alt="AMA Twitter" />,
+        value: <Icon ariaHidden="true" icon="ama-facebook" alt="Página do ePortugal.gov no Facebook" />,
         hasExternalLink: true,
-        link: 'https://twitter.com',
-        title: 'Twitter'
-      },
-      {
-        value: <Icon ariaHidden="true" icon="ama-facebook" alt="AMA Facebook" />,
-        hasExternalLink: true,
-        link: 'https://facebook.com',
+        link: 'https://www.facebook.com/ePortugal.gov.pt/',
         title: 'facebook'
       },
       {
-        value: <Icon ariaHidden="true" icon="ama-linkedin" alt="AMA Linkedin" />,
+        value: <Icon ariaHidden="true" icon="ama-twitter" alt="Página da Agência para a Modernização Administrativa no Twitter" />,
         hasExternalLink: true,
-        link: 'https://www.linkedin.com/',
+        link: 'https://twitter.com/ama_gov_pt',
+        title: 'Twitter'
+      },
+      {
+        value: <Icon ariaHidden="true" icon="ama-linkedin" alt="Página da Agência para a Modernização Administrativa no LinkedIn" />,
+        hasExternalLink: true,
+        link: 'https://www.linkedin.com/organization-guest/company/ama-gov-pt',
         title: 'linkedin'
       }
     ],
@@ -377,7 +415,7 @@ export const HeaderFooterExample: Story<HeaderProps> = (props) => {
         logoSrc="/logo.svg"
         logoAlt="Homepage"
         isAuthenticated={props.isAuthenticated}
-        username="Area reservada"
+        username="Área reservada"
         homepageLink="/"
         languages={languages}
         activeLanguage={currentLanguage}

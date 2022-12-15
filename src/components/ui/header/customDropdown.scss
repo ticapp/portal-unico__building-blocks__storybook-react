@@ -12,6 +12,13 @@
     .custom-dropdown-option {
       display: flex;
 
+      span {
+        color: index.$brand-green-main;
+        text-decoration: underline;
+        font-weight: map-get(index.$font-weights, 900);
+        white-space: nowrap;
+      }
+
       &.selected {
         &.checked {
           &:after {

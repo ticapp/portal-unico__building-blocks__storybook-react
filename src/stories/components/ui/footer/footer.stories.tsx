@@ -13,12 +13,27 @@ export default {
 
 export const BasicFooter: Story<FooterProps> = () => {
   const args = {
-    headerTitle01: 'Contactos e sites Públicos',
+    headerTitle01: 'Contactos e links úteis',
     contentInfo01: [
-      { label: 'Centro de Contacto Cidadão (dias úteis: 9h - 18h)', value: '300 003 990 ou 210 489 010' },
-      { label: 'Centro de Contacto Empresas (dias úteis: 9h - 18h)', value: '300 003 980 ou 210 489 011' }
+      {
+        label: (
+          <>
+            Linha Cidadão <br /> Dias úteis: 9h às 18h
+          </>
+        ),
+        value: '300 003 990 ou 210 489 010'
+      },
+      {
+        label: (
+          <>
+            Centro de Contacto Empresas <br />
+            Dias úteis: 9h às 18h
+          </>
+        ),
+        value: '300 003 980 ou 210 489 011'
+      }
     ],
-    headerTitle02: 'Links úteis',
+    headerTitle02: 'Sobre o portal',
     headerTitle03: 'Redes sociais',
     classFooterCopyright: 'text-center',
     classFooterCol01: 'bg-brand-yellow-terciary',
@@ -29,8 +44,8 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
-            <span className="col-11 text-medium-normal">Contactos ePortugal</span>
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
+            <span className="col-11 text-medium-normal">Contactos</span>
           </>
         ),
         hasExternalLink: true,
@@ -40,12 +55,24 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
             <span className="col-11 text-medium-normal"> Linhas úteis </span>
           </>
         ),
         hasExternalLink: true,
         link: 'https://eportugal.gov.pt/linhas-uteis',
+        title: 'abre numa nova janela'
+      },
+
+      {
+        value: (
+          <>
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
+            <span className="col-11 text-medium-normal"> Diretório dos sítios públicos </span>
+          </>
+        ),
+        hasExternalLink: true,
+        link: 'https://eportugal.gov.pt/diretorio-dos-sitios-publicos',
         title: 'abre numa nova janela'
       }
     ],
@@ -53,66 +80,77 @@ export const BasicFooter: Story<FooterProps> = () => {
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
-            <span className="col-11 text-medium-normal">APP.GOV.PT </span>
-          </>
-        ),
-        hasExternalLink: true,
-        link: 'https://www.app.gov.pt',
-        title: 'abre numa nova janela'
-      },
-      {
-        value: (
-          <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
             <span className="col-11 text-medium-normal">Mapa do site </span>
           </>
         ),
-        hasExternalLink: false,
+        hasExternalLink: true,
         link: 'https://eportugal.gov.pt/mapa-do-site',
         title: 'abre numa nova janela'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
             <span className="col-11 text-medium-normal">Termos e condições</span>
           </>
         ),
-        hasExternalLink: false,
-        link: 'https://eportugal.gov.pt/termos-e-condicoes',
+        hasExternalLink: true,
+        link: 'https://eportugal.gov.pt/termos-e-condições',
         title: 'abre numa nova janela'
       },
       {
         value: (
           <>
-            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="sm" />
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
+            <span className="col-11 text-medium-normal">Acessibilidade</span>
+          </>
+        ),
+        hasExternalLink: true,
+        link: 'https://eportugal.gov.pt/acessibilidade',
+        title: 'abre numa nova janela'
+      },
+      {
+        value: (
+          <>
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
             <span className="col-11 text-medium-normal">Sobre o portal </span>
           </>
         ),
         hasExternalLink: false,
         link: 'https://eportugal.gov.pt/sobre',
         title: 'abre numa nova janela'
+      },
+      {
+        value: (
+          <>
+            <Icon ariaHidden="true" icon="ama-arrow-right" className="col-1 me-10" size="md" />
+            <span className="col-11 text-medium-normal">APP.GOV.PT </span>
+          </>
+        ),
+        hasExternalLink: true,
+        link: 'https://www.app.gov.pt/Application/All?language=pt-PT&store=1&privacy=all',
+        title: 'abre numa nova janela'
       }
     ],
     listDataCol03: [
       {
-        value: <Icon ariaHidden="true" icon="ama-twitter" alt="AMA Twitter" size="sm" />,
+        value: <Icon ariaHidden="true" icon="ama-facebook" alt="Página do ePortugal.gov no Facebook" />,
         hasExternalLink: true,
-        link: 'https://www.twitter.com/ama_gov_pt',
-        title: 'Página da Agência para a Modernização Administrativa no Twitter'
+        link: 'https://www.facebook.com/ePortugal.gov.pt/',
+        title: 'facebook'
       },
       {
-        value: <Icon ariaHidden="true" icon="ama-facebook" alt="AMA Facebook" size="sm" />,
+        value: <Icon ariaHidden="true" icon="ama-twitter" alt="Página da Agência para a Modernização Administrativa no Twitter" />,
         hasExternalLink: true,
-        link: 'https://www.facebook.com/ama.gov.pt',
-        title: 'Página da Agência para a Modernização Administrativa no Facebook'
+        link: 'https://twitter.com/ama_gov_pt',
+        title: 'Twitter'
       },
       {
-        value: <Icon ariaHidden="true" icon="ama-linkedin" alt="AMA Linkedin" size="sm" />,
+        value: <Icon ariaHidden="true" icon="ama-linkedin" alt="Página da Agência para a Modernização Administrativa no LinkedIn" />,
         hasExternalLink: true,
-        link: 'https://www.linkedin.com/company/ama-gov-pt/',
-        title: 'Página da Agência para a Modernização Administrativa no Linkedin'
+        link: 'https://www.linkedin.com/organization-guest/company/ama-gov-pt',
+        title: 'linkedin'
       }
     ],
     listDataRowImagesLink: [

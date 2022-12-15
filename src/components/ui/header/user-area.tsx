@@ -33,11 +33,11 @@ export interface UserAreaProps {
 
 const UserArea: FC<UserAreaProps> = ({
   className = '',
-  username = 'Area reservada',
+  username = 'Área reservada',
   isAuthenticated = false,
   options = [],
   onOptionChange,
-  dropdownAriaLabel = 'Opções da Area Reservada'
+  dropdownAriaLabel = 'Opções da Área Reservada'
 }: UserAreaProps) => {
   const [activeOptionList, setActiveOptionList] = useState([] as UserAreaOption[]);
 
@@ -73,7 +73,7 @@ const UserArea: FC<UserAreaProps> = ({
       className={classes}
       dropdownControls={
         <>
-          <Icon className="me-8" size="md" icon="ama-user" alt={username} ariaHidden />
+          <Icon className="me-8" size="md" icon="ama-user-thin" alt={username} ariaHidden />
           <span>{username}</span>
         </>
       }
