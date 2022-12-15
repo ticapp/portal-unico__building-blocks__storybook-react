@@ -28,6 +28,7 @@ const iconList: Record<string, string> = {
   'ama-error': './AmaError',
   'ama-error-filled': './AmaErrorFilled',
   'ama-expand': './AmaExpand',
+  'ama-exit': './AmaExit',
   'ama-facebook': './AmaFacebook',
   'ama-face-satisfied': './AmaFaceSatisfied',
   'ama-face-unsatisfied': './AmaFaceUnsatisfied',
@@ -40,6 +41,7 @@ const iconList: Record<string, string> = {
   'ama-linkedin': './AmaLinkedin',
   'ama-login': './AmaLogin',
   'ama-logout': './AmaLogout',
+  'ama-my-area': './AmaMyArea',
   'ama-radio-unselected': './AmaRadioUnselected',
   'ama-radio-selected': './AmaRadioSelected',
   'ama-radio-selected-focus': './AmaRadioSelectedFocus',
@@ -49,6 +51,7 @@ const iconList: Record<string, string> = {
   'ama-search': './AmaSearch',
   'ama-twitter': './AmaTwitter',
   'ama-user': './AmaUser',
+  'ama-user-thin': './AmaUserThin',
   'ama-warning': './AmaWarning',
   'ama-warning-circle': './AmaWarningCircle',
   'ama-warning-triangle': './AmaWarningTriangle'
