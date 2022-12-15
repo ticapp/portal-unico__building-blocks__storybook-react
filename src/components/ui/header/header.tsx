@@ -69,7 +69,7 @@ const Header = ({
   onOptionChange,
 
   isAuthenticated = false,
-  username = 'Area Reservada',
+  username = 'Área Reservada',
 
   burgerMenuVisible = false,
   onBurgerVisibilityChange,

@@ -34,7 +34,7 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
   headerTitle03?: string;
 
   /** Footer 1st column content array */
-  contentInfo01?: Array<{ [key: string]: string }>;
+  contentInfo01?: Array<{ [key: string]: string | React.ReactNode }>;
 
   /** copyright content */
   copyrightContent?: string;
