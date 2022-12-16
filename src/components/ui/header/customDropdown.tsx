@@ -411,7 +411,7 @@ const CustomDropdown = ({
               onMouseEnter={() => hoverOption(i)}
               aria-selected={isSelected}
             >
-              <span className="custom-dropdown-option-content me-8" aria-label={optionAriaLabel}>
+              <span className="custom-dropdown-option-content d-flex align-items-center me-8" aria-label={optionAriaLabel}>
                 {o.children || o.label}
               </span>
             </div>
