@@ -74,7 +74,15 @@ const UserArea: FC<UserAreaProps> = ({
       dropdownControls={
         <>
           <Icon className="me-8" size="md" icon="ama-user-thin" alt={username} ariaHidden />
-          <span>{username}</span>
+          <span className="fw-900">
+            {username
+              .toLowerCase()
+              .split(' ')
+              .map((word) => {
+                return word.charAt(0).toUpperCase() + word.slice(1);
+              })
+              .join(' ')}
+          </span>
         </>
       }
       ariaLabel={dropdownAriaLabel}
